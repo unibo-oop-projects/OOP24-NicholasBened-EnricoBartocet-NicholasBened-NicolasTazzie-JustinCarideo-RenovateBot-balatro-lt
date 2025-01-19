@@ -8,7 +8,15 @@ bin/
 # Ignore Idea customizations
 .idea
 
+# Ignore VSCode settings
+.vscode
+
 # Ignore Eclipse settings
 .project
 .settings/
 .classpath
+
+# Ignore Java compiled files
+*.class
+*.DS_Store
+deleteme/

@@ -5,11 +5,11 @@ import java.util.List;
 /** 
  * Models a normal 52 card deck
  */
-public interface Deck extends Rank, Suit {
+public interface Deck<X, Y> extends Rank, Suit {
 
     /**
      * 
      * @return a list representing a normal 52 card deck
      */
-    public List<PlayableCard> getDeck();
+    public List<PlayableCard<X, Y>> getDeck();
 }

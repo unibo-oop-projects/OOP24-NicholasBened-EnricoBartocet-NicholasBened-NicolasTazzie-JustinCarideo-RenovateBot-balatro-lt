@@ -5,21 +5,21 @@ import java.util.Optional;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
-public class PlayableCardImpl implements PlayableCard {
+public class PlayableCardImpl<X, Y> implements PlayableCard<X, Y> {
     
-    private final Pair<Ranks, Suits> card;
+    private final Pair<X, Y> card;
 
-    public PlayableCardImpl(Pair<Ranks, Suits> card) {
+    public PlayableCardImpl(Pair<X, Y> card) {
         this.card = card;
     }
 
     @Override
-    public Ranks getRank() {
+    public X getRank() {
         return this.card.get1(); 
     }
 
     @Override
-    public Suits getSuit() {
+    public Y getSuit() {
         return this.card.get2();
     }
 
@@ -27,5 +27,4 @@ public class PlayableCardImpl implements PlayableCard {
     public Optional<Modifier> getModifier() {
         return Optional.empty();
     }
-
 }

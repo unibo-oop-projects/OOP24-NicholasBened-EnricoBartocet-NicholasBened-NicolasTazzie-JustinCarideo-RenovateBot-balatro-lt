@@ -6,10 +6,11 @@ import java.util.List;
 import it.unibo.balatrolt.model.api.Deck;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
-public class DeckImpl implements  Deck {
+public class DeckImpl<X, Y> implements  Deck<X, Y> {
     
-    private final List<PlayableCard> deck; 
+    private final List<PlayableCard<X, Y>> deck; 
 
+    @SuppressWarnings({ "unchecked", "rawtypes" }) //TO MODIFY
     public DeckImpl() {
         this.deck = new ArrayList<>();
         for (Suits suit : Suits.values()) {
@@ -20,7 +21,7 @@ public class DeckImpl implements  Deck {
     }
     
     @Override
-    public List<PlayableCard> getDeck() {
+    public List<PlayableCard<X, Y>> getDeck() {
         return List.copyOf(this.deck);
     }
 }

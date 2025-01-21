@@ -2,6 +2,7 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -20,36 +21,65 @@ public class GUI extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(70*size, 50*size);
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
-
-        //creating left panel
-        JPanel leftPanel = new JPanel(new GridLayout(5, 1));
+        //Image img = Toolkit.getDefaultToolkit().createImage("C:/Users/nicholas.benedetti/Desktop/sfondo_balatro.jpg");
         
-        JLabel blind = new JLabel("Big Blind", SwingConstants.CENTER);
+        //creating left panel
+        JPanel leftPanel = createLeftPanel();
+
+        //creating slots panel
+        JPanel slotPanel = createSlotPanel();
+
+        //mixing everything togheter
+        this.add(leftPanel, BorderLayout.WEST);
+        this.add(slotPanel);
+        this.setVisible(true);
+    }
+
+    private JPanel createLeftPanel () {
+        JPanel leftPanel = new JPanel(new GridLayout(5, 1));
+        //leftPanel.setBackground(Color.darkGray.darker());
+        
+        //first block
+        JPanel blind = new JPanel();
         blind.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        blind.setBackground(Color.orange.darker());
+        JLabel str = new JLabel("Big Blind");
+        str.setFont(new Font("Bauhaus 93", Font.PLAIN, 36));
+        blind.add(str, BorderLayout.CENTER);
         leftPanel.add(blind);
-
-        JLabel blindInfo = new JLabel("Score at least: ---based on the round---");
+        
+        //second block
+        JPanel blindInfo = new JPanel();
         blindInfo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        blindInfo.setBackground(Color.orange.darker().darker());
+        JLabel str1 = new JLabel("Score at least: ---based on the round---");
+        blindInfo.add(str1);
         leftPanel.add(blindInfo);
-
+        
+        //third block  
         JLabel score = new JLabel("round score: xxxxx", SwingConstants.CENTER);
         score.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         leftPanel.add(score);
 
+        //fourth block
         JLabel multiplicators = new JLabel("--somma carte-- X --moltiplicatori--", SwingConstants.CENTER);
         multiplicators.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         leftPanel.add(multiplicators);
 
+        //fifth block
         JPanel infoPanel = new JPanel(new BorderLayout());
         infoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         JPanel leftInfoPanel = new JPanel(new GridLayout(2, 1));
+
         ActionListener al = e -> {
             JOptionPane.showMessageDialog(leftPanel, "ciaooooo");
         };
+
         JButton infoButton = new JButton("Run info");
+        infoButton.setBackground(Color.ORANGE);
         JButton optionButton = new JButton("Options");
+        optionButton.setBackground(Color.ORANGE);
         infoButton.addActionListener(al);
         optionButton.addActionListener(al);
 
@@ -59,6 +89,7 @@ public class GUI extends JFrame {
         infoPanel.add(leftInfoPanel, BorderLayout.WEST);
 
         JPanel rightInfoPanel = new JPanel(new GridLayout(3, 2));
+        rightInfoPanel.setBackground(Color.red.darker());
         JLabel hands = new JLabel("Hands : xxx");
         hands.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         JLabel money = new JLabel("money : xxx");
@@ -78,21 +109,16 @@ public class GUI extends JFrame {
         infoPanel.add(rightInfoPanel);
         leftPanel.add(infoPanel);
 
-        //creating card panel
-        JPanel cardPanel = new JPanel();
+        return leftPanel;
+    }
 
-        cardPanel.setLayout(new GridLayout(2, 5));
-        for (int i = 0; i < 10; i++) {
-            JLabel cardSlot = new JLabel("Card Slot " + (i + 1), SwingConstants.CENTER);
-            cardSlot.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            cardPanel.add(cardSlot);
-        }
+    private JPanel createSlotPanel() {
+        JPanel panel = new JPanel(new GridLayout());
+        panel.setBackground(Color.green.darker().darker().darker());
+        
+        //creating special cards slots
 
-        //mixing everything togheter
-        mainPanel.add(leftPanel, BorderLayout.WEST);
-        mainPanel.add(cardPanel, BorderLayout.SOUTH);
-        this.getContentPane().add(mainPanel);
-
-        this.setVisible(true);
-    }    
+        return panel;
+    }
+    
 }

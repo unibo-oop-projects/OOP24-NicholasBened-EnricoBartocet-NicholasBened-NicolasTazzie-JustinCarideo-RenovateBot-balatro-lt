@@ -20,4 +20,11 @@ public interface Modifier {
      * mapping the new value {@link BasePoints} should have
      */
     Optional<UnaryOperator<BasePoints>> getBasePointMapper();
+
+    /**
+     * It sets the current game status in the modifier.
+     * It's used to check if certain conditions are satisfied and a modifier should be applicated
+     * @param stats current game stats.
+     */
+    void setGameStatus(ModifierStatsSupplier stats);
 }

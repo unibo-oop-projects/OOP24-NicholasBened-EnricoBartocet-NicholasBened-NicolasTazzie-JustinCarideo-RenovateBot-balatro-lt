@@ -4,7 +4,7 @@ import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.BasePoint;
+import it.unibo.balatrolt.model.api.BasePoints;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.Multiplier;
@@ -16,14 +16,14 @@ import it.unibo.balatrolt.model.api.Multiplier;
  */
 public final class BaseModifier implements Modifier {
     private final Optional<UnaryOperator<Multiplier>> multiplierMod;
-    private final Optional<UnaryOperator<BasePoint>> basePointMod;
+    private final Optional<UnaryOperator<BasePoints>> basePointMod;
 
     /**
      * @param multiplierMod UnaryOperator that modifies the multiplier
      * @param basePointMod UnaryOperator that modifies the basePonit
      */
     public BaseModifier(final Optional<UnaryOperator<Multiplier>> multiplierMod,
-            final Optional<UnaryOperator<BasePoint>> basePointMod) {
+            final Optional<UnaryOperator<BasePoints>> basePointMod) {
         this.multiplierMod = multiplierMod;
         this.basePointMod = basePointMod;
     }
@@ -34,7 +34,7 @@ public final class BaseModifier implements Modifier {
     }
 
     @Override
-    public Optional<UnaryOperator<BasePoint>> getBasePointMapper() {
+    public Optional<UnaryOperator<BasePoints>> getBasePointMapper() {
         return this.basePointMod;
     }
 

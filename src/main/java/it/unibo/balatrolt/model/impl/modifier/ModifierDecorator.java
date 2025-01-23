@@ -5,7 +5,7 @@ import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.BasePoint;
+import it.unibo.balatrolt.model.api.BasePoints;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.Multiplier;
 
@@ -29,7 +29,7 @@ public abstract class ModifierDecorator implements Modifier {
     }
 
     @Override
-    public final Optional<UnaryOperator<BasePoint>> getBasePointMapper() {
+    public final Optional<UnaryOperator<BasePoints>> getBasePointMapper() {
         return this.canApply() ? this.base.getBasePointMapper() : Optional.absent();
     }
 

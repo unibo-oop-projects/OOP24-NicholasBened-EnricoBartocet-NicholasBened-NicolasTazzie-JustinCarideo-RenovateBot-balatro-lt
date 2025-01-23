@@ -8,7 +8,7 @@ import it.unibo.balatrolt.model.api.BasePoint;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.Multiplier;
 
-public abstract class ModifierDecorator implements Modifier{
+public abstract class ModifierDecorator implements Modifier {
     protected final Modifier base;
 
     protected ModifierDecorator(Modifier modifier) {
@@ -25,4 +25,5 @@ public abstract class ModifierDecorator implements Modifier{
         return this.base.getBasePointMapper();
     }
 
+    protected abstract boolean canApply();
 }

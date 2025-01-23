@@ -12,7 +12,6 @@ public class BaseModifier implements Modifier {
     private final Optional<UnaryOperator<Multiplier>> multiplierMod;
     private final Optional<UnaryOperator<BasePoint>> basePointMod;
 
-
     public BaseModifier(final Optional<UnaryOperator<Multiplier>> multiplierMod,
             final Optional<UnaryOperator<BasePoint>> basePointMod) {
         this.multiplierMod = multiplierMod;

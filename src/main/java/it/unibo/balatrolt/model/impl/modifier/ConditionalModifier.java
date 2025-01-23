@@ -7,4 +7,10 @@ public class ConditionalModifier<X> extends ModifierDecorator {
     public ConditionalModifier(Predicate<X> condition, Modifier modifier) {
         super(modifier);
     }
+
+    @Override
+    protected boolean canApply() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'canApply'");
+    }
 }

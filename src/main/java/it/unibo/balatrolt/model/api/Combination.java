@@ -17,7 +17,7 @@ public interface Combination {
     /**
      * @return the current basepoints reached
      */
-    BasePoint getBasePoints();
+    BasePoints getBasePoints();
 
     /**
      * applies the modifier passed by input

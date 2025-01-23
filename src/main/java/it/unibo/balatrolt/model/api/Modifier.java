@@ -5,7 +5,7 @@ import java.util.function.UnaryOperator;
 import com.google.common.base.Optional;
 
 /**
- * Interface modelling the of Multiplier.
+ * Interface modelling the concept of Multiplier. 
  * Essentially it supplies UnaryOperators mapping BasePoints and Multipliers when some conditions are verified.
  */
 public interface Modifier {

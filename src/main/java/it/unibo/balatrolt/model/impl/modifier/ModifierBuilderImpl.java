@@ -15,29 +15,38 @@ import it.unibo.balatrolt.model.api.PlayableCard;
 /**
  * Builder implementation for Modifier.
  */
-public class ModifierBuilderImpl implements ModifierBuilder {
-    private Modifier modifier = new BaseModifier(Optional.absent(), Optional.absent());
+public final class ModifierBuilderImpl implements ModifierBuilder {
+    private Optional<UnaryOperator<Multiplier>> mFun = Optional.absent();
+    private Optional<UnaryOperator<BasePoints>> bpFun = Optional.absent();
+    private Optional<Predicate<Set<PlayableCard>>> playerCardBound = Optional.absent();
 
     @Override
-    public ModifierBuilder addMultiplierModifier(UnaryOperator<Multiplier> multiplierFun) {
-        this.modifier = new BaseModifier(Optional.of(multiplierFun), modifier.getBasePointMapper());
+    public ModifierBuilder addMultiplierModifier(final UnaryOperator<Multiplier> multiplierFun) {
+        this.mFun = Optional.fromNullable(multiplierFun);
         return this;
     }
 
     @Override
-    public ModifierBuilder addBasePointsModifier(UnaryOperator<BasePoints> bPFun) {
-        this.modifier = new BaseModifier(modifier.getMultiplierMapper(), Optional.of(bPFun));
+    public ModifierBuilder addBasePointsModifier(final UnaryOperator<BasePoints> bPFun) {
+        this.bpFun = Optional.fromNullable(bPFun);
         return this;
     }
 
     @Override
-    public ModifierBuilder addPlayedCardBound(Predicate<Set<PlayableCard>> condition) {
-        this.modifier = new ModifierWithCardCondition(this.modifier, condition);
+    public ModifierBuilder addPlayedCardBound(final Predicate<Set<PlayableCard>> condition) {
+        this.playerCardBound = Optional.fromNullable(condition);
         return this;
     }
 
     @Override
     public Modifier build() {
-        return this.modifier;
+        if (!mFun.isPresent() && !bpFun.isPresent()) {
+            throw new IllegalStateException("At least one between Moltiplicator and BasePoints functions must be present!");
+        }
+        Modifier modifier = new BaseModifier(mFun, bpFun);
+        if (playerCardBound.isPresent()) {
+            modifier = new ModifierWithCardCondition(modifier, playerCardBound.get());
+        }
+        return modifier;
     }
 }

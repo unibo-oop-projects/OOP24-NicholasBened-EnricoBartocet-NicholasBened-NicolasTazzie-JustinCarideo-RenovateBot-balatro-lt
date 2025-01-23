@@ -34,7 +34,7 @@ public abstract class ModifierDecorator implements Modifier {
     }
 
     /**
-     * @return whether the modifier can be applied or not 
+     * @return whether the modifier can be applied or not
      */
     protected abstract boolean canApply();
 }

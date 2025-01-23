@@ -18,14 +18,14 @@ public interface ModifierBuilder {
     /**
      * Adds a base point function to the modifier.
      * @param bPFun base point funtion
-     * @return
+     * @return current modifierBuilder status
      */
     ModifierBuilder addBasePointsModifier(UnaryOperator<BasePoints> bPFun);
 
     /**
      * Adds a bound on played cards.
      * @param condition
-     * @return
+     * @return current modifierBuilder status
      */
     ModifierBuilder addPlayedCardBound(Predicate<Set<PlayableCard>> condition);
 

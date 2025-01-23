@@ -4,8 +4,6 @@ import java.util.Optional;
 
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.Rank;
-import it.unibo.balatrolt.model.api.Suit;
 
 public class PlayableCardImpl implements PlayableCard {
 

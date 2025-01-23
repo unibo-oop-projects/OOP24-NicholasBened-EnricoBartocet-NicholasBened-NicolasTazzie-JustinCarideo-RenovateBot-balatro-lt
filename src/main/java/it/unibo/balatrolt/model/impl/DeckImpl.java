@@ -5,8 +5,8 @@ import java.util.List;
 
 import it.unibo.balatrolt.model.api.Deck;
 import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.Rank;
-import it.unibo.balatrolt.model.api.Suit;
+import it.unibo.balatrolt.model.api.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.PlayableCard.Suit;
 
 public class DeckImpl implements Deck {
 

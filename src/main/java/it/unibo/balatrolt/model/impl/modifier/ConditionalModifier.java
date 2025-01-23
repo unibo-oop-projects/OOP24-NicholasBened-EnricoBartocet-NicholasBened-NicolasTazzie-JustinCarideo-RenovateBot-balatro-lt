@@ -8,30 +8,40 @@ import com.google.common.base.Optional;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 
-public class ConditionalModifier<X> extends ModifierDecorator {
+/**
+ * A modifier which checks whether a condition is satisfied before suppling the modifying functions.
+ * If the game status is not set it will always return the modifier.
+ * @param <X> type of condition that should be satisfied.
+ */
+public abstract class ConditionalModifier<X> extends ModifierDecorator {
     private Optional<ModifierStatsSupplier> stats = Optional.absent();
     private final Predicate<X> condition;
 
-    public ConditionalModifier(Predicate<X> condition, Modifier modifier) {
+    /**
+     * @param condition to satisfy
+     * @param modifier base modifier
+     */
+    protected ConditionalModifier(final Predicate<X> condition, final Modifier modifier) {
         super(modifier);
         this.condition = Objects.requireNonNull(condition, "Condition can't be null");
     }
 
     @Override
-    public void setGameStatus(ModifierStatsSupplier stats) {
+    public final void setGameStatus(final ModifierStatsSupplier stats) {
         this.stats = Optional.of(stats);
     }
 
-    protected Predicate<X> getCondition() {
+    /**
+     * @return current condition
+     */
+    protected final Predicate<X> getCondition() {
         return this.condition;
     }
 
-    protected Optional<ModifierStatsSupplier> getStats() {
+    /**
+     * @return current statistics
+     */
+    protected final Optional<ModifierStatsSupplier> getStats() {
         return this.stats;
-    }
-
-    @Override
-    protected boolean canApply() {
-        return true;
     }
 }

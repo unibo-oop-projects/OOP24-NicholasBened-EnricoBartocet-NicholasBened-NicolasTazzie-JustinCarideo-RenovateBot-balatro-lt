@@ -9,22 +9,32 @@ import it.unibo.balatrolt.model.api.BasePoint;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.Multiplier;
 
+/**
+ * A decorator for modifier.
+ * If canApply is false, then it returns an empty optional.
+ */
 public abstract class ModifierDecorator implements Modifier {
-    protected final Modifier base;
+    private final Modifier base;
 
-    protected ModifierDecorator(Modifier modifier) {
+    /**
+     * @param modifier base modifier
+     */
+    protected ModifierDecorator(final Modifier modifier) {
         this.base = Objects.requireNonNull(modifier, "Modifier cant't be null");
     }
 
     @Override
-    public Optional<UnaryOperator<Multiplier>> getMultiplierMapper() {
+    public final Optional<UnaryOperator<Multiplier>> getMultiplierMapper() {
         return this.canApply() ? this.base.getMultiplierMapper() : Optional.absent();
     }
 
     @Override
-    public Optional<UnaryOperator<BasePoint>> getBasePointMapper() {
+    public final Optional<UnaryOperator<BasePoint>> getBasePointMapper() {
         return this.canApply() ? this.base.getBasePointMapper() : Optional.absent();
     }
 
+    /**
+     * @return whether the modifier can be applied or not 
+     */
     protected abstract boolean canApply();
 }

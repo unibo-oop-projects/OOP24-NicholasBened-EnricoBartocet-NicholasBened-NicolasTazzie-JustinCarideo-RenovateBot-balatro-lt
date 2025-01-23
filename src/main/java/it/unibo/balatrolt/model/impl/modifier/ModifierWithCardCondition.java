@@ -9,20 +9,27 @@ import it.unibo.balatrolt.model.api.Card;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 
-public class ModifierWithCardCondition extends ConditionalModifier<Set<Card>>{
-    public ModifierWithCardCondition(Modifier base, Predicate<Set<Card>> condition) {
+/**
+ * Implementation of ConditionalModifier checking if the played cards satisfies the specified condition.
+ */
+public final class ModifierWithCardCondition extends ConditionalModifier<Set<Card>> {
+    /**
+     * @param base base modifier
+     * @param condition condition on cards to satisfy
+     */
+    public ModifierWithCardCondition(final Modifier base, final Predicate<Set<Card>> condition) {
         super(condition, base);
     }
 
     @Override
     protected boolean canApply() {
-        Optional<ModifierStatsSupplier> stats = super.getStats();
-        if(!stats.isPresent()) {
-            return false;
+        final Optional<ModifierStatsSupplier> stats = super.getStats();
+        if (!stats.isPresent()) {
+            return true;
         }
-        Optional<Set<Card>> playedCards = stats.get().getPlayedCards();
-        if(!playedCards.isPresent()) {
-            return false;
+        final Optional<Set<Card>> playedCards = stats.get().getPlayedCards();
+        if (!playedCards.isPresent()) {
+            throw new IllegalStateException("Current played cards are required");
         }
         return super.getCondition().test(playedCards.get());
     }

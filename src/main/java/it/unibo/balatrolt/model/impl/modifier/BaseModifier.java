@@ -9,10 +9,19 @@ import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.Multiplier;
 
-public class BaseModifier implements Modifier {
+/**
+ * A basic modifier. It returns the multiplier and the basepoints if are present.
+ * It can contain one of them or both depending on how is constructed.
+ * modification without checking any condition and doesn't need any status
+ */
+public final class BaseModifier implements Modifier {
     private final Optional<UnaryOperator<Multiplier>> multiplierMod;
     private final Optional<UnaryOperator<BasePoint>> basePointMod;
 
+    /**
+     * @param multiplierMod UnaryOperator that modifies the multiplier
+     * @param basePointMod UnaryOperator that modifies the basePonit
+     */
     public BaseModifier(final Optional<UnaryOperator<Multiplier>> multiplierMod,
             final Optional<UnaryOperator<BasePoint>> basePointMod) {
         this.multiplierMod = multiplierMod;
@@ -30,7 +39,7 @@ public class BaseModifier implements Modifier {
     }
 
     @Override
-    public void setGameStatus(ModifierStatsSupplier stats) {
+    public void setGameStatus(final ModifierStatsSupplier stats) {
         // it doesn't set any game status since it's not required.
     }
 

@@ -6,6 +6,7 @@ import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.BasePoint;
 import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.Multiplier;
 
 public class BaseModifier implements Modifier {
@@ -26,6 +27,11 @@ public class BaseModifier implements Modifier {
     @Override
     public Optional<UnaryOperator<BasePoint>> getBasePointMapper() {
         return this.basePointMod;
+    }
+
+    @Override
+    public void setGameStatus(ModifierStatsSupplier stats) {
+        // it doesn't set any game status since it's not required.
     }
 
 }

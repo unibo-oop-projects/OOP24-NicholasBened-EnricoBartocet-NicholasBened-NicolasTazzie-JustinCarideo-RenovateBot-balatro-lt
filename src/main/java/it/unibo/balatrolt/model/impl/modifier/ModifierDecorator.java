@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.model.impl.modifier;
 
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
@@ -12,7 +13,7 @@ public abstract class ModifierDecorator implements Modifier {
     protected final Modifier base;
 
     protected ModifierDecorator(Modifier modifier) {
-        this.base = modifier;
+        this.base = Objects.requireNonNull(modifier, "Modifier cant't be null");
     }
 
     @Override

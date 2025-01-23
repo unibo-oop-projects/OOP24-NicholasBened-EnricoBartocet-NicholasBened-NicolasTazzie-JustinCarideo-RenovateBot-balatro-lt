@@ -18,12 +18,12 @@ public abstract class ModifierDecorator implements Modifier {
 
     @Override
     public Optional<UnaryOperator<Multiplier>> getMultiplierMapper() {
-        return this.base.getMultiplierMapper();
+        return this.canApply() ? this.base.getMultiplierMapper() : Optional.absent();
     }
 
     @Override
     public Optional<UnaryOperator<BasePoint>> getBasePointMapper() {
-        return this.base.getBasePointMapper();
+        return this.canApply() ? this.base.getBasePointMapper() : Optional.absent();
     }
 
     protected abstract boolean canApply();

@@ -8,7 +8,7 @@ import com.google.common.base.Optional;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 
-public abstract class ConditionalModifier<X> extends ModifierDecorator {
+public class ConditionalModifier<X> extends ModifierDecorator {
     private Optional<ModifierStatsSupplier> stats = Optional.absent();
     private final Predicate<X> condition;
 
@@ -28,5 +28,10 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
 
     protected Optional<ModifierStatsSupplier> getStats() {
         return this.stats;
+    }
+
+    @Override
+    protected boolean canApply() {
+        return true;
     }
 }

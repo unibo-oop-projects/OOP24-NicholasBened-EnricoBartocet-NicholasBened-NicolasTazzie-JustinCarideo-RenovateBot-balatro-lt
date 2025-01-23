@@ -34,7 +34,7 @@ public final class BaseModifier implements Modifier {
     }
 
     @Override
-    public Optional<UnaryOperator<BasePoint>> getBasePointMapper() {
+    public Optional getBasePointMapper() {
         return this.basePointMod;
     }
 

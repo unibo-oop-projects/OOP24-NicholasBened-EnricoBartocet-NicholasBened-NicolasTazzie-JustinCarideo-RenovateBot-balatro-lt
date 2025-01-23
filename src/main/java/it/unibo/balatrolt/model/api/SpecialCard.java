@@ -1,7 +1,7 @@
 package it.unibo.balatrolt.model.api;
 
 /**
- * An interface modelling the concept of a SpecialCard. 
+ * An interface modelling the concept of a SpecialCard.
  * It has a name and a descripion, it's mostly used to carry modifiers.
  */
 public interface SpecialCard extends Card {

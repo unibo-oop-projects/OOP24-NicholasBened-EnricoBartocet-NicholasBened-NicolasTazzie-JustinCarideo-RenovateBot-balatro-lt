@@ -2,19 +2,19 @@ package it.unibo.balatrolt.model.api;
 
 /**
  * An interface modelling a PlayableCard (of standard 52 card deck),
- * it has a rank and a suit. 
+ * it has a rank and a suit.
  */
-public interface PlayableCard<X, Y> extends Card, Rank, Suit{
-    
-    /**
-     * 
-     * @return the rank of the card
-     */
-    X getRank();
+public interface PlayableCard extends Card {
 
     /**
-     * 
+     *
+     * @return the rank of the card
+     */
+    Rank getRank();
+
+    /**
+     *
      * @return the suit of the card
      */
-    Y getSuit();
+    Suit getSuit();
 }

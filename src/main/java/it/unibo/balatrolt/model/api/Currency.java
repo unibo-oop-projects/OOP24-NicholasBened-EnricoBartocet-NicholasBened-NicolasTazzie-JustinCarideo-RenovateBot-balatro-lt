@@ -1,7 +1,7 @@
 package it.unibo.balatrolt.model.api;
 
 /**
- * An interface modelling the concept of a generic currency. 
+ * An interface modelling the concept of a generic currency.
  */
 public interface Currency {
     /**

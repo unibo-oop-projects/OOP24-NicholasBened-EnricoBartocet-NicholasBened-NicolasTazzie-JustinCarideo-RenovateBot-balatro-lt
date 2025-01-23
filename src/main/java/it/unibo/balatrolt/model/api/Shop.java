@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * Interface that models the concept of a shop. It's used to buy the special cards
- * used by the player to power-up combinations. 
+ * used by the player to power-up combinations.
  * NOTE: when a card is bought, it will be taken off the shop.
  */
 public interface Shop {

@@ -3,13 +3,13 @@ package it.unibo.balatrolt.model.impl;
 import java.util.Objects;
 
 /**
- * Simple Pair class of two generic types 
+ * Simple Pair class of two generic types
  */
 public class Pair<X,Y> {
-	
+
 	private final X e1;
 	private final Y e2;
-	
+
 	public Pair(X x, Y y) {
 		super();
 		this.e1 = x;
@@ -29,6 +29,7 @@ public class Pair<X,Y> {
 		return Objects.hash(e1, e2);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

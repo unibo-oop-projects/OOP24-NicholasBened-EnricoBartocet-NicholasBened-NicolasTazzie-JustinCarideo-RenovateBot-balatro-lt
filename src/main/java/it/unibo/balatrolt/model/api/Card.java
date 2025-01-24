@@ -1,6 +1,6 @@
 package it.unibo.balatrolt.model.api;
 
-import java.util.Optional;
+import com.google.common.base.Optional;
 
 public interface Card {
 

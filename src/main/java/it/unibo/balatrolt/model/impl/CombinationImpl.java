@@ -31,10 +31,10 @@ public class CombinationImpl implements Combination {
     @Override
     public void applyModifier(Modifier mod) {
         if (mod.getBasePointMapper().isPresent()) {
-            this.points = new BasePointsImpl(mod.getBasePointMapper().get().apply(points).basePoints());
+            this.points = new BasePointsImpl(mod.getBasePointMapper().get().apply(this.points.basePoints()));
         }
         if (mod.getMultiplierMapper().isPresent()) {
-            this.multiplier = new MultiplierImpl(mod.getMultiplierMapper().get().apply(multiplier).multiplier());
+            this.multiplier = new MultiplierImpl(mod.getMultiplierMapper().get().apply(this.multiplier.multiplier()));
         }
     }
 

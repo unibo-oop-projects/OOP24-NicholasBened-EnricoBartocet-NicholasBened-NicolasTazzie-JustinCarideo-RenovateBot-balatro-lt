@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.BasePoints;
 import it.unibo.balatrolt.model.api.Currency;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierBuilder;
@@ -61,7 +60,7 @@ public class TestModifier {
     @Test
     public void testCardPredicateModifier() {
         int basePoints = 1;
-        double multipler = 1;
+        // double multipler = 1;
         Modifier m = this.builder
             .addBasePointsModifier(p -> p + 1)
             .addPlayedCardBound(c -> c.contains(

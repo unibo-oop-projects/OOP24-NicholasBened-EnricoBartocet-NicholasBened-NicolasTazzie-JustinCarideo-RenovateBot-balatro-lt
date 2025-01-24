@@ -2,6 +2,8 @@ package it.unibo.balatrolt.model.api;
 
 import java.util.List;
 
+import com.google.common.base.Optional;
+
 /**
  * Interface used to represent an Ante.
  */
@@ -20,10 +22,11 @@ public interface Ante {
     List<Blind> getBlinds();
 
     /**
-     * Returns the current {@link Blind}.
+     * Returns an Optional containing the current {@link Blind}.
+     * If the Ante is over (so it isn't poiting to any Blind) returns an empty Optional.
      * @return the current Blind which the Ante is pointing to
      */
-    Blind getCurrentBlind();
+    Optional<Blind> getCurrentBlind();
 
     /**
      * Makes the Ante point to the next Blind.

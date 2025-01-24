@@ -4,13 +4,17 @@ import java.util.List;
 
 import it.unibo.balatrolt.model.api.PlayableCard;
 
-public class SortingPlayableHelpers {
-    
-    public static List<PlayableCard> sortingByRank(List<PlayableCard> hand) {
+public final class SortingPlayableHelpers {
+
+    private SortingPlayableHelpers() {
+        throw new UnsupportedOperationException();
+    }
+
+    public static List<PlayableCard> sortingByRank(final List<PlayableCard> hand) {
         return hand.stream().sorted((a, b) -> Integer.compare(a.getRank().ordinal(), b.getRank().ordinal())).toList();
     }
 
-    public static List<PlayableCard> sortingBySuit(List<PlayableCard> hand) {
+    public static List<PlayableCard> sortingBySuit(final List<PlayableCard> hand) {
         return hand.stream().sorted((a, b) -> Integer.compare(a.getSuit().ordinal(), b.getSuit().ordinal())).toList();
     }
 }

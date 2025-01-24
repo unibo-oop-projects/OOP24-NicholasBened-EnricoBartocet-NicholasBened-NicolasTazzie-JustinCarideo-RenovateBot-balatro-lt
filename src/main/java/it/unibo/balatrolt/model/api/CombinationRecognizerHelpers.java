@@ -6,5 +6,5 @@ package it.unibo.balatrolt.model.api;
  * given by input.
  */
 public interface CombinationRecognizerHelpers {
-    
+
 }

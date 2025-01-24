@@ -22,9 +22,31 @@ public interface Slot {
     /**
      * @param cards, list containing the cards to add in the Slot.
      *
-     * @throws
+     * @throws IllegalArgumentException if List.size() > Slot.size()
      */
     void addAll(List<? extends Card> cards);
+
+    /**
+     * removes every element in the slot
+     */
+    void clear();
+
+    /**
+     * It removes the element given, otherwise it'll do nothing.
+     * the card given will be compared using equals() method.
+     *
+     * @param card
+     */
+    void remove(Card card);
+
+    /**
+     * Removes the element at the given index.
+     *
+     * @param index
+     *
+     * @throws IndexOutOfBoundException
+     */
+    void remove(int index);
 
     /**
      * @return the list of the cards contained in the Slot.

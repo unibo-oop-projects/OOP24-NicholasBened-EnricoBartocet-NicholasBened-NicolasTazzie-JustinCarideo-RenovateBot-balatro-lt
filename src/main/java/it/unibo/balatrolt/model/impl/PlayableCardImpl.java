@@ -2,7 +2,6 @@ package it.unibo.balatrolt.model.impl;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Card;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
@@ -25,19 +24,24 @@ public class PlayableCardImpl implements PlayableCard {
     }
 
     @Override
-    public Optional<Modifier> getModifier() {
-        return Optional.absent();
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PlayableCardImpl other = (PlayableCardImpl) obj;
+        if (card == null) {
+            if (other.card != null)
+                return false;
+        } else if (!card.equals(other.card))
+            return false;
+        return true;
     }
 
     @Override
-    public boolean equals(Card card) {
-        if (card == null)
-            return false;
-        if (getClass() != card.getClass())
-            return false;
-        PlayableCardImpl other = (PlayableCardImpl) card;
-        if (this.getRank() == other.getRank() && this.getSuit() == other.getSuit()) {
-            return true;
-        } else return false;
+    public Optional<Modifier> getModifier() {
+        return Optional.absent();
     }
 }

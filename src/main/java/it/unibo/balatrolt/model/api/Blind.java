@@ -4,13 +4,13 @@ public interface Blind {
 
     int getBlindNumber();
 
-    void playHand(PlayedHand hand);
+    int getMinimumChips();
 
-    Chip getMinimunChips();
+    int getCurrentChips();
 
-    Chip getCurrentChips();
+    void incrementChips(int handChips);
 
     boolean isOver();
 
-    Currency getEarnedCurrency();
+    int getReward();
 }

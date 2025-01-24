@@ -14,4 +14,6 @@ public interface Ante {
     Blind getCurrentBlind();
 
     void nextBlind();
+
+    boolean isOver();
 }

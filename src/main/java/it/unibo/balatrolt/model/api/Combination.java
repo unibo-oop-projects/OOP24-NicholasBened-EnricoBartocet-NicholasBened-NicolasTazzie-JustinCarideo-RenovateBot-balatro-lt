@@ -5,10 +5,10 @@ package it.unibo.balatrolt.model.api;
  * Essentially provides some utilities methods and
  * models internally the combination played, applying
  * modifiers passed and getting the result converted into
- * Chip
+ * Chip.
  */
 public interface Combination {
-    
+
     /**
      * @return the current multiplier applied
      */

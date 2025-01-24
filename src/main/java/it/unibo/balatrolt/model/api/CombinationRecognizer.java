@@ -9,7 +9,7 @@ import java.util.List;
  */
 @FunctionalInterface
 public interface CombinationRecognizer {
-    
+
     /**
      * Recognize what type of combination the player done.
      * @param hand played

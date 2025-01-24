@@ -35,7 +35,7 @@ public class TestSortingHelpers {
 	 */
 	@Test
 	public void testSortEmptyHand() {
-		List<PlayableCard> emptyHand = Collections.emptyList();
+		final List<PlayableCard> emptyHand = Collections.emptyList();
 		assertEquals(emptyHand, SortingPlayableHelpers.sortingByRank(emptyHand));
 	}
 

@@ -10,6 +10,15 @@ package it.unibo.balatrolt.model.api;
 public interface Combination {
 
     /**
+     * Enum for combination type.
+     */
+    enum CombinationType {
+        HIGHCARD, PAIR, TWOPAIR, THREEOFAKIND,
+        STRAIGHT, FLUSH, FULLHOUSE, FOUROFAKIND,
+        STRAIGHTFLUSH, ROYALFLUSH
+    }
+
+    /**
      * @return the current multiplier applied
      */
     Multiplier getMultiplier();
@@ -20,10 +29,15 @@ public interface Combination {
     BasePoints getBasePoints();
 
     /**
-     * applies the modifier passed by input
+     * applies the modifier passed by input.
      * @param mod to apply
      */
     void applyModifier(Modifier mod);
+
+    /**
+     * @return the combination type
+     */
+    CombinationType getCombinationType();
 
     /**
      * @return the result in chips

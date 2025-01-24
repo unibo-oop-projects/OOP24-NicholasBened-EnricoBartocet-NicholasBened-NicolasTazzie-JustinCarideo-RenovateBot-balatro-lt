@@ -5,7 +5,7 @@ package it.unibo.balatrolt.model.api;
  */
 public interface JokerFactory {
     /**
-     * Creates a {@link Joker} with a name and a description, but no effect.
+     * Creates a {@link Joker} with a name, a description, a random price, but no effect.
      * @param name Joker's name
      * @param description Joker's description
      * @return joker without effect.
@@ -17,9 +17,19 @@ public interface JokerFactory {
      * @param name Joker's name
      * @param description Joker's description
      * @param modifier Joker's effect
+     * @param basePrice Joker's price in the shop
      * @return joker with a modifier
      */
-    Joker withModifier(String name, String description, Modifier modifier);
+    Joker withModifier(String name, String description, int basePrice, Modifier modifier);
+
+    /**
+     * Creates a {@link Joker} with a effect and a random price.
+     * @param name Joker's name
+     * @param description Joker's description
+     * @param modifier Joker's effect
+     * @return joker with a modifier
+     */
+    Joker withModifierAndRandomPrice(String name, String description, Modifier modifier);
 
     /**
      * Creates a {@link Joker} by merging two exixting jokers.

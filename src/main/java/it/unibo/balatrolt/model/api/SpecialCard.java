@@ -14,4 +14,14 @@ public interface SpecialCard extends Card {
      * @return a description of what the special card does.
      */
     String getDescription();
+
+    /**
+     * @return the price shown in the shop.
+     */
+    int getShopPrice();
+
+    /**
+     * @return the value of which the card can be sold.
+     */
+    int getToSellValue();
 }

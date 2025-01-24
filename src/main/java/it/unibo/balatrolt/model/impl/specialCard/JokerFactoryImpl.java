@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl.specialCard;
+package it.unibo.balatrolt.model.impl.specialcard;
 
 import java.util.Random;
 
@@ -7,30 +7,30 @@ import it.unibo.balatrolt.model.api.JokerFactory;
 import it.unibo.balatrolt.model.api.Modifier;
 
 /**
- * Implementation of {@link JokerFactory}
+ * Implementation of {@link JokerFactory}.
  */
 public final class JokerFactoryImpl implements JokerFactory {
     private static final int MAX_PRICE = 10;
     private static final int MIN_PRICE = 3;
-    private Random priceSupplier = new Random();
+    private final Random priceSupplier = new Random();
 
     @Override
-    public Joker standardJoker(String name, String description) {
+    public Joker standardJoker(final String name, final String description) {
         return new JokerImpl(name, description, getRandomPrice(), null);
     }
 
     @Override
-    public Joker withModifier(String name, String description, int basePrice, Modifier modifier) {
+    public Joker withModifier(final String name, final String description, final int basePrice, final Modifier modifier) {
         return new JokerImpl(name, description, basePrice, modifier);
     }
 
     @Override
-    public Joker withModifierAndRandomPrice(String name, String description, Modifier modifier) {
+    public Joker withModifierAndRandomPrice(final String name, final String description, final Modifier modifier) {
         return new JokerImpl(name, description, getRandomPrice(), modifier);
     }
 
     @Override
-    public Joker merge(String newName, String newDescription, Joker j1, Joker j2) {
+    public Joker merge(final String newName, final String newDescription, final Joker j1, final Joker j2) {
         // TODO merge elems
         throw new UnsupportedOperationException("Unimplemented method 'merge'");
     }

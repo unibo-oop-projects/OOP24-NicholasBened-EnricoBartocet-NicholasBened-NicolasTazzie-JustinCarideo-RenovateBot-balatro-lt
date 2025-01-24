@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl.specialCard;
+package it.unibo.balatrolt.model.impl.specialcard;
 
 import com.google.common.base.Optional;
 
@@ -6,7 +6,7 @@ import it.unibo.balatrolt.model.api.Joker;
 import it.unibo.balatrolt.model.api.Modifier;
 
 /**
- * Implementation of {@link Joker}
+ * Implementation of {@link Joker}.
  */
 public final class JokerImpl extends BaseSpecialCard implements Joker {
     private final Optional<Modifier> modifier;
@@ -16,10 +16,11 @@ public final class JokerImpl extends BaseSpecialCard implements Joker {
      *
      * @param name        joker name
      * @param description a description of what the joker does
+     * @param price       card price
      * @param modifier    modifier
      * @throws NullPointerException if the modifier is null
      */
-    public JokerImpl(String name, String description, int price, Modifier modifier) {
+    public JokerImpl(final String name, final String description, final int price, final Modifier modifier) {
         super(name, description, price);
         this.modifier = Optional.fromNullable(modifier);
     }
@@ -38,19 +39,24 @@ public final class JokerImpl extends BaseSpecialCard implements Joker {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (!super.equals(obj))
+        }
+        if (!super.equals(obj)) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        JokerImpl other = (JokerImpl) obj;
+        }
+        final JokerImpl other = (JokerImpl) obj;
         if (modifier == null) {
-            if (other.modifier != null)
+            if (other.modifier != null) {
                 return false;
-        } else if (!modifier.equals(other.modifier) || !super.equals(obj))
+            }
+        } else if (!modifier.equals(other.modifier) || !super.equals(obj)) {
             return false;
+        }
         return true;
     }
 }

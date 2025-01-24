@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl.specialCard;
+package it.unibo.balatrolt.model.impl.specialcard;
 
 import java.util.Random;
 
@@ -10,13 +10,13 @@ import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
 /**
  * Joker supplier implementation.
  */
-public class JokerSupplierImpl implements JokerSupplier {
-    private JokerFactory factory = new JokerFactoryImpl();
-    private Random r = new Random();
+public final class JokerSupplierImpl implements JokerSupplier {
+    private final JokerFactory factory = new JokerFactoryImpl();
+    private final Random r = new Random();
 
     @Override
     public Joker getRandom() {
-        return switch(r.nextInt(1)) {
+        return switch (r.nextInt(1)) {
             case 0 -> doubleMultiplier();
             default -> factory.standardJoker("The bored joker", "It does nothing");
         };

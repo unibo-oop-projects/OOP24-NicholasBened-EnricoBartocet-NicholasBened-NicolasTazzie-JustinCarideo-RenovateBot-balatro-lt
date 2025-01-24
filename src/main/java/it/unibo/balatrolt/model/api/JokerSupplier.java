@@ -5,7 +5,7 @@ package it.unibo.balatrolt.model.api;
  */
 public interface JokerSupplier {
     /**
-     * It returns a random {@link Joker}
+     * It returns a random {@link Joker}.
      * @return a Joker
      */
     Joker getRandom();

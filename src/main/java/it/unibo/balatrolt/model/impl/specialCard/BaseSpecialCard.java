@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl.specialCard;
+package it.unibo.balatrolt.model.impl.specialcard;
 
 import com.google.common.base.Optional;
 
@@ -15,24 +15,25 @@ public class BaseSpecialCard implements SpecialCard {
     private final int price;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param name        card name
      * @param description description of what the card does
+     * @param price       card selling price
      */
-    public BaseSpecialCard(String name, String description, int price) {
+    public BaseSpecialCard(final String name, final String description, final int price) {
         this.name = name;
         this.description = description;
         this.price = price;
     }
 
     @Override
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
 
     @Override
-    public String getDescription() {
+    public final String getDescription() {
         return this.description;
     }
 
@@ -42,12 +43,12 @@ public class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public int getShopPrice() {
+    public final int getShopPrice() {
         return this.price;
     }
 
     @Override
-    public int getToSellValue() {
+    public final int getToSellValue() {
         return this.price / 2;
     }
 
@@ -61,24 +62,31 @@ public class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        BaseSpecialCard other = (BaseSpecialCard) obj;
+        }
+        final BaseSpecialCard other = (BaseSpecialCard) obj;
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (description == null) {
-            if (other.description != null)
+            if (other.description != null) {
                 return false;
-        } else if (!description.equals(other.description))
+            }
+        } else if (!description.equals(other.description)) {
             return false;
+        }
         return true;
     }
 

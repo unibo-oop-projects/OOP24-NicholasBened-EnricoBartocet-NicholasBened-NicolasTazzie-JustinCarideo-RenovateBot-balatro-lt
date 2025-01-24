@@ -12,6 +12,4 @@ public interface Player {
 
     Currency getCurrency();
 
-    Ante getCurrentAnte();
-
 }

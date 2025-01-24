@@ -10,7 +10,8 @@ import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.Multiplier;
 
 /**
- * A basic modifier. It returns the multiplier and the basepoints if are present.
+ * A basic modifier. 
+ * It returns the multiplier and the basepoints if are present.
  * It can contain one of them or both depending on how is constructed.
  * modification without checking any condition and doesn't need any status
  */

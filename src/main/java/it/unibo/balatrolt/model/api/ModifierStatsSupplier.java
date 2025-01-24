@@ -12,12 +12,12 @@ public interface ModifierStatsSupplier {
     /**
      * @return cards held by the player at the moment
      */
-    Optional<Set<Card>> getHoldingCards();
+    Optional<Set<PlayableCard>> getHoldingCards();
 
     /**
-     * @return cards played by the player in the last round. 
+     * @return cards played by the player in the last round.
      */
-    Optional<Set<Card>> getPlayedCards();
+    Optional<Set<PlayableCard>> getPlayedCards();
 
     /**
      * @return currency got by the player at the moment

@@ -8,5 +8,5 @@ public interface Multiplier {
     /**
      * @return the multiplier
      */
-    double getMultiplierValue();
+    double multiplier();
 }

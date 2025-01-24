@@ -10,5 +10,5 @@ public interface BasePoints {
     /**
      * @return the basepoints
      */
-    int getBasePointsValue();
+    int basePoints();
 }

@@ -21,7 +21,7 @@ public final class JokerFactoryImpl implements JokerFactory {
 
     @Override
     public Joker merge(String newName, String newDescription, Joker j1, Joker j2) {
-        // TODO
+        // TODO merge elems
         throw new UnsupportedOperationException("Unimplemented method 'merge'");
     }
 }

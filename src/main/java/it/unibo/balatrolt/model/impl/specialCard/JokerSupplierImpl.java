@@ -26,7 +26,7 @@ public class JokerSupplierImpl implements JokerSupplier {
         return factory.withModifierAndRandomPrice("The doubler",
                 "It doubles the current value of multipler without checking any condition",
                 new ModifierBuilderImpl()
-                        .addMultiplierModifier(null)
+                        .addMultiplierModifier(m -> m * 2)
                         .build());
     }
 }

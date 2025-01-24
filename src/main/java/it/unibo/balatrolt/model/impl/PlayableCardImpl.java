@@ -1,6 +1,6 @@
 package it.unibo.balatrolt.model.impl;
 
-import java.util.Optional;
+import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.Card;
 import it.unibo.balatrolt.model.api.Modifier;
@@ -26,7 +26,7 @@ public class PlayableCardImpl implements PlayableCard {
 
     @Override
     public Optional<Modifier> getModifier() {
-        return Optional.empty();
+        return Optional.absent();
     }
 
     @Override

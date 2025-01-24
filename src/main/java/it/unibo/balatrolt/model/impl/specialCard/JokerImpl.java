@@ -5,6 +5,9 @@ import com.google.common.base.Optional;
 import it.unibo.balatrolt.model.api.Joker;
 import it.unibo.balatrolt.model.api.Modifier;
 
+/**
+ * Implementation of {@link Joker}
+ */
 public final class JokerImpl extends BaseSpecialCard implements Joker {
     private final Optional<Modifier> modifier;
 

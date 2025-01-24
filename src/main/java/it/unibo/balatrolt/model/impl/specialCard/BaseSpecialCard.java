@@ -7,7 +7,7 @@ import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.SpecialCard;
 
 /**
- * It's a BasicSpecialCard, it has a name and a description, but doesn't have any modifier.
+ * It's a Basic SpecialCard, it has a name and a description, but doesn't have any modifier.
  */
 public class BaseSpecialCard implements SpecialCard {
     private final String name;

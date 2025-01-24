@@ -4,38 +4,36 @@ import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.BasePoints;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
-import it.unibo.balatrolt.model.api.Multiplier;
 
 /**
- * A basic modifier. 
+ * A basic modifier.
  * It returns the multiplier and the basepoints if are present.
  * It can contain one of them or both depending on how is constructed.
  * modification without checking any condition and doesn't need any status
  */
 public final class BaseModifier implements Modifier {
-    private final Optional<UnaryOperator<Multiplier>> multiplierMod;
-    private final Optional<UnaryOperator<BasePoints>> basePointMod;
+    private final Optional<UnaryOperator<Double>> multiplierMod;
+    private final Optional<UnaryOperator<Integer>> basePointMod;
 
     /**
      * @param multiplierMod UnaryOperator that modifies the multiplier
      * @param basePointMod UnaryOperator that modifies the basePonit
      */
-    public BaseModifier(final Optional<UnaryOperator<Multiplier>> multiplierMod,
-            final Optional<UnaryOperator<BasePoints>> basePointMod) {
+    public BaseModifier(final Optional<UnaryOperator<Double>> multiplierMod,
+            final Optional<UnaryOperator<Integer>> basePointMod) {
         this.multiplierMod = multiplierMod;
         this.basePointMod = basePointMod;
     }
 
     @Override
-    public Optional<UnaryOperator<Multiplier>> getMultiplierMapper() {
+    public Optional<UnaryOperator<Double>> getMultiplierMapper() {
         return this.multiplierMod;
     }
 
     @Override
-    public Optional<UnaryOperator<BasePoints>> getBasePointMapper() {
+    public Optional<UnaryOperator<Integer>> getBasePointMapper() {
         return this.basePointMod;
     }
 

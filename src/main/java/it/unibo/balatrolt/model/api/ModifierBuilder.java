@@ -13,14 +13,14 @@ public interface ModifierBuilder {
      * @param multiplierFun multiplier function
      * @return current modifierBuilder status
      */
-    ModifierBuilder addMultiplierModifier(UnaryOperator<Multiplier> multiplierFun);
+    ModifierBuilder addMultiplierModifier(UnaryOperator<Double> multiplierFun);
 
     /**
      * Adds a base point function to the modifier.
      * @param bPFun base point funtion
      * @return current modifierBuilder status
      */
-    ModifierBuilder addBasePointsModifier(UnaryOperator<BasePoints> bPFun);
+    ModifierBuilder addBasePointsModifier(UnaryOperator<Integer> bPFun);
 
     /**
      * Adds a bound on played cards.

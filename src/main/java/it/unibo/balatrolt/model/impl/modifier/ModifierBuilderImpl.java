@@ -6,28 +6,26 @@ import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.BasePoints;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierBuilder;
-import it.unibo.balatrolt.model.api.Multiplier;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
  * Builder implementation for Modifier.
  */
 public final class ModifierBuilderImpl implements ModifierBuilder {
-    private Optional<UnaryOperator<Multiplier>> mFun = Optional.absent();
-    private Optional<UnaryOperator<BasePoints>> bpFun = Optional.absent();
+    private Optional<UnaryOperator<Double>> mFun = Optional.absent();
+    private Optional<UnaryOperator<Integer>> bpFun = Optional.absent();
     private Optional<Predicate<Set<PlayableCard>>> playerCardBound = Optional.absent();
 
     @Override
-    public ModifierBuilder addMultiplierModifier(final UnaryOperator<Multiplier> multiplierFun) {
+    public ModifierBuilder addMultiplierModifier(final UnaryOperator<Double> multiplierFun) {
         this.mFun = Optional.fromNullable(multiplierFun);
         return this;
     }
 
     @Override
-    public ModifierBuilder addBasePointsModifier(final UnaryOperator<BasePoints> bPFun) {
+    public ModifierBuilder addBasePointsModifier(final UnaryOperator<Integer> bPFun) {
         this.bpFun = Optional.fromNullable(bPFun);
         return this;
     }

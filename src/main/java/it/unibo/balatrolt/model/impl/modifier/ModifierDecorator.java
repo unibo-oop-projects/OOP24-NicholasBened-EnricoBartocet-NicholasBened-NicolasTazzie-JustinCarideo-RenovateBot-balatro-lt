@@ -5,9 +5,7 @@ import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.BasePoints;
 import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.Multiplier;
 
 /**
  * A decorator for modifier.
@@ -24,12 +22,12 @@ public abstract class ModifierDecorator implements Modifier {
     }
 
     @Override
-    public final Optional<UnaryOperator<Multiplier>> getMultiplierMapper() {
+    public final Optional<UnaryOperator<Double>> getMultiplierMapper() {
         return this.canApply() ? this.base.getMultiplierMapper() : Optional.absent();
     }
 
     @Override
-    public final Optional<UnaryOperator<BasePoints>> getBasePointMapper() {
+    public final Optional<UnaryOperator<Integer>> getBasePointMapper() {
         return this.canApply() ? this.base.getBasePointMapper() : Optional.absent();
     }
 

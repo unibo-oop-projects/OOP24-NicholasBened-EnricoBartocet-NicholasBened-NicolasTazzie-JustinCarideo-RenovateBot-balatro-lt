@@ -13,13 +13,13 @@ public interface Modifier {
      * @return Optional.empty() if conditions are not verified, otherwise an UnaryOperator. 
      * mapping the new value a {@link Multiplier} should have
      */
-    Optional<UnaryOperator<Multiplier>> getMultiplierMapper();
+    Optional<UnaryOperator<Double>> getMultiplierMapper();
 
     /**
      * @return Optional.empty() if conditions are not verified, otherwise an UnaryOperator.
      * mapping the new value {@link BasePoints} should have
      */
-    Optional<UnaryOperator<BasePoints>> getBasePointMapper();
+    Optional<UnaryOperator<Integer>> getBasePointMapper();
 
     /**
      * It sets the current game status in the modifier.

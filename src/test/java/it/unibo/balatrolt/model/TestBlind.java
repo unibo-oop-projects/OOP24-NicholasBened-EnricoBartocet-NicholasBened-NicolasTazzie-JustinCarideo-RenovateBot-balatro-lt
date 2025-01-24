@@ -12,7 +12,7 @@ import it.unibo.balatrolt.model.api.Blind;
 import it.unibo.balatrolt.model.impl.BlindConfiguration;
 import it.unibo.balatrolt.model.impl.BlindImpl;
 
-public class TestBlind {
+class TestBlind {
     private static final int BLIND_ID = 1;
     private static final int BASE_CHIPS = 1000;
     private static final int REWARD = 2;
@@ -20,26 +20,26 @@ public class TestBlind {
     private Blind blind;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.blind = new BlindImpl(new BlindConfiguration(BLIND_ID, BASE_CHIPS, REWARD));
     }
 
     @Test
-    public void testConfiguration() {
+    void testConfiguration() {
         assertEquals(BLIND_ID, this.blind.getBlindNumber());
         assertEquals(BASE_CHIPS, this.blind.getMinimumChips());
         assertEquals(REWARD, this.blind.getReward());
     }
 
     @Test
-    public void testIncrementChips() {
+    void testIncrementChips() {
         this.blind.incrementChips(CHIPS_EARNED);
         assertEquals(CHIPS_EARNED, this.blind.getCurrentChips());
         assertThrows(IllegalArgumentException.class, () -> this.blind.incrementChips(-CHIPS_EARNED));
     }
 
     @Test
-    public void testDefeat() {
+    void testDefeat() {
         assertFalse(this.blind.isOver());
         for (int i = 0; i <= BASE_CHIPS / CHIPS_EARNED; i++) {
             this.blind.incrementChips(CHIPS_EARNED);

@@ -9,9 +9,9 @@ public interface Ante {
 
     int getAnteNumber();
 
-    void nextAnte();
+    List<Blind> getBlinds();
 
     Blind getCurrentBlind();
 
-    List<Blind> getBlinds();
+    void nextBlind();
 }

@@ -4,8 +4,6 @@ public interface Blind {
 
     int getBlindNumber();
 
-    void nextBlind();
-
     void playHand(PlayedHand hand);
 
     Chip getMinimunChips();

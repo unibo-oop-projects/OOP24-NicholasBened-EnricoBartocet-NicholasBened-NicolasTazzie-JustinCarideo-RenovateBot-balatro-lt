@@ -32,10 +32,4 @@ public interface PlayableCard extends Card {
      * @return the suit of the card.
      */
     Suit getSuit();
-
-    /**
-     * @param card, to compare
-     * @return true if the card is equal to this one, false otherwise.
-     */
-    boolean equals(Card card);
 }

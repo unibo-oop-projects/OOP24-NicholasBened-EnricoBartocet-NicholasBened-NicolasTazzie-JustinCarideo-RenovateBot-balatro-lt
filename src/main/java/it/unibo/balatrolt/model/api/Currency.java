@@ -22,4 +22,10 @@ public interface Currency {
      * @throws IllegalArgumentException if value is negative
      */
     void addValue(int value);
+
+    /**
+     * 
+     * @param value
+     */
+    void retrieveValue(int value);
 }

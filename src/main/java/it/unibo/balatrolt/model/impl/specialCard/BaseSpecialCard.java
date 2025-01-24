@@ -1,26 +1,29 @@
 package it.unibo.balatrolt.model.impl.specialCard;
 
-
 import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.SpecialCard;
 
 /**
- * It's a Basic SpecialCard, it has a name and a description, but doesn't have any modifier.
+ * It's a Basic SpecialCard, it has a name and a description, but doesn't have
+ * any modifier.
  */
 public class BaseSpecialCard implements SpecialCard {
     private final String name;
     private final String description;
+    private final int price;
 
     /**
      * Constructor
-     * @param name card name
+     *
+     * @param name        card name
      * @param description description of what the card does
      */
-    public BaseSpecialCard(String name, String description) {
+    public BaseSpecialCard(String name, String description, int price) {
         this.name = name;
         this.description = description;
+        this.price = price;
     }
 
     @Override
@@ -36,6 +39,16 @@ public class BaseSpecialCard implements SpecialCard {
     @Override
     public Optional<Modifier> getModifier() {
         return Optional.absent();
+    }
+
+    @Override
+    public int getShopPrice() {
+        return this.price;
+    }
+
+    @Override
+    public int getToSellValue() {
+        return this.price / 2;
     }
 
     @Override
@@ -68,4 +81,5 @@ public class BaseSpecialCard implements SpecialCard {
             return false;
         return true;
     }
+
 }

@@ -19,8 +19,8 @@ public final class JokerImpl extends BaseSpecialCard implements Joker {
      * @param modifier    modifier
      * @throws NullPointerException if the modifier is null
      */
-    public JokerImpl(String name, String description, Modifier modifier) {
-        super(name, description);
+    public JokerImpl(String name, String description, int price, Modifier modifier) {
+        super(name, description, price);
         this.modifier = Optional.fromNullable(modifier);
     }
 

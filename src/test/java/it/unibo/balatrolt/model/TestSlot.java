@@ -2,18 +2,14 @@ package it.unibo.balatrolt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.Card;
 import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.Slot;
 import it.unibo.balatrolt.model.api.PlayableCard.Rank;

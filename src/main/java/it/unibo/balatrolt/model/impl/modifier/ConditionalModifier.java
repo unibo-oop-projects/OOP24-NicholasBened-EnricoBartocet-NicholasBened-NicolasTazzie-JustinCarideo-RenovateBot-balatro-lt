@@ -38,6 +38,37 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
         return this.condition;
     }
 
+    @Override
+    public final int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((condition == null) ? 0 : condition.hashCode());
+        return result;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ConditionalModifier<X> other = (ConditionalModifier<X>) obj;
+        if (condition == null) {
+            if (other.condition != null) {
+                return false;
+            }
+        } else if (!condition.equals(other.condition)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @return current statistics
      */

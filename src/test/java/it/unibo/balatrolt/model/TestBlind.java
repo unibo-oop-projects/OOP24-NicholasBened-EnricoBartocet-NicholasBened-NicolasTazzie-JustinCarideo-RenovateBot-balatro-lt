@@ -2,15 +2,16 @@ package it.unibo.balatrolt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.Blind;
-import it.unibo.balatrolt.model.impl.BlindConfiguration;
-import it.unibo.balatrolt.model.impl.BlindImpl;
+import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.impl.levels.BlindConfiguration;
+import it.unibo.balatrolt.model.impl.levels.BlindImpl;
 
 class TestBlind {
     private static final int BLIND_ID = 1;
@@ -22,6 +23,11 @@ class TestBlind {
     @BeforeEach
     void init() {
         this.blind = new BlindImpl(new BlindConfiguration(BLIND_ID, BASE_CHIPS, REWARD));
+    }
+
+    @Test
+    void testCreation() {
+        assertNotNull(this.blind);
     }
 
     @Test

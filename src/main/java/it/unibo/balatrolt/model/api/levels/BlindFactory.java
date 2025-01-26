@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.levels;
 
 import java.util.List;
 

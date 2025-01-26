@@ -13,8 +13,7 @@ import it.unibo.balatrolt.model.api.levels.Blind;
  * @author Bartocetti Enrico
  */
 public final class AnteImpl implements Ante {
-    private static final int NUM_BLINDS = 3;
-    private final int id;
+    private final AnteConfiguration configuration;
     private final List<Blind> blinds;
     private int currentBlind;
 
@@ -22,17 +21,17 @@ public final class AnteImpl implements Ante {
      * Initialize an Ante from his number.
      * @param id its ID
      */
-    public AnteImpl(final int id) {
-        this.id = id;
+    public AnteImpl(final AnteConfiguration config) {
+        this.configuration = config;
         this.blinds = new BlindFactoryImpl(
-            (a, b) -> (int) (Math.pow(a, 2) * 10 + Math.pow(b, 4) * 10),
-            n -> 4 + n
-        ).createList(NUM_BLINDS, id);
+            config.baseChipCalc(),
+            config.rewardCalc()
+        ).createList(config.numBlinds(), config.id());
     }
 
     @Override
     public int getAnteNumber() {
-        return this.id;
+        return this.configuration.id();
     }
 
     @Override
@@ -60,7 +59,7 @@ public final class AnteImpl implements Ante {
 
     @Override
     public boolean isOver() {
-        return this.currentBlind >= NUM_BLINDS;
+        return this.currentBlind >= this.configuration.numBlinds();
     }
 
 }

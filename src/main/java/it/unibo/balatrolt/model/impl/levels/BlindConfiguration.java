@@ -8,4 +8,5 @@ package it.unibo.balatrolt.model.impl.levels;
  * @param reward the reward which will be awarded to the player if he defeats the blind
  */
 public record BlindConfiguration(int id, int baseChip, int reward) {
+
 }

@@ -13,7 +13,7 @@ import it.unibo.balatrolt.model.api.levels.BlindFactory;
  * A factory for {@link Blind} objects.
  * @author Bartocetti Enrico
  */
-public class BlindFactoryImpl implements BlindFactory {
+public final class BlindFactoryImpl implements BlindFactory {
 
     private final BiFunction<Integer, Integer, Integer> baseChipsCalculator;
     private final Function<Integer, Integer> rewardCalculator;
@@ -32,7 +32,11 @@ public class BlindFactoryImpl implements BlindFactory {
 
     @Override
     public Blind fromIds(final int anteId, final int blindId) {
-        return new BlindImpl(new BlindConfiguration(blindId, baseChipsCalculator.apply(anteId, blindId), rewardCalculator.apply(blindId)));
+        return new BlindImpl(new BlindConfiguration(
+            blindId,
+            baseChipsCalculator.apply(anteId, blindId),
+            rewardCalculator.apply(blindId)
+        ));
     }
 
     @Override

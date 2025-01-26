@@ -12,8 +12,8 @@ import it.unibo.balatrolt.model.api.levels.Blind;
  * An implementation of the {@link Ante} interface.
  * @author Bartocetti Enrico
  */
-public class AnteImpl implements Ante {
-    private static int NUM_BLINDS = 3;
+public final class AnteImpl implements Ante {
+    private static final int NUM_BLINDS = 3;
     private final int id;
     private final List<Blind> blinds;
     private int currentBlind;
@@ -25,7 +25,7 @@ public class AnteImpl implements Ante {
     public AnteImpl(final int id) {
         this.id = id;
         this.blinds = new BlindFactoryImpl(
-            (a, b) -> (int)(Math.pow(a, 2) * 10 + Math.pow(b, 4) * 10),
+            (a, b) -> (int) (Math.pow(a, 2) * 10 + Math.pow(b, 4) * 10),
             n -> 4 + n
         ).createList(NUM_BLINDS, id);
     }

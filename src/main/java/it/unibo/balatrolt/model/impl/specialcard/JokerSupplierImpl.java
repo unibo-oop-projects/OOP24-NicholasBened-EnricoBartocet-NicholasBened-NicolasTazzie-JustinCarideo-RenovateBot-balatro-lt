@@ -15,17 +15,19 @@ import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
  * Joker supplier implementation.
  */
 public final class JokerSupplierImpl implements JokerSupplier {
-    private static final int NUM_METHODS = 4;
+    private static final int NUM_JOKERS = 6;
     private final JokerFactory factory = new JokerFactoryImpl();
     private final Random r = new Random();
 
     @Override
     public Joker getRandom() {
-        return switch (r.nextInt(NUM_METHODS)) {
-            case 0 -> doubleMultiplier();
-            case 1 -> doubleMultiplierWithCondition();
-            case 2 -> theDonour();
-            case 3 -> theKingDonour();
+        return switch (r.nextInt(NUM_JOKERS)) {
+            case 0 -> doubler();
+            case 1 -> diamondDoubler();
+            case 2 -> donour();
+            case 3 -> kingDonour();
+            case 4 -> heartDoubler();
+            case 5 -> seventhDonour();
             default -> factory.standardJoker("The bored joker", "It does nothing");
         };
     }
@@ -46,7 +48,7 @@ public final class JokerSupplierImpl implements JokerSupplier {
      * The doubler.
      * @return It doubles the current value of multipler without checking any condition
      */
-    public Joker doubleMultiplier() {
+    public Joker doubler() {
         return factory.withModifierAndRandomPrice("The doubler",
                 "It doubles the current value of multipler without checking any condition",
                 new ModifierBuilderImpl()
@@ -58,21 +60,35 @@ public final class JokerSupplierImpl implements JokerSupplier {
      * The diamond doubler.
      * @return It doubles the current value of multipler if one of the played cards has suit diamond
      */
-    public Joker doubleMultiplierWithCondition() {
+    public Joker diamondDoubler() {
         return factory.withModifierAndRandomPrice("The diamond doubler",
                 "It doubles the current value of multipler if one of " +
                 "the played cards has suit diamond",
                 new ModifierBuilderImpl()
-                        .addMultiplierModifier(m -> m * 2)
-                        .addPlayedCardBound(cards -> checkContainsSuit(cards, Suit.DIAMONDS))
-                        .build());
+                    .addMultiplierModifier(m -> m * 2)
+                    .addPlayedCardBound(cards -> checkContainsSuit(cards, Suit.DIAMONDS))
+                    .build());
+    }
+
+    /**
+     * The heart doubler.
+     * @return It doubles the current value of multipler if one of the played cards has suit heart
+     */
+    public Joker heartDoubler() {
+        return factory.withModifierAndRandomPrice("The heart doubler",
+                "It doubles the current value of multipler if one of " +
+                "the played cards has suit heart",
+                new ModifierBuilderImpl()
+                    .addMultiplierModifier(m -> m * 2)
+                    .addPlayedCardBound(cards -> checkContainsSuit(cards, Suit.HEARTS))
+                    .build());
     }
 
     /**
      * The donour.
      * @return It adds 50 base points
      */
-    public Joker theDonour() {
+    public Joker donour() {
         return factory.withModifierAndRandomPrice(
             "The donour",
             "It adds 50 base points",
@@ -85,13 +101,27 @@ public final class JokerSupplierImpl implements JokerSupplier {
      * The king donour.
      * @return It adds 50 base points if the played cards contains a king
      */
-    public Joker theKingDonour() {
+    public Joker kingDonour() {
         return factory.withModifierAndRandomPrice(
             "The king donour",
             "It adds 50 base points if the played cards contains a king",
             new ModifierBuilderImpl()
                 .addBasePointsModifier(p -> p + 50)
                 .addPlayedCardBound(cards -> checkContainsRank(cards, Rank.KING))
+                .build());
+    }
+
+    /**
+     * The seventh donour.
+     * @return It adds 50 base points if the played cards contains a seven
+     */
+    public Joker seventhDonour() {
+        return factory.withModifierAndRandomPrice(
+            "The seventh donour",
+            "It adds 50 base points if the played cards contains a seven",
+            new ModifierBuilderImpl()
+                .addBasePointsModifier(p -> p + 50)
+                .addPlayedCardBound(cards -> checkContainsRank(cards, Rank.SEVEN))
                 .build());
     }
 

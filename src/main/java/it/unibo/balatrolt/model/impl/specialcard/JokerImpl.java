@@ -59,4 +59,10 @@ public final class JokerImpl extends BaseSpecialCard implements Joker {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "JokerImpl [name=" + getName() + ", description=" + getDescription()
+                + ", price=" + getShopPrice() + ", sellValue=" + getToSellValue() + "]";
+    }
 }

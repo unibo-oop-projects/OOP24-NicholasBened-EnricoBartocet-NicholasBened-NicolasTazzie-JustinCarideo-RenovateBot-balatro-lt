@@ -1,67 +1,94 @@
 package it.unibo.balatrolt.model.impl;
 
+import java.util.Iterator;
+import java.util.stream.Collectors;
+
 import it.unibo.balatrolt.model.api.CombinationRecognizer;
 import it.unibo.balatrolt.model.api.CombinationRecognizerHelpers;
+import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 
 public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
 
     @Override
     public CombinationRecognizer highCardRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'highCardRecognizer'");
+        return hand -> !hand.isEmpty();
     }
 
     @Override
     public CombinationRecognizer pairRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pairRecognizer'");
+        return hand -> hand.size() >= 2L &&
+            hand.stream()
+                .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .anyMatch(e -> e.getValue() == 2L);
     }
 
     @Override
     public CombinationRecognizer twoPairRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'twoPairRecognizer'");
+        return hand -> hand.size() >= 4L &&
+            hand.stream()
+            .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
+            .entrySet()
+            .stream()
+            .filter(e -> e.getValue() == 2L)
+            .toList().size() == 2L;
     }
 
     @Override
     public CombinationRecognizer threeOfAKindRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'threeOfAKindRecognizer'");
+        return hand -> hand.size() >= 3L  &&
+            hand.stream()
+                .collect(Collectors.groupingBy(p -> p.getRank(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .anyMatch(e -> e.getValue() == 3L);
     }
 
     @Override
     public CombinationRecognizer straightRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'straightRecognizer'");
+        return hand -> {
+            Iterator<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
+                .stream()
+                .map(p -> p.getRank())
+                .iterator();
+            return false;
+        };
     }
 
     @Override
     public CombinationRecognizer flushRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'flushRecognizer'");
+        return hand ->  hand.stream()
+            .collect(Collectors.groupingBy(p -> p.getSuit(), Collectors.counting()))
+            .entrySet()
+            .stream()
+            .anyMatch(e -> e.getValue() == 5);
     }
 
     @Override
     public CombinationRecognizer fullHouseRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'fullHouseRecognizer'");
+        return hand -> pairRecognizer().recognize(hand) &&
+            threeOfAKindRecognizer().recognize(hand);
     }
 
     @Override
     public CombinationRecognizer fourOfAKindRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'fourOfAKindRecognizer'");
+        return hand -> !hand.isEmpty() &&
+            hand.stream()
+                .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .anyMatch(e -> e.getValue() == 4L);
     }
 
     @Override
     public CombinationRecognizer straightFlushRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'straightFlushRecognizer'");
+        return hand -> straightRecognizer().recognize(hand) &&
+            flushRecognizer().recognize(hand);
     }
 
     @Override
     public CombinationRecognizer royalFlushRecognizer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'royalFlushRecognizer'");
+        return hand -> !hand.isEmpty();
     }
 }

@@ -13,18 +13,18 @@ public class PlayableCardImpl implements PlayableCard {
 
     public PlayableCardImpl(final Pair<Rank, Suit> card) {
         this.card = card;
-        this.rank = card.get1();
-        this.suit = card.get2();
+        this.rank = card.e1();
+        this.suit = card.e2();
     }
 
     @Override
     public Rank getRank() {
-        return this.card.get1();
+        return this.card.e1();
     }
 
     @Override
     public Suit getSuit() {
-        return this.card.get2();
+        return this.card.e2();
     }
 
     @Override

@@ -13,6 +13,7 @@ import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
 
 /**
  * Joker supplier implementation.
+ * @author Nicolas Tazzieri - nicolas.tazzieri@studio.unibo.it
  */
 public final class JokerSupplierImpl implements JokerSupplier {
     private static final int NUM_JOKERS = 6;
@@ -22,12 +23,12 @@ public final class JokerSupplierImpl implements JokerSupplier {
     @Override
     public Joker getRandom() {
         return switch (r.nextInt(NUM_JOKERS)) {
-            case 0 -> doubler();
-            case 1 -> diamondDoubler();
-            case 2 -> donour();
-            case 3 -> kingDonour();
-            case 4 -> heartDoubler();
-            case 5 -> seventhDonour();
+            case 0 -> this.doubler();
+            case 1 -> this.diamondDoubler();
+            case 2 -> this.donour();
+            case 3 -> this.kingDonour();
+            case 4 -> this.heartDoubler();
+            case 5 -> this.seventhDonour();
             default -> factory.standardJoker("The bored joker", "It does nothing");
         };
     }
@@ -61,13 +62,12 @@ public final class JokerSupplierImpl implements JokerSupplier {
      * @return It doubles the current value of multipler if one of the played cards has suit diamond
      */
     public Joker diamondDoubler() {
-        return factory.withModifierAndRandomPrice("The diamond doubler",
+        return factory.addPlayableCardBoundToJoker("The diamond doubler",
                 "It doubles the current value of multipler if one of " +
                 "the played cards has suit diamond",
-                new ModifierBuilderImpl()
-                    .addMultiplierModifier(m -> m * 2)
-                    .addPlayedCardBound(cards -> checkContainsSuit(cards, Suit.DIAMONDS))
-                    .build());
+                doubler(),
+                cards -> checkContainsSuit(cards, Suit.DIAMONDS)
+            );
     }
 
     /**
@@ -75,13 +75,12 @@ public final class JokerSupplierImpl implements JokerSupplier {
      * @return It doubles the current value of multipler if one of the played cards has suit heart
      */
     public Joker heartDoubler() {
-        return factory.withModifierAndRandomPrice("The heart doubler",
+        return factory.addPlayableCardBoundToJoker("The heart doubler",
                 "It doubles the current value of multipler if one of " +
                 "the played cards has suit heart",
-                new ModifierBuilderImpl()
-                    .addMultiplierModifier(m -> m * 2)
-                    .addPlayedCardBound(cards -> checkContainsSuit(cards, Suit.HEARTS))
-                    .build());
+                this.doubler(),
+                cards -> checkContainsSuit(cards, Suit.HEARTS)
+            );
     }
 
     /**
@@ -102,13 +101,12 @@ public final class JokerSupplierImpl implements JokerSupplier {
      * @return It adds 50 base points if the played cards contains a king
      */
     public Joker kingDonour() {
-        return factory.withModifierAndRandomPrice(
+        return this.factory.addPlayableCardBoundToJoker(
             "The king donour",
             "It adds 50 base points if the played cards contains a king",
-            new ModifierBuilderImpl()
-                .addBasePointsModifier(p -> p + 50)
-                .addPlayedCardBound(cards -> checkContainsRank(cards, Rank.KING))
-                .build());
+            this.donour(),
+            cards -> checkContainsRank(cards, Rank.KING)
+        );
     }
 
     /**
@@ -116,13 +114,12 @@ public final class JokerSupplierImpl implements JokerSupplier {
      * @return It adds 50 base points if the played cards contains a seven
      */
     public Joker seventhDonour() {
-        return factory.withModifierAndRandomPrice(
+        return this.factory.addPlayableCardBoundToJoker(
             "The seventh donour",
             "It adds 50 base points if the played cards contains a seven",
-            new ModifierBuilderImpl()
-                .addBasePointsModifier(p -> p + 50)
-                .addPlayedCardBound(cards -> checkContainsRank(cards, Rank.SEVEN))
-                .build());
+            this.donour(),
+            cards -> checkContainsRank(cards, Rank.SEVEN)
+        );
     }
 
 }

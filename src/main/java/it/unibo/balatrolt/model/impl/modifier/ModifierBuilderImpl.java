@@ -47,8 +47,9 @@ public final class ModifierBuilderImpl implements ModifierBuilder {
 
     @Override
     public Modifier build() {
-        checkState(!this.mFun.isPresent() && !this.bpFun.isPresent(),
-        "At least one between Moltiplicator and BasePoints functions must be present!");
+        checkState(this.mFun.isPresent() || this.bpFun.isPresent() || this.toMerge.isPresent(),
+        "At least one between Moltiplicator and BasePoints functions," +
+        "or modifier to merge must be present!");
         Modifier modifier;
         if (this.toMerge.isPresent()) {
             modifier = new ModifierFromExisting(this.mFun, this.bpFun, this.toMerge.get());

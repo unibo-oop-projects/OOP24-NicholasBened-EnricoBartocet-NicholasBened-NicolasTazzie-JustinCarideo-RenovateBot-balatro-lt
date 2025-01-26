@@ -34,6 +34,7 @@ public final class JokerFactoryImpl implements JokerFactory {
         return new JokerImpl(name, description, getRandomPrice(), modifier);
     }
 
+    @Override
     public Joker addPlayableCardBoundToJoker(
             final String name,
             final String description,

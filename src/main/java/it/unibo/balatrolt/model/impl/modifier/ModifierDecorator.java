@@ -1,11 +1,12 @@
 package it.unibo.balatrolt.model.impl.modifier;
 
-import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 
 /**
  * A decorator for modifier.
@@ -18,17 +19,22 @@ public abstract class ModifierDecorator implements Modifier {
      * @param modifier base modifier
      */
     protected ModifierDecorator(final Modifier modifier) {
-        this.base = Objects.requireNonNull(modifier, "Modifier cant't be null");
+        this.base = Preconditions.checkNotNull(modifier, "Modifier cant't be null");
     }
 
     @Override
-    public final Optional<UnaryOperator<Double>> getMultiplierMapper() {
+    public Optional<UnaryOperator<Double>> getMultiplierMapper() {
         return this.canApply() ? this.base.getMultiplierMapper() : Optional.absent();
     }
 
     @Override
-    public final Optional<UnaryOperator<Integer>> getBasePointMapper() {
+    public Optional<UnaryOperator<Integer>> getBasePointMapper() {
         return this.canApply() ? this.base.getBasePointMapper() : Optional.absent();
+    }
+
+    @Override
+    public void setGameStatus(ModifierStatsSupplier stats) {
+        base.setGameStatus(stats);
     }
 
     /**

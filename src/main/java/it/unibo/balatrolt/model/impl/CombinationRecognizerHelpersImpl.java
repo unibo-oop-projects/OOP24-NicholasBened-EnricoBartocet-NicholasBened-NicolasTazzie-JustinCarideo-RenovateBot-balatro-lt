@@ -1,13 +1,20 @@
 package it.unibo.balatrolt.model.impl;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
+
+import org.checkerframework.checker.units.qual.t;
 
 import it.unibo.balatrolt.model.api.CombinationRecognizer;
 import it.unibo.balatrolt.model.api.CombinationRecognizerHelpers;
 import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 
 public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
+
+    private final List<Rank> ranks = List.of(Rank.values());
 
     @Override
     public CombinationRecognizer highCardRecognizer() {
@@ -48,11 +55,28 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
     @Override
     public CombinationRecognizer straightRecognizer() {
         return hand -> {
-            Iterator<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
+            List<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
                 .stream()
                 .map(p -> p.getRank())
-                .iterator();
-            return false;
+                .toList();
+            boolean isStraight= true;
+            Rank next = ranks.get((ranks.indexOf(sorted.getFirst()) + 1) % ranks.size() );
+            for (int i = 1; i < sorted.size(); i++) {
+                if (next.equals(sorted.get(i))) {
+                    isStraight = false;
+                }
+                next = ranks.get((ranks.indexOf(sorted.get(i)) + 1) % ranks.size() );
+            }
+            if (sorted.equals(List.of(
+                Rank.TWO,
+                Rank.THREE,
+                Rank.FOUR,
+                Rank.FIVE,
+                Rank.ACE
+            ))) {
+                return true;
+            }
+            return hand.size() == 5 && isStraight;
         };
     }
 
@@ -89,6 +113,21 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
 
     @Override
     public CombinationRecognizer royalFlushRecognizer() {
-        return hand -> !hand.isEmpty();
+        return hand -> {
+            List<Rank> l = SortingPlayableHelpers.sortingByRank(hand)
+                .stream()
+                .map(p -> p.getRank())
+                .toList();
+            if (l.equals(List.of(
+                Rank.TEN,
+                Rank.JACK,
+                Rank.QUEEN,
+                Rank.KING,
+                Rank.ACE
+            ))) {
+                return flushRecognizer().recognize(hand);
+            }
+            return false;
+        };
     }
 }

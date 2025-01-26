@@ -8,6 +8,7 @@ import it.unibo.balatrolt.model.api.Joker;
 import it.unibo.balatrolt.model.api.JokerFactory;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.PlayableCard;
+import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
 
 /**
  * Implementation of {@link JokerFactory}.
@@ -23,7 +24,8 @@ public final class JokerFactoryImpl implements JokerFactory {
     }
 
     @Override
-    public Joker withModifier(final String name, final String description, final int basePrice, final Modifier modifier) {
+    public Joker withModifier(final String name, final String description, final int basePrice,
+            final Modifier modifier) {
         return new JokerImpl(name, description, basePrice, modifier);
     }
 
@@ -33,17 +35,33 @@ public final class JokerFactoryImpl implements JokerFactory {
     }
 
     public Joker addPlayableCardBoundToJoker(
-        final String name,
-        final String description,
-        final Joker j,
-        final Predicate<Set<PlayableCard>> bound) {
-            throw new UnsupportedOperationException("Unimplemented method 'addPlayableCardBoundToJoker'");
+            final String name,
+            final String description,
+            final Joker j,
+            final Predicate<Set<PlayableCard>> bound) {
+        return new JokerImpl(
+                name,
+                description,
+                getRandomPrice(),
+                new ModifierBuilderImpl()
+                    .merge(j.getModifier().get())
+                    .addPlayedCardBound(bound)
+                    .build()
+        );
     }
 
     @Override
     public Joker merge(final String newName, final String newDescription, final Joker j1, final Joker j2) {
-        // TODO merge elems
-        throw new UnsupportedOperationException("Unimplemented method 'merge'");
+        Modifier newModifier = new ModifierBuilderImpl()
+            .merge(j1.getModifier().get())
+            .build();
+        return new JokerImpl(
+            newName,
+            newDescription,
+            getRandomPrice(),
+            new ModifierBuilderImpl()
+                .merge(newModifier)
+                .build());
     }
 
     private int getRandomPrice() {

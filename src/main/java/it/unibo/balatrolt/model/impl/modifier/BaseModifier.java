@@ -42,4 +42,41 @@ public final class BaseModifier implements Modifier {
         // it doesn't set any game status since it's not required.
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((multiplierMod == null) ? 0 : multiplierMod.hashCode());
+        result = prime * result + ((basePointMod == null) ? 0 : basePointMod.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        BaseModifier other = (BaseModifier) obj;
+        if (multiplierMod == null) {
+            if (other.multiplierMod != null) {
+                return false;
+            }
+        } else if (!multiplierMod.equals(other.multiplierMod)) {
+            return false;
+        }
+        if (basePointMod == null) {
+            if (other.basePointMod != null) {
+                return false;
+            }
+        } else if (!basePointMod.equals(other.basePointMod)) {
+            return false;
+        }
+        return true;
+    }
 }

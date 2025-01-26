@@ -55,28 +55,25 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
     @Override
     public CombinationRecognizer straightRecognizer() {
         return hand -> {
+            if (hand.size() != 5) {
+                return false;
+            }
             List<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
                 .stream()
                 .map(p -> p.getRank())
+                .distinct()
+                .sorted()
                 .toList();
-            boolean isStraight= true;
-            Rank next = ranks.get((ranks.indexOf(sorted.getFirst()) + 1) % ranks.size() );
-            for (int i = 1; i < sorted.size(); i++) {
-                if (next.equals(sorted.get(i))) {
-                    isStraight = false;
-                }
-                next = ranks.get((ranks.indexOf(sorted.get(i)) + 1) % ranks.size() );
-            }
-            if (sorted.equals(List.of(
-                Rank.TWO,
-                Rank.THREE,
-                Rank.FOUR,
-                Rank.FIVE,
-                Rank.ACE
-            ))) {
+            if (sorted.equals(List.of(Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.ACE))) {
                 return true;
             }
-            return hand.size() == 5 && isStraight;
+            boolean isStraight = true;
+            for (int i = 1; i < sorted.size(); i++) {
+                if (ranks.indexOf(sorted.get(i)) != ranks.indexOf(sorted.get(i - 1)) + 1) {
+                    isStraight = false;
+                }
+            }
+            return isStraight;
         };
     }
 

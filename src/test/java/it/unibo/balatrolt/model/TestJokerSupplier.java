@@ -21,8 +21,8 @@ import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
 
-public class TestJokerSupplier {
-    private JokerSupplierImpl js = new JokerSupplierImpl();
+class TestJokerSupplier {
+    private final JokerSupplierImpl js = new JokerSupplierImpl();
 
     private Set<PlayableCard> getHandCards() {
         return Set.of(
@@ -35,22 +35,22 @@ public class TestJokerSupplier {
     }
 
     @Test
-    public void testTheDoubler() {
-        Joker j = js.doubler();
-        double m = 1;
-        ModifierStatsSupplier stats = getStatusByCards(getHandCards());
+    void testTheDoubler() {
+        final Joker j = js.doubler();
+        final double m = 1;
+        final ModifierStatsSupplier stats = getStatusByCards(getHandCards());
         assertTrue(j.getModifier().isPresent());
-        Modifier mod = getMod(j, stats);
+        final Modifier mod = getMod(j, stats);
         assertFalse(mod.getBasePointMapper().isPresent());
         assertTrue(mod.getMultiplierMapper().isPresent());
         assertEquals(m * 2, mod.getMultiplierMapper().get().apply(m));
     }
 
     @Test
-    public void testTheDoublerWithCondition() {
+    void testTheDoublerWithCondition() {
         Joker j = js.diamondDoubler(); // diamond is present
-        double m = 1;
-        ModifierStatsSupplier stats = getStatusByCards(getHandCards());
+        final double m = 1;
+        final ModifierStatsSupplier stats = getStatusByCards(getHandCards());
         assertTrue(j.getModifier().isPresent());
         Modifier mod = getMod(j, stats);
         assertFalse(mod.getBasePointMapper().isPresent());
@@ -64,22 +64,22 @@ public class TestJokerSupplier {
     }
 
     @Test
-    public void testTheDonour() {
-        Joker j = js.donour();
-        int bp = 0;
-        ModifierStatsSupplier stats = getStatusByCards(getHandCards());
+    void testTheDonour() {
+        final Joker j = js.donour();
+        final int bp = 0;
+        final ModifierStatsSupplier stats = getStatusByCards(getHandCards());
         assertTrue(j.getModifier().isPresent());
-        Modifier mod = getMod(j, stats);
+        final Modifier mod = getMod(j, stats);
         assertTrue(mod.getBasePointMapper().isPresent());
         assertFalse(mod.getMultiplierMapper().isPresent());
         assertEquals(bp + 50, mod.getBasePointMapper().get().apply(bp));
     }
 
     @Test
-    public void testTheDonourWithCondition() {
+    void testTheDonourWithCondition() {
         Joker j = js.kingDonour(); // king is present
-        int bp = 0;
-        ModifierStatsSupplier stats = getStatusByCards(getHandCards());
+        final int bp = 0;
+        final ModifierStatsSupplier stats = getStatusByCards(getHandCards());
         assertTrue(j.getModifier().isPresent());
         Modifier mod = getMod(j, stats);
         assertTrue(mod.getBasePointMapper().isPresent());
@@ -91,8 +91,8 @@ public class TestJokerSupplier {
         assertFalse(mod.getMultiplierMapper().isPresent());
     }
 
-    private Modifier getMod(Joker j, ModifierStatsSupplier stats) {
-        Modifier mod = j.getModifier().get();
+    private Modifier getMod(final Joker j, final ModifierStatsSupplier stats) {
+        final Modifier mod = j.getModifier().get();
         mod.setGameStatus(stats);
         return mod;
     }

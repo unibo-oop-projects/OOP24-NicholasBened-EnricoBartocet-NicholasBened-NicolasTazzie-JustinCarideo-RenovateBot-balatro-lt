@@ -104,8 +104,8 @@ class TestModifier {
     void testMerge() {
         Modifier base = getModifierWithHCardCondTrue();
         Modifier modifier = getMergedModifier(base);
-        double mul = 1;
-        int baseP = 1;
+        final double mul = 1;
+        final int baseP = 1;
         modifier.setGameStatus(getStatusByCards(getTestCards()));
         // validStatus
         assertTrue(modifier.getBasePointMapper().isPresent());
@@ -122,7 +122,7 @@ class TestModifier {
         assertFalse(modifier.getMultiplierMapper().isPresent());
     }
 
-    private Modifier getMergedModifier(Modifier base) {
+    private Modifier getMergedModifier(final Modifier base) {
         return this.builder
                 .merge(base)
                 .addBasePointsModifier(p -> p + 2)

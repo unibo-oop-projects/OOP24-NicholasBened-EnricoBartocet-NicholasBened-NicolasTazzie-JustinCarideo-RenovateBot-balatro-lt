@@ -1,6 +1,6 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.levels;
 
-import it.unibo.balatrolt.model.api.Blind;
+import it.unibo.balatrolt.model.api.levels.Blind;
 
 /**
  * An implementation for the {@link Blind} interface.

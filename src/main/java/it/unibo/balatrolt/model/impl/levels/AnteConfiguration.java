@@ -20,5 +20,15 @@ public record AnteConfiguration(
     BiFunction<Integer, Integer, Integer> baseChipCalc,
     Function<Integer, Integer> rewardCalc
 ) {
-
+    /**
+     * Check that the functions aren't null and the number of blinds is positive.
+     */
+    public AnteConfiguration {
+        if (rewardCalc == null || baseChipCalc == null) {
+            throw new IllegalArgumentException(new NullPointerException());
+        }
+        if (numBlinds <= 0) {
+            throw new IllegalArgumentException("The Ante must contain at least 1 Blind");
+        }
+    }
 }

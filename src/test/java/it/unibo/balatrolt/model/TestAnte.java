@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.function.Function;
@@ -33,6 +34,13 @@ class TestAnte {
         assertEquals(ANTE_ID, this.ante.getAnteNumber());
         assertNotNull(this.ante.getBlinds());
         assertEquals(NUM_BLINDS, this.ante.getBlinds().size());
+    }
+
+    @Test
+    void testConfiguration() {
+        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, null, Function.identity()));
+        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, null));
+        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, 0, (a, b) -> a, Function.identity()));
     }
 
     @Test

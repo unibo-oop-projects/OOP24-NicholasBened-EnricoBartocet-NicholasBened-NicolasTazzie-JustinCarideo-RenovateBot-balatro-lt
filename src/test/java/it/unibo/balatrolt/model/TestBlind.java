@@ -28,13 +28,15 @@ class TestBlind {
     @Test
     void testCreation() {
         assertNotNull(this.blind);
+        assertEquals(BLIND_ID, this.blind.getBlindNumber());
+        assertEquals(BASE_CHIPS, this.blind.getMinimumChips());
+        assertEquals(REWARD, this.blind.getReward());
     }
 
     @Test
     void testConfiguration() {
-        assertEquals(BLIND_ID, this.blind.getBlindNumber());
-        assertEquals(BASE_CHIPS, this.blind.getMinimumChips());
-        assertEquals(REWARD, this.blind.getReward());
+        assertThrows(IllegalArgumentException.class, () -> new BlindConfiguration(BLIND_ID, -BASE_CHIPS, REWARD));
+        assertThrows(IllegalArgumentException.class, () -> new BlindConfiguration(BLIND_ID, BASE_CHIPS, -REWARD));
     }
 
     @Test

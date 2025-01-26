@@ -60,14 +60,27 @@ public class TestSortingHelpers {
 	@Test
 	public void testSortByRank() {
 		List<PlayableCard> expected = new ArrayList<>();
-		expected.add(new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.DIAMONDS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.KING, Suit.HEARTS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.DIAMONDS)));
 		var result = SortingPlayableHelpers.sortingByRank(hand);
-		for (int i = 0 ; i < expected.size(); i++) {
-			assertEquals(expected.get(i), result.get(i), "Mismatch at index " + i + ": expected " + expected.get(i) + ", but got " + result.get(i));
-		}
+		assertEquals(expected, result);
+	}
+
+	/**
+	 * Test sorting by suit
+	 */
+	@Test
+	public void testSortBySuit() {
+		List<PlayableCard> expected = new ArrayList<>();
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.KING, Suit.HEARTS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.DIAMONDS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)));
+		var result = SortingPlayableHelpers.sortingBySuit(hand);
+		assertEquals(expected, result);
 	}
 }

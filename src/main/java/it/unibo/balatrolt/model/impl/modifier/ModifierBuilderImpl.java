@@ -57,7 +57,7 @@ public final class ModifierBuilderImpl implements ModifierBuilder {
             modifier = new BaseModifier(this.mFun, this.bpFun);
         }
         if (this.playerCardBound.isPresent()) {
-            modifier = new ModifierWithCardCondition(modifier, this.playerCardBound.get());
+            modifier = new ModifierPlayedCardCondition(modifier, this.playerCardBound.get());
         }
         return modifier;
     }

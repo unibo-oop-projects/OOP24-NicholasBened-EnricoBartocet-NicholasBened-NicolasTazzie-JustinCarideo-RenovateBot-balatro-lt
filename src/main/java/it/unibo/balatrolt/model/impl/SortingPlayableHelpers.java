@@ -15,6 +15,6 @@ public final class SortingPlayableHelpers {
     }
 
     public static List<PlayableCard> sortingBySuit(final List<PlayableCard> hand) {
-        return hand.stream().sorted((a, b) -> Integer.compare(a.getSuit().ordinal(), b.getSuit().ordinal())).toList();
+        return sortingByRank(hand).stream().sorted((a, b) -> Integer.compare(a.getSuit().ordinal(), b.getSuit().ordinal())).toList();
     }
 }

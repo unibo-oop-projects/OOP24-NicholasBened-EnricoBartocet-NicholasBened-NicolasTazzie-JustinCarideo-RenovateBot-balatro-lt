@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import it.unibo.balatrolt.model.api.PlayableCard;
@@ -57,14 +58,28 @@ public class TestSortingHelpers {
 	 */
 	@Test
 	public void testSortByRank() {
-		assertEquals(List.of(
-			new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.DIAMONDS)),
-			new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)),
-			new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS)),
-			new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)),
-			new PlayableCardImpl(new Pair<>(Rank.KING, Suit.HEARTS))
-		),
-			SortingPlayableHelpers.sortingByRank(hand)
-		);
+		List<PlayableCard> expected = new ArrayList<>();
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.KING, Suit.HEARTS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.DIAMONDS)));
+		var result = SortingPlayableHelpers.sortingByRank(hand);
+		assertEquals(expected, result);
+	}
+
+	/**
+	 * Test sorting by suit
+	 */
+	@Test
+	public void testSortBySuit() {
+		List<PlayableCard> expected = new ArrayList<>();
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.KING, Suit.HEARTS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.DIAMONDS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)));
+		expected.add(new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)));
+		var result = SortingPlayableHelpers.sortingBySuit(hand);
+		assertEquals(expected, result);
 	}
 }

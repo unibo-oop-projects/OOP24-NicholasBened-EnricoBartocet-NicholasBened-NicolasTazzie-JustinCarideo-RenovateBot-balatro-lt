@@ -10,9 +10,14 @@ public interface Slot {
 
 
     /**
-     * @return the size of the Slot.
+     * @return the elements of the Slot.
      */
     int getSize();
+
+    /**
+     * @return how many elements the Slot can hold.
+     */
+    int getCapacity();
 
     /**
      * @param card, to add in the Slot.

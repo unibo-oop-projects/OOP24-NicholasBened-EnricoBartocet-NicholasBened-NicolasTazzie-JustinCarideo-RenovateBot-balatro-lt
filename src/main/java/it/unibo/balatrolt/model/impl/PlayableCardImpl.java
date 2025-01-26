@@ -8,19 +8,37 @@ import it.unibo.balatrolt.model.api.PlayableCard;
 public class PlayableCardImpl implements PlayableCard {
 
     private final Pair<Rank, Suit> card;
+    private final Rank rank;
+    private final Suit suit;
 
     public PlayableCardImpl(final Pair<Rank, Suit> card) {
         this.card = card;
+        this.rank = card.e1();
+        this.suit = card.e2();
     }
 
     @Override
     public Rank getRank() {
-        return this.card.get1();
+        return this.card.e1();
     }
 
     @Override
     public Suit getSuit() {
-        return this.card.get2();
+        return this.card.e2();
+    }
+
+    @Override
+    public Optional<Modifier> getModifier() {
+        return Optional.absent();
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((rank == null) ? 0 : rank.hashCode());
+        result = prime * result + ((suit == null) ? 0 : suit.hashCode());
+        return result;
     }
 
     @Override
@@ -32,16 +50,10 @@ public class PlayableCardImpl implements PlayableCard {
         if (getClass() != obj.getClass())
             return false;
         PlayableCardImpl other = (PlayableCardImpl) obj;
-        if (card == null) {
-            if (other.card != null)
-                return false;
-        } else if (!card.equals(other.card))
+        if (rank != other.rank)
+            return false;
+        if (suit != other.suit)
             return false;
         return true;
-    }
-
-    @Override
-    public Optional<Modifier> getModifier() {
-        return Optional.absent();
     }
 }

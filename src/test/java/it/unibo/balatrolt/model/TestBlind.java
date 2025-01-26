@@ -2,6 +2,7 @@ package it.unibo.balatrolt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,6 +23,11 @@ class TestBlind {
     @BeforeEach
     void init() {
         this.blind = new BlindImpl(new BlindConfiguration(BLIND_ID, BASE_CHIPS, REWARD));
+    }
+
+    @Test
+    void testCreation() {
+        assertNotNull(this.blind);
     }
 
     @Test

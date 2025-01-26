@@ -19,7 +19,7 @@ public final class AnteImpl implements Ante {
 
     /**
      * Initialize an Ante from his number.
-     * @param id its ID
+     * @param config the configuration of the Ante
      */
     public AnteImpl(final AnteConfiguration config) {
         this.configuration = config;

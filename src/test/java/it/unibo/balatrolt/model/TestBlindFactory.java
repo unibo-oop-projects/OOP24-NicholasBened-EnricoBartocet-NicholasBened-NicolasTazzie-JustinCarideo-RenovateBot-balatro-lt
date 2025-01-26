@@ -33,6 +33,11 @@ class TestBlindFactory {
     }
 
     @Test
+    void testCreation() {
+        assertNotNull(this.factory);
+    }
+
+    @Test
     void testSingleBlind() {
         final Blind newBlind = this.factory.fromIds(ANTE_ID, BLIND_ID);
         assertEquals(2, newBlind.getBlindNumber());

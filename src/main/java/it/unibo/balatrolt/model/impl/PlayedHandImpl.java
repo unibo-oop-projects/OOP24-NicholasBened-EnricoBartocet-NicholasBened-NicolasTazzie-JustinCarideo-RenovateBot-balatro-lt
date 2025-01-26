@@ -29,20 +29,24 @@ public class PlayedHandImpl implements PlayedHand {
     @Override
     public Combination evaluateCombination() {
         resetCombinations();
-        for (var type : CombinationType.values()) {
-            var recognizer = giveRecognizer(type);
-            combinationTable.add(new Pair<>(type, recognizer));
-        }
-        CombinationType bestCombination = combinationTable.stream()
-            .map(p -> new Pair<>(p.get1(), p.get2().recognize(hand)))
-            .filter(p -> p.get2())
-            .toList().getLast().get1();
-        //TODO
+        CombinationType bestCombination = evaluateBest();
+        //TODO : Insert Calculator
         return new CombinationImpl(0, 0, bestCombination);
     }
 
     private void resetCombinations() {
         this.combinationTable.clear();
+        for (var type : CombinationType.values()) {
+            var recognizer = giveRecognizer(type);
+            combinationTable.add(new Pair<>(type, recognizer));
+        }
+    }
+
+    private CombinationType evaluateBest() {
+        return combinationTable.stream()
+            .map(p -> new Pair<>(p.get1(), p.get2().recognize(hand)))
+            .filter(p -> p.get2())
+            .toList().getLast().get1();
     }
 
     private CombinationRecognizer giveRecognizer(CombinationType type) {

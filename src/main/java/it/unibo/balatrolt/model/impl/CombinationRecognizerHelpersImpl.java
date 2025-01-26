@@ -64,5 +64,4 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'royalFlushRecognizer'");
     }
-    
 }

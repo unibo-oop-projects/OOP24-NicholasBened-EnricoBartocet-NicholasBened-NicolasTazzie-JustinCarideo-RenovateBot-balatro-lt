@@ -1,12 +1,7 @@
 package it.unibo.balatrolt.model.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.checkerframework.checker.units.qual.t;
 
 import it.unibo.balatrolt.model.api.CombinationRecognizer;
 import it.unibo.balatrolt.model.api.CombinationRecognizerHelpers;

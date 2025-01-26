@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.levels;
 
 import java.util.List;
 import java.util.Objects;
@@ -6,11 +6,12 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import it.unibo.balatrolt.model.api.Blind;
-import it.unibo.balatrolt.model.api.BlindFactory;
+import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.api.levels.BlindFactory;
 
 /**
  * A factory for {@link Blind} objects.
+ * @author Bartocetti Enrico
  */
 public class BlindFactoryImpl implements BlindFactory {
 

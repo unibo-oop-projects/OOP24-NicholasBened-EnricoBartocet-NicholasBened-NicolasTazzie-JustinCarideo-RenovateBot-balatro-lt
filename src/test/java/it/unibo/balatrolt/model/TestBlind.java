@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.Blind;
-import it.unibo.balatrolt.model.impl.BlindConfiguration;
-import it.unibo.balatrolt.model.impl.BlindImpl;
+import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.impl.levels.BlindConfiguration;
+import it.unibo.balatrolt.model.impl.levels.BlindImpl;
 
 class TestBlind {
     private static final int BLIND_ID = 1;

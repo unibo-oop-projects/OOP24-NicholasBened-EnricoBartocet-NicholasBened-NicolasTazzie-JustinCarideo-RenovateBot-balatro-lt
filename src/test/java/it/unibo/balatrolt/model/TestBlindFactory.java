@@ -12,9 +12,9 @@ import java.util.function.Function;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.Blind;
-import it.unibo.balatrolt.model.api.BlindFactory;
-import it.unibo.balatrolt.model.impl.BlindFactoryImpl;
+import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.api.levels.BlindFactory;
+import it.unibo.balatrolt.model.impl.levels.BlindFactoryImpl;
 
 class TestBlindFactory {
     private static final int NUM_BLINDS = 5;

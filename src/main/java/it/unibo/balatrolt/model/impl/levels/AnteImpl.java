@@ -1,15 +1,16 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.levels;
 
 import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Ante;
-import it.unibo.balatrolt.model.api.Blind;
+import it.unibo.balatrolt.model.api.levels.Ante;
+import it.unibo.balatrolt.model.api.levels.Blind;
 
 /**
  * An implementation of the {@link Ante} interface.
+ * @author Bartocetti Enrico
  */
 public class AnteImpl implements Ante {
     private static int NUM_BLINDS = 3;

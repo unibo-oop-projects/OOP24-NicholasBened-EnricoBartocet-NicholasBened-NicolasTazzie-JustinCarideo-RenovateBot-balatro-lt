@@ -33,8 +33,8 @@ public class TestModifier {
     @Test
     public void testBaseModifier() {
         Modifier m = this.builder.addBasePointsModifier(p -> p + 1).build();
-        int basePoints = 1;
-        double multipler = 1;
+        final int basePoints = 1;
+        final double multipler = 1;
         // only basePoints
         assertTrue(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
@@ -59,7 +59,7 @@ public class TestModifier {
 
     @Test
     public void testCardPredicateModifier() {
-        int basePoints = 1;
+        final int basePoints = 1;
         // double multipler = 1;
         Modifier m = this.builder
             .addBasePointsModifier(p -> p + 1)
@@ -67,7 +67,7 @@ public class TestModifier {
                 new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS))
             ))
             .build();
-        Set<PlayableCard> cards = Set.of(
+        final Set<PlayableCard> cards = Set.of(
             new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
             new PlayableCardImpl(new Pair<>(Rank.FOUR, Suit.DIAMONDS)),
             new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.SPADES)),
@@ -76,7 +76,7 @@ public class TestModifier {
         );
         assertTrue(cards.contains(new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS))));
         m.setGameStatus(getStatusByCards(cards));
-        assertTrue(m.getBasePointMapper().isPresent()); // manca equals fatta a modo
+        assertTrue(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
         assertEquals(basePoints + 1, m.getBasePointMapper().get().apply(basePoints));
         init();
@@ -86,11 +86,12 @@ public class TestModifier {
                 .map(e -> e.getSuit())
                 .anyMatch(s -> s.equals(Suit.HEARTS)))
             .build();
+        m.setGameStatus(getStatusByCards(cards));
         assertFalse(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
     }
 
-    private ModifierStatsSupplier getStatusByCards(Set<PlayableCard> cards) {
+    private ModifierStatsSupplier getStatusByCards(final Set<PlayableCard> cards) {
         return new ModifierStatsSupplier() {
 
             @Override

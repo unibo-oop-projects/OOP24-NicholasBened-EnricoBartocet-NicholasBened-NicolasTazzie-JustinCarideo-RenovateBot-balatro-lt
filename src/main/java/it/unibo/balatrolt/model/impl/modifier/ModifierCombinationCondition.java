@@ -10,12 +10,12 @@ import it.unibo.balatrolt.model.api.Modifier;
 /**
  * Implementation of ConditionalModifier checking if the the current combination satisfies the specified condition.
  */
-public class ModifierCombinationCondition extends ConditionalModifier<CombinationType> {
+public final class ModifierCombinationCondition extends ConditionalModifier<CombinationType> {
     /**
-     * @param base base modifier
+     * @param modifier base modifier
      * @param condition condition on holding cards to satisfy
      */
-    public ModifierCombinationCondition(Modifier modifier, Predicate<CombinationType> condition) {
+    public ModifierCombinationCondition(final Modifier modifier, final Predicate<CombinationType> condition) {
         super(modifier, condition);
     }
 

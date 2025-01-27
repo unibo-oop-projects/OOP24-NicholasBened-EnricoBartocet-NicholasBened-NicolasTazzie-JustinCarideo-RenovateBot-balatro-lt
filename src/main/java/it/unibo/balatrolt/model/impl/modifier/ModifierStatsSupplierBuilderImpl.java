@@ -9,7 +9,10 @@ import it.unibo.balatrolt.model.api.ModifierStatsBuilder;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
-public class ModifierStatsSupplierBuilderImpl implements ModifierStatsBuilder {
+/**
+ * Implementation of {@link ModifierStatsSupplier}
+ */
+public final class ModifierStatsSupplierBuilderImpl implements ModifierStatsBuilder {
     private final class ModifierStatsSupplierImpl implements ModifierStatsSupplier {
         @Override
         public Optional<Set<PlayableCard>> getHoldingCards() {

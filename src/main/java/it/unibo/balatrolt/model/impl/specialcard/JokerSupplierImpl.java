@@ -33,13 +33,13 @@ public final class JokerSupplierImpl implements JokerSupplier {
         };
     }
 
-    private boolean checkContainsSuit(Set<PlayableCard> cards, Suit suit) {
+    private boolean checkContainsSuit(final Set<PlayableCard> cards, final Suit suit) {
         return cards.stream()
             .map(c -> c.getSuit())
             .anyMatch(s -> s.equals(suit));
     }
 
-    private boolean checkContainsRank(Set<PlayableCard> cards, Rank rank) {
+    private boolean checkContainsRank(final Set<PlayableCard> cards, final Rank rank) {
         return cards.stream()
             .map(c -> c.getRank())
             .anyMatch(r -> r.equals(rank));
@@ -53,7 +53,10 @@ public final class JokerSupplierImpl implements JokerSupplier {
         return factory.withModifierAndRandomPrice("The doubler",
                 "It doubles the current value of multipler without checking any condition",
                 new ModifierBuilderImpl()
-                        .addMultiplierModifier(m -> m * 2)
+                        .addMultiplierModifier(m -> {
+                            int toMultiply = 2;
+                            return m * toMultiply;
+                        })
                         .build());
     }
 
@@ -63,8 +66,8 @@ public final class JokerSupplierImpl implements JokerSupplier {
      */
     public Joker diamondDoubler() {
         return factory.addPlayableCardBoundToJoker("The diamond doubler",
-                "It doubles the current value of multipler if one of " +
-                "the played cards has suit diamond",
+                "It doubles the current value of multipler if one of "
+                + "the played cards has suit diamond",
                 doubler(),
                 cards -> checkContainsSuit(cards, Suit.DIAMONDS)
             );
@@ -76,8 +79,8 @@ public final class JokerSupplierImpl implements JokerSupplier {
      */
     public Joker heartDoubler() {
         return factory.addPlayableCardBoundToJoker("The heart doubler",
-                "It doubles the current value of multipler if one of " +
-                "the played cards has suit heart",
+                "It doubles the current value of multipler if one of "
+                + "the played cards has suit heart",
                 this.doubler(),
                 cards -> checkContainsSuit(cards, Suit.HEARTS)
             );
@@ -92,7 +95,10 @@ public final class JokerSupplierImpl implements JokerSupplier {
             "The donour",
             "It adds 50 base points",
             new ModifierBuilderImpl()
-                .addBasePointsModifier(p -> p + 50)
+                .addBasePointsModifier(p -> {
+                    int toAdd = 50;
+                    return p + toAdd;
+                })
                 .build());
     }
 

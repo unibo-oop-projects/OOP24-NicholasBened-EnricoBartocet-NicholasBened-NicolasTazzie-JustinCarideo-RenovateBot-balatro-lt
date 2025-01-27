@@ -6,7 +6,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 
 /**
  * Special modifier that wraps and existing modifier.
@@ -25,12 +24,12 @@ public final class ModifierFromExisting extends ModifierDecorator {
     }
 
     @Override
-    public final Optional<UnaryOperator<Integer>> getBasePointMapper() {
+    public Optional<UnaryOperator<Integer>> getBasePointMapper() {
         return this.mergeOperatorsMapper(super.getBasePointMapper(), this.basePointMod);
     }
 
     @Override
-    public final Optional<UnaryOperator<Double>> getMultiplierMapper() {
+    public Optional<UnaryOperator<Double>> getMultiplierMapper() {
         return this.mergeOperatorsMapper(super.getMultiplierMapper(), this.multiplierMod);
     }
 
@@ -48,11 +47,6 @@ public final class ModifierFromExisting extends ModifierDecorator {
             return m2;
         }
         return Optional.absent();
-    }
-
-    @Override
-    public void setGameStatus(final ModifierStatsSupplier stats) {
-        super.setGameStatus(stats);
     }
 
     @Override

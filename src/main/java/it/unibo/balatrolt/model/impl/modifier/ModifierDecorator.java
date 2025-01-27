@@ -13,6 +13,7 @@ import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
  * If canApply is false, then it returns an empty optional.
  */
 public abstract class ModifierDecorator implements Modifier {
+    private Optional<ModifierStatsSupplier> stats = Optional.absent();
     private final Modifier base;
 
     /**
@@ -33,8 +34,16 @@ public abstract class ModifierDecorator implements Modifier {
     }
 
     @Override
-    public void setGameStatus(ModifierStatsSupplier stats) {
+    public void setGameStatus(final ModifierStatsSupplier stats) {
         base.setGameStatus(stats);
+        this.stats = Optional.fromNullable(stats);
+    }
+
+    /**
+     * @return current statistics
+     */
+    protected final Optional<ModifierStatsSupplier> getStats() {
+        return this.stats;
     }
 
     /**

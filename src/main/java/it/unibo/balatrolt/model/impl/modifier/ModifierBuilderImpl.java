@@ -49,13 +49,13 @@ public final class ModifierBuilderImpl implements ModifierBuilder {
     }
 
     @Override
-    public ModifierBuilder addCombinationBound(Predicate<CombinationType> condition) {
+    public ModifierBuilder addCombinationBound(final Predicate<CombinationType> condition) {
         this.combinationBound = Optional.fromNullable(condition);
         return this;
     }
 
     @Override
-    public ModifierBuilder addCurrentCurrencyBound(Predicate<Integer> condition) {
+    public ModifierBuilder addCurrentCurrencyBound(final Predicate<Integer> condition) {
         this.currencyBound = Optional.fromNullable(condition);
         return this;
     }
@@ -70,8 +70,8 @@ public final class ModifierBuilderImpl implements ModifierBuilder {
     @Override
     public Modifier build() {
         checkState(this.mFun.isPresent() || this.bpFun.isPresent() || this.toMerge.isPresent(),
-        "At least one between Moltiplicator and BasePoints functions," +
-        "or modifier to merge must be present!");
+        "At least one between Moltiplicator and BasePoints functions,"
+        + "or modifier to merge must be present!");
         Modifier modifier;
         if (this.toMerge.isPresent()) {
             modifier = new ModifierFromExisting(this.mFun, this.bpFun, this.toMerge.get());

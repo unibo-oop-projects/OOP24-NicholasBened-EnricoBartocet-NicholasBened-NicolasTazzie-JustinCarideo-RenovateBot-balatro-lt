@@ -75,7 +75,7 @@ class TestModifier {
         assertTrue(modifier.getMultiplierMapper().isPresent());
         // It should be f -> g = f + DELTA_B_P -> h = g + DELTA_B_P2
         assertEquals(baseP + DELTA_B_P + DELTA_B_P2, modifier.getBasePointMapper().get().apply(baseP));
-        assertEquals(mul + DELTA_MUL2, modifier.getMultiplierMapper().get().apply(mul));
+        assertEquals(mul + DELTA_MUL + DELTA_MUL2, modifier.getMultiplierMapper().get().apply(mul));
         base = getModifierWithPCardCondFalse();
         modifier = getMergedModifier(base);
         modifier.setGameStatus(getMockStatus());

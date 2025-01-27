@@ -11,10 +11,10 @@ public final class SortingPlayableHelpers {
     }
 
     public static List<PlayableCard> sortingByRank(final List<PlayableCard> hand) {
-        return hand.stream().sorted((a, b) -> Integer.compare(a.getRank().ordinal(), b.getRank().ordinal())).toList();
+        return hand.stream().sorted((a, b) -> a.getRank().compareTo(b.getRank())).toList();
     }
 
     public static List<PlayableCard> sortingBySuit(final List<PlayableCard> hand) {
-        return sortingByRank(hand).stream().sorted((a, b) -> Integer.compare(a.getSuit().ordinal(), b.getSuit().ordinal())).toList();
+        return sortingByRank(hand).stream().sorted((a, b) -> a.getSuit().compareTo(b.getSuit())).toList();
     }
 }

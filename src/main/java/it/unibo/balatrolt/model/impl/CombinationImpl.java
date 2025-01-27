@@ -1,7 +1,6 @@
 package it.unibo.balatrolt.model.impl;
 
 import it.unibo.balatrolt.model.api.BasePoints;
-import it.unibo.balatrolt.model.api.Chip;
 import it.unibo.balatrolt.model.api.Combination;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.Multiplier;
@@ -39,9 +38,8 @@ public class CombinationImpl implements Combination {
     }
 
     @Override
-    public Chip getChips() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getChips'");
+    public int getChips() {
+        return (int) Math.round((double)this.points.basePoints() * this.multiplier.multiplier());
     }
 
     @Override

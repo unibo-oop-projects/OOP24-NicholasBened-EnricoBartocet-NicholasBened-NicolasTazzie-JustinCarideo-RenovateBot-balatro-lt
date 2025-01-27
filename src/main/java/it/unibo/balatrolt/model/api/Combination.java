@@ -42,5 +42,5 @@ public interface Combination {
     /**
      * @return the result in chips
      */
-    Chip getChips();
+    int getChips();
 }

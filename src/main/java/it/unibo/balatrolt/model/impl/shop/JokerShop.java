@@ -1,5 +1,7 @@
 package it.unibo.balatrolt.model.impl.shop;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,10 +22,11 @@ public class JokerShop implements Shop {
     /**
      * Shop constructor.
      * @param size the maximum size of the shop.
+     * @throws NullPointerException if size is null
      */
     public JokerShop(final int size) {
         supply();
-        this.size = size;
+        this.size = checkNotNull(size, "Size can't be null");
     }
 
     @Override

@@ -53,7 +53,7 @@ public class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -62,7 +62,7 @@ public class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

@@ -22,6 +22,10 @@ import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
 import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
 
 class TestModifier {
+    private static final int INIT_B_P = 1;
+    private static final double INIT_MUL = 1;
+    private static final int DELTA_B_P = 2;
+    private static final double DELTA_MUL = 2.5;
     private static final int CURRENT_CURRENCY = 10;
     private ModifierBuilder builder;
 
@@ -32,45 +36,64 @@ class TestModifier {
 
     @Test
     void testBaseModifier() {
-        Modifier m = this.builder.addBasePointsModifier(p -> p + 1).build();
-        final int basePoints = 1;
-        final double multipler = 1;
+        Modifier m = this.builder.addBasePointsModifier(p -> p + DELTA_B_P).build();
+        final int basePoints = INIT_B_P;
+        final double multipler = INIT_MUL;
         // only basePoints
         assertTrue(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
-        assertEquals(basePoints + 1, m.getBasePointMapper().get().apply(basePoints));
+        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
         // only multiplier
         init();
-        m = this.builder.addMultiplierModifier(p -> p + 0.5).build();
+        m = this.builder.addMultiplierModifier(p -> p + DELTA_MUL).build();
         assertFalse(m.getBasePointMapper().isPresent());
         assertTrue(m.getMultiplierMapper().isPresent());
-        assertEquals(multipler + 0.5, m.getMultiplierMapper().get().apply(multipler));
+        assertEquals(multipler + DELTA_MUL, m.getMultiplierMapper().get().apply(multipler));
         // both
         init();
         m = this.builder
-                .addBasePointsModifier(p -> p + 2)
-                .addMultiplierModifier(p -> p + 1.5)
+                .addBasePointsModifier(p -> p + DELTA_B_P)
+                .addMultiplierModifier(p -> p + DELTA_MUL)
                 .build();
         assertTrue(m.getBasePointMapper().isPresent());
         assertTrue(m.getMultiplierMapper().isPresent());
-        assertEquals(multipler + 1.5, m.getMultiplierMapper().get().apply(multipler));
-        assertEquals(basePoints + 2, m.getBasePointMapper().get().apply(basePoints));
+        assertEquals(multipler + DELTA_MUL, m.getMultiplierMapper().get().apply(multipler));
+        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
     }
 
     @Test
-    void testCardPredicateModifier() {
-        final int basePoints = 1;
+    void testPlayedCardModifier() {
+        final int basePoints = INIT_B_P;
         Modifier m = getModifierWithHCardCondTrue();
         m.setGameStatus(getMockStatus());
         assertTrue(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
-        assertEquals(basePoints + 1, m.getBasePointMapper().get().apply(basePoints));
+        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
         init();
         m = getModifierWithHCardCondFalse();
         m.setGameStatus(getMockStatus());
         assertFalse(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
     }
+
+    @Test
+    void testHoldingCardModifier() {
+        //TODO: to finish
+        // both
+        final double multipler = INIT_MUL;
+        final int basePoints = INIT_B_P;
+        init();
+        Modifier m = this.builder
+                .addBasePointsModifier(p -> p + DELTA_B_P)
+                .addMultiplierModifier(p -> p + DELTA_MUL)
+                .build();
+        assertTrue(m.getBasePointMapper().isPresent());
+        assertTrue(m.getMultiplierMapper().isPresent());
+        assertEquals(multipler + DELTA_MUL, m.getMultiplierMapper().get().apply(multipler));
+        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
+    }
+
+
 
     private Modifier getModifierWithHCardCondFalse() {
         return this.builder

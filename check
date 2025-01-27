@@ -1,0 +1,545 @@
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :generateCheckstyleConfiguration UP-TO-DATE
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+> Task :cpdCheck SKIPPED
+> Task :populateDefaultSpotBugsExcludes
+
+> Task :checkstyleTest
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestDeck.java:3:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestJokerSupplier.java:75:27: '50' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestJokerSupplier.java:87:27: '50' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestModifier.java:52:49: '1.5' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestModifier.java:56:34: '1.5' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestModifier.java:115:28: '2.5' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestModifier.java:129:53: '2.5' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestPlayableCard.java:18:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestPlayableCard.java:23:5: Class 'TestPlayableCard' looks like designed for extension (can be subclassed), but the method 'init' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'TestPlayableCard' final or making the method 'init' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:18:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:23:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:44:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:49:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:54:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:59:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:65:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:70:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:75:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:80:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:85:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:90:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSlot.java:21:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSlot.java:30:5: Class 'TestSlot' looks like designed for extension (can be subclassed), but the method 'init' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'TestSlot' final or making the method 'init' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSlot.java:54:60: '{' at column 60 should have line break after. [LeftCurly]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSlot.java:54:60: '{' is not followed by whitespace. [WhitespaceAround]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSlot.java:54:84: ';' is not followed by whitespace. [WhitespaceAfter]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSlot.java:54:85: '}' is not preceded with whitespace. [WhitespaceAround]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:26:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:71: First sentence should end with a period. [JavadocStyle]
+
+> Task :checkstyleTest FAILED
+
+> Task :test
+
+TestAnte > testCreation() STARTED
+
+TestAnte > testCreation() PASSED
+
+TestAnte > testConfiguration() STARTED
+
+TestAnte > testConfiguration() PASSED
+
+TestAnte > testBlindAdvancement() STARTED
+
+TestAnte > testBlindAdvancement() PASSED
+
+TestAnteFactory > testCreation() STARTED
+
+TestAnteFactory > testCreation() PASSED
+
+TestAnteFactory > testInvalidList() STARTED
+
+TestAnteFactory > testInvalidList() PASSED
+
+TestAnteFactory > testList() STARTED
+
+TestAnteFactory > testList() PASSED
+
+TestAnteFactory > testSingleAnte() STARTED
+
+TestAnteFactory > testSingleAnte() PASSED
+
+TestAnteFactory > testInvalidFactory() STARTED
+
+TestAnteFactory > testInvalidFactory() PASSED
+
+TestBlind > testCreation() STARTED
+
+TestBlind > testCreation() PASSED
+
+TestBlind > testConfiguration() STARTED
+
+TestBlind > testConfiguration() PASSED
+
+TestBlind > testIncrementChips() STARTED
+
+TestBlind > testIncrementChips() PASSED
+
+TestBlind > testDefeat() STARTED
+
+TestBlind > testDefeat() PASSED
+
+TestBlindFactory > testCreation() STARTED
+
+TestBlindFactory > testCreation() PASSED
+
+TestBlindFactory > testInvalidList() STARTED
+
+TestBlindFactory > testInvalidList() PASSED
+
+TestBlindFactory > testList() STARTED
+
+TestBlindFactory > testList() PASSED
+
+TestBlindFactory > testSingleBlind() STARTED
+
+TestBlindFactory > testSingleBlind() PASSED
+
+TestJokerSupplier > testTheDoubler() STARTED
+
+TestJokerSupplier > testTheDoubler() PASSED
+
+TestJokerSupplier > testTheDonourWithCondition() STARTED
+
+TestJokerSupplier > testTheDonourWithCondition() PASSED
+
+TestJokerSupplier > testTheDonour() STARTED
+
+TestJokerSupplier > testTheDonour() PASSED
+
+TestJokerSupplier > testTheDoublerWithCondition() STARTED
+
+TestJokerSupplier > testTheDoublerWithCondition() PASSED
+
+TestModifier > testCardPredicateModifier() STARTED
+
+TestModifier > testCardPredicateModifier() PASSED
+
+TestModifier > testBaseModifier() STARTED
+
+TestModifier > testBaseModifier() PASSED
+
+TestModifier > testMerge() STARTED
+
+TestModifier > testMerge() PASSED
+
+TestPlayableCard > testConfiguration() STARTED
+
+TestPlayableCard > testConfiguration() PASSED
+
+TestPlayableCard > testEquals() STARTED
+
+TestPlayableCard > testEquals() PASSED
+
+TestRecognizers > testStraight() STARTED
+
+TestRecognizers > testStraight() PASSED
+
+TestRecognizers > testTwoPair() STARTED
+
+TestRecognizers > testTwoPair() PASSED
+
+TestRecognizers > testFlush() STARTED
+
+TestRecognizers > testFlush() PASSED
+
+TestRecognizers > testPair() STARTED
+
+TestRecognizers > testPair() PASSED
+
+TestRecognizers > testFullHouse() STARTED
+
+TestRecognizers > testFullHouse() PASSED
+
+TestRecognizers > testHighCard() STARTED
+
+TestRecognizers > testHighCard() PASSED
+
+TestRecognizers > testRoyalFlush() STARTED
+
+TestRecognizers > testRoyalFlush() PASSED
+
+TestRecognizers > testStraightFlush() STARTED
+
+TestRecognizers > testStraightFlush() PASSED
+
+TestRecognizers > testFourOfAKind() STARTED
+
+TestRecognizers > testFourOfAKind() PASSED
+
+TestRecognizers > testThreeOfAKind() STARTED
+
+TestRecognizers > testThreeOfAKind() PASSED
+
+TestSlot > testAdd() STARTED
+
+TestSlot > testAdd() PASSED
+
+TestSlot > testConfiguration() STARTED
+
+TestSlot > testConfiguration() PASSED
+
+TestSlot > testRemove() STARTED
+
+TestSlot > testRemove() PASSED
+
+TestSortingHelpers > testSortByRank() STARTED
+
+TestSortingHelpers > testSortByRank() PASSED
+
+TestSortingHelpers > testSortBySuit() STARTED
+
+TestSortingHelpers > testSortBySuit() PASSED
+
+TestSortingHelpers > testSortEmptyHand() STARTED
+
+TestSortingHelpers > testSortEmptyHand() PASSED
+
+> Task :checkstyleMain
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/LaunchApp.java:5:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/LaunchApp.java:7:5: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/LaunchApp.java:11:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Card.java:5:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Card.java:7:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:10:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:16:9: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:16:19: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:16:25: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:16:34: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:17:9: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:17:19: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:17:26: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:17:37: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:18:9: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Combination.java:18:24: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/JokerFactory.java:45:5: Redundant 'public' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/JokerFactory.java:46:13: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/JokerFactory.java:47:13: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/JokerFactory.java:48:13: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/JokerFactory.java:49:13: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [INFO] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/ModifierStatsSupplier.java:27:7: Comment matches to-do format 'TODO:'. [TodoComment]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:12:5: Redundant 'public' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:13:9: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:13:14: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:13:21: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:13:27: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:13:33: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:13:38: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:14:9: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:14:16: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:14:22: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:14:27: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:14:33: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:14:40: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:14:46: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:20:5: Redundant 'public' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:21:9: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:21:17: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:21:27: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:21:34: Missing a Javadoc comment. [JavadocVariable]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayedHand.java:11: First sentence should end with a period. [JavadocStyle]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Player.java:3:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Player.java:5:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Player.java:7:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Player.java:9:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Player.java:11:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Player.java:13:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Slot.java:23:8: Unused @param tag for 'card,'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Slot.java:25:23: Expected @param tag for 'card'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Slot.java:28:8: Unused @param tag for 'cards,'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Slot.java:32:38: Expected @param tag for 'cards'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/Slot.java:34: First sentence should end with a period. [JavadocStyle]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/BasePointsImpl.java:5:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/BasePointsImpl.java:5:67: '{' is not preceded with whitespace. [WhitespaceAround]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:9:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:15:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:15:28: Parameter points should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:15:40: Parameter multiplier should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:15:59: Parameter t should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:21:5: Class 'CombinationImpl' looks like designed for extension (can be subclassed), but the method 'getMultiplier' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationImpl' final or making the method 'getMultiplier' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:26:5: Class 'CombinationImpl' looks like designed for extension (can be subclassed), but the method 'getBasePoints' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationImpl' final or making the method 'getBasePoints' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:31:5: Class 'CombinationImpl' looks like designed for extension (can be subclassed), but the method 'applyModifier' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationImpl' final or making the method 'applyModifier' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:32:31: Parameter mod should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:41:5: Class 'CombinationImpl' looks like designed for extension (can be subclassed), but the method 'getChips' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationImpl' final or making the method 'getChips' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:47:5: Class 'CombinationImpl' looks like designed for extension (can be subclassed), but the method 'getCombinationType' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationImpl' final or making the method 'getCombinationType' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:10:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:14:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'highCardRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'highCardRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:19:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'pairRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'pairRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:21:42: '&&' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:29:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'twoPairRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'twoPairRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:31:42: '&&' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:40:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'threeOfAKindRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'threeOfAKindRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:42:43: '&&' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:50:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'straightRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'straightRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:53:32: '5' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:75:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'flushRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'flushRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:81:44: '5' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:84:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'fullHouseRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'fullHouseRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:86:57: '&&' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:90:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'fourOfAKindRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'fourOfAKindRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:92:40: '&&' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:100:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'straightFlushRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'straightFlushRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:102:61: '&&' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:106:5: Class 'CombinationRecognizerHelpersImpl' looks like designed for extension (can be subclassed), but the method 'royalFlushRecognizer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'CombinationRecognizerHelpersImpl' final or making the method 'royalFlushRecognizer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/DeckImpl.java:11:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/DeckImpl.java:15:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/DeckImpl.java:24:5: Class 'DeckImpl' looks like designed for extension (can be subclassed), but the method 'getDeck' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'DeckImpl' final or making the method 'getDeck' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/BaseModifier.java:55:27: Parameter obj should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ConditionalModifier.java:51:33: Parameter obj should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierBuilderImpl.java:51:72: '+' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierDecorator.java:25:5: Class 'ModifierDecorator' looks like designed for extension (can be subclassed), but the method 'getMultiplierMapper' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'ModifierDecorator' final or making the method 'getMultiplierMapper' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierDecorator.java:30:5: Class 'ModifierDecorator' looks like designed for extension (can be subclassed), but the method 'getBasePointMapper' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'ModifierDecorator' final or making the method 'getBasePointMapper' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierDecorator.java:35:5: Class 'ModifierDecorator' looks like designed for extension (can be subclassed), but the method 'setGameStatus' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'ModifierDecorator' final or making the method 'setGameStatus' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierDecorator.java:36:31: Parameter stats should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierFromExisting.java:18:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierFromExisting.java:28:12: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierFromExisting.java:33:12: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/MultiplierImpl.java:5:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/MultiplierImpl.java:5:70: '{' is not preceded with whitespace. [WhitespaceAround]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:8:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:14:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:20:5: Class 'PlayableCardImpl' looks like designed for extension (can be subclassed), but the method 'getRank' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'PlayableCardImpl' final or making the method 'getRank' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:25:5: Class 'PlayableCardImpl' looks like designed for extension (can be subclassed), but the method 'getSuit' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'PlayableCardImpl' final or making the method 'getSuit' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:30:5: Class 'PlayableCardImpl' looks like designed for extension (can be subclassed), but the method 'getModifier' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'PlayableCardImpl' final or making the method 'getModifier' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:35:5: Class 'PlayableCardImpl' looks like designed for extension (can be subclassed), but the method 'hashCode' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'PlayableCardImpl' final or making the method 'hashCode' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:44:5: Class 'PlayableCardImpl' looks like designed for extension (can be subclassed), but the method 'equals' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'PlayableCardImpl' final or making the method 'equals' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:45:27: Parameter obj should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:46:9: 'if' construct must use '{}'s. [NeedBraces]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:48:9: 'if' construct must use '{}'s. [NeedBraces]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:50:9: 'if' construct must use '{}'s. [NeedBraces]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:53:9: 'if' construct must use '{}'s. [NeedBraces]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:55:9: 'if' construct must use '{}'s. [NeedBraces]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:14:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:20:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:20:27: Parameter hand should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:24:5: Class 'PlayedHandImpl' looks like designed for extension (can be subclassed), but the method 'getCards' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'PlayedHandImpl' final or making the method 'getCards' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:29:5: Class 'PlayedHandImpl' looks like designed for extension (can be subclassed), but the method 'evaluateCombination' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'PlayedHandImpl' final or making the method 'evaluateCombination' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:52:50: Parameter type should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:9:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:9:38: '{' is not preceded with whitespace. [WhitespaceAround]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:13:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:13:21: Parameter size should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:18:5: Class 'SlotImpl' looks like designed for extension (can be subclassed), but the method 'getSize' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'SlotImpl' final or making the method 'getSize' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:23:5: Class 'SlotImpl' looks like designed for extension (can be subclassed), but the method 'getCapacity' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'SlotImpl' final or making the method 'getCapacity' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:28:5: Class 'SlotImpl' looks like designed for extension (can be subclassed), but the method 'addCard' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'SlotImpl' final or making the method 'addCard' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:29:25: Parameter card should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:31:13: 'assert' is not followed by whitespace. [WhitespaceAround]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:38:5: Class 'SlotImpl' looks like designed for extension (can be subclassed), but the method 'addAll' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'SlotImpl' final or making the method 'addAll' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:39:24: Parameter cards should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:45:5: Class 'SlotImpl' looks like designed for extension (can be subclassed), but the method 'getCards' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'SlotImpl' final or making the method 'getCards' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:50:5: Class 'SlotImpl' looks like designed for extension (can be subclassed), but the method 'clear' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'SlotImpl' final or making the method 'clear' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:55:5: Class 'SlotImpl' looks like designed for extension (can be subclassed), but the method 'remove' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'SlotImpl' final or making the method 'remove' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:56:24: Parameter card should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:60:5: Class 'SlotImpl' looks like designed for extension (can be subclassed), but the method 'remove' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'SlotImpl' final or making the method 'remove' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:61:24: Parameter index should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SortingPlayableHelpers.java:7:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SortingPlayableHelpers.java:13:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SortingPlayableHelpers.java:17:5: Missing a Javadoc comment. [MissingJavadocMethod]
+
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestPlayableCard.java:18:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestPlayableCard.java:20:	ImmutableField:	Field 'rank' may be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestPlayableCard.java:21:	ImmutableField:	Field 'suit' may be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestPlayableCard.java:37:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestPlayableCard.java:38:	LocalVariableCouldBeFinal:	Local variable 'otherCard' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestPlayableCard.java:39:	SimplifiableTestAssertion:	Assertion may be simplified using assertNotEquals
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:18:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:45:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:50:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:55:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:60:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:66:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:71:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:76:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:81:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:86:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestRecognizers.java:91:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSlot.java:21:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:22:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:38:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:60:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:61:	LocalVariableCouldBeFinal:	Local variable 'expected' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:67:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:75:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:76:	LocalVariableCouldBeFinal:	Local variable 'expected' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/test/java/it/unibo/balatrolt/model/TestSortingHelpers.java:82:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+
+> Task :pmdTest FAILED
+
+> Task :checkstyleMain
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SortingPlayableHelpers.java:18: Line is longer than 130 characters (found 133). [LineLength]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/BaseSpecialCard.java:40:5: Class 'BaseSpecialCard' looks like designed for extension (can be subclassed), but the method 'getModifier' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'BaseSpecialCard' final or making the method 'getModifier' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/BaseSpecialCard.java:55:5: Class 'BaseSpecialCard' looks like designed for extension (can be subclassed), but the method 'hashCode' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'BaseSpecialCard' final or making the method 'hashCode' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/BaseSpecialCard.java:64:5: Class 'BaseSpecialCard' looks like designed for extension (can be subclassed), but the method 'equals' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'BaseSpecialCard' final or making the method 'equals' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:31:18: '5' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:36:39: Parameter cards should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:36:64: Parameter suit should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:42:39: Parameter cards should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:42:64: Parameter rank should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:66:72: '+' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:79:72: '+' should be on a new line. [OperatorWrap]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:95:49: '50' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:17:1: Missing a Javadoc comment. [MissingJavadocType]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:21:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:23:22: '70' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:23:33: '50' is a magic number. [MagicNumber]
+[ant:checkstyle] [ERROR] /mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:48:56: '36' is a magic number. [MagicNumber]
+
+> Task :checkstyleMain FAILED
+> Task :pmdMain
+
+> Task :spotbugsMain
+M V EI2: new it.unibo.balatrolt.model.impl.PlayedHandImpl(List) may expose internal representation by storing an externally mutable object into PlayedHandImpl.hand  At PlayedHandImpl.java:[line 21]
+
+> Task :spotbugsMain FAILED
+> Task :spotbugsTest
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/JokerFactory.java:45:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/JokerFactory.java:45:	UnnecessaryModifier:	Unnecessary modifier 'public' on method 'addPlayableCardBoundToJoker': the method is declared in an interface type
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:12:	UnnecessaryModifier:	Unnecessary modifier 'public' on enum 'Rank': the enum is declared in an interface type
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/api/PlayableCard.java:20:	UnnecessaryModifier:	Unnecessary modifier 'public' on enum 'Suit': the enum is declared in an interface type
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:13:	ImmutableField:	Field 'type' may be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:13:	UnusedAssignment:	The field initializer for 'type' is never used (overwritten on line 17)
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:15:	MethodArgumentCouldBeFinal:	Parameter 'points' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:15:	MethodArgumentCouldBeFinal:	Parameter 'multiplier' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:15:	MethodArgumentCouldBeFinal:	Parameter 't' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationImpl.java:32:	MethodArgumentCouldBeFinal:	Parameter 'mod' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:44:	LambdaCanBeMethodReference:	Lambda expression could be written as a method reference: `PlayableCard::getRank`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:56:	LocalVariableCouldBeFinal:	Local variable 'sorted' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:58:	LambdaCanBeMethodReference:	Lambda expression could be written as a method reference: `PlayableCard::getRank`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:78:	LambdaCanBeMethodReference:	Lambda expression could be written as a method reference: `PlayableCard::getSuit`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:109:	LocalVariableCouldBeFinal:	Local variable 'l' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:111:	LambdaCanBeMethodReference:	Lambda expression could be written as a method reference: `PlayableCard::getRank`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/CombinationRecognizerHelpersImpl.java:113:	SimplifyBooleanReturns:	This if statement can be replaced by `return {condition} && {thenBranch};`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:45:	MethodArgumentCouldBeFinal:	Parameter 'obj' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:47:	ControlStatementBraces:	This statement should have braces
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:49:	ControlStatementBraces:	This statement should have braces
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:51:	ControlStatementBraces:	This statement should have braces
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:52:	LocalVariableCouldBeFinal:	Local variable 'other' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:54:	ControlStatementBraces:	This statement should have braces
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:55:	SimplifyBooleanReturns:	This if statement can be replaced by `return !{condition};`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayableCardImpl.java:56:	ControlStatementBraces:	This statement should have braces
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:18:	ImmutableField:	Field 'combinationTable' may be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:20:	MethodArgumentCouldBeFinal:	Parameter 'hand' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:32:	LocalVariableCouldBeFinal:	Local variable 'bestCombination' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:39:	LocalVariableCouldBeFinal:	Local variable 'type' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:40:	LocalVariableCouldBeFinal:	Local variable 'recognizer' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:48:	LambdaCanBeMethodReference:	Lambda expression could be written as a method reference: `Pair::e2`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/PlayedHandImpl.java:52:	MethodArgumentCouldBeFinal:	Parameter 'type' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:11:	ImmutableField:	Field 'slot' may be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:13:	MethodArgumentCouldBeFinal:	Parameter 'size' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:29:	MethodArgumentCouldBeFinal:	Parameter 'card' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:31:	UselessParentheses:	Useless parentheses.
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:33:	PreserveStackTrace:	Thrown exception does not preserve the stack trace of exception 'e' on all code paths
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:39:	MethodArgumentCouldBeFinal:	Parameter 'cards' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:40:	LocalVariableCouldBeFinal:	Local variable 'card' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:56:	MethodArgumentCouldBeFinal:	Parameter 'card' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/SlotImpl.java:61:	MethodArgumentCouldBeFinal:	Parameter 'index' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/BaseModifier.java:55:	MethodArgumentCouldBeFinal:	Parameter 'obj' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/BaseModifier.java:65:	LocalVariableCouldBeFinal:	Local variable 'other' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ConditionalModifier.java:51:	MethodArgumentCouldBeFinal:	Parameter 'obj' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ConditionalModifier.java:61:	LocalVariableCouldBeFinal:	Local variable 'other' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierDecorator.java:36:	MethodArgumentCouldBeFinal:	Parameter 'stats' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierFromExisting.java:28:	UnnecessaryModifier:	Unnecessary modifier 'final' on method 'getBasePointMapper': the method is already in a final class
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierFromExisting.java:33:	UnnecessaryModifier:	Unnecessary modifier 'final' on method 'getMultiplierMapper': the method is already in a final class
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/modifier/ModifierFromExisting.java:54:	UselessOverridingMethod:	Overriding method merely calls super
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerFactoryImpl.java:56:	LocalVariableCouldBeFinal:	Local variable 'newModifier' could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:36:	MethodArgumentCouldBeFinal:	Parameter 'cards' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:36:	MethodArgumentCouldBeFinal:	Parameter 'suit' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:38:	LambdaCanBeMethodReference:	Lambda expression could be written as a method reference: `PlayableCard::getSuit`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:42:	MethodArgumentCouldBeFinal:	Parameter 'cards' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:42:	MethodArgumentCouldBeFinal:	Parameter 'rank' is not assigned and could be declared final
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/model/impl/specialcard/JokerSupplierImpl.java:44:	LambdaCanBeMethodReference:	Lambda expression could be written as a method reference: `PlayableCard::getRank`
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:22:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: JFrame.setDefaultCloseOperation(int) 
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:23:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: Window.setSize(int, int) 
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:34:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: Container.add(Component, Object) 
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:35:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: Container.add(Component) 
+/mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/src/main/java/it/unibo/balatrolt/view/impl/GUI.java:36:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: Window.setVisible(boolean) 
+> Task :pmdMain FAILED
+
+[Incubating] Problems report is available at: file:///mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/build/reports/problems/problems-report.html
+
+FAILURE: Build completed with 5 failures.
+
+1: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':checkstyleTest'.
+> A failure occurred while executing org.gradle.api.plugins.quality.internal.CheckstyleAction
+   > Checkstyle rule violations were found. See the report at: file:///mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/build/reports/checkstyle/test.html
+     Checkstyle files with violations: 7
+     Checkstyle violations by severity: [error:29]
+
+
+* Try:
+> Run with --scan to get full insights.
+==============================================================================
+
+2: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':pmdTest'.
+> A failure occurred while executing org.gradle.api.plugins.quality.internal.PmdAction
+   > 26 PMD rule violations were found. See the report at: file:///mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/build/reports/pmd/test.html
+
+* Try:
+> Run with --scan to get full insights.
+==============================================================================
+
+3: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':checkstyleMain'.
+> A failure occurred while executing org.gradle.api.plugins.quality.internal.CheckstyleAction
+   > Checkstyle rule violations were found. See the report at: file:///mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/build/reports/checkstyle/main.html
+     Checkstyle files with violations: 26
+     Checkstyle violations by severity: [error:155, info:1]
+
+
+* Try:
+> Run with --scan to get full insights.
+==============================================================================
+
+4: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':spotbugsMain'.
+> A failure occurred while executing com.github.spotbugs.snom.internal.SpotBugsRunnerForHybrid$SpotBugsExecutor
+   > Verification failed: SpotBugs ended with exit code 1.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+==============================================================================
+
+5: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':pmdMain'.
+> A failure occurred while executing org.gradle.api.plugins.quality.internal.PmdAction
+   > 61 PMD rule violations were found. See the report at: file:///mnt/c/Users/enrico/Documents/Progetti/OOP/OOP24-balatro-lt/build/reports/pmd/main.html
+
+* Try:
+> Run with --scan to get full insights.
+==============================================================================
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.12/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 40s
+12 actionable tasks: 9 executed, 3 up-to-date

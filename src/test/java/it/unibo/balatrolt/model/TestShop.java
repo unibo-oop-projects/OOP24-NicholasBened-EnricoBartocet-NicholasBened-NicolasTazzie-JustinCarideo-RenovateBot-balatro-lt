@@ -29,7 +29,7 @@ class TestShop {
     void testCreation() {
         assertNotNull(this.shop.getSellableSpecialCards());
         assertEquals(this.shop.getSellableSpecialCards().size(), SIZE);
-        for (var item : this.shop.getSellableSpecialCards().entrySet()) {
+        for (final var item : this.shop.getSellableSpecialCards().entrySet()) {
             assertNotNull(item.getKey());
             assertNotNull(item.getValue());
             assertTrue(item.getValue() > 0);
@@ -53,7 +53,7 @@ class TestShop {
 
     private Joker getRandomJokerInShop() {
         // for some reason sometimes it breaks
-        JokerSupplier js = new JokerSupplierImpl();
+        final JokerSupplier js = new JokerSupplierImpl();
         Joker j = js.getRandom();
         while (!this.shop.getSellableSpecialCards().containsKey(j)) {
             j = js.getRandom();

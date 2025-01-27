@@ -6,6 +6,8 @@ import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
+import com.google.common.base.Preconditions;
+
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindFactory;
 
@@ -41,9 +43,7 @@ public final class BlindFactoryImpl implements BlindFactory {
 
     @Override
     public List<Blind> createList(final int numBlinds, final int anteId) {
-        if (numBlinds <= 0) {
-            throw new IllegalArgumentException();
-        }
+        Preconditions.checkArgument(numBlinds > 0, "The list must contain at least 1 Blind");
         return Stream.iterate(0, i -> i + 1).limit(numBlinds).map(n -> this.fromIds(anteId, n)).toList();
     }
 }

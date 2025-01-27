@@ -3,6 +3,8 @@ package it.unibo.balatrolt.model.impl.levels;
 import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 
+import com.google.common.base.Preconditions;
+
 import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.api.levels.Blind;
 
@@ -24,11 +26,8 @@ public record AnteConfiguration(
      * Check that the functions aren't null and the number of blinds is positive.
      */
     public AnteConfiguration {
-        if (rewardCalc == null || baseChipCalc == null) {
-            throw new IllegalArgumentException(new NullPointerException());
-        }
-        if (numBlinds <= 0) {
-            throw new IllegalArgumentException("The Ante must contain at least 1 Blind");
-        }
+        Preconditions.checkArgument(numBlinds > 0, "The Ante must contain at least 1 Blind");
+        Preconditions.checkNotNull(baseChipCalc);
+        Preconditions.checkNotNull(rewardCalc);
     }
 }

@@ -38,9 +38,12 @@ class TestAnte {
 
     @Test
     void testConfiguration() {
-        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, null, UnaryOperator.identity()));
-        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, null));
-        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, 0, (a, b) -> a, UnaryOperator.identity()));
+        // Used to avoid line length > 130 characters
+        final var npException = NullPointerException.class;
+        final var argException = IllegalArgumentException.class;
+        assertThrows(npException, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, null, UnaryOperator.identity()));
+        assertThrows(npException, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, null));
+        assertThrows(argException, () -> new AnteConfiguration(ANTE_ID, 0, (a, b) -> a, UnaryOperator.identity()));
     }
 
     @Test

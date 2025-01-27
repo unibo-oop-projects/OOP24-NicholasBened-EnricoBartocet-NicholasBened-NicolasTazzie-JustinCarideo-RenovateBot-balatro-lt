@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import com.google.common.base.Optional;
 
+import it.unibo.balatrolt.model.api.Combination.CombinationType;
 import it.unibo.balatrolt.model.api.Currency;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierBuilder;
@@ -148,6 +149,12 @@ class TestModifier {
             public Optional<Currency> getCurrentCurrency() {
                 return Optional.absent();
             }
+
+            @Override
+            public Optional<CombinationType> getCurrentCombinationType() {
+                return Optional.of(CombinationType.TWOPAIR);
+            }
+
         };
     }
 }

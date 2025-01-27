@@ -7,19 +7,20 @@ import java.util.function.Predicate;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
+import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
- * Implementation of ConditionalModifier checking if the played cards satisfies the specified condition.
+ * Implementation of ConditionalModifier checking if the holding cards satisfies the specified condition.
  */
-public final class ModifierPlayedCardCondition extends ConditionalModifier<Set<PlayableCard>> {
+public final class ModifierHoldingCardCondition extends ConditionalModifier<Set<PlayableCard>> {
+
     /**
      * @param base base modifier
      * @param condition condition on cards to satisfy
      */
-    public ModifierPlayedCardCondition(final Modifier base, final Predicate<Set<PlayableCard>> condition) {
+    public ModifierHoldingCardCondition(final Modifier base, final Predicate<Set<PlayableCard>> condition) {
         super(condition, base);
     }
 
@@ -29,8 +30,8 @@ public final class ModifierPlayedCardCondition extends ConditionalModifier<Set<P
         if (!stats.isPresent()) {
             return true;
         }
-        final Optional<Set<PlayableCard>> playedCards = stats.get().getPlayedCards();
-        checkState(playedCards.isPresent(), "Current played cards are required");
-        return super.getCondition().test(playedCards.get());
+        final Optional<Set<PlayableCard>> holdingCards = stats.get().getHoldingCards();
+        checkState(holdingCards.isPresent(), "Current holding cards are required");
+        return super.getCondition().test(holdingCards.get());
     }
 }

@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 
 import it.unibo.balatrolt.model.api.Modifier;
 
+/**
+ * Implementation of ConditionalModifier checking if the currency held by the player satisfies the specified condition.
+ */
 public class ModifierCurrencyCondition extends ConditionalModifier<Integer> {
 
     protected ModifierCurrencyCondition(Predicate<Integer> condition, Modifier modifier) {

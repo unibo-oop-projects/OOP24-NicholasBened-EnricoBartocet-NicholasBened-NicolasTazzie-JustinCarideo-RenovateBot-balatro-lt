@@ -7,6 +7,9 @@ import java.util.function.Predicate;
 import it.unibo.balatrolt.model.api.Combination.CombinationType;
 import it.unibo.balatrolt.model.api.Modifier;
 
+/**
+ * Implementation of ConditionalModifier checking if the the current combination satisfies the specified condition.
+ */
 public class ModifierCombinationCondition extends ConditionalModifier<CombinationType> {
     /**
      * @param base base modifier

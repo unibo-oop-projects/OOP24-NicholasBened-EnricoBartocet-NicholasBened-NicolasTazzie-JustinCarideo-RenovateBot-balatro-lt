@@ -12,10 +12,9 @@ import it.unibo.balatrolt.model.api.PlayableCard;
  * Implementation of ConditionalModifier checking if the holding cards satisfies the specified condition.
  */
 public final class ModifierHoldingCardCondition extends ConditionalModifier<Set<PlayableCard>> {
-
     /**
      * @param base base modifier
-     * @param condition condition on cards to satisfy
+     * @param condition condition on holding cards to satisfy
      */
     public ModifierHoldingCardCondition(final Modifier base, final Predicate<Set<PlayableCard>> condition) {
         super(condition, base);

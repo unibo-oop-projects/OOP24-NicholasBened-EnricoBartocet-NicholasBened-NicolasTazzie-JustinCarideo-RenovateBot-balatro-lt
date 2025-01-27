@@ -24,7 +24,7 @@ public interface ModifierStatsSupplier {
     /**
      * @return currency got by the player at the moment
      */
-    Optional<Currency> getCurrentCurrency();
+    Optional<Integer> getCurrentCurrency();
 
     /**
      * @return current combination type

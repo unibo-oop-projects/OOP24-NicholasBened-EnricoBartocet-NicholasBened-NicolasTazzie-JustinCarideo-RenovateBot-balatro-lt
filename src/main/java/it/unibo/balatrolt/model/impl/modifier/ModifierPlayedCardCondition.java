@@ -14,7 +14,7 @@ import it.unibo.balatrolt.model.api.Modifier;
 public final class ModifierPlayedCardCondition extends ConditionalModifier<Set<PlayableCard>> {
     /**
      * @param base base modifier
-     * @param condition condition on cards to satisfy
+     * @param condition condition on played cards to satisfy
      */
     public ModifierPlayedCardCondition(final Modifier base, final Predicate<Set<PlayableCard>> condition) {
         super(condition, base);

@@ -11,8 +11,8 @@ import it.unibo.balatrolt.model.api.Modifier;
  */
 public class ModifierCurrencyCondition extends ConditionalModifier<Integer> {
 
-    protected ModifierCurrencyCondition(Predicate<Integer> condition, Modifier modifier) {
-        super(condition, modifier);
+    protected ModifierCurrencyCondition(Modifier modifier, Predicate<Integer> condition) {
+        super(modifier, condition);
     }
 
     @Override

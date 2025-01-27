@@ -15,8 +15,8 @@ public class ModifierCombinationCondition extends ConditionalModifier<Combinatio
      * @param base base modifier
      * @param condition condition on holding cards to satisfy
      */
-    public ModifierCombinationCondition(Predicate<CombinationType> condition, Modifier modifier) {
-        super(condition, modifier);
+    public ModifierCombinationCondition(Modifier modifier, Predicate<CombinationType> condition) {
+        super(modifier, condition);
     }
 
     @Override

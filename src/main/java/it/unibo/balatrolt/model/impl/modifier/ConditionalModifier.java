@@ -23,7 +23,7 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
      * @param condition to satisfy
      * @param modifier  base modifier
      */
-    protected ConditionalModifier(final Predicate<X> condition, final Modifier modifier) {
+    protected ConditionalModifier(final Modifier modifier, final Predicate<X> condition) {
         super(modifier);
         this.condition = Objects.requireNonNull(condition, "Condition can't be null");
     }

@@ -59,5 +59,4 @@ public final class ModifierFromExisting extends ModifierDecorator {
     protected boolean canApply() {
         return true;
     }
-
 }

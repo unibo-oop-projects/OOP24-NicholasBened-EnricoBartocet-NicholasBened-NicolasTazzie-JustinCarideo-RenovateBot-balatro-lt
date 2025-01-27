@@ -17,7 +17,7 @@ public final class ModifierHoldingCardCondition extends ConditionalModifier<Set<
      * @param condition condition on holding cards to satisfy
      */
     public ModifierHoldingCardCondition(final Modifier base, final Predicate<Set<PlayableCard>> condition) {
-        super(condition, base);
+        super(base, condition);
     }
 
     @Override

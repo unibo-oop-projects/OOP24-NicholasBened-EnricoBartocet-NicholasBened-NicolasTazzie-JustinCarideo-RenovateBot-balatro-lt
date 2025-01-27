@@ -1,5 +1,8 @@
 package it.unibo.balatrolt.model.api;
 
+import java.util.Set;
+import java.util.function.Predicate;
+
 /**
  * A {@link Joker} factory.
  */
@@ -30,6 +33,20 @@ public interface JokerFactory {
      * @return joker with a modifier
      */
     Joker withModifierAndRandomPrice(String name, String description, Modifier modifier);
+
+    /**
+     * Creates a new {@link Joker} from an existing one, adding a playable card bound.
+     * @param newName new Joker's name
+     * @param newDescription new Joker's description
+     * @param j joker which add bound
+     * @param bound bound to add
+     * @return new Joker with the old's effect and with the specified bound
+     */
+    public Joker addPlayableCardBoundToJoker(
+            final String newName,
+            final String newDescription,
+            final Joker j,
+            final Predicate<Set<PlayableCard>> bound);
 
     /**
      * Creates a {@link Joker} by merging two exixting jokers.

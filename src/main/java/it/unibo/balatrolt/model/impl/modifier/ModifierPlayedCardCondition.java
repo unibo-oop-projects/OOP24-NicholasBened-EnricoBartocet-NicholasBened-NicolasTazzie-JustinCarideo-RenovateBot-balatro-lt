@@ -12,12 +12,12 @@ import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 /**
  * Implementation of ConditionalModifier checking if the played cards satisfies the specified condition.
  */
-public final class ModifierWithCardCondition extends ConditionalModifier<Set<PlayableCard>> {
+public final class ModifierPlayedCardCondition extends ConditionalModifier<Set<PlayableCard>> {
     /**
      * @param base base modifier
      * @param condition condition on cards to satisfy
      */
-    public ModifierWithCardCondition(final Modifier base, final Predicate<Set<PlayableCard>> condition) {
+    public ModifierPlayedCardCondition(final Modifier base, final Predicate<Set<PlayableCard>> condition) {
         super(condition, base);
     }
 

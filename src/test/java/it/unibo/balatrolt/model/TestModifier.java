@@ -9,9 +9,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.google.common.base.Optional;
-
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.api.Combination;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierBuilder;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
@@ -21,8 +19,10 @@ import it.unibo.balatrolt.model.api.PlayableCard.Suit;
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
+import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
 
 class TestModifier {
+    private static final int CURRENT_CURRENCY = 10;
     private ModifierBuilder builder;
 
     @BeforeEach
@@ -61,15 +61,13 @@ class TestModifier {
     void testCardPredicateModifier() {
         final int basePoints = 1;
         Modifier m = getModifierWithHCardCondTrue();
-        final Set<PlayableCard> cards = getTestCards();
-        assertTrue(cards.contains(new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS))));
-        m.setGameStatus(getStatusByCards(cards));
+        m.setGameStatus(getMockStatus());
         assertTrue(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
         assertEquals(basePoints + 1, m.getBasePointMapper().get().apply(basePoints));
         init();
         m = getModifierWithHCardCondFalse();
-        m.setGameStatus(getStatusByCards(cards));
+        m.setGameStatus(getMockStatus());
         assertFalse(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
     }
@@ -83,13 +81,22 @@ class TestModifier {
                 .build();
     }
 
-    private Set<PlayableCard> getTestCards() {
+    private Set<PlayableCard> getTestHoldingCards() {
         return Set.of(
                 new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
                 new PlayableCardImpl(new Pair<>(Rank.FOUR, Suit.DIAMONDS)),
                 new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.SPADES)),
                 new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
                 new PlayableCardImpl(new Pair<>(Rank.TWO, Suit.DIAMONDS)));
+    }
+
+    private Set<PlayableCard> getTestPlayedCard() {
+        return Set.of(
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES))
+        );
     }
 
     private Modifier getModifierWithHCardCondTrue() {
@@ -106,7 +113,7 @@ class TestModifier {
         Modifier modifier = getMergedModifier(base);
         final double mul = 1;
         final int baseP = 1;
-        modifier.setGameStatus(getStatusByCards(getTestCards()));
+        modifier.setGameStatus(getMockStatus());
         // validStatus
         assertTrue(modifier.getBasePointMapper().isPresent());
         assertTrue(modifier.getMultiplierMapper().isPresent());
@@ -116,7 +123,7 @@ class TestModifier {
         init();
         base = getModifierWithHCardCondFalse();
         modifier = getMergedModifier(base);
-        modifier.setGameStatus(getStatusByCards(getTestCards()));
+        modifier.setGameStatus(getMockStatus());
         // invalid status
         assertFalse(modifier.getBasePointMapper().isPresent());
         assertFalse(modifier.getMultiplierMapper().isPresent());
@@ -130,30 +137,12 @@ class TestModifier {
                 .build();
     }
 
-    private ModifierStatsSupplier getStatusByCards(final Set<PlayableCard> cards) {
-        return new ModifierStatsSupplier() {
-
-            @Override
-            public Optional<Set<PlayableCard>> getHoldingCards() {
-                return Optional.of(cards);
-            }
-
-            @Override
-            public Optional<Set<PlayableCard>> getPlayedCards() {
-                return Optional.of(cards);
-
-            }
-
-            @Override
-            public Optional<Integer> getCurrentCurrency() {
-                return Optional.absent();
-            }
-
-            @Override
-            public Optional<CombinationType> getCurrentCombinationType() {
-                return Optional.of(CombinationType.TWOPAIR);
-            }
-
-        };
+    private ModifierStatsSupplier getMockStatus() {
+        return new ModifierStatsSupplierBuilderImpl()
+            .setCurrentCombination(Combination.CombinationType.TWOPAIR)
+            .setHoldingCards(getTestHoldingCards())
+            .setPlayedCards(getTestPlayedCard())
+            .setCurrentCurrency(CURRENT_CURRENCY)
+            .build();
     }
 }

@@ -8,9 +8,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import com.google.common.base.Optional;
-
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.api.Combination;
 import it.unibo.balatrolt.model.api.Joker;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
@@ -19,26 +17,18 @@ import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.PlayableCard.Suit;
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.PlayableCardImpl;
+import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
 import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
 
 class TestJokerSupplier {
+    private static final int CURRENT_CURRENCY = 10;
     private final JokerSupplierImpl js = new JokerSupplierImpl();
-
-    private Set<PlayableCard> getHandCards() {
-        return Set.of(
-            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
-            new PlayableCardImpl(new Pair<>(Rank.FOUR, Suit.DIAMONDS)),
-            new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.SPADES)),
-            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
-            new PlayableCardImpl(new Pair<>(Rank.TWO, Suit.DIAMONDS))
-        );
-    }
 
     @Test
     void testTheDoubler() {
         final Joker j = js.doubler();
         final double m = 1;
-        final ModifierStatsSupplier stats = getStatusByCards(getHandCards());
+        final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         final Modifier mod = getMod(j, stats);
         assertFalse(mod.getBasePointMapper().isPresent());
@@ -50,7 +40,7 @@ class TestJokerSupplier {
     void testTheDoublerWithCondition() {
         Joker j = js.diamondDoubler(); // diamond is present
         final double m = 1;
-        final ModifierStatsSupplier stats = getStatusByCards(getHandCards());
+        final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         Modifier mod = getMod(j, stats);
         assertFalse(mod.getBasePointMapper().isPresent());
@@ -67,7 +57,7 @@ class TestJokerSupplier {
     void testTheDonour() {
         final Joker j = js.donour();
         final int bp = 0;
-        final ModifierStatsSupplier stats = getStatusByCards(getHandCards());
+        final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         final Modifier mod = getMod(j, stats);
         assertTrue(mod.getBasePointMapper().isPresent());
@@ -79,7 +69,7 @@ class TestJokerSupplier {
     void testTheDonourWithCondition() {
         Joker j = js.kingDonour(); // king is present
         final int bp = 0;
-        final ModifierStatsSupplier stats = getStatusByCards(getHandCards());
+        final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         Modifier mod = getMod(j, stats);
         assertTrue(mod.getBasePointMapper().isPresent());
@@ -97,29 +87,30 @@ class TestJokerSupplier {
         return mod;
     }
 
-    private ModifierStatsSupplier getStatusByCards(final Set<PlayableCard> cards) {
-        return new ModifierStatsSupplier() {
+    private ModifierStatsSupplier getMockStatus() {
+        return new ModifierStatsSupplierBuilderImpl()
+                .setCurrentCombination(Combination.CombinationType.TWOPAIR)
+                .setHoldingCards(getTestHoldingCards())
+                .setPlayedCards(getTestPlayedCard())
+                .setCurrentCurrency(CURRENT_CURRENCY)
+                .build();
+    }
 
-            @Override
-            public Optional<Set<PlayableCard>> getHoldingCards() {
-                return Optional.of(cards);
-            }
+    private Set<PlayableCard> getTestHoldingCards() {
+        return Set.of(
+                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+                new PlayableCardImpl(new Pair<>(Rank.FOUR, Suit.DIAMONDS)),
+                new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.SPADES)),
+                new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
+                new PlayableCardImpl(new Pair<>(Rank.TWO, Suit.DIAMONDS)));
+    }
 
-            @Override
-            public Optional<Set<PlayableCard>> getPlayedCards() {
-                return Optional.of(cards);
-
-            }
-
-            @Override
-            public Optional<Integer> getCurrentCurrency() {
-                return Optional.absent();
-            }
-
-            @Override
-            public Optional<CombinationType> getCurrentCombinationType() {
-                return Optional.of(CombinationType.TWOPAIR);
-            }
-        };
+    private Set<PlayableCard> getTestPlayedCard() {
+        return Set.of(
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES))
+        );
     }
 }

@@ -9,8 +9,10 @@ import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 
 /**
- * A modifier which checks whether a condition is satisfied before suppling the modifying functions.
+ * A modifier which checks whether a condition is satisfied before suppling the
+ * modifying functions.
  * If the game status is not set it will always return the modifier.
+ *
  * @param <X> type of condition that should be satisfied.
  */
 public abstract class ConditionalModifier<X> extends ModifierDecorator {
@@ -19,7 +21,7 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
 
     /**
      * @param condition to satisfy
-     * @param modifier base modifier
+     * @param modifier  base modifier
      */
     protected ConditionalModifier(final Predicate<X> condition, final Modifier modifier) {
         super(modifier);
@@ -75,4 +77,17 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
     protected final Optional<ModifierStatsSupplier> getStats() {
         return this.stats;
     }
+
+    @Override
+    protected boolean canApply() {
+        if (!this.stats.isPresent()) {
+            return true;
+        }
+        return checkCondition();
+    }
+
+    /**
+     * @return true if the condition is satisfied
+     */
+    protected abstract boolean checkCondition();
 }

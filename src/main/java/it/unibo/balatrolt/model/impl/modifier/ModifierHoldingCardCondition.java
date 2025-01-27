@@ -5,10 +5,7 @@ import static com.google.common.base.Preconditions.checkState;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import com.google.common.base.Optional;
-
 import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
@@ -25,12 +22,8 @@ public final class ModifierHoldingCardCondition extends ConditionalModifier<Set<
     }
 
     @Override
-    protected boolean canApply() {
-        final Optional<ModifierStatsSupplier> stats = super.getStats();
-        if (!stats.isPresent()) {
-            return true;
-        }
-        final Optional<Set<PlayableCard>> holdingCards = stats.get().getHoldingCards();
+    protected boolean checkCondition() {
+        final var holdingCards = super.getStats().get().getHoldingCards();
         checkState(holdingCards.isPresent(), "Current holding cards are required");
         return super.getCondition().test(holdingCards.get());
     }

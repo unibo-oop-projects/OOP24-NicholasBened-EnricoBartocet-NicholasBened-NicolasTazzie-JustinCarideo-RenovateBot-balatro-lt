@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class TestAnte {
 
     @BeforeEach
     void init() {
-        this.ante = new AnteImpl(new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, Function.identity()));
+        this.ante = new AnteImpl(new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, UnaryOperator.identity()));
     }
 
     @Test
@@ -38,9 +38,9 @@ class TestAnte {
 
     @Test
     void testConfiguration() {
-        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, null, Function.identity()));
+        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, null, UnaryOperator.identity()));
         assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, null));
-        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, 0, (a, b) -> a, Function.identity()));
+        assertThrows(IllegalArgumentException.class, () -> new AnteConfiguration(ANTE_ID, 0, (a, b) -> a, UnaryOperator.identity()));
     }
 
     @Test

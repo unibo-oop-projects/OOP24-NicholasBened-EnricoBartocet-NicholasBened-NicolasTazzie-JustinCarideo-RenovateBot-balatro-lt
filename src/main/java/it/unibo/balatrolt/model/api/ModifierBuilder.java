@@ -24,10 +24,19 @@ public interface ModifierBuilder {
 
     /**
      * Adds a bound on played cards.
-     * @param condition
+     * @param condition condition to verify to get the modifier functions
      * @return current modifierBuilder status
      */
     ModifierBuilder addPlayedCardBound(Predicate<Set<PlayableCard>> condition);
+
+    /**
+     * Merges the current modifier with toMerge.
+     * It can be called only once.
+     * @param toMerge modifier to merge
+     * @return curret modifierBuilder status
+     * @throws IllegalStateException when this method is called more than once.
+     */
+    ModifierBuilder merge(Modifier toMerge);
 
     /**
      * Builds the modifier.

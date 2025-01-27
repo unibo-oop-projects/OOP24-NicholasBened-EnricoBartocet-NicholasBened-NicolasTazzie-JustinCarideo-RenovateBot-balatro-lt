@@ -44,9 +44,9 @@ public class PlayedHandImpl implements PlayedHand {
 
     private CombinationType evaluateBest() {
         return combinationTable.stream()
-            .map(p -> new Pair<>(p.get1(), p.get2().recognize(hand)))
-            .filter(p -> p.get2())
-            .toList().getLast().get1();
+            .map(p -> new Pair<>(p.e1(), p.e2().recognize(hand)))
+            .filter(p -> p.e2())
+            .toList().getLast().e1();
     }
 
     private CombinationRecognizer giveRecognizer(CombinationType type) {

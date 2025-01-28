@@ -5,12 +5,20 @@ import com.google.common.base.Optional;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
-public class PlayableCardImpl implements PlayableCard {
+/**
+ * Implements a PlayableCard, made of a Rank and a Suit.
+ */
+public final class PlayableCardImpl implements PlayableCard {
 
     private final Pair<Rank, Suit> card;
     private final Rank rank;
     private final Suit suit;
 
+    /**
+     * Building a PlayableCard.
+     *
+     * @param card
+     */
     public PlayableCardImpl(final Pair<Rank, Suit> card) {
         this.card = card;
         this.rank = card.e1();
@@ -42,18 +50,20 @@ public class PlayableCardImpl implements PlayableCard {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        PlayableCardImpl other = (PlayableCardImpl) obj;
-        if (rank != other.rank)
+        }
+        final PlayableCardImpl other = (PlayableCardImpl) obj;
+        if (rank != other.rank) {
             return false;
-        if (suit != other.suit)
-            return false;
-        return true;
+        } else
+        return suit == other.suit;
     }
 }

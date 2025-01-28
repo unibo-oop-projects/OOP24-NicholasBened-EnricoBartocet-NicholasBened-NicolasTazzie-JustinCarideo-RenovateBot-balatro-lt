@@ -6,12 +6,20 @@ import java.util.List;
 import it.unibo.balatrolt.model.api.Card;
 import it.unibo.balatrolt.model.api.Slot;
 
-public class SlotImpl implements Slot{
-    private final int size;
-    private List<Card> slot;
+/**
+ * Implements Slot interface.
+ */
+public final class SlotImpl implements Slot {
+    private final int capacity;
+    private final List<Card> slot;
 
-    public SlotImpl(int size) {
-        this.size = size;
+    /**
+     * Generates a Slot with the given capacity.
+     *
+     * @param capacity of the Slot.
+     */
+    public SlotImpl(final int capacity) {
+        this.capacity = capacity;
         this.slot = new ArrayList<>();
     }
 
@@ -22,22 +30,22 @@ public class SlotImpl implements Slot{
 
     @Override
     public int getCapacity() {
-        return this.size;
+        return this.capacity;
     }
 
     @Override
-    public void addCard(Card card) {
+    public void addCard(final Card card) {
         try {
-            assert(getSize() + 1 <= getCapacity());
+            assert getSize() + 1 <= getCapacity();
         } catch (AssertionError e) {
-            throw new IllegalArgumentException("The Slot is full! ");
+            throw new AssertionError(e);
         }
         this.slot.add(card);
     }
 
     @Override
-    public void addAll(List<? extends Card> cards) {
-        for (Card card : cards) {
+    public void addAll(final List<? extends Card> cards) {
+        for (final Card card : cards) {
             addCard(card);
         }
     }
@@ -53,12 +61,12 @@ public class SlotImpl implements Slot{
     }
 
     @Override
-    public void remove(Card card) {
+    public void remove(final Card card) {
         this.slot.remove(card);
     }
 
     @Override
-    public void remove(int index) {
+    public void remove(final int index) {
         this.slot.remove(index);
     }
 }

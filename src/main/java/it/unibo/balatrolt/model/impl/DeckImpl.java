@@ -8,10 +8,16 @@ import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.PlayableCard.Suit;
 
-public class DeckImpl implements Deck {
+/**
+ * Implementation of a normal 52 card deck.
+ */
+public final class DeckImpl implements Deck {
 
     private final List<PlayableCard> deck;
 
+    /**
+     * Constructor that generates a 52 card deck.
+     */
     public DeckImpl() {
         this.deck = new ArrayList<>();
         for (final Suit suit : Suit.values()) {

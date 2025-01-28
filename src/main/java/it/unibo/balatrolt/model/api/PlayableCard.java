@@ -6,18 +6,18 @@ package it.unibo.balatrolt.model.api;
  */
 public interface PlayableCard extends Card {
 
-    /**
-     * This models the concept of rank of the card.
-    */
-    public enum Rank {
+    enum Rank {
+        /**
+         * This models the concept of rank in a card.
+         */
         TWO, THREE, FOUR, FIVE, SIX, SEVEN,
         EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
     }
 
-    /**
-     * This models the concept of suit in the card.
-    */
-    public enum Suit {
+    enum Suit {
+        /**
+         * This models the concept of suit in a card.
+         */
         HEARTS, DIAMONDS, CLUBS, SPADES
     }
 

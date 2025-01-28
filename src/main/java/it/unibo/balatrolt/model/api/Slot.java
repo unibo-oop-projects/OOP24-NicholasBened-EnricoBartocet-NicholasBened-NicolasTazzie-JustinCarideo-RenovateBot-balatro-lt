@@ -20,25 +20,25 @@ public interface Slot {
     int getCapacity();
 
     /**
-     * @param card, to add in the Slot.
+     * @param card to add in the Slot.
      */
     void addCard(Card card);
 
     /**
-     * @param cards, list containing the cards to add in the Slot.
+     * @param cards list containing the cards to add in the Slot.
      *
      * @throws IllegalArgumentException if List.size() > Slot.size()
      */
     void addAll(List<? extends Card> cards);
 
     /**
-     * removes every element in the slot
+     * removes every element in the slot.
      */
     void clear();
 
     /**
      * It removes the element given, otherwise it'll do nothing.
-     * the card given will be compared using equals() method.
+     * The card given will be compared using equals() method.
      *
      * @param card
      */

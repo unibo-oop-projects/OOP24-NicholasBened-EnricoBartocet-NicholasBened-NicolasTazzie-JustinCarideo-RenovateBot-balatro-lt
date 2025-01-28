@@ -18,7 +18,10 @@ import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.SlotImpl;
 
-public class TestSlot {
+/**
+ * Tester for Slot and it's methods.
+ */
+final class TestSlot {
     private Slot slot;
     private PlayableCard card;
     private PlayableCard otheCard;
@@ -51,7 +54,7 @@ public class TestSlot {
         this.slot.addAll(list);
         assertEquals(List.of(card, otheCard, otheCard), this.slot.getCards());
 
-        assertThrows(IllegalArgumentException.class, () -> {this.slot.addCard(card);});
+        assertThrows(IllegalArgumentException.class, () -> this.slot.addCard(card));
         assertEquals(List.of(card, otheCard, otheCard), this.slot.getCards());
     }
 

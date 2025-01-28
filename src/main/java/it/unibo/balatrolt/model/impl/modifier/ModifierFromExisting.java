@@ -25,12 +25,12 @@ public final class ModifierFromExisting extends ModifierDecorator {
 
     @Override
     public Optional<UnaryOperator<Integer>> getBasePointMapper() {
-        return this.mergeOperatorsMapper(super.getBasePointMapper(), this.basePointMod);
+        return this.canApply() ? this.mergeOperatorsMapper(super.getBasePointMapper(), this.basePointMod) : Optional.absent();
     }
 
     @Override
     public Optional<UnaryOperator<Double>> getMultiplierMapper() {
-        return this.mergeOperatorsMapper(super.getMultiplierMapper(), this.multiplierMod);
+        return this.canApply() ? this.mergeOperatorsMapper(super.getMultiplierMapper(), this.multiplierMod) : Optional.absent();
     }
 
     private <X> Optional<UnaryOperator<X>> mergeOperatorsMapper(
@@ -50,7 +50,7 @@ public final class ModifierFromExisting extends ModifierDecorator {
     }
 
     @Override
-    protected boolean canApply() {
+    protected boolean canApplySingle() {
         return true;
     }
 }

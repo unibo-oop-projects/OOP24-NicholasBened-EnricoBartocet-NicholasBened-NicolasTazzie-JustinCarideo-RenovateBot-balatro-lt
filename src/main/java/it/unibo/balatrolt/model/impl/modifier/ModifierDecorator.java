@@ -1,9 +1,10 @@
 package it.unibo.balatrolt.model.impl.modifier;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
@@ -19,8 +20,8 @@ public abstract class ModifierDecorator implements Modifier {
     /**
      * @param modifier base modifier
      */
-    protected ModifierDecorator(final Modifier modifier) {
-        this.base = Preconditions.checkNotNull(modifier, "Modifier cant't be null");
+    public ModifierDecorator(final Modifier modifier) {
+        this.base = checkNotNull(modifier, "Modifier can't be null");
     }
 
     @Override
@@ -46,8 +47,13 @@ public abstract class ModifierDecorator implements Modifier {
         return this.stats;
     }
 
+    @Override
+    public final boolean canApply() {
+        return this.canApplySingle() && base.canApply();
+    }
+
     /**
      * @return whether the modifier can be applied or not
      */
-    protected abstract boolean canApply();
+    protected abstract boolean canApplySingle();
 }

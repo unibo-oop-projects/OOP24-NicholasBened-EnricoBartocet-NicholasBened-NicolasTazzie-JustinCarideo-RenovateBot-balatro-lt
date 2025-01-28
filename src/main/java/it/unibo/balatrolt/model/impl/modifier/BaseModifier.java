@@ -79,4 +79,9 @@ public final class BaseModifier implements Modifier {
         }
         return true;
     }
+
+    @Override
+    public boolean canApply() {
+        return true;
+    }
 }

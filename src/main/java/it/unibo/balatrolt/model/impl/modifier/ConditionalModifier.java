@@ -63,7 +63,7 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
     }
 
     @Override
-    protected final boolean canApply() {
+    protected final boolean canApplySingle() {
         if (!super.getStats().isPresent()) {
             return true;
         }

@@ -3,6 +3,7 @@ package it.unibo.balatrolt.model.api;
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
+import com.google.errorprone.annotations.DoNotCall;
 
 /**
  * Interface modelling the concept of Multiplier. 
@@ -27,4 +28,12 @@ public interface Modifier {
      * @param stats current game stats.
      */
     void setGameStatus(ModifierStatsSupplier stats);
+
+    /**
+     * Returns whether the modifier can be applied or not.
+     * It's used to concatenate results of different modifiers
+     * @return true if can be applied
+     */
+    @DoNotCall
+    boolean canApply();
 }

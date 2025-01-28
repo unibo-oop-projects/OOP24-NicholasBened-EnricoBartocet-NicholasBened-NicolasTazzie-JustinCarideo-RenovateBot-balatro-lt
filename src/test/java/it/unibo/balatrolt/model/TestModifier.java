@@ -2,6 +2,7 @@ package it.unibo.balatrolt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -195,6 +196,49 @@ final class TestModifier {
         m.setGameStatus(getMockStatus());
         assertFalse(m.getBasePointMapper().isPresent());
         assertFalse(m.getMultiplierMapper().isPresent());
+    }
+
+    @Test
+    void testMergedConditionalModifiers() {
+        final double multipler = INIT_MUL;
+        final int basePoints = INIT_B_P;
+        // both with true conditions
+        Modifier m = getModifierFromTwoMerges(getModifierWithCombCondTrue(), getModifierWithHCardCondTrue());
+        m.setGameStatus(getMockStatus());
+        assertTrue(m.getBasePointMapper().isPresent());
+        assertTrue(m.getMultiplierMapper().isPresent());
+        assertEquals(basePoints + DELTA_B_P + DELTA_B_P, m.getBasePointMapper().get().apply(INIT_B_P));
+        assertEquals(multipler + DELTA_MUL, + DELTA_MUL, m.getMultiplierMapper().get().apply(INIT_MUL));
+        // first with false condition
+        m = getModifierFromTwoMerges(getModifierWithCombCondFalse(), getModifierWithHCardCondTrue());
+        m.setGameStatus(getMockStatus());
+        assertFalse(m.getBasePointMapper().isPresent());
+        assertFalse(m.getMultiplierMapper().isPresent());
+        // second with false condition
+        m = getModifierFromTwoMerges(getModifierWithCombCondTrue(), getModifierWithHCardCondFalse());
+        m.setGameStatus(getMockStatus());
+        assertFalse(m.getBasePointMapper().isPresent());
+        assertFalse(m.getMultiplierMapper().isPresent());
+        // both with false conditions
+        m = getModifierFromTwoMerges(getModifierWithCombCondFalse(), getModifierWithHCardCondFalse());
+        m.setGameStatus(getMockStatus());
+        assertFalse(m.getBasePointMapper().isPresent());
+        assertFalse(m.getMultiplierMapper().isPresent());
+    }
+
+    private Modifier getModifierFromTwoMerges(Modifier m1, Modifier m2) {
+        return builder()
+            .merge(m1)
+            .merge(m2)
+            .build();
+    }
+
+    @Test
+    void testBuilderFails() {
+        // EmptyBuilder
+        assertThrows(IllegalStateException.class, () -> builder().build());
+        // Empty, only with condition
+        assertThrows(IllegalStateException.class, () -> builder().addPlayedCardBound(c -> true).build());
     }
 
     private Modifier getModifierWithCurrCondTrue() {

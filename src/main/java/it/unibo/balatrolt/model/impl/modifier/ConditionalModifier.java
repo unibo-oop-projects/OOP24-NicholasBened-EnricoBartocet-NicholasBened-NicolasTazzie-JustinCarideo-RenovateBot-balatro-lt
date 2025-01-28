@@ -1,7 +1,12 @@
 package it.unibo.balatrolt.model.impl.modifier;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+
+import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.Modifier;
 
@@ -21,7 +26,7 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
      */
     protected ConditionalModifier(final Modifier modifier, final Predicate<X> condition) {
         super(modifier);
-        this.condition = Objects.requireNonNull(condition, "Condition can't be null");
+        this.condition = checkNotNull(condition, "Condition can't be null");
     }
 
     /**
@@ -61,6 +66,16 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
             return true;
         }*/
         return !super.getStats().isPresent() || checkCondition();
+    }
+
+    @Override
+    protected final Optional<UnaryOperator<Integer>> getInnerBasePointsFun() {
+        return Optional.absent();
+    }
+
+    @Override
+    protected final Optional<UnaryOperator<Double>> getInnerMultiplierFun() {
+        return Optional.absent();
     }
 
     /**

@@ -6,7 +6,7 @@ import com.google.common.base.Optional;
 import com.google.errorprone.annotations.DoNotCall;
 
 /**
- * Interface modelling the concept of Multiplier. 
+ * Interface modelling the concept of Multiplier.
  * Essentially it supplies UnaryOperators mapping BasePoints and Multipliers when some conditions are verified.
  */
 public interface Modifier {
@@ -31,7 +31,7 @@ public interface Modifier {
 
     /**
      * Returns whether the modifier can be applied or not.
-     * It's used to concatenate results of different modifiers
+     * It's used to concatenate results of different mofi
      * @return true if can be applied
      */
     @DoNotCall

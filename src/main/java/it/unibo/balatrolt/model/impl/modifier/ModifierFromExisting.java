@@ -30,33 +30,17 @@ public final class ModifierFromExisting extends ModifierDecorator {
     }
 
     @Override
-    public Optional<UnaryOperator<Integer>> getBasePointMapper() {
-        return this.canApply() ? this.mergeOperatorsMapper(super.getBasePointMapper(), this.basePointMod) : Optional.absent();
-    }
-
-    @Override
-    public Optional<UnaryOperator<Double>> getMultiplierMapper() {
-        return this.canApply() ? this.mergeOperatorsMapper(super.getMultiplierMapper(), this.multiplierMod) : Optional.absent();
-    }
-
-    private <X> Optional<UnaryOperator<X>> mergeOperatorsMapper(
-            final Optional<UnaryOperator<X>> m1,
-            final Optional<UnaryOperator<X>> m2) {
-        if (m1.isPresent() && m2.isPresent()) {
-            final var composed = m1.get().compose(m2.get());
-            return Optional.of(composed::apply);
-        }
-        if (m1.isPresent()) {
-            return m1;
-        }
-        if (m2.isPresent()) {
-            return m2;
-        }
-        return Optional.absent();
-    }
-
-    @Override
     protected boolean canApplySingle() {
         return true;
+    }
+
+    @Override
+    protected Optional<UnaryOperator<Double>> getInnerMultiplierFun() {
+        return this.multiplierMod;
+    }
+
+    @Override
+    protected Optional<UnaryOperator<Integer>> getInnerBasePointsFun() {
+        return this.basePointMod;
     }
 }

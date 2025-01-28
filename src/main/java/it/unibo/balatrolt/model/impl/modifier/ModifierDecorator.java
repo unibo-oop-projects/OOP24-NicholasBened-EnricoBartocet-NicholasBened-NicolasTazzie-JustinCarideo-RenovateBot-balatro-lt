@@ -25,13 +25,17 @@ public abstract class ModifierDecorator implements Modifier {
     }
 
     @Override
-    public Optional<UnaryOperator<Double>> getMultiplierMapper() {
-        return this.canApply() ? this.base.getMultiplierMapper() : Optional.absent();
+    public final Optional<UnaryOperator<Double>> getMultiplierMapper() {
+        return this.canApply()
+            ? mergeOperatorsMapper(this.base.getMultiplierMapper(), this.getInnerMultiplierFun())
+            : Optional.absent();
     }
 
     @Override
-    public Optional<UnaryOperator<Integer>> getBasePointMapper() {
-        return this.canApply() ? this.base.getBasePointMapper() : Optional.absent();
+    public final Optional<UnaryOperator<Integer>> getBasePointMapper() {
+        return this.canApply()
+            ? mergeOperatorsMapper(this.base.getBasePointMapper(), this.getInnerBasePointsFun())
+            : Optional.absent();
     }
 
     @Override
@@ -53,7 +57,41 @@ public abstract class ModifierDecorator implements Modifier {
     }
 
     /**
+     * Utility method to merge two optional UnaryOperators.
+     * @param <X> operator type
+     * @param m1 first operator
+     * @param m2 second operator
+     * @return merged operator, absent if both are empty
+     */
+    private static <X> Optional<UnaryOperator<X>> mergeOperatorsMapper(
+            final Optional<UnaryOperator<X>> m1,
+            final Optional<UnaryOperator<X>> m2) {
+        if (m1.isPresent() && m2.isPresent()) {
+            final var composed = m1.get().andThen(m2.get());
+            return Optional.of(composed::apply);
+        }
+        if (m1.isPresent()) {
+            return m1;
+        }
+        if (m2.isPresent()) {
+            return m2;
+        }
+        return Optional.absent();
+    }
+
+    /**
+     * @return innerMultiplierFunction to merge with base
+     */
+    protected abstract Optional<UnaryOperator<Double>> getInnerMultiplierFun();
+
+    /**
+     * @return innerBasePointFunction to merge with base
+     */
+    protected abstract Optional<UnaryOperator<Integer>> getInnerBasePointsFun();
+
+    /**
      * @return whether the modifier can be applied or not
      */
     protected abstract boolean canApplySingle();
+
 }

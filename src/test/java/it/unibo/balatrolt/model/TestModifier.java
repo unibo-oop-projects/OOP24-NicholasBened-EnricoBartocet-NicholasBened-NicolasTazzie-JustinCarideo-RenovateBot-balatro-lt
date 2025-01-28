@@ -21,7 +21,9 @@ import it.unibo.balatrolt.model.impl.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
 import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
 
-class TestModifier {
+final class TestModifier {
+    private static final int CURR_QTY_FALSE = 5;
+    private static final int CURR_QTY_TRUE = 20;
     private static final int INIT_B_P = 1;
     private static final double INIT_MUL = 1;
     private static final int DELTA_B_P = 2;
@@ -74,8 +76,9 @@ class TestModifier {
         assertTrue(modifier.getBasePointMapper().isPresent());
         assertTrue(modifier.getMultiplierMapper().isPresent());
         // It should be f -> g = f + DELTA_B_P -> h = g + DELTA_B_P2
+        // and          f -> g = f + DELTA_MUL -> h = g * DELTA_MUL2
         assertEquals(baseP + DELTA_B_P + DELTA_B_P2, modifier.getBasePointMapper().get().apply(baseP));
-        assertEquals(mul + DELTA_MUL + DELTA_MUL2, modifier.getMultiplierMapper().get().apply(mul));
+        assertEquals((mul + DELTA_MUL) * DELTA_MUL2, modifier.getMultiplierMapper().get().apply(mul));
         base = getModifierWithPCardCondFalse();
         modifier = getMergedModifier(base);
         modifier.setGameStatus(getMockStatus());
@@ -197,14 +200,14 @@ class TestModifier {
     private Modifier getModifierWithCurrCondTrue() {
         return builder()
                 .merge(getStandardModifier())
-                .addCurrentCurrencyBound(c -> c < 20)
+                .addCurrentCurrencyBound(c -> c < CURR_QTY_TRUE)
                 .build();
     }
 
     private Modifier getModifierWithCombCurrFalse() {
         return builder()
                 .merge(getStandardModifier())
-                .addCurrentCurrencyBound(c -> c < 5)
+                .addCurrentCurrencyBound(c -> c < CURR_QTY_FALSE)
                 .build();
     }
 
@@ -229,7 +232,7 @@ class TestModifier {
         return builder()
                 .merge(base)
                 .addBasePointsModifier(p -> p + DELTA_B_P2)
-                .addMultiplierModifier(mul -> mul + DELTA_MUL2)
+                .addMultiplierModifier(mul -> mul * DELTA_MUL2)
                 .build();
     }
 

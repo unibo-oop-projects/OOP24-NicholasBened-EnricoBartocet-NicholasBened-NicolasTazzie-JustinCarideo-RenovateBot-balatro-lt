@@ -63,7 +63,7 @@ public abstract class ModifierDecorator implements Modifier {
      * @param m2 second operator
      * @return merged operator, absent if both are empty
      */
-    private static <X> Optional<UnaryOperator<X>> mergeOperatorsMapper(
+    protected static <X> Optional<UnaryOperator<X>> mergeOperatorsMapper(
             final Optional<UnaryOperator<X>> m1,
             final Optional<UnaryOperator<X>> m2) {
         if (m1.isPresent() && m2.isPresent()) {

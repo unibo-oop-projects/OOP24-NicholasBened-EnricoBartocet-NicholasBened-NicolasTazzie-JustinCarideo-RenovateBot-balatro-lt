@@ -12,16 +12,16 @@ public interface Shop {
      * @return a map containing all sellable {@link SpecialCards} and how much does
      * it cost
      */
-    Map<SpecialCard, Currency> getSellableSpecialCards();
+    Map<SpecialCard, Integer> getSellableSpecialCards();
 
     /**
      * It buys a card from the shop. If it doesn't extist or it cannot be afford, then false is returned and 
      * the card is not taken off from the shop.
      * @param toBuy card to buy
-     * @param currency current quantity of money
+     * @param money current quantity of money
      * @return true if the card is bought and taken off the shop, false otherwise
      */
-    boolean buy(SpecialCard toBuy, Currency currency);
+    boolean buy(SpecialCard toBuy, int money);
 
     /**
      * Supplies the shop with brand new SpecialCards.

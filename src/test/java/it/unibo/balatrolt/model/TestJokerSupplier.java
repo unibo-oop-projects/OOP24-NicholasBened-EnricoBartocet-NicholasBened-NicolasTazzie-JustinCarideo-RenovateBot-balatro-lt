@@ -8,7 +8,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.Combination;
+import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.Joker;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
@@ -93,7 +93,7 @@ final class TestJokerSupplier {
 
     private ModifierStatsSupplier getMockStatus() {
         return new ModifierStatsSupplierBuilderImpl()
-                .addCurrentCombination(Combination.CombinationType.TWOPAIR)
+                .addCurrentCombination(Combination.CombinationType.TWO_PAIR)
                 .addHoldingCards(getTestHoldingCards())
                 .addPlayedCards(getTestPlayedCard())
                 .addCurrentCurrency(CURRENT_CURRENCY)

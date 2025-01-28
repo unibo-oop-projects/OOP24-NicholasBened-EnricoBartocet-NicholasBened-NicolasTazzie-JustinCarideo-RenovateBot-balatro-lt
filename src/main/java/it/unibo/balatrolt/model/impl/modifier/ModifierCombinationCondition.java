@@ -4,7 +4,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import java.util.function.Predicate;
 
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.api.Modifier;
 
 /**

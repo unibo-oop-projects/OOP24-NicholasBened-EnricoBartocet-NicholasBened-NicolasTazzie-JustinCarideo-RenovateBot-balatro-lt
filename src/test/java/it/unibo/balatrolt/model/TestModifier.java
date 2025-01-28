@@ -8,12 +8,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.Combination;
+import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierBuilder;
 import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.PlayableCard.Suit;
 import it.unibo.balatrolt.model.impl.Pair;
@@ -170,14 +170,14 @@ final class TestModifier {
     private Modifier getModifierWithCombCondFalse() {
         return builder()
                 .merge(getStandardModifier())
-                .addCombinationBound(c -> c.equals(CombinationType.ROYALFLUSH))
+                .addCombinationBound(c -> c.equals(CombinationType.ROYAL_FLUSH))
                 .build();
     }
 
     private Modifier getModifierWithCombCondTrue() {
         return builder()
                 .merge(getStandardModifier())
-                .addCombinationBound(c -> c.equals(CombinationType.TWOPAIR))
+                .addCombinationBound(c -> c.equals(CombinationType.TWO_PAIR))
                 .build();
     }
 
@@ -238,7 +238,7 @@ final class TestModifier {
 
     private ModifierStatsSupplier getMockStatus() {
         return new ModifierStatsSupplierBuilderImpl()
-                .addCurrentCombination(Combination.CombinationType.TWOPAIR)
+                .addCurrentCombination(Combination.CombinationType.TWO_PAIR)
                 .addHoldingCards(getTestHoldingCards())
                 .addPlayedCards(getTestPlayedCard())
                 .addCurrentCurrency(CURRENT_CURRENCY)

@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * Builder for modifier. It allows the to create a modifier with bound

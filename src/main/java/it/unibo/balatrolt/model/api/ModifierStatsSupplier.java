@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * It models a supplier of statistics used to retrieve player, card and other statistics.

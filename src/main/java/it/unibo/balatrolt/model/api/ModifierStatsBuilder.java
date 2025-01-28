@@ -2,6 +2,8 @@ package it.unibo.balatrolt.model.api;
 
 import java.util.Set;
 
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
+
 /**
  * Builder for ModifierStats.
  */
@@ -37,7 +39,7 @@ public interface ModifierStatsBuilder {
      * @param combination current combination
      * @return builder state
      */
-    ModifierStatsBuilder addCurrentCombination(Combination.CombinationType combination);
+    ModifierStatsBuilder addCurrentCombination(CombinationType combination);
 
     /**
      * builds ModifierStats.

@@ -7,7 +7,7 @@ import java.util.function.UnaryOperator;
 import com.google.common.base.Optional;
 import static com.google.common.base.Preconditions.checkState;
 
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.ModifierBuilder;
 import it.unibo.balatrolt.model.api.PlayableCard;

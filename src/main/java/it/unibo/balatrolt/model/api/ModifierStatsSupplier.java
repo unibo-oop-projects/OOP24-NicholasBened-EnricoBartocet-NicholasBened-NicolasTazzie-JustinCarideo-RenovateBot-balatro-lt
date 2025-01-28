@@ -30,6 +30,4 @@ public interface ModifierStatsSupplier {
      * @return current combination type
      */
     Optional<CombinationType> getCurrentCombinationType();
-
-    /* [TODO: add combination getter] */
 }

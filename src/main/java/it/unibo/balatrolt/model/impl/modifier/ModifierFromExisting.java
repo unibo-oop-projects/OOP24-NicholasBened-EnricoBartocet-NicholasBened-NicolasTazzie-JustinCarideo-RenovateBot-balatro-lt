@@ -14,6 +14,12 @@ public final class ModifierFromExisting extends ModifierDecorator {
     private final Optional<UnaryOperator<Double>> multiplierMod;
     private final Optional<UnaryOperator<Integer>> basePointMod;
 
+    /**
+     * Modifier from existing builder.
+     * @param multiplierMod multiplier function
+     * @param basePointMod base points function
+     * @param modifier base
+     */
     public ModifierFromExisting(
             final Optional<UnaryOperator<Double>> multiplierMod,
             final Optional<UnaryOperator<Integer>> basePointMod,

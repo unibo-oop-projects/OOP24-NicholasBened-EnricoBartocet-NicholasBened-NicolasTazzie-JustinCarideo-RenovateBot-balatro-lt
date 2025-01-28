@@ -38,9 +38,15 @@ public abstract class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public Optional<Modifier> getModifier() {
-        return Optional.absent();
+    public final Optional<Modifier> getModifier() {
+        return getInnerModifier();
     }
+
+    /**
+     * It should return an inner modifier relative to the specific implementation.
+     * @return inner modifier
+     */
+    protected abstract Optional<Modifier> getInnerModifier();
 
     @Override
     public final int getShopPrice() {

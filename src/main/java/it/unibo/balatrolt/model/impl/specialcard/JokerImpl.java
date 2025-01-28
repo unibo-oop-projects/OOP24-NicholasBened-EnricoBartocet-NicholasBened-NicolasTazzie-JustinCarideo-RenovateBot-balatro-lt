@@ -26,7 +26,7 @@ public final class JokerImpl extends BaseSpecialCard implements Joker {
     }
 
     @Override
-    public Optional<Modifier> getModifier() {
+    protected Optional<Modifier> getInnerModifier() {
         return this.modifier;
     }
 

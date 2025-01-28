@@ -10,7 +10,7 @@ import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
- * Implementation of {@link ModifierStatsSupplier}
+ * Implementation of {@link ModifierStatsSupplier}.
  */
 public final class ModifierStatsSupplierBuilderImpl implements ModifierStatsBuilder {
     private final class ModifierStatsSupplierImpl implements ModifierStatsSupplier {

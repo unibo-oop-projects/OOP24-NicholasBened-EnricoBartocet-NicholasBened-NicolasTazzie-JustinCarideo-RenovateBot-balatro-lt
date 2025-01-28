@@ -35,7 +35,7 @@ public abstract class ModifierDecorator implements Modifier {
     }
 
     @Override
-    public void setGameStatus(final ModifierStatsSupplier stats) {
+    public final void setGameStatus(final ModifierStatsSupplier stats) {
         base.setGameStatus(stats);
         this.stats = Optional.fromNullable(stats);
     }

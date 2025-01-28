@@ -15,7 +15,7 @@ public final class ModifierCurrencyCondition extends ConditionalModifier<Integer
      * @param modifier base modifier
      * @param condition condition on currency to satisfy
      */
-    public ModifierCurrencyCondition(Modifier modifier, Predicate<Integer> condition) {
+    public ModifierCurrencyCondition(final Modifier modifier, final Predicate<Integer> condition) {
         super(modifier, condition);
     }
 

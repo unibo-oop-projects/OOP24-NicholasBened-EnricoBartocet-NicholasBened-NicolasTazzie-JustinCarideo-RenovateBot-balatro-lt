@@ -2,8 +2,7 @@ package it.unibo.balatrolt.model.impl;
 
 import java.util.List;
 import java.util.function.Function;
-
-import org.checkerframework.checker.units.qual.s;
+import java.util.stream.Collectors;
 
 import it.unibo.balatrolt.model.api.CombinationCalculator;
 import it.unibo.balatrolt.model.api.CombinationCalculatorFactory;
@@ -17,9 +16,19 @@ public class CombinationCalculatorFactoryImpl implements CombinationCalculatorFa
     private final CombinationTables table = new CombinationTables();
 
     private Function<List<PlayableCard>,Integer> computeFiveCards() {
-        return hand -> SortingPlayableHelpers.sortingByRank(hand)
+        return hand -> hand
             .stream()
             .map(p -> table.convertRank(p.getRank()))
+            .reduce(0, (i, j) -> i + j);
+    }
+
+    private Function<List<PlayableCard>,Integer> computeBelowFiveCards(final int n) {
+        return hand -> hand.stream()
+            .collect(Collectors.groupingBy(p -> p.getRank()))
+            .entrySet()
+            .stream()
+            .filter(e -> e.getValue().size() == n)
+            .map(e -> table.convertRank(e.getKey()) * n)
             .reduce(0, (i, j) -> i + j);
     }
 
@@ -33,35 +42,25 @@ public class CombinationCalculatorFactoryImpl implements CombinationCalculatorFa
 
     @Override
     public CombinationCalculator highCardCalculator() {
-        return general(hand -> table.convertRank(
-            SortingPlayableHelpers.sortingByRank(hand)
+        return general(hand -> table.convertRank(SortingPlayableHelpers.sortingByRank(hand)
             .getLast()
             .getRank()));
     }
 
     @Override
-    public CombinationCalculator pairCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pairCalculator'");
-    }
-
-    @Override
-    public CombinationCalculator twoPairCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'twoPairCalculator'");
+    public CombinationCalculator pairsCalculator() {
+        return general(computeBelowFiveCards(2));
     }
 
     @Override
     public CombinationCalculator threeOfAKindCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'threeOfAKindCalculator'");
+        return general(computeBelowFiveCards(3));
     }
 
 
     @Override
     public CombinationCalculator fourOfAKindCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'fourOfAKindCalculator'");
+        return general(computeBelowFiveCards(4));
     }
 
     @Override

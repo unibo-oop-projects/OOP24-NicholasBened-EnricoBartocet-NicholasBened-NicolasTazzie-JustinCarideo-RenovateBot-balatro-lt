@@ -15,12 +15,7 @@ public interface CombinationCalculatorFactory {
     /**
      * @return a CombinationCalculator for pair
      */
-    CombinationCalculator pairCalculator();
-
-    /**
-     * @return a CombinationCalculator for two pair
-     */
-    CombinationCalculator twoPairCalculator();
+    CombinationCalculator pairsCalculator();
 
     /**
      * @return a CombinationCalculator for three of a kind

@@ -118,10 +118,8 @@ public class PlayedHandImpl implements PlayedHand {
         switch (type) {
             case HIGH_CARD:
                 return this.factory.highCardCalculator();
-            case PAIR:
-                return this.factory.pairCalculator();
-            case TWO_PAIR:
-                return this.factory.twoPairCalculator();
+            case PAIR, TWO_PAIR:
+                return this.factory.pairsCalculator();
             case THREE_OF_A_KIND:
                 return this.factory.threeOfAKindCalculator();
             case FOUR_OF_A_KIND:

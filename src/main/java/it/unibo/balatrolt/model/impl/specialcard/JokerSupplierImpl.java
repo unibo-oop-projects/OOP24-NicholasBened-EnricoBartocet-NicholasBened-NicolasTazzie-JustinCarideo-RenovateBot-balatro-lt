@@ -3,6 +3,8 @@ package it.unibo.balatrolt.model.impl.specialcard;
 import java.util.Random;
 import java.util.Set;
 
+import com.google.common.base.Supplier;
+
 import it.unibo.balatrolt.model.api.Joker;
 import it.unibo.balatrolt.model.api.JokerFactory;
 import it.unibo.balatrolt.model.api.JokerSupplier;
@@ -15,7 +17,7 @@ import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
  * Joker supplier implementation.
  * @author Nicolas Tazzieri - nicolas.tazzieri@studio.unibo.it
  */
-public final class JokerSupplierImpl implements JokerSupplier {
+public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
     private static final int DB = 0;
     private static final int D_DB = 1;
     private static final int D = 2;
@@ -26,6 +28,11 @@ public final class JokerSupplierImpl implements JokerSupplier {
     private static final int NUM_JOKERS = 6;
     private final JokerFactory factory = new JokerFactoryImpl();
     private final Random r = new Random();
+
+    @Override
+    public Joker get() {
+        return this.getRandom();
+    }
 
     @Override
     public Joker getRandom() {
@@ -133,5 +140,4 @@ public final class JokerSupplierImpl implements JokerSupplier {
             cards -> checkContainsRank(cards, Rank.SEVEN)
         );
     }
-
 }

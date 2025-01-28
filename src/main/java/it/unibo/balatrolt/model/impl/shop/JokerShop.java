@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import it.unibo.balatrolt.model.api.JokerSupplier;
+import com.google.common.base.Supplier;
+
+import it.unibo.balatrolt.model.api.Joker;
 import it.unibo.balatrolt.model.api.Shop;
 import it.unibo.balatrolt.model.api.SpecialCard;
 import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
@@ -16,7 +18,7 @@ import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
  */
 public class JokerShop implements Shop {
     private Map<SpecialCard, Integer> cards = Map.of();
-    private final JokerSupplier supplier = new JokerSupplierImpl();
+    private final Supplier<Joker> supplier = new JokerSupplierImpl();
     private final int size;
 
     /**
@@ -49,7 +51,7 @@ public class JokerShop implements Shop {
     public void supply() {
         while (this.cards.size() < this.size) {
             this.cards = Stream.iterate(0, i -> i < this.size, i -> i + 1)
-                .map(i -> this.supplier.getRandom())
+                .map(i -> this.supplier.get())
                 .distinct()
                 .collect(Collectors.toMap(j -> j, j -> j.getShopPrice()));
         }

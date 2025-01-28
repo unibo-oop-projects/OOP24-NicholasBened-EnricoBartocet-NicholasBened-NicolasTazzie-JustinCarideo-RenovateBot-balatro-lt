@@ -9,7 +9,7 @@ import it.unibo.balatrolt.model.api.SpecialCard;
  * It's a Basic SpecialCard, it has a name and a description, but doesn't have
  * any modifier.
  */
-public class BaseSpecialCard implements SpecialCard {
+public abstract class BaseSpecialCard implements SpecialCard {
     private final String name;
     private final String description;
     private final int price;
@@ -38,9 +38,15 @@ public class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public Optional<Modifier> getModifier() {
-        return Optional.absent();
+    public final Optional<Modifier> getModifier() {
+        return getInnerModifier();
     }
+
+    /**
+     * It should return an inner modifier relative to the specific implementation.
+     * @return inner modifier
+     */
+    protected abstract Optional<Modifier> getInnerModifier();
 
     @Override
     public final int getShopPrice() {
@@ -53,7 +59,7 @@ public class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -62,7 +68,7 @@ public class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

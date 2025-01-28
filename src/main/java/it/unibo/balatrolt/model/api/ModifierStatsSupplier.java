@@ -4,6 +4,8 @@ import java.util.Set;
 
 import com.google.common.base.Optional;
 
+import it.unibo.balatrolt.model.api.Combination.CombinationType;
+
 /**
  * It models a supplier of statistics used to retrieve player, card and other statistics.
  * Although it's not required, it's preferable to pass immutable implementation of the provided classes.
@@ -22,7 +24,10 @@ public interface ModifierStatsSupplier {
     /**
      * @return currency got by the player at the moment
      */
-    Optional<Currency> getCurrentCurrency();
+    Optional<Integer> getCurrentCurrency();
 
-    /* [TODO: add combination getter] */
+    /**
+     * @return current combination type
+     */
+    Optional<CombinationType> getCurrentCombinationType();
 }

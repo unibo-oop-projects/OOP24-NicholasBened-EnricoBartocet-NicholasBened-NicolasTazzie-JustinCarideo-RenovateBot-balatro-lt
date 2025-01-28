@@ -53,7 +53,7 @@ public final class JokerFactoryImpl implements JokerFactory {
 
     @Override
     public Joker merge(final String newName, final String newDescription, final Joker j1, final Joker j2) {
-        Modifier newModifier = new ModifierBuilderImpl()
+        final Modifier newModifier = new ModifierBuilderImpl()
             .merge(j1.getModifier().get())
             .build();
         return new JokerImpl(

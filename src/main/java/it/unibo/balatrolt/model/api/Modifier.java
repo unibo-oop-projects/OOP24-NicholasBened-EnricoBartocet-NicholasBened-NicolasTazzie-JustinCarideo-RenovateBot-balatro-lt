@@ -3,12 +3,13 @@ package it.unibo.balatrolt.model.api;
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
+import com.google.errorprone.annotations.DoNotCall;
 
 import it.unibo.balatrolt.model.api.combination.BasePoints;
 import it.unibo.balatrolt.model.api.combination.Multiplier;
 
 /**
- * Interface modelling the concept of Multiplier. 
+ * Interface modelling the concept of Multiplier.
  * Essentially it supplies UnaryOperators mapping BasePoints and Multipliers when some conditions are verified.
  */
 public interface Modifier {
@@ -30,4 +31,12 @@ public interface Modifier {
      * @param stats current game stats.
      */
     void setGameStatus(ModifierStatsSupplier stats);
+
+    /**
+     * Returns whether the modifier can be applied or not.
+     * It's used to concatenate results of different mofi
+     * @return true if can be applied
+     */
+    @DoNotCall
+    boolean canApply();
 }

@@ -52,7 +52,7 @@ public final class BaseModifier implements Modifier {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -62,7 +62,7 @@ public final class BaseModifier implements Modifier {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        BaseModifier other = (BaseModifier) obj;
+        final BaseModifier other = (BaseModifier) obj;
         if (multiplierMod == null) {
             if (other.multiplierMod != null) {
                 return false;
@@ -77,6 +77,11 @@ public final class BaseModifier implements Modifier {
         } else if (!basePointMod.equals(other.basePointMod)) {
             return false;
         }
+        return true;
+    }
+
+    @Override
+    public boolean canApply() {
         return true;
     }
 }

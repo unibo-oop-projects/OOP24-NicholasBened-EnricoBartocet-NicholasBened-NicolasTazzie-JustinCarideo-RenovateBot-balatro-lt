@@ -44,52 +44,81 @@ public class TestRecognizers {
 		);
 	}
 
+    /**
+     * Test whether the hand is an high card.
+     */
     @Test
     public void testHighCard() {
         assertTrue(this.helper.highCardRecognizer().recognize(hand));
     }
 
+    /**
+     * Test whether the hand is a pair.
+     */
     @Test
     public void testPair() {
         assertFalse(this.helper.pairRecognizer().recognize(hand));
     }
 
+    /**
+     * Test whether the hand is a two pair.
+     */
     @Test
     public void testTwoPair() {
         assertFalse(this.helper.twoPairRecognizer().recognize(hand));
     }
 
+    /**
+     * Test whether the hand is a three of a kind.
+     */
     @Test
     public void testThreeOfAKind() {
         assertFalse(this.helper.threeOfAKindRecognizer().recognize(hand));
     }
 
-
+    /**
+     * Test whether the hand is a straight.
+     */
     @Test
     public void testStraight() {
         assertTrue(this.helper.straightRecognizer().recognize(hand));
     }
 
+    /**
+     * Test whether the hand is a flush.
+     */
     @Test
     public void testFlush() {
         assertFalse(this.helper.flushRecognizer().recognize(hand));
     }
 
+    /**
+     * Test whether the hand is a full house.
+     */
     @Test
     public void testFullHouse() {
         assertFalse(this.helper.fullHouseRecognizer().recognize(hand));
     }
 
+    /**
+     * Test whether the hand is a four a kind.
+     */
     @Test
     public void testFourOfAKind() {
         assertFalse(this.helper.fourOfAKindRecognizer().recognize(hand));
     }
 
+    /**
+     * Test whether the hand is a straight flush.
+     */
     @Test
     public void testStraightFlush() {
         assertFalse(this.helper.straightFlushRecognizer().recognize(hand));
     }
 
+    /**
+     * Test whether the hand is a royal flush.
+     */
     @Test
     public void testRoyalFlush() {
         assertFalse(this.helper.royalFlushRecognizer().recognize(hand));

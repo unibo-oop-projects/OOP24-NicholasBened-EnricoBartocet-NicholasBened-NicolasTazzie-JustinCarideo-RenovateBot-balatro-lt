@@ -2,9 +2,11 @@ package it.unibo.balatrolt.model.impl.levels;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
+import java.util.function.BinaryOperator;
+import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
+
+import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindFactory;
@@ -15,15 +17,15 @@ import it.unibo.balatrolt.model.api.levels.BlindFactory;
  */
 public final class BlindFactoryImpl implements BlindFactory {
 
-    private final BiFunction<Integer, Integer, Integer> baseChipsCalculator;
-    private final Function<Integer, Integer> rewardCalculator;
+    private final BinaryOperator<Integer> baseChipsCalculator;
+    private final UnaryOperator<Integer> rewardCalculator;
 
     /**
      * Initialize the factory using the strategy pattern to compute the base chips and the reward of the blinds.
      * @param chips a bifunction that takes the ante id and the blind id, and gives the base chips
      * @param reward a function that takes the blind id to compute the reward
      */
-    public BlindFactoryImpl(final BiFunction<Integer, Integer, Integer> chips, final Function<Integer, Integer> reward) {
+    public BlindFactoryImpl(final BinaryOperator<Integer> chips, final UnaryOperator<Integer> reward) {
         Objects.requireNonNull(chips);
         Objects.requireNonNull(reward);
         this.baseChipsCalculator = chips;
@@ -41,9 +43,7 @@ public final class BlindFactoryImpl implements BlindFactory {
 
     @Override
     public List<Blind> createList(final int numBlinds, final int anteId) {
-        if (numBlinds <= 0) {
-            throw new IllegalArgumentException();
-        }
+        Preconditions.checkArgument(numBlinds > 0, "The list must contain at least 1 Blind");
         return Stream.iterate(0, i -> i + 1).limit(numBlinds).map(n -> this.fromIds(anteId, n)).toList();
     }
 }

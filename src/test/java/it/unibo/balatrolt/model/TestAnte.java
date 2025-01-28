@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class TestAnte {
 
     @BeforeEach
     void init() {
-        this.ante = new AnteImpl(new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, Function.identity()));
+        this.ante = new AnteImpl(new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, UnaryOperator.identity()));
     }
 
     @Test
@@ -33,6 +34,16 @@ class TestAnte {
         assertEquals(ANTE_ID, this.ante.getAnteNumber());
         assertNotNull(this.ante.getBlinds());
         assertEquals(NUM_BLINDS, this.ante.getBlinds().size());
+    }
+
+    @Test
+    void testConfiguration() {
+        // Used to avoid line length > 130 characters
+        final var npException = NullPointerException.class;
+        final var argException = IllegalArgumentException.class;
+        assertThrows(npException, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, null, UnaryOperator.identity()));
+        assertThrows(npException, () -> new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, null));
+        assertThrows(argException, () -> new AnteConfiguration(ANTE_ID, 0, (a, b) -> a, UnaryOperator.identity()));
     }
 
     @Test

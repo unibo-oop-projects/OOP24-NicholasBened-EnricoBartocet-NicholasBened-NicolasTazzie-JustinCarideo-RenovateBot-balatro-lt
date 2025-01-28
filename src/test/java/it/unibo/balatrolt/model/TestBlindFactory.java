@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Function;
+import java.util.function.BinaryOperator;
+import java.util.function.UnaryOperator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,13 +22,13 @@ class TestBlindFactory {
     private static final int BLIND_ID = 2;
 
     private BlindFactory factory;
-    private BiFunction<Integer, Integer, Integer> baseChipsCalculator;
-    private Function<Integer, Integer> rewardCalculator;
+    private BinaryOperator<Integer> baseChipsCalculator;
+    private UnaryOperator<Integer> rewardCalculator;
 
     @BeforeEach
     void init() {
         baseChipsCalculator = (a, b) -> a * 10 + (b + 2) * 4;
-        rewardCalculator = Function.identity();
+        rewardCalculator = UnaryOperator.identity();
         this.factory = new BlindFactoryImpl(baseChipsCalculator, rewardCalculator);
     }
 

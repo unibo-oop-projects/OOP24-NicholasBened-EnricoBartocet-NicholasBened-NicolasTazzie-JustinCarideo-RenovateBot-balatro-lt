@@ -27,22 +27,7 @@ public interface CombinationCalculatorFactory {
      */
     CombinationCalculator threeOfAKindCalculator();
 
-    /**
-     * @return a CombinationCalculator for straight
-     */
-    CombinationCalculator straightCalculator();
-
-    /**
-     * @return a CombinationCalculator for flush
-     */
-    CombinationCalculator flushCalculator();
-
-    /**
-     * @return a CombinationCalculator for full house
-     */
-    CombinationCalculator fullHouseCalculator();
-
-    /**
+        /**
      * @return a CombinationCalculator for four of a kind
      */
     CombinationCalculator fourOfAKindCalculator();
@@ -50,10 +35,5 @@ public interface CombinationCalculatorFactory {
     /**
      * @return a CombinationCalculator for straight flush
      */
-    CombinationCalculator straightFlushCalculator();
-
-    /**
-     * @return a CombinationCalculator for royal flush
-     */
-    CombinationCalculator royalFlushCalculator();
+    CombinationCalculator fiveCardsCalculator();
 }

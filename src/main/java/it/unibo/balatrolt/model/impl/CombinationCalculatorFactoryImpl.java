@@ -1,17 +1,42 @@
 package it.unibo.balatrolt.model.impl;
 
+import java.util.List;
+import java.util.function.Function;
+
+import org.checkerframework.checker.units.qual.s;
+
 import it.unibo.balatrolt.model.api.CombinationCalculator;
 import it.unibo.balatrolt.model.api.CombinationCalculatorFactory;
+import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
  * @author Justin Carideo
  */
 public class CombinationCalculatorFactoryImpl implements CombinationCalculatorFactory {
 
+    private final CombinationTables table = new CombinationTables();
+
+    private Function<List<PlayableCard>,Integer> computeFiveCards() {
+        return hand -> SortingPlayableHelpers.sortingByRank(hand)
+            .stream()
+            .map(p -> table.convertRank(p.getRank()))
+            .reduce(0, (i, j) -> i + j);
+    }
+
+    private CombinationCalculator general(Function<List<PlayableCard>,Integer> fun) {
+        return (type, hand) -> {
+            final int value = fun.apply(hand);
+            final Pair<Integer,Double> comb = table.convertCombination(type);
+            return new CombinationImpl(value + comb.e1(), comb.e2(), type);
+        };
+    }
+
     @Override
     public CombinationCalculator highCardCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'highCardCalculator'");
+        return general(hand -> table.convertRank(
+            SortingPlayableHelpers.sortingByRank(hand)
+            .getLast()
+            .getRank()));
     }
 
     @Override
@@ -32,23 +57,6 @@ public class CombinationCalculatorFactoryImpl implements CombinationCalculatorFa
         throw new UnsupportedOperationException("Unimplemented method 'threeOfAKindCalculator'");
     }
 
-    @Override
-    public CombinationCalculator straightCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'straightCalculator'");
-    }
-
-    @Override
-    public CombinationCalculator flushCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'flushCalculator'");
-    }
-
-    @Override
-    public CombinationCalculator fullHouseCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'fullHouseCalculator'");
-    }
 
     @Override
     public CombinationCalculator fourOfAKindCalculator() {
@@ -57,15 +65,8 @@ public class CombinationCalculatorFactoryImpl implements CombinationCalculatorFa
     }
 
     @Override
-    public CombinationCalculator straightFlushCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'straightFlushCalculator'");
-    }
-
-    @Override
-    public CombinationCalculator royalFlushCalculator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'royalFlushCalculator'");
+    public CombinationCalculator fiveCardsCalculator() {
+        return general(computeFiveCards());
     }
 
 }

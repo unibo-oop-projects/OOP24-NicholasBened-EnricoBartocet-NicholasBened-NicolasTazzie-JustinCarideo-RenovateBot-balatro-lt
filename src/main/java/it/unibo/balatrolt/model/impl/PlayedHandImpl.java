@@ -31,13 +31,13 @@ public class PlayedHandImpl implements PlayedHand {
     private final List<PlayableCard> hand;
     private final CombinationRecognizerHelpers helper = new CombinationRecognizerHelpersImpl();
     private final CombinationCalculatorFactory factory = new CombinationCalculatorFactoryImpl();
-    private List<Pair<CombinationType, CombinationRecognizer>> combinationTable = new ArrayList<>();
+    private final List<Pair<CombinationType, CombinationRecognizer>> combinationTable = new ArrayList<>();
 
     /**
      * The constructor wraps the hand played.
      * @param hand
      */
-    public PlayedHandImpl(List<PlayableCard> hand) {
+    public PlayedHandImpl(final List<PlayableCard> hand) {
         this.hand = hand;
     }
 
@@ -60,8 +60,8 @@ public class PlayedHandImpl implements PlayedHand {
      */
     private void resetCombinations() {
         this.combinationTable.clear();
-        for (var type : CombinationType.values()) {
-            var recognizer = getRecognizer(type);
+        for (final var type : CombinationType.values()) {
+            final var recognizer = getRecognizer(type);
             combinationTable.add(new Pair<>(type, recognizer));
         }
     }
@@ -85,25 +85,25 @@ public class PlayedHandImpl implements PlayedHand {
      */
     private CombinationRecognizer getRecognizer(final CombinationType type) {
         switch (type) {
-            case HIGHCARD:
+            case HIGH_CARD:
                 return this.helper.highCardRecognizer();
             case PAIR:
                 return this.helper.pairRecognizer();
-            case TWOPAIR:
+            case TWO_PAIR:
                 return this.helper.twoPairRecognizer();
-            case THREEOFAKIND:
+            case THREE_OF_A_KIND:
                 return this.helper.threeOfAKindRecognizer();
             case STRAIGHT:
                 return this.helper.straightRecognizer();
             case FLUSH:
                 return this.helper.flushRecognizer();
-            case FULLHOUSE:
+            case FULL_HOUSE:
                 return this.helper.fullHouseRecognizer();
-            case FOUROFAKIND:
+            case FOUR_OF_A_KIND:
                 return this.helper.fourOfAKindRecognizer();
-            case STRAIGHTFLUSH:
+            case STRAIGHT_FLUSH:
                 return this.helper.straightFlushRecognizer();
-            case ROYALFLUSH:
+            case ROYAL_FLUSH:
                 return this.helper.royalFlushRecognizer();
             default:
                 throw new IllegalArgumentException("Invalid argument");
@@ -116,26 +116,18 @@ public class PlayedHandImpl implements PlayedHand {
      */
     private CombinationCalculator getCalculator(final CombinationType type) {
         switch (type) {
-            case HIGHCARD:
+            case HIGH_CARD:
                 return this.factory.highCardCalculator();
             case PAIR:
                 return this.factory.pairCalculator();
-            case TWOPAIR:
+            case TWO_PAIR:
                 return this.factory.twoPairCalculator();
-            case THREEOFAKIND:
+            case THREE_OF_A_KIND:
                 return this.factory.threeOfAKindCalculator();
-            case STRAIGHT:
-                return this.factory.straightCalculator();
-            case FLUSH:
-                return this.factory.flushCalculator();
-            case FULLHOUSE:
-                return this.factory.fullHouseCalculator();
-            case FOUROFAKIND:
+            case FOUR_OF_A_KIND:
                 return this.factory.fourOfAKindCalculator();
-            case STRAIGHTFLUSH:
-                return this.factory.straightFlushCalculator();
-            case ROYALFLUSH:
-                return this.factory.royalFlushCalculator();
+            case ROYAL_FLUSH, STRAIGHT, FLUSH, FULL_HOUSE, STRAIGHT_FLUSH:
+                return this.factory.fiveCardsCalculator();
             default:
                 throw new IllegalArgumentException("Invalid argument");
         }

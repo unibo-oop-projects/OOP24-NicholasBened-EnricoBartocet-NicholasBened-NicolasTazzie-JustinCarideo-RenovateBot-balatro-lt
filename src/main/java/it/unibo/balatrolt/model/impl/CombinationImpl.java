@@ -18,9 +18,9 @@ public class CombinationImpl implements Combination {
 
     private Multiplier multiplier;
     private BasePoints points;
-    private CombinationType type = CombinationType.HIGHCARD;
+    private CombinationType type = CombinationType.HIGH_CARD;
 
-    public CombinationImpl(int points, double multiplier, CombinationType t) {
+    public CombinationImpl(final int points, final double multiplier, final CombinationType t) {
         this.multiplier = new MultiplierImpl(multiplier);
         this.type = t;
         this.points = new BasePointsImpl(points);
@@ -37,7 +37,7 @@ public class CombinationImpl implements Combination {
     }
 
     @Override
-    public void applyModifier(Modifier mod) {
+    public void applyModifier(final Modifier mod) {
         if (mod.getBasePointMapper().isPresent()) {
             this.points = new BasePointsImpl(mod.getBasePointMapper().get().apply(this.points.basePoints()));
         }

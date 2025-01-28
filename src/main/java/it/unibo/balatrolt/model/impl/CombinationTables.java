@@ -17,9 +17,9 @@ public final class CombinationTables {
     private final Map<CombinationType,Pair<Integer,Double>> COMBINATION_TABLE;
 
     /**
-     * Private constructor for preventing the creation of a new instance
+     * Constructor for creating maps.
      */
-    private CombinationTables() {
+    public CombinationTables() {
         this.RANK_TABLE = Map.ofEntries(
             Map.entry(Rank.ACE, 11),
             Map.entry(Rank.TWO, 2),
@@ -36,16 +36,16 @@ public final class CombinationTables {
             Map.entry(Rank.KING, 10)
         );
         this.COMBINATION_TABLE = Map.ofEntries(
-            Map.entry(CombinationType.HIGHCARD, new Pair<>(5, 1.0)),
+            Map.entry(CombinationType.HIGH_CARD, new Pair<>(5, 1.0)),
             Map.entry(CombinationType.PAIR, new Pair<>(10, 2.0)),
-            Map.entry(CombinationType.TWOPAIR, new Pair<>(20, 2.0)),
-            Map.entry(CombinationType.THREEOFAKIND, new Pair<>(30, 3.0)),
+            Map.entry(CombinationType.TWO_PAIR, new Pair<>(20, 2.0)),
+            Map.entry(CombinationType.THREE_OF_A_KIND, new Pair<>(30, 3.0)),
             Map.entry(CombinationType.STRAIGHT, new Pair<>(30, 4.0)),
             Map.entry(CombinationType.FLUSH, new Pair<>(35, 4.0)),
-            Map.entry(CombinationType.FULLHOUSE, new Pair<>(40, 4.0)),
-            Map.entry(CombinationType.FOUROFAKIND, new Pair<>(60, 7.0)),
-            Map.entry(CombinationType.STRAIGHTFLUSH, new Pair<>(100, 8.0)),
-            Map.entry(CombinationType.ROYALFLUSH, new Pair<>(150, 8.0))
+            Map.entry(CombinationType.FULL_HOUSE, new Pair<>(40, 4.0)),
+            Map.entry(CombinationType.FOUR_OF_A_KIND, new Pair<>(60, 7.0)),
+            Map.entry(CombinationType.STRAIGHT_FLUSH, new Pair<>(100, 8.0)),
+            Map.entry(CombinationType.ROYAL_FLUSH, new Pair<>(150, 8.0))
         );
     }
 
@@ -62,7 +62,7 @@ public final class CombinationTables {
      * @param type combination
      * @return the couple points-multiplier
      */
-    public Pair<Integer,Double> convertCombination(CombinationType type) {
+    public Pair<Integer,Double> convertCombination(final CombinationType type) {
         return this.COMBINATION_TABLE.get(type);
     }
 
@@ -72,7 +72,7 @@ public final class CombinationTables {
      * @param rank
      * @return the couple points-multiplier
      */
-    public Integer convertRank(Rank rank) {
+    public Integer convertRank(final Rank rank) {
         return this.RANK_TABLE.get(rank);
     }
 }

@@ -26,38 +26,8 @@ public final class JokerImpl extends BaseSpecialCard implements Joker {
     }
 
     @Override
-    public Optional<Modifier> getModifier() {
+    protected Optional<Modifier> getInnerModifier() {
         return this.modifier;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + ((modifier == null) ? 0 : modifier.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final JokerImpl other = (JokerImpl) obj;
-        if (modifier == null) {
-            if (other.modifier != null) {
-                return false;
-            }
-        } else if (!modifier.equals(other.modifier) || !super.equals(obj)) {
-            return false;
-        }
-        return true;
     }
 
     @Override

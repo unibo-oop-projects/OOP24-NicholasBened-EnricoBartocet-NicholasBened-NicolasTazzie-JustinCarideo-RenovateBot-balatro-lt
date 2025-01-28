@@ -42,11 +42,11 @@ public interface JokerFactory {
      * @param bound bound to add
      * @return new Joker with the old's effect and with the specified bound
      */
-    public Joker addPlayableCardBoundToJoker(
-            final String newName,
-            final String newDescription,
-            final Joker j,
-            final Predicate<Set<PlayableCard>> bound);
+    Joker addPlayableCardBoundToJoker(
+            String newName,
+            String newDescription,
+            Joker j,
+            Predicate<Set<PlayableCard>> bound);
 
     /**
      * Creates a {@link Joker} by merging two exixting jokers.

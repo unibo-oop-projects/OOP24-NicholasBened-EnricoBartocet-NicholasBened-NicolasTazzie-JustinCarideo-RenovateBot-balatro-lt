@@ -1,34 +1,32 @@
 package it.unibo.balatrolt.model.impl.modifier;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 
 /**
- * A modifier which checks whether a condition is satisfied before suppling the modifying functions.
+ * A modifier which checks whether a condition is satisfied before suppling the
+ * modifying functions.
  * If the game status is not set it will always return the modifier.
+ *
  * @param <X> type of condition that should be satisfied.
  */
 public abstract class ConditionalModifier<X> extends ModifierDecorator {
-    private Optional<ModifierStatsSupplier> stats = Optional.absent();
     private final Predicate<X> condition;
 
     /**
      * @param condition to satisfy
-     * @param modifier base modifier
+     * @param modifier  base modifier
      */
-    protected ConditionalModifier(final Predicate<X> condition, final Modifier modifier) {
+    protected ConditionalModifier(final Modifier modifier, final Predicate<X> condition) {
         super(modifier);
-        this.condition = Objects.requireNonNull(condition, "Condition can't be null");
-    }
-
-    @Override
-    public final void setGameStatus(final ModifierStatsSupplier stats) {
-        this.stats = Optional.of(stats);
+        this.condition = checkNotNull(condition, "Condition can't be null");
     }
 
     /**
@@ -48,7 +46,7 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
 
     @Override
     @SuppressWarnings("unchecked")
-    public final boolean equals(Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -58,21 +56,30 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ConditionalModifier<X> other = (ConditionalModifier<X>) obj;
-        if (condition == null) {
-            if (other.condition != null) {
-                return false;
-            }
-        } else if (!condition.equals(other.condition)) {
-            return false;
-        }
-        return true;
+        final ConditionalModifier<X> other = (ConditionalModifier<X>) obj;
+        return Objects.equals(other.condition, this.condition);
+    }
+
+    @Override
+    protected final boolean canApplySingle() {
+        /*if (!super.getStats().isPresent()) {
+            return true;
+        }*/
+        return !super.getStats().isPresent() || checkCondition();
+    }
+
+    @Override
+    protected final Optional<UnaryOperator<Integer>> getInnerBasePointsFun() {
+        return Optional.absent();
+    }
+
+    @Override
+    protected final Optional<UnaryOperator<Double>> getInnerMultiplierFun() {
+        return Optional.absent();
     }
 
     /**
-     * @return current statistics
+     * @return true if the condition is satisfied
      */
-    protected final Optional<ModifierStatsSupplier> getStats() {
-        return this.stats;
-    }
+    protected abstract boolean checkCondition();
 }

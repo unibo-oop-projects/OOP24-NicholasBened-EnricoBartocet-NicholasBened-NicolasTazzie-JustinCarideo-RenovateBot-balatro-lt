@@ -33,7 +33,7 @@ public class GUI extends JFrame {
 
         //creating slots panel
         try {
-            final JPanel slotPanel = new SlotGUI().build();
+            final JPanel slotPanel = new SlotGUI().build(this.getSize());
             this.add(slotPanel);
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);

@@ -235,10 +235,10 @@ class TestModifier {
 
     private ModifierStatsSupplier getMockStatus() {
         return new ModifierStatsSupplierBuilderImpl()
-                .setCurrentCombination(Combination.CombinationType.TWOPAIR)
-                .setHoldingCards(getTestHoldingCards())
-                .setPlayedCards(getTestPlayedCard())
-                .setCurrentCurrency(CURRENT_CURRENCY)
+                .addCurrentCombination(Combination.CombinationType.TWOPAIR)
+                .addHoldingCards(getTestHoldingCards())
+                .addPlayedCards(getTestPlayedCard())
+                .addCurrentCurrency(CURRENT_CURRENCY)
                 .build();
     }
 }

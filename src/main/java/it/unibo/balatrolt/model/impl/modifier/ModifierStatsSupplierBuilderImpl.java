@@ -13,6 +13,10 @@ import it.unibo.balatrolt.model.api.PlayableCard;
  * Implementation of {@link ModifierStatsSupplier}.
  */
 public final class ModifierStatsSupplierBuilderImpl implements ModifierStatsBuilder {
+    private Optional<Set<PlayableCard>> playedCards = Optional.absent();
+    private Optional<Set<PlayableCard>> holdingCards = Optional.absent();
+    private Optional<Integer> currentCurrency = Optional.absent();
+    private Optional<CombinationType> currentCombination = Optional.absent();
     private final class ModifierStatsSupplierImpl implements ModifierStatsSupplier {
         @Override
         public Optional<Set<PlayableCard>> getHoldingCards() {
@@ -35,31 +39,26 @@ public final class ModifierStatsSupplierBuilderImpl implements ModifierStatsBuil
         }
     }
 
-    private Optional<Set<PlayableCard>> playedCards = Optional.absent();
-    private Optional<Set<PlayableCard>> holdingCards = Optional.absent();
-    private Optional<Integer> currentCurrency = Optional.absent();
-    private Optional<CombinationType> currentCombination = Optional.absent();
-
     @Override
-    public ModifierStatsBuilder setPlayedCards(final Set<PlayableCard> playedCards) {
+    public ModifierStatsBuilder addPlayedCards(final Set<PlayableCard> playedCards) {
         this.playedCards = Optional.of(playedCards);
         return this;
     }
 
     @Override
-    public ModifierStatsBuilder setHoldingCards(final Set<PlayableCard> holdingCards) {
+    public ModifierStatsBuilder addHoldingCards(final Set<PlayableCard> holdingCards) {
         this.holdingCards = Optional.of(holdingCards);
         return this;
     }
 
     @Override
-    public ModifierStatsBuilder setCurrentCurrency(final int currentCurrency) {
+    public ModifierStatsBuilder addCurrentCurrency(final int currentCurrency) {
         this.currentCurrency = Optional.of(currentCurrency);
         return this;
     }
 
     @Override
-    public ModifierStatsBuilder setCurrentCombination(final CombinationType combination) {
+    public ModifierStatsBuilder addCurrentCombination(final CombinationType combination) {
         this.currentCombination = Optional.of(combination);
         return this;
     }

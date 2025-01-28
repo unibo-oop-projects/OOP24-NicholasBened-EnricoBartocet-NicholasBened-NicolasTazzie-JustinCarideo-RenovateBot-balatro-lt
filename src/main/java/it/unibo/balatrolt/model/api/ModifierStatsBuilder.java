@@ -13,7 +13,7 @@ public interface ModifierStatsBuilder {
      * @param playedCards current played cards
      * @return builder state
      */
-    ModifierStatsBuilder setPlayedCards(Set<PlayableCard> playedCards);
+    ModifierStatsBuilder addPlayedCards(Set<PlayableCard> playedCards);
 
     /**
      * Sets current holding cards.
@@ -21,7 +21,7 @@ public interface ModifierStatsBuilder {
      * @param holdingCards current holding cards
      * @return builder state
      */
-    ModifierStatsBuilder setHoldingCards(Set<PlayableCard> holdingCards);
+    ModifierStatsBuilder addHoldingCards(Set<PlayableCard> holdingCards);
 
     /**
      * Sets current currency.
@@ -29,7 +29,7 @@ public interface ModifierStatsBuilder {
      * @param currentCurrency current currency
      * @return builder state
      */
-    ModifierStatsBuilder setCurrentCurrency(int currentCurrency);
+    ModifierStatsBuilder addCurrentCurrency(int currentCurrency);
 
     /**
      * Sets current combination.
@@ -37,7 +37,7 @@ public interface ModifierStatsBuilder {
      * @param combination current combination
      * @return builder state
      */
-    ModifierStatsBuilder setCurrentCombination(Combination.CombinationType combination);
+    ModifierStatsBuilder addCurrentCombination(Combination.CombinationType combination);
 
     /**
      * builds ModifierStats.

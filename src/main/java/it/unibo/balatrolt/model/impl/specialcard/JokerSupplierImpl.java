@@ -42,13 +42,13 @@ public final class JokerSupplierImpl implements JokerSupplier {
 
     private boolean checkContainsSuit(final Set<PlayableCard> cards, final Suit suit) {
         return cards.stream()
-            .map(c -> c.getSuit())
+            .map(PlayableCard::getSuit)
             .anyMatch(s -> s.equals(suit));
     }
 
     private boolean checkContainsRank(final Set<PlayableCard> cards, final Rank rank) {
         return cards.stream()
-            .map(c -> c.getRank())
+            .map(PlayableCard::getRank)
             .anyMatch(r -> r.equals(rank));
     }
 
@@ -61,7 +61,7 @@ public final class JokerSupplierImpl implements JokerSupplier {
                 "It doubles the current value of multipler without checking any condition",
                 new ModifierBuilderImpl()
                         .addMultiplierModifier(m -> {
-                            int toMultiply = 2;
+                            final int toMultiply = 2;
                             return m * toMultiply;
                         })
                         .build());

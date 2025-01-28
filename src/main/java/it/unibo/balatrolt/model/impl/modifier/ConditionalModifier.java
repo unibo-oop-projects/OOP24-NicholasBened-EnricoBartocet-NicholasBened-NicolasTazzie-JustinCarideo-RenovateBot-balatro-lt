@@ -52,22 +52,15 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
             return false;
         }
         final ConditionalModifier<X> other = (ConditionalModifier<X>) obj;
-        if (condition == null) {
-            if (other.condition != null) {
-                return false;
-            }
-        } else if (!condition.equals(other.condition)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(other.condition, this.condition);
     }
 
     @Override
     protected final boolean canApplySingle() {
-        if (!super.getStats().isPresent()) {
+        /*if (!super.getStats().isPresent()) {
             return true;
-        }
-        return checkCondition();
+        }*/
+        return !super.getStats().isPresent() || checkCondition();
     }
 
     /**

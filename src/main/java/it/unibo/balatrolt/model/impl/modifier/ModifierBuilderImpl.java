@@ -62,8 +62,11 @@ public final class ModifierBuilderImpl implements ModifierBuilder {
 
     @Override
     public ModifierBuilder merge(final Modifier toMerge) {
-        checkState(!this.toMerge.isPresent(), "merge() should be called once");
-        this.toMerge = Optional.of(toMerge);
+        if (!this.toMerge.isPresent()) {
+            this.toMerge = Optional.of(new ModifierFromExisting(Optional.absent(), Optional.absent(), toMerge));
+            return this;
+        }
+        this.toMerge = Optional.of(new DoubleModifier(this.toMerge.get(), toMerge));
         return this;
     }
 

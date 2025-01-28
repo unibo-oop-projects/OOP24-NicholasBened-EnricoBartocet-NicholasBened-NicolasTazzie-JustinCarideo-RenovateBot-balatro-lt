@@ -24,6 +24,7 @@ import it.unibo.balatrolt.model.api.PlayedHand;
  * - In the end it creates the right combination with a calculator
  * For more details check Combination class that simply acts as a
  * container of the result.
+ * @author Justin Carideo
  */
 public class PlayedHandImpl implements PlayedHand {
 

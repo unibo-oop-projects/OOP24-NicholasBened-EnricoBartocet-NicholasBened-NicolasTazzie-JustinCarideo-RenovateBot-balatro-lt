@@ -18,6 +18,7 @@ import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;
 
 /**
  * Class for testing SortingHelpers.
+ * @author Justin Carideo
  */
 public class TestSortingHelpers {
 

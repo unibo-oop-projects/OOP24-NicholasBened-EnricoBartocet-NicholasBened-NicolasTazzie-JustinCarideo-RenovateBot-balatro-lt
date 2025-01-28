@@ -9,6 +9,7 @@ import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 
 /**
  * Factory that creats recognizers.
+ * @author Justin Carideo
  */
 public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
 

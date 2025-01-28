@@ -9,6 +9,7 @@ import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 /**
  * This is an utility class that contains
  * conversition tables for evaluating combinations.
+ * @author Justin Carideo
  */
 public final class CombinationTables {
 

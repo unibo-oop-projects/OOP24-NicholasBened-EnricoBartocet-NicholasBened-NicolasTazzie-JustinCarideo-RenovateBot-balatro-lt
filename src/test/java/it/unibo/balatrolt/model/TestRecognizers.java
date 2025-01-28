@@ -15,6 +15,9 @@ import it.unibo.balatrolt.model.impl.CombinationRecognizerHelpersImpl;
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.PlayableCardImpl;
 
+/**
+ * @author Justin Carideo
+ */
 public class TestRecognizers {
 
     private final CombinationRecognizerHelpersImpl helper = new CombinationRecognizerHelpersImpl();

@@ -3,6 +3,9 @@ package it.unibo.balatrolt.model.impl;
 import it.unibo.balatrolt.model.api.CombinationCalculator;
 import it.unibo.balatrolt.model.api.CombinationCalculatorFactory;
 
+/**
+ * @author Justin Carideo
+ */
 public class CombinationCalculatorFactoryImpl implements CombinationCalculatorFactory {
 
     @Override

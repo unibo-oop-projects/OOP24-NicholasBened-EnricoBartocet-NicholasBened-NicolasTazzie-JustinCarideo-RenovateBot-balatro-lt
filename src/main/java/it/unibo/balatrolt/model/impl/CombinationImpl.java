@@ -12,6 +12,7 @@ import it.unibo.balatrolt.model.api.Multiplier;
  * the hand played, check PlayedHandImpl for more details) and a
  * multiplier (multiplier scored with the combination).
  * This class can be modify only with applyModifier method.
+ * @author Justin Carideo
  */
 public class CombinationImpl implements Combination {
 

@@ -7,8 +7,15 @@ import it.unibo.balatrolt.model.api.CombinationRecognizer;
 import it.unibo.balatrolt.model.api.CombinationRecognizerHelpers;
 import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 
+/**
+ * Factory that creats recognizers.
+ */
 public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
 
+    private static final int FULL_HAND = 5;
+    private static final int THREE_SIZE = 3;
+    private static final int FOUR_SIZE = 4;
+    private static final int PAIR_SIZE = 2;
     private final List<Rank> ranks = List.of(Rank.values());
 
     @Override
@@ -18,45 +25,44 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
 
     @Override
     public CombinationRecognizer pairRecognizer() {
-        return hand -> hand.size() >= 2L &&
+        return hand -> hand.size() >= PAIR_SIZE &&
             hand.stream()
                 .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .anyMatch(e -> e.getValue() == 2L);
+                .anyMatch(e -> e.getValue() == PAIR_SIZE);
     }
 
     @Override
     public CombinationRecognizer twoPairRecognizer() {
-        return hand -> hand.size() >= 4L &&
+        return hand -> hand.size() >= FOUR_SIZE &&
             hand.stream()
             .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
             .entrySet()
             .stream()
-            .filter(e -> e.getValue() == 2L)
-            .toList().size() == 2L;
+            .filter(e -> e.getValue() == PAIR_SIZE)
+            .toList().size() == PAIR_SIZE;
     }
 
     @Override
     public CombinationRecognizer threeOfAKindRecognizer() {
-        return hand -> hand.size() >= 3L  &&
+        return hand -> hand.size() >= THREE_SIZE  &&
             hand.stream()
                 .collect(Collectors.groupingBy(p -> p.getRank(), Collectors.counting()))
                 .entrySet()
                 .stream()
-                .anyMatch(e -> e.getValue() == 3L);
+                .anyMatch(e -> e.getValue() == THREE_SIZE);
     }
 
     @Override
     public CombinationRecognizer straightRecognizer() {
         return hand -> {
-            if (hand.size() != 5) {
+            if (hand.size() != FULL_HAND) {
                 return false;
             }
             List<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
                 .stream()
                 .map(p -> p.getRank())
-                .distinct()
                 .sorted()
                 .toList();
             if (sorted.equals(List.of(Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.ACE))) {
@@ -78,7 +84,7 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
             .collect(Collectors.groupingBy(p -> p.getSuit(), Collectors.counting()))
             .entrySet()
             .stream()
-            .anyMatch(e -> e.getValue() == 5);
+            .anyMatch(e -> e.getValue() == FULL_HAND);
     }
 
     @Override
@@ -94,7 +100,7 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
                 .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .anyMatch(e -> e.getValue() == 4L);
+                .anyMatch(e -> e.getValue() == FOUR_SIZE);
     }
 
     @Override

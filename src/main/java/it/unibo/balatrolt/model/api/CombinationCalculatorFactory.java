@@ -7,23 +7,53 @@ package it.unibo.balatrolt.model.api;
  */
 public interface CombinationCalculatorFactory {
 
+    /**
+     * @return a CombinationCalculator for high card
+     */
     CombinationCalculator highCardCalculator();
 
+    /**
+     * @return a CombinationCalculator for pair
+     */
     CombinationCalculator pairCalculator();
 
+    /**
+     * @return a CombinationCalculator for two pair
+     */
     CombinationCalculator twoPairCalculator();
 
+    /**
+     * @return a CombinationCalculator for three of a kind
+     */
     CombinationCalculator threeOfAKindCalculator();
 
+    /**
+     * @return a CombinationCalculator for straight
+     */
     CombinationCalculator straightCalculator();
 
+    /**
+     * @return a CombinationCalculator for flush
+     */
     CombinationCalculator flushCalculator();
 
+    /**
+     * @return a CombinationCalculator for full house
+     */
     CombinationCalculator fullHouseCalculator();
 
+    /**
+     * @return a CombinationCalculator for four of a kind
+     */
     CombinationCalculator fourOfAKindCalculator();
 
+    /**
+     * @return a CombinationCalculator for straight flush
+     */
     CombinationCalculator straightFlushCalculator();
 
+    /**
+     * @return a CombinationCalculator for royal flush
+     */
     CombinationCalculator royalFlushCalculator();
 }

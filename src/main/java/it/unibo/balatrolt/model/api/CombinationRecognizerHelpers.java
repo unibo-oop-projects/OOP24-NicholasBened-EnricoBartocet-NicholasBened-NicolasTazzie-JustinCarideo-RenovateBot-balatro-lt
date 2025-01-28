@@ -8,52 +8,52 @@ package it.unibo.balatrolt.model.api;
 public interface CombinationRecognizerHelpers {
 
     /**
-     * @return a recognizer
+     * @return an high card recognizer
      */
     CombinationRecognizer highCardRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a pair recognizer
      */
     CombinationRecognizer pairRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a two pair recognizer
      */
     CombinationRecognizer twoPairRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a three of a kind recognizer
      */
     CombinationRecognizer threeOfAKindRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a straight recognizer
      */
     CombinationRecognizer straightRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a flush recognizer
      */
     CombinationRecognizer flushRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a full house recognizer
      */
     CombinationRecognizer fullHouseRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a four of a kind recognizer
      */
     CombinationRecognizer fourOfAKindRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a straight recognizer
      */
     CombinationRecognizer straightFlushRecognizer();
 
     /**
-     * @return a recognizer
+     * @return a royal flush recognizer
      */
     CombinationRecognizer royalFlushRecognizer();
 }

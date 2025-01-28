@@ -48,14 +48,29 @@ public final class CombinationTables {
         );
     }
 
+    /**
+     * @return the combination table
+     */
     public Map<CombinationType,Pair<Integer,Double>> getCombinationTable() {
         return Collections.unmodifiableMap(this.COMBINATION_TABLE);
     }
 
+    /**
+     * Given the type of combination, it returns
+     * the pair points-multiplier assigned in the table.
+     * @param type combination
+     * @return the couple points-multiplier
+     */
     public Pair<Integer,Double> convertCombination(CombinationType type) {
         return this.COMBINATION_TABLE.get(type);
     }
 
+    /**
+     * Given the rank, it returns
+     * amount of points assigned in the table.
+     * @param rank
+     * @return the couple points-multiplier
+     */
     public Integer convertRank(Rank rank) {
         return this.RANK_TABLE.get(rank);
     }

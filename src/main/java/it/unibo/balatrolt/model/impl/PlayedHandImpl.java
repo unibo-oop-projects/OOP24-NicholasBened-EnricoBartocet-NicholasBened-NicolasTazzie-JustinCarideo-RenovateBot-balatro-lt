@@ -13,6 +13,18 @@ import it.unibo.balatrolt.model.api.Combination.CombinationType;
 import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.PlayedHand;
 
+/**
+ * Implementation the played hand.
+ * Simply it wraps a list of PlayableCard and it recognize
+ * what type of combination has the player done.
+ * For evaluating the combination it goes in these steps:
+ * - it creates a list for all combination types
+ * - then maps only avaiable combinations
+ * - once obtained the mapped list, it takes the last one, in other words the best
+ * - In the end it creates the right combination with a calculator
+ * For more details check Combination class that simply acts as a
+ * container of the result.
+ */
 public class PlayedHandImpl implements PlayedHand {
 
     private final List<PlayableCard> hand;
@@ -20,6 +32,10 @@ public class PlayedHandImpl implements PlayedHand {
     private final CombinationCalculatorFactory factory = new CombinationCalculatorFactoryImpl();
     private List<Pair<CombinationType, CombinationRecognizer>> combinationTable = new ArrayList<>();
 
+    /**
+     * The constructor wraps the hand played.
+     * @param hand
+     */
     public PlayedHandImpl(List<PlayableCard> hand) {
         this.hand = hand;
     }
@@ -32,10 +48,15 @@ public class PlayedHandImpl implements PlayedHand {
     @Override
     public Combination evaluateCombination() {
         resetCombinations();
-        CombinationType bestCombination = evaluateBest();
+        final CombinationType bestCombination = evaluateBest();
         return getCalculator(bestCombination).compute(bestCombination, hand);
     }
 
+    /**
+     * This method restarts the combination list,
+     * where each combination type is going to checked
+     * whether is an avaiable combination for the hand played.
+     */
     private void resetCombinations() {
         this.combinationTable.clear();
         for (var type : CombinationType.values()) {
@@ -44,6 +65,9 @@ public class PlayedHandImpl implements PlayedHand {
         }
     }
 
+    /**
+     * @return the best combination scored
+     */
     private CombinationType evaluateBest() {
         return combinationTable.stream()
             .map(p -> new Pair<>(p.e1(), p.e2().recognize(hand)))
@@ -51,7 +75,14 @@ public class PlayedHandImpl implements PlayedHand {
             .toList().getLast().e1();
     }
 
-    private CombinationRecognizer getRecognizer(CombinationType type) {
+    /**
+     * This is a support method for recognizing the right combination.
+     * Given the type of the combination, it returns the right recognizer,
+     * produced by the factory CombinationFactoryHelpers implementation.
+     * @param type of the combination
+     * @return the right recognizer
+     */
+    private CombinationRecognizer getRecognizer(final CombinationType type) {
         switch (type) {
             case HIGHCARD:
                 return this.helper.highCardRecognizer();
@@ -78,7 +109,11 @@ public class PlayedHandImpl implements PlayedHand {
         }
     }
 
-    private CombinationCalculator getCalculator(CombinationType type) {
+    /**
+     * @param type of combination
+     * @return the right calculator for the given combination
+     */
+    private CombinationCalculator getCalculator(final CombinationType type) {
         switch (type) {
             case HIGHCARD:
                 return this.factory.highCardCalculator();

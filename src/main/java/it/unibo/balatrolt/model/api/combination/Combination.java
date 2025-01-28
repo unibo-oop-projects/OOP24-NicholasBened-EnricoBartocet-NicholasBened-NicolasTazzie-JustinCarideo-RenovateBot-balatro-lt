@@ -1,4 +1,6 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.combination;
+
+import it.unibo.balatrolt.model.api.Modifier;
 
 /*
  * Interface that models the Combination played.

@@ -1,6 +1,6 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.combination;
 
-import it.unibo.balatrolt.model.api.BasePoints;
+import it.unibo.balatrolt.model.api.combination.BasePoints;
 
 /**
  * Immutable classes for representing BasePoints.

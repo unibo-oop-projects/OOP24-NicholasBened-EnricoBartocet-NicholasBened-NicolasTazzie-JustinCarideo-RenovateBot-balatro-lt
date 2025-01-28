@@ -1,9 +1,9 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.combination;
 
-import it.unibo.balatrolt.model.api.BasePoints;
-import it.unibo.balatrolt.model.api.Combination;
 import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.Multiplier;
+import it.unibo.balatrolt.model.api.combination.BasePoints;
+import it.unibo.balatrolt.model.api.combination.Combination;
+import it.unibo.balatrolt.model.api.combination.Multiplier;
 
 /**
  * Classes that represents the concept of combination.

@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.combination;
 
 /**
  * Interface modelling the concept of creating CombinationRecognizer classes.

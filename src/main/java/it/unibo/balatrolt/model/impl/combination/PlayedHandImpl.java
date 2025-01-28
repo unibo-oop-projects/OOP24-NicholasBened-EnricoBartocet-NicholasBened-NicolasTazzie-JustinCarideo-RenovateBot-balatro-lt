@@ -1,17 +1,18 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.combination;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import it.unibo.balatrolt.model.api.Combination;
-import it.unibo.balatrolt.model.api.CombinationCalculator;
-import it.unibo.balatrolt.model.api.CombinationCalculatorFactory;
-import it.unibo.balatrolt.model.api.CombinationRecognizer;
-import it.unibo.balatrolt.model.api.CombinationRecognizerHelpers;
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.PlayedHand;
+import it.unibo.balatrolt.model.api.combination.Combination;
+import it.unibo.balatrolt.model.api.combination.CombinationCalculator;
+import it.unibo.balatrolt.model.api.combination.CombinationCalculatorFactory;
+import it.unibo.balatrolt.model.api.combination.CombinationRecognizer;
+import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
+import it.unibo.balatrolt.model.api.combination.PlayedHand;
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * Implementation the played hand.

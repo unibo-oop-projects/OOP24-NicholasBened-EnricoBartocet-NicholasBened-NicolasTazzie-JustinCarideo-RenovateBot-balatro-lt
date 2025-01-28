@@ -1,6 +1,8 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.combination;
 
 import java.util.List;
+
+import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
  * Interface that model a recognizer for cards.

@@ -1,11 +1,12 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.combination;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import it.unibo.balatrolt.model.api.CombinationRecognizer;
-import it.unibo.balatrolt.model.api.CombinationRecognizerHelpers;
 import it.unibo.balatrolt.model.api.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.combination.CombinationRecognizer;
+import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
+import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;
 
 /**
  * Factory that creats recognizers.

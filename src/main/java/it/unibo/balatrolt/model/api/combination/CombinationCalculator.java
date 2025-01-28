@@ -1,8 +1,9 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.combination;
 
 import java.util.List;
 
-import it.unibo.balatrolt.model.api.Combination.CombinationType;
+import it.unibo.balatrolt.model.api.PlayableCard;
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * Interface modelling the concept of creating

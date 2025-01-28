@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.PlayableCard.Suit;
-import it.unibo.balatrolt.model.impl.CombinationRecognizerHelpersImpl;
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.PlayableCardImpl;
+import it.unibo.balatrolt.model.impl.combination.CombinationRecognizerHelpersImpl;
 
 /**
  * @author Justin Carideo

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import it.unibo.balatrolt.model.api.Combination;
+import it.unibo.balatrolt.model.api.CombinationCalculator;
+import it.unibo.balatrolt.model.api.CombinationCalculatorFactory;
 import it.unibo.balatrolt.model.api.CombinationRecognizer;
 import it.unibo.balatrolt.model.api.CombinationRecognizerHelpers;
 import it.unibo.balatrolt.model.api.Combination.CombinationType;
@@ -15,6 +17,7 @@ public class PlayedHandImpl implements PlayedHand {
 
     private final List<PlayableCard> hand;
     private final CombinationRecognizerHelpers helper = new CombinationRecognizerHelpersImpl();
+    private final CombinationCalculatorFactory factory = new CombinationCalculatorFactoryImpl();
     private List<Pair<CombinationType, CombinationRecognizer>> combinationTable = new ArrayList<>();
 
     public PlayedHandImpl(List<PlayableCard> hand) {
@@ -30,14 +33,13 @@ public class PlayedHandImpl implements PlayedHand {
     public Combination evaluateCombination() {
         resetCombinations();
         CombinationType bestCombination = evaluateBest();
-        //TODO : Insert Calculator
-        return new CombinationImpl(0, 0, bestCombination);
+        return getCalculator(bestCombination).compute(bestCombination, hand);
     }
 
     private void resetCombinations() {
         this.combinationTable.clear();
         for (var type : CombinationType.values()) {
-            var recognizer = giveRecognizer(type);
+            var recognizer = getRecognizer(type);
             combinationTable.add(new Pair<>(type, recognizer));
         }
     }
@@ -49,7 +51,7 @@ public class PlayedHandImpl implements PlayedHand {
             .toList().getLast().e1();
     }
 
-    private CombinationRecognizer giveRecognizer(CombinationType type) {
+    private CombinationRecognizer getRecognizer(CombinationType type) {
         switch (type) {
             case HIGHCARD:
                 return this.helper.highCardRecognizer();
@@ -71,6 +73,33 @@ public class PlayedHandImpl implements PlayedHand {
                 return this.helper.straightFlushRecognizer();
             case ROYALFLUSH:
                 return this.helper.royalFlushRecognizer();
+            default:
+                throw new IllegalArgumentException("Invalid argument");
+        }
+    }
+
+    private CombinationCalculator getCalculator(CombinationType type) {
+        switch (type) {
+            case HIGHCARD:
+                return this.factory.highCardCalculator();
+            case PAIR:
+                return this.factory.pairCalculator();
+            case TWOPAIR:
+                return this.factory.twoPairCalculator();
+            case THREEOFAKIND:
+                return this.factory.threeOfAKindCalculator();
+            case STRAIGHT:
+                return this.factory.straightCalculator();
+            case FLUSH:
+                return this.factory.flushCalculator();
+            case FULLHOUSE:
+                return this.factory.fullHouseCalculator();
+            case FOUROFAKIND:
+                return this.factory.fourOfAKindCalculator();
+            case STRAIGHTFLUSH:
+                return this.factory.straightFlushCalculator();
+            case ROYALFLUSH:
+                return this.factory.royalFlushCalculator();
             default:
                 throw new IllegalArgumentException("Invalid argument");
         }

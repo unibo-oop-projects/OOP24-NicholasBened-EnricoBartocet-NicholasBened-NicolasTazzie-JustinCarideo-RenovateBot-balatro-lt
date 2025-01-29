@@ -45,6 +45,11 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
         return this.jokers.get(innerListIndex());
     }
 
+    @Override
+    public List<Joker> getJokerList() {
+        return List.copyOf(this.jokers);
+    }
+
     private int innerListIndex() {
         return r.nextInt(this.jokers.size());
     }
@@ -65,7 +70,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
      * The doubler.
      * @return It doubles the current value of multipler without checking any condition
      */
-    public Joker doubler() {
+    private Joker doubler() {
         return factory.withModifierAndRandomPrice("The doubler",
                 "It doubles the current value of multipler without checking any condition",
                 new ModifierBuilderImpl()
@@ -80,7 +85,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
      * The diamond doubler.
      * @return It doubles the current value of multipler if one of the played cards has suit diamond
      */
-    public Joker diamondDoubler() {
+    private Joker diamondDoubler() {
         return factory.addPlayableCardBoundToJoker("The diamond doubler",
                 "It doubles the current value of multipler if one of "
                 + "the played cards has suit diamond",
@@ -93,7 +98,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
      * The heart doubler.
      * @return It doubles the current value of multipler if one of the played cards has suit heart
      */
-    public Joker heartDoubler() {
+    private Joker heartDoubler() {
         return factory.addPlayableCardBoundToJoker("The heart doubler",
                 "It doubles the current value of multipler if one of "
                 + "the played cards has suit heart",
@@ -106,7 +111,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
      * The donour.
      * @return It adds 50 base points
      */
-    public Joker donour() {
+    private Joker donour() {
         return factory.withModifierAndRandomPrice(
             "The donour",
             "It adds 50 base points",
@@ -121,7 +126,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
      * The king donour.
      * @return It adds 50 base points if the played cards contains a king
      */
-    public Joker kingDonour() {
+    private Joker kingDonour() {
         return this.factory.addPlayableCardBoundToJoker(
             "The king donour",
             "It adds 50 base points if the played cards contains a king",
@@ -134,7 +139,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
      * The seventh donour.
      * @return It adds 50 base points if the played cards contains a seven
      */
-    public Joker seventhDonour() {
+    private Joker seventhDonour() {
         return this.factory.addPlayableCardBoundToJoker(
             "The seventh donour",
             "It adds 50 base points if the played cards contains a seven",

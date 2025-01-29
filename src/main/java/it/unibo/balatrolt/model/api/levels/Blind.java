@@ -1,5 +1,10 @@
 package it.unibo.balatrolt.model.api.levels;
 
+import java.util.List;
+
+import it.unibo.balatrolt.model.api.PlayableCard;
+import it.unibo.balatrolt.model.api.combination.PlayedHand;
+
 /**
  * Interface used to represent a Blind.
  */
@@ -40,4 +45,16 @@ public interface Blind {
      * @return the amount of the reward in case the Blind will be defeated
      */
     int getReward();
+
+    List<PlayableCard> getRemainingDeckCards();
+
+    List<PlayableCard> getHandCards();
+
+    void playHand(PlayedHand hand);
+
+    void discardPlayableCards(List<PlayableCard> toDiscard);
+
+    int getRemainingHands();
+
+    int getRemainingDiscards();
 }

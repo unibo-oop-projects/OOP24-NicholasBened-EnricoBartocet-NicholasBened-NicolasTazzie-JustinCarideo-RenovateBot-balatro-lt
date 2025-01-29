@@ -21,6 +21,8 @@ import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
 public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
     private static final int DONOUR_ADDER = 50;
     private final List<Joker> jokers;
+    private final JokerFactory factory = new JokerFactoryImpl();
+    private final Random r = new Random();
 
     public JokerSupplierImpl() {
         this.jokers = List.of(
@@ -33,9 +35,6 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
         );
     }
 
-    private final JokerFactory factory = new JokerFactoryImpl();
-    private final Random r = new Random();
-
     @Override
     public Joker get() {
         return this.getRandom();
@@ -43,7 +42,11 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
 
     @Override
     public Joker getRandom() {
-        return this.jokers.get(r.nextInt(this.jokers.size()));
+        return this.jokers.get(innerListIndex());
+    }
+
+    private int innerListIndex() {
+        return r.nextInt(this.jokers.size());
     }
 
     private boolean checkContainsSuit(final Set<PlayableCard> cards, final Suit suit) {

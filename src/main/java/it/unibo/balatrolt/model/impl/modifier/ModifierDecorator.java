@@ -1,6 +1,7 @@
 package it.unibo.balatrolt.model.impl.modifier;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import java.util.function.UnaryOperator;
 
@@ -16,6 +17,8 @@ import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 public abstract class ModifierDecorator implements Modifier {
     private Optional<ModifierStatsSupplier> stats = Optional.absent();
     private final Modifier base;
+    private boolean multiplierMapperReady;
+    private boolean basePointsMapperReady;
 
     /**
      * @param modifier base modifier
@@ -26,6 +29,9 @@ public abstract class ModifierDecorator implements Modifier {
 
     @Override
     public final Optional<UnaryOperator<Double>> getMultiplierMapper() {
+        checkState(this.multiplierMapperReady, "Inconsistent state: game status should"
+        + " be updated before getting the multiplier mapper");
+        this.multiplierMapperReady = false;
         return this.canApply()
             ? mergeOperatorsMapper(this.base.getMultiplierMapper(), this.getInnerMultiplierFun())
             : Optional.absent();
@@ -33,6 +39,9 @@ public abstract class ModifierDecorator implements Modifier {
 
     @Override
     public final Optional<UnaryOperator<Integer>> getBasePointMapper() {
+        checkState(this.basePointsMapperReady, "Inconsistent state: game status should"
+        + " be updated before getting the basePoints mapper");
+        this.basePointsMapperReady = false;
         return this.canApply()
             ? mergeOperatorsMapper(this.base.getBasePointMapper(), this.getInnerBasePointsFun())
             : Optional.absent();
@@ -40,6 +49,8 @@ public abstract class ModifierDecorator implements Modifier {
 
     @Override
     public final void setGameStatus(final ModifierStatsSupplier stats) {
+        this.basePointsMapperReady = true;
+        this.multiplierMapperReady = true;
         base.setGameStatus(stats);
         this.stats = Optional.fromNullable(stats);
     }

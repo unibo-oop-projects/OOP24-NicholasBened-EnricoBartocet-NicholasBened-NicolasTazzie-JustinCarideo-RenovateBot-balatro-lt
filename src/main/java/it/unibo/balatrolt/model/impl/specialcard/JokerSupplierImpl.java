@@ -66,66 +66,51 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             .anyMatch(r -> r.equals(rank));
     }
 
-    /**
-     * The doubler.
-     * @return It doubles the current value of multipler without checking any condition
-     */
     private Joker doubler() {
-        return factory.withModifierAndRandomPrice("The doubler",
-                "It doubles the current value of multipler without checking any condition",
-                new ModifierBuilderImpl()
-                        .addMultiplierModifier(m -> {
-                            final int toMultiply = 2;
-                            return m * toMultiply;
-                        })
-                        .build());
+        return factory.withModifierAndRandomPrice(
+            "The doubler",
+            "It doubles the current value of multipler without checking any condition",
+            new ModifierBuilderImpl()
+                    .addMultiplierModifier(m -> {
+                        final int toMultiply = 2;
+                        return m * toMultiply;
+                    })
+                    .build()
+            );
     }
 
-    /**
-     * The diamond doubler.
-     * @return It doubles the current value of multipler if one of the played cards has suit diamond
-     */
     private Joker diamondDoubler() {
-        return factory.addPlayableCardBoundToJoker("The diamond doubler",
-                "It doubles the current value of multipler if one of "
-                + "the played cards has suit diamond",
-                doubler(),
-                cards -> checkContainsSuit(cards, Suit.DIAMONDS)
-            );
+        return factory.addPlayableCardBoundToJoker(
+            "The diamond doubler",
+            "It doubles the current value of multipler if one of "
+            + "the played cards has suit diamond",
+            doubler(),
+            cards -> checkContainsSuit(cards, Suit.DIAMONDS)
+        );
     }
 
-    /**
-     * The heart doubler.
-     * @return It doubles the current value of multipler if one of the played cards has suit heart
-     */
     private Joker heartDoubler() {
-        return factory.addPlayableCardBoundToJoker("The heart doubler",
-                "It doubles the current value of multipler if one of "
-                + "the played cards has suit heart",
-                this.doubler(),
-                cards -> checkContainsSuit(cards, Suit.HEARTS)
-            );
+        return factory.addPlayableCardBoundToJoker(
+            "The heart doubler",
+            "It doubles the current value of multipler if one of "
+            + "the played cards has suit heart",
+            this.doubler(),
+            cards -> checkContainsSuit(cards, Suit.HEARTS)
+        );
     }
 
-    /**
-     * The donour.
-     * @return It adds 50 base points
-     */
     private Joker donour() {
         return factory.withModifierAndRandomPrice(
-            "The donour",
-            "It adds 50 base points",
-            new ModifierBuilderImpl()
-                .addBasePointsModifier(p -> {
-                    return p + DONOUR_ADDER;
-                })
-                .build());
+        "The donour",
+        "It adds 50 base points",
+        new ModifierBuilderImpl()
+            .addBasePointsModifier(p -> {
+                return p + DONOUR_ADDER;
+            })
+            .build()
+        );
     }
 
-    /**
-     * The king donour.
-     * @return It adds 50 base points if the played cards contains a king
-     */
     private Joker kingDonour() {
         return this.factory.addPlayableCardBoundToJoker(
             "The king donour",
@@ -135,10 +120,6 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
         );
     }
 
-    /**
-     * The seventh donour.
-     * @return It adds 50 base points if the played cards contains a seven
-     */
     private Joker seventhDonour() {
         return this.factory.addPlayableCardBoundToJoker(
             "The seventh donour",

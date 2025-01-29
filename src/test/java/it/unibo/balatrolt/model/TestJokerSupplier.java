@@ -41,9 +41,11 @@ final class TestJokerSupplier {
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         final Modifier mod = getMod(j, stats);
-        assertFalse(mod.getBasePointMapper().isPresent());
-        assertTrue(mod.getMultiplierMapper().isPresent());
-        assertEquals(m * DOUBLER_MUL, mod.getMultiplierMapper().get().apply(m));
+        var bp_mapper = mod.getBasePointMapper();
+        var mul_mapper = mod.getMultiplierMapper();
+        assertFalse(bp_mapper.isPresent());
+        assertTrue(mul_mapper.isPresent());
+        assertEquals(m * DOUBLER_MUL, mul_mapper.get().apply(m));
     }
 
     @Test
@@ -53,14 +55,18 @@ final class TestJokerSupplier {
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         Modifier mod = getMod(j, stats);
-        assertFalse(mod.getBasePointMapper().isPresent());
-        assertTrue(mod.getMultiplierMapper().isPresent());
-        assertEquals(m * DOUBLER_MUL, mod.getMultiplierMapper().get().apply(m));
+        var bp_mapper = mod.getBasePointMapper();
+        var mul_mapper = mod.getMultiplierMapper();
+        assertFalse(bp_mapper.isPresent());
+        assertTrue(mul_mapper.isPresent());
+        assertEquals(m * DOUBLER_MUL, mul_mapper.get().apply(m));
         j = js.getJokerList().get(HEART_DOUBLER_INDEX); // heart is not present
         assertTrue(j.getModifier().isPresent());
         mod = getMod(j, stats);
-        assertFalse(mod.getBasePointMapper().isPresent());
-        assertFalse(mod.getMultiplierMapper().isPresent());
+        bp_mapper = mod.getBasePointMapper();
+        mul_mapper = mod.getMultiplierMapper();
+        assertFalse(bp_mapper.isPresent());
+        assertFalse(mul_mapper.isPresent());
     }
 
     @Test
@@ -70,9 +76,11 @@ final class TestJokerSupplier {
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         final Modifier mod = getMod(j, stats);
-        assertTrue(mod.getBasePointMapper().isPresent());
-        assertFalse(mod.getMultiplierMapper().isPresent());
-        assertEquals(bp + DONOUR_BP, mod.getBasePointMapper().get().apply(bp));
+        var bp_mapper = mod.getBasePointMapper();
+        var mul_mapper = mod.getMultiplierMapper();
+        assertTrue(bp_mapper.isPresent());
+        assertFalse(mul_mapper.isPresent());
+        assertEquals(bp + DONOUR_BP, bp_mapper.get().apply(bp));
     }
 
     @Test
@@ -82,13 +90,17 @@ final class TestJokerSupplier {
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         Modifier mod = getMod(j, stats);
-        assertTrue(mod.getBasePointMapper().isPresent());
-        assertFalse(mod.getMultiplierMapper().isPresent());
-        assertEquals(bp + DONOUR_BP, mod.getBasePointMapper().get().apply(bp));
+        var bp_mapper = mod.getBasePointMapper();
+        var mul_mapper = mod.getMultiplierMapper();
+        assertTrue(bp_mapper.isPresent());
+        assertFalse(mul_mapper.isPresent());
+        assertEquals(bp + DONOUR_BP, bp_mapper.get().apply(bp));
         j = js.getJokerList().get(SEVENTH_DONOUR_INDEX); // seven is not present
         mod = getMod(j, stats);
-        assertFalse(mod.getBasePointMapper().isPresent());
-        assertFalse(mod.getMultiplierMapper().isPresent());
+        bp_mapper = mod.getBasePointMapper();
+        mul_mapper = mod.getMultiplierMapper();
+        assertFalse(bp_mapper.isPresent());
+        assertFalse(mul_mapper.isPresent());
     }
 
     private Modifier getMod(final Joker j, final ModifierStatsSupplier stats) {

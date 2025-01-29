@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.model.impl.specialcard;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -18,14 +19,20 @@ import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
  * @author Nicolas Tazzieri - nicolas.tazzieri@studio.unibo.it
  */
 public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
-    private static final int DB = 0;
-    private static final int D_DB = 1;
-    private static final int D = 2;
-    private static final int K_D = 3;
-    private static final int H_D = 4;
-    private static final int S_D = 5;
     private static final int DONOUR_ADDER = 50;
-    private static final int NUM_JOKERS = 6;
+    private final List<Joker> jokers;
+
+    public JokerSupplierImpl() {
+        this.jokers = List.of(
+            this.doubler(),
+            this.diamondDoubler(),
+            this.donour(),
+            this.kingDonour(),
+            this.heartDoubler(),
+            this.seventhDonour()
+        );
+    }
+
     private final JokerFactory factory = new JokerFactoryImpl();
     private final Random r = new Random();
 
@@ -36,15 +43,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
 
     @Override
     public Joker getRandom() {
-        return switch (r.nextInt(NUM_JOKERS)) {
-            case DB -> this.doubler();
-            case D_DB -> this.diamondDoubler();
-            case D -> this.donour();
-            case K_D -> this.kingDonour();
-            case H_D -> this.heartDoubler();
-            case S_D -> this.seventhDonour();
-            default -> factory.standardJoker("The bored joker", "It does nothing");
-        };
+        return this.jokers.get(r.nextInt(this.jokers.size()));
     }
 
     private boolean checkContainsSuit(final Set<PlayableCard> cards, final Suit suit) {

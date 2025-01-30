@@ -1,6 +1,7 @@
 package it.unibo.balatrolt.model.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import it.unibo.balatrolt.model.api.Deck;
@@ -28,7 +29,15 @@ public final class DeckImpl implements Deck {
     }
 
     @Override
-    public List<PlayableCard> getDeck() {
+    public List<PlayableCard> getCards() {
         return List.copyOf(this.deck);
+    }
+
+    @Override
+    public List<PlayableCard> getShuffledCards() {
+        final List<PlayableCard> shuffledCards = new ArrayList<>();
+        shuffledCards.addAll(deck);
+        Collections.shuffle(shuffledCards);
+        return shuffledCards;
     }
 }

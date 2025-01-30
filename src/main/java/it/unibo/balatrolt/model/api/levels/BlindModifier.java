@@ -1,13 +1,13 @@
 package it.unibo.balatrolt.model.api.levels;
 
 /**
- * A BlindModifier is used to change the default values of a {@link Blind}
+ * A BlindModifier is used to change the default values of a {@link Blind}.
  */
 public interface BlindModifier {
 
     /**
      * Compute the new number of hands that the player will have.
-     * @param discards the old number of hands
+     * @param hands the old number of hands
      * @return the new number of hands
      */
     int getNewHands(int hands);
@@ -21,7 +21,7 @@ public interface BlindModifier {
 
     /**
      * Compute the number of chips that will be given to the player.
-     * @param discards the original number of chips
+     * @param chips the original number of chips
      * @return the new number of chips
      */
     int getNewChips(int chips);

@@ -30,18 +30,19 @@ public final class AnteFactoryImpl implements AnteFactory {
      * @param numBlinds the number of {@link Blind} present in the Ante
      * @param baseChipCalc the function that computes the minimum chips required to defeat the Blind, given the Ante and Blind IDs
      * @param rewardCalc the function that computes the reward given when defeating the Blind, given the Blind ID
+     * @param blindModifier the modifier that tells how to change the statistics of the Blind
      */
     public AnteFactoryImpl(
         final int numBlinds,
         final BinaryOperator<Integer> baseChipCalc,
         final UnaryOperator<Integer> rewardCalc,
-        final BlindModifier modifier
+        final BlindModifier blindModifier
     ) {
         Preconditions.checkArgument(numBlinds > 0, "The number of blinds must be positive");
         this.numBlinds = numBlinds;
         this.baseChipCalc = Preconditions.checkNotNull(baseChipCalc);
         this.rewardCalc = Preconditions.checkNotNull(rewardCalc);
-        this.modifier = Preconditions.checkNotNull(modifier);
+        this.modifier = Preconditions.checkNotNull(blindModifier);
     }
 
     @Override

@@ -21,13 +21,14 @@ public final class AnteImpl implements Ante {
     /**
      * Initialize an Ante from his number.
      * @param config the configuration of the Ante
+     * @param blindModifier the modifier that tells how to change the statistics of the Blind
      */
-    public AnteImpl(final AnteConfiguration config, final BlindModifier modifier) {
+    public AnteImpl(final AnteConfiguration config, final BlindModifier blindModifier) {
         this.configuration = config;
         this.blinds = new BlindFactoryImpl(
             config.baseChipCalc(),
             config.rewardCalc(),
-            modifier
+            blindModifier
         ).createList(config.numBlinds(), config.id());
     }
 

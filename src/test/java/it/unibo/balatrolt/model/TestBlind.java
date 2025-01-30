@@ -4,25 +4,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.api.levels.BlindModifier;
+import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindConfiguration;
 import it.unibo.balatrolt.model.impl.levels.BlindImpl;
+import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
+import it.unibo.balatrolt.model.impl.levels.BlindStats;
 
 class TestBlind {
     private static final int BLIND_ID = 1;
     private static final int BASE_CHIPS = 1000;
     private static final int REWARD = 2;
-    private static final int CHIPS_EARNED = 222;
+    private BlindModifier blindModifier;
     private Blind blind;
 
     @BeforeEach
     void init() {
-        this.blind = new BlindImpl(new BlindConfiguration(BLIND_ID, BASE_CHIPS, REWARD));
+        this.blindModifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
+        this.blind = new BlindImpl(new BlindConfiguration(BLIND_ID, BASE_CHIPS, REWARD), blindModifier);
     }
 
     @Test
@@ -31,6 +38,9 @@ class TestBlind {
         assertEquals(BLIND_ID, this.blind.getBlindNumber());
         assertEquals(BASE_CHIPS, this.blind.getMinimumChips());
         assertEquals(REWARD, this.blind.getReward());
+        assertEquals(0, this.blind.getCurrentChips());
+        assertEquals(this.blindModifier.getNewHands(BlindStats.BASE_HANDS), this.blind.getRemainingHands());
+        assertEquals(this.blindModifier.getNewDiscards(BlindStats.BASE_DISCARDS), this.blind.getRemainingDiscards());
     }
 
     @Test
@@ -40,18 +50,31 @@ class TestBlind {
     }
 
     @Test
-    void testIncrementChips() {
-        this.blind.incrementChips(CHIPS_EARNED);
-        assertEquals(CHIPS_EARNED, this.blind.getCurrentChips());
-        assertThrows(IllegalArgumentException.class, () -> this.blind.incrementChips(-CHIPS_EARNED));
+    void testDiscards() {
+        // Finish the discards and assert that no chips are earned
+        for (int i = 0; i < this.blindModifier.getNewDiscards(BlindStats.BASE_DISCARDS); i++) {
+            final List<PlayableCard> toDiscard = this.blind.getHandCards().subList(0, 2);
+            this.blind.discardPlayableCards(toDiscard);
+            toDiscard.forEach(c -> assertFalse(this.blind.getHandCards().contains(c)));
+        }
+        assertEquals(0, this.blind.getRemainingDiscards());
+        assertEquals(0, this.blind.getCurrentChips());
     }
 
     @Test
-    void testDefeat() {
-        assertFalse(this.blind.isOver());
-        for (int i = 0; i <= BASE_CHIPS / CHIPS_EARNED; i++) {
-            this.blind.incrementChips(CHIPS_EARNED);
+    void testGamePlay() {
+        // Finish the hands and check the status and the amount of chips
+        assertEquals(0, this.blind.getCurrentChips());
+        int chips = 0;
+        for (int i = 0; i < this.blindModifier.getNewHands(BlindStats.BASE_HANDS); i++) {
+            assertEquals(Blind.Status.IN_GAME, this.blind.getStatus());
+            final List<PlayableCard> toPlay = this.blind.getHandCards().subList(0, 2);
+            this.blind.playHand(toPlay);
+            toPlay.forEach(c -> assertFalse(this.blind.getHandCards().contains(c)));
+            chips += this.blindModifier.getNewChips(new PlayedHandImpl(toPlay).evaluateCombination().getChips());
         }
-        assertTrue(this.blind.isOver());
+        assertEquals(0, this.blind.getRemainingHands());
+        assertEquals(chips, this.blind.getCurrentChips());
+        assertEquals(chips >= blind.getMinimumChips() ? Blind.Status.DEFEATED : Blind.Status.GAME_OVER, blind.getStatus());
     }
 }

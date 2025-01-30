@@ -25,8 +25,13 @@ public final class BlindFactoryImpl implements BlindFactory {
      * Initialize the factory using the strategy pattern to compute the base chips and the reward of the blinds.
      * @param chips a bifunction that takes the ante id and the blind id, and gives the base chips
      * @param reward a function that takes the blind id to compute the reward
+     * @param modifier a set of functions that change the statistics of a Blind
      */
-    public BlindFactoryImpl(final BinaryOperator<Integer> chips, final UnaryOperator<Integer> reward, final BlindModifier modifier) {
+    public BlindFactoryImpl(
+        final BinaryOperator<Integer> chips,
+        final UnaryOperator<Integer> reward,
+        final BlindModifier modifier
+    ) {
         this.baseChipsCalculator = Preconditions.checkNotNull(chips);
         this.rewardCalculator = Preconditions.checkNotNull(reward);
         this.modifier = Preconditions.checkNotNull(modifier);

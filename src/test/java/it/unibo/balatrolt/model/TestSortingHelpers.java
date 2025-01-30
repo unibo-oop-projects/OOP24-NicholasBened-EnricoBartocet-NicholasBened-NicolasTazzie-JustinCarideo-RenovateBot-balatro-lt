@@ -20,7 +20,7 @@ import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;
  * Class for testing SortingHelpers.
  * @author Justin Carideo
  */
-public class TestSortingHelpers {
+class TestSortingHelpers {
 
     private List<PlayableCard> hand;
 
@@ -28,7 +28,7 @@ public class TestSortingHelpers {
 	 * Create a new instance for the hand.
 	 */
 	@BeforeEach
-	public void init() {
+	void init() {
 		this.hand = fill();
 	}
 
@@ -36,7 +36,7 @@ public class TestSortingHelpers {
 	 * Test empty hand.
 	 */
 	@Test
-	public void testSortEmptyHand() {
+	void testSortEmptyHand() {
 		final List<PlayableCard> emptyHand = Collections.emptyList();
 		assertEquals(emptyHand, SortingPlayableHelpers.sortingByRank(emptyHand));
 	}
@@ -44,7 +44,7 @@ public class TestSortingHelpers {
 	/**
 	 * @return a hand filled with some cards.
 	 */
-	public List<PlayableCard> fill() {
+	private List<PlayableCard> fill() {
 		return List.of(
 			new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)),
 			new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)),
@@ -58,29 +58,29 @@ public class TestSortingHelpers {
 	 * Test sorting by rank.
 	 */
 	@Test
-	public void testSortByRank() {
-		List<PlayableCard> expected = new ArrayList<>();
+	void testSortByRank() {
+		final List<PlayableCard> expected = new ArrayList<>();
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.KING, Suit.HEARTS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.DIAMONDS)));
-		var result = SortingPlayableHelpers.sortingByRank(hand);
+		final var result = SortingPlayableHelpers.sortingByRank(hand);
 		assertEquals(expected, result);
 	}
 
 	/**
-	 * Test sorting by suit
+	 * Test sorting by suit.
 	 */
 	@Test
-	public void testSortBySuit() {
-		List<PlayableCard> expected = new ArrayList<>();
+	void testSortBySuit() {
+		final List<PlayableCard> expected = new ArrayList<>();
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.KING, Suit.HEARTS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.DIAMONDS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)));
 		expected.add(new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)));
-		var result = SortingPlayableHelpers.sortingBySuit(hand);
+		final var result = SortingPlayableHelpers.sortingBySuit(hand);
 		assertEquals(expected, result);
 	}
 }

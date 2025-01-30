@@ -7,7 +7,7 @@ import it.unibo.balatrolt.model.api.combination.Multiplier;
  * Simply is a wrapper of a double that represents
  * the amount of multiplier scored.
  * @author Justin Carideo
+ * @param multiplier
  */
-public record MultiplierImpl(double multiplier) implements Multiplier{
-
+public record MultiplierImpl(double multiplier) implements Multiplier {
 }

@@ -14,12 +14,18 @@ import it.unibo.balatrolt.model.api.combination.Multiplier;
  * This class can be modify only with applyModifier method.
  * @author Justin Carideo
  */
-public class CombinationImpl implements Combination {
+public final class CombinationImpl implements Combination {
 
+    private final CombinationType type;
     private Multiplier multiplier;
     private BasePoints points;
-    private CombinationType type = CombinationType.HIGH_CARD;
 
+    /**
+     * Constructor for declaring a combination.
+     * @param points
+     * @param multiplier
+     * @param t
+     */
     public CombinationImpl(final int points, final double multiplier, final CombinationType t) {
         this.multiplier = new MultiplierImpl(multiplier);
         this.type = t;
@@ -38,8 +44,8 @@ public class CombinationImpl implements Combination {
 
     @Override
     public void applyModifier(final Modifier mod) {
-        var multiplierMapper = mod.getMultiplierMapper();
-        var basePointsMapper = mod.getBasePointMapper();
+        final var multiplierMapper = mod.getMultiplierMapper();
+        final var basePointsMapper = mod.getBasePointMapper();
         if (basePointsMapper.isPresent()) {
             this.points = new BasePointsImpl(basePointsMapper.get().apply(this.points.basePoints()));
         }
@@ -50,7 +56,7 @@ public class CombinationImpl implements Combination {
 
     @Override
     public int getChips() {
-        return (int) Math.round((double)this.points.basePoints() * this.multiplier.multiplier());
+        return (int) Math.round(this.points.basePoints() * this.multiplier.multiplier());
     }
 
     @Override

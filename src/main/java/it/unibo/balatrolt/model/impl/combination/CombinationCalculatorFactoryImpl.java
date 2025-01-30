@@ -13,20 +13,20 @@ import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;
 /**
  * @author Justin Carideo
  */
-public class CombinationCalculatorFactoryImpl implements CombinationCalculatorFactory {
+public final class CombinationCalculatorFactoryImpl implements CombinationCalculatorFactory {
 
     private final CombinationTables table = new CombinationTables();
 
-    private Function<List<PlayableCard>,Integer> computeFiveCards() {
+    private Function<List<PlayableCard>, Integer> computeFiveCards() {
         return hand -> hand
             .stream()
             .map(p -> table.convertRank(p.getRank()))
             .reduce(0, (i, j) -> i + j);
     }
 
-    private Function<List<PlayableCard>,Integer> computeBelowFiveCards(final int n) {
+    private Function<List<PlayableCard>, Integer> computeBelowFiveCards(final int n) {
         return hand -> hand.stream()
-            .collect(Collectors.groupingBy(p -> p.getRank()))
+            .collect(Collectors.groupingBy(PlayableCard::getRank))
             .entrySet()
             .stream()
             .filter(e -> e.getValue().size() == n)
@@ -34,10 +34,10 @@ public class CombinationCalculatorFactoryImpl implements CombinationCalculatorFa
             .reduce(0, (i, j) -> i + j);
     }
 
-    private CombinationCalculator general(Function<List<PlayableCard>,Integer> fun) {
+    private CombinationCalculator general(final Function<List<PlayableCard>, Integer> fun) {
         return (type, hand) -> {
             final int value = fun.apply(hand);
-            final Pair<Integer,Double> comb = table.convertCombination(type);
+            final Pair<Integer, Double> comb = table.convertCombination(type);
             return new CombinationImpl(value + comb.e1(), comb.e2(), type);
         };
     }

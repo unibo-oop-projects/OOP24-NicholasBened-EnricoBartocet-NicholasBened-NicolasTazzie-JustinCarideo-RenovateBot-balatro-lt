@@ -5,7 +5,7 @@ import java.util.List;
 import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
- * Support class that orders list of PlayableCard
+ * Support class that orders list of PlayableCard.
  * @author Justin Carideo
  */
 public final class SortingPlayableHelpers {

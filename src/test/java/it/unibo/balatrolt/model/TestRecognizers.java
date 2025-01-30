@@ -16,47 +16,48 @@ import it.unibo.balatrolt.model.impl.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.combination.CombinationRecognizerHelpersImpl;
 
 /**
- * @author Justin Carideo
+ * Test class for Combination Recognizers.
  */
-public class TestRecognizers {
+class TestRecognizers {
 
     private final CombinationRecognizerHelpersImpl helper = new CombinationRecognizerHelpersImpl();
     private List<PlayableCard> hand;
 
-	/**
-	 * Create a new instance for the hand.
-	 */
-	@BeforeEach
-	public void init() {
-		this.hand = fill();
-	}
-
-	/**
-	 * @return a hand filled with some cards.
-	 */
-	public List<PlayableCard> fill() {
-		return List.of(
-			new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)),
-			new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)),
-			new PlayableCardImpl(new Pair<>(Rank.EIGHT, Suit.HEARTS)),
-			new PlayableCardImpl(new Pair<>(Rank.NINE, Suit.DIAMONDS)),
-			new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS))
-		);
-	}
-
-    private List<PlayableCard> getTestPlayedCard() {
-        return List.of(
-                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
-                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
-                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
-                new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES)));
+    /**
+     * Initializes a new hand before each test.
+     */
+    @BeforeEach
+    void init() {
+        this.hand = fill();
     }
 
     /**
-     * Test whether the hand is an high card.
+     * @return a hand filled with some cards.
+     */
+    private List<PlayableCard> fill() {
+        return List.of(
+            new PlayableCardImpl(new Pair<>(Rank.SEVEN, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)),
+            new PlayableCardImpl(new Pair<>(Rank.EIGHT, Suit.HEARTS)),
+            new PlayableCardImpl(new Pair<>(Rank.NINE, Suit.DIAMONDS)),
+            new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS))
+        );
+    }
+
+    private List<PlayableCard> getTestPlayedCard() {
+        return List.of(
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES))
+        );
+    }
+
+    /**
+     * Test whether the hand is a high card.
      */
     @Test
-    public void testHighCard() {
+    void testHighCard() {
         assertTrue(this.helper.highCardRecognizer().recognize(hand));
         assertTrue(this.helper.highCardRecognizer().recognize(getTestPlayedCard()));
     }
@@ -65,7 +66,7 @@ public class TestRecognizers {
      * Test whether the hand is a pair.
      */
     @Test
-    public void testPair() {
+    void testPair() {
         assertFalse(this.helper.pairRecognizer().recognize(hand));
         assertFalse(this.helper.pairRecognizer().recognize(getTestPlayedCard()));
     }
@@ -74,7 +75,7 @@ public class TestRecognizers {
      * Test whether the hand is a two pair.
      */
     @Test
-    public void testTwoPair() {
+    void testTwoPair() {
         assertFalse(this.helper.twoPairRecognizer().recognize(hand));
         assertFalse(this.helper.twoPairRecognizer().recognize(getTestPlayedCard()));
     }
@@ -83,7 +84,7 @@ public class TestRecognizers {
      * Test whether the hand is a three of a kind.
      */
     @Test
-    public void testThreeOfAKind() {
+    void testThreeOfAKind() {
         assertFalse(this.helper.threeOfAKindRecognizer().recognize(hand));
         assertTrue(this.helper.threeOfAKindRecognizer().recognize(getTestPlayedCard()));
     }
@@ -92,7 +93,7 @@ public class TestRecognizers {
      * Test whether the hand is a straight.
      */
     @Test
-    public void testStraight() {
+    void testStraight() {
         assertTrue(this.helper.straightRecognizer().recognize(hand));
         assertFalse(this.helper.straightRecognizer().recognize(getTestPlayedCard()));
     }
@@ -101,7 +102,7 @@ public class TestRecognizers {
      * Test whether the hand is a flush.
      */
     @Test
-    public void testFlush() {
+    void testFlush() {
         assertFalse(this.helper.flushRecognizer().recognize(hand));
         assertFalse(this.helper.flushRecognizer().recognize(getTestPlayedCard()));
     }
@@ -110,16 +111,16 @@ public class TestRecognizers {
      * Test whether the hand is a full house.
      */
     @Test
-    public void testFullHouse() {
+    void testFullHouse() {
         assertFalse(this.helper.fullHouseRecognizer().recognize(hand));
         assertFalse(this.helper.fullHouseRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
-     * Test whether the hand is a four a kind.
+     * Test whether the hand is a four of a kind.
      */
     @Test
-    public void testFourOfAKind() {
+    void testFourOfAKind() {
         assertFalse(this.helper.fourOfAKindRecognizer().recognize(hand));
         assertFalse(this.helper.fourOfAKindRecognizer().recognize(getTestPlayedCard()));
     }
@@ -128,7 +129,7 @@ public class TestRecognizers {
      * Test whether the hand is a straight flush.
      */
     @Test
-    public void testStraightFlush() {
+    void testStraightFlush() {
         assertFalse(this.helper.straightFlushRecognizer().recognize(hand));
         assertFalse(this.helper.straightFlushRecognizer().recognize(getTestPlayedCard()));
     }
@@ -137,7 +138,7 @@ public class TestRecognizers {
      * Test whether the hand is a royal flush.
      */
     @Test
-    public void testRoyalFlush() {
+    void testRoyalFlush() {
         assertFalse(this.helper.royalFlushRecognizer().recognize(hand));
         assertFalse(this.helper.royalFlushRecognizer().recognize(getTestPlayedCard()));
     }

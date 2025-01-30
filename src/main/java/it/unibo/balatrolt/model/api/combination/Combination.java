@@ -2,47 +2,65 @@ package it.unibo.balatrolt.model.api.combination;
 
 import it.unibo.balatrolt.model.api.Modifier;
 
-/*
+/**
  * Interface that models the Combination played.
- * Essentially provides some utilities methods and
- * models internally the combination played, applying
- * modifiers passed and getting the result converted into
- * Chip.
+ * Provides utility methods to apply modifiers and get the result in chips.
  */
 public interface Combination {
 
     /**
-     * Enum for combination type.
+     * Enum representing the different types of poker combinations.
      */
     enum CombinationType {
-        HIGH_CARD, PAIR, TWO_PAIR, THREE_OF_A_KIND,
-        STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_A_KIND,
-        STRAIGHT_FLUSH, ROYAL_FLUSH
+        /** High card combination. */
+        HIGH_CARD,
+        /** A pair combination. */
+        PAIR,
+        /** Two pairs combination. */
+        TWO_PAIR,
+        /** Three of a kind combination. */
+        THREE_OF_A_KIND,
+        /** Straight combination. */
+        STRAIGHT,
+        /** Flush combination. */
+        FLUSH,
+        /** Full house combination. */
+        FULL_HOUSE,
+        /** Four of a kind combination. */
+        FOUR_OF_A_KIND,
+        /** Straight flush combination. */
+        STRAIGHT_FLUSH,
+        /** Royal flush combination. */
+        ROYAL_FLUSH
     }
 
     /**
-     * @return the current multiplier applied
+     * Gets the current multiplier applied.
+     * @return the multiplier
      */
     Multiplier getMultiplier();
 
     /**
-     * @return the current basepoints reached
+     * Gets the current base points reached.
+     * @return the base points
      */
     BasePoints getBasePoints();
 
     /**
-     * applies the modifier passed by input.
-     * @param mod to apply
+     * Applies the specified modifier to the combination.
+     * @param mod the modifier to be applied
      */
     void applyModifier(Modifier mod);
 
     /**
+     * Gets the type of combination.
      * @return the combination type
      */
     CombinationType getCombinationType();
 
     /**
-     * @return the result in chips
+     * Gets the result in chips.
+     * @return the number of chips
      */
     int getChips();
 }

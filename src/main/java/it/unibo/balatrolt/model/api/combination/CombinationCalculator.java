@@ -19,5 +19,5 @@ public interface CombinationCalculator {
      * @param hand played
      * @return the combination with points scored
      */
-    public Combination compute(CombinationType type, List<PlayableCard> hand);
+    Combination compute(CombinationType type, List<PlayableCard> hand);
 }

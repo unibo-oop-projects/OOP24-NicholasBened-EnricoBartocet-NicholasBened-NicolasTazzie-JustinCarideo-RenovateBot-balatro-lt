@@ -7,7 +7,7 @@ import it.unibo.balatrolt.model.api.combination.BasePoints;
  * Simply is a wrapper of intergers that represents
  * the amount of points scored.
  * @author Justin Carideo
+ * @param basePoints
  */
-public record BasePointsImpl(int basePoints) implements BasePoints{
-
+public record BasePointsImpl(int basePoints) implements BasePoints {
 }

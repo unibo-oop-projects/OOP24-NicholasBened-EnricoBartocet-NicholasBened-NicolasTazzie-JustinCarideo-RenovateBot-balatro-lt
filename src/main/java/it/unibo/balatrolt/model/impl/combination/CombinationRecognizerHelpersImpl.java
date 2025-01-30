@@ -3,6 +3,7 @@ package it.unibo.balatrolt.model.impl.combination;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.combination.CombinationRecognizer;
 import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
@@ -12,7 +13,7 @@ import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;
  * Factory that creats recognizers.
  * @author Justin Carideo
  */
-public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
+public final class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
 
     private static final int FULL_HAND = 5;
     private static final int THREE_SIZE = 3;
@@ -27,9 +28,9 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
 
     @Override
     public CombinationRecognizer pairRecognizer() {
-        return hand -> hand.size() >= PAIR_SIZE &&
-            hand.stream()
-                .collect(Collectors.groupingBy(p -> p.getRank(), Collectors.counting()))
+        return hand -> hand.size() >= PAIR_SIZE
+            && hand.stream()
+                .collect(Collectors.groupingBy(PlayableCard::getRank, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .anyMatch(e -> e.getValue() == PAIR_SIZE);
@@ -37,9 +38,9 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
 
     @Override
     public CombinationRecognizer twoPairRecognizer() {
-        return hand -> hand.size() >= FOUR_SIZE &&
-            hand.stream()
-                .collect(Collectors.groupingBy(p -> p.getRank(), Collectors.counting()))
+        return hand -> hand.size() >= FOUR_SIZE
+            && hand.stream()
+                .collect(Collectors.groupingBy(PlayableCard::getRank, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .filter(e -> e.getValue() == PAIR_SIZE)
@@ -48,9 +49,9 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
 
     @Override
     public CombinationRecognizer threeOfAKindRecognizer() {
-        return hand -> hand.size() >= THREE_SIZE  &&
-            hand.stream()
-                .collect(Collectors.groupingBy(p -> p.getRank(), Collectors.counting()))
+        return hand -> hand.size() >= THREE_SIZE
+            && hand.stream()
+                .collect(Collectors.groupingBy(PlayableCard::getRank, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .anyMatch(e -> e.getValue() == THREE_SIZE);
@@ -62,9 +63,9 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
             if (hand.size() != FULL_HAND) {
                 return false;
             }
-            List<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
+            final List<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
                 .stream()
-                .map(p -> p.getRank())
+                .map(PlayableCard::getRank)
                 .sorted()
                 .toList();
             if (sorted.equals(List.of(Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.ACE))) {
@@ -83,7 +84,7 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
     @Override
     public CombinationRecognizer flushRecognizer() {
         return hand ->  hand.stream()
-            .collect(Collectors.groupingBy(p -> p.getSuit(), Collectors.counting()))
+            .collect(Collectors.groupingBy(PlayableCard::getSuit, Collectors.counting()))
             .entrySet()
             .stream()
             .anyMatch(e -> e.getValue() == FULL_HAND);
@@ -91,15 +92,15 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
 
     @Override
     public CombinationRecognizer fullHouseRecognizer() {
-        return hand -> hand.size() == FULL_HAND &&
-            pairRecognizer().recognize(hand) &&
-            threeOfAKindRecognizer().recognize(hand);
+        return hand -> hand.size() == FULL_HAND
+            && pairRecognizer().recognize(hand)
+            && threeOfAKindRecognizer().recognize(hand);
     }
 
     @Override
     public CombinationRecognizer fourOfAKindRecognizer() {
-        return hand -> !hand.isEmpty() &&
-            hand.stream()
+        return hand -> !hand.isEmpty()
+            && hand.stream()
                 .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
                 .entrySet()
                 .stream()
@@ -108,27 +109,24 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
 
     @Override
     public CombinationRecognizer straightFlushRecognizer() {
-        return hand -> straightRecognizer().recognize(hand) &&
-            flushRecognizer().recognize(hand);
+        return hand -> straightRecognizer().recognize(hand)
+            && flushRecognizer().recognize(hand);
     }
 
     @Override
     public CombinationRecognizer royalFlushRecognizer() {
         return hand -> {
-            List<Rank> l = SortingPlayableHelpers.sortingByRank(hand)
+            final List<Rank> l = SortingPlayableHelpers.sortingByRank(hand)
                 .stream()
-                .map(p -> p.getRank())
+                .map(PlayableCard::getRank)
                 .toList();
-            if (l.equals(List.of(
+            return l.equals(List.of(
                 Rank.TEN,
                 Rank.JACK,
                 Rank.QUEEN,
                 Rank.KING,
                 Rank.ACE
-            ))) {
-                return flushRecognizer().recognize(hand);
-            }
-            return false;
+            )) && flushRecognizer().recognize(hand);
         };
     }
 }

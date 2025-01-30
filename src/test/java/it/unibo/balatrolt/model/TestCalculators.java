@@ -77,7 +77,7 @@ class TestCalculators {
      */
     @Test
     void testThree() {
-        List<PlayableCard> handTest1 = List.of(
+        final List<PlayableCard> hand1 = List.of(
             new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
             new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)),
             new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.HEARTS)),
@@ -85,13 +85,13 @@ class TestCalculators {
             new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS))
         );
         final var expected1 = new CombinationImpl(45, 3, CombinationType.THREE_OF_A_KIND);
-        final var result1 = this.factory.threeOfAKindCalculator().compute(CombinationType.THREE_OF_A_KIND, handTest1);
+        final var result1 = this.factory.threeOfAKindCalculator().compute(CombinationType.THREE_OF_A_KIND, hand1);
         assertEquals(expected1.getBasePoints().basePoints(), result1.getBasePoints().basePoints());
         assertEquals(expected1.getMultiplier().multiplier(), result1.getMultiplier().multiplier());
 
-        List<PlayableCard> handTest2 = getTestPlayedCard();
+        final List<PlayableCard> hand2 = getTestPlayedCard();
         final var expected2 = new CombinationImpl(45, 3, CombinationType.THREE_OF_A_KIND);
-        final var result2 = this.factory.threeOfAKindCalculator().compute(CombinationType.THREE_OF_A_KIND, handTest2);
+        final var result2 = this.factory.threeOfAKindCalculator().compute(CombinationType.THREE_OF_A_KIND, hand2);
         assertEquals(expected2.getBasePoints().basePoints(), result2.getBasePoints().basePoints());
         assertEquals(expected2.getMultiplier().multiplier(), result2.getMultiplier().multiplier());
     }

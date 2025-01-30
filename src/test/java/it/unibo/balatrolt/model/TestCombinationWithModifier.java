@@ -21,6 +21,9 @@ import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
 
 class TestCombinationWithModifier {
 
+    private static final int EXPECTED_MULTIPLIER_STD = 3;
+    private static final int EXPECTED_POINTS_STD = 45;
+
     private List<PlayableCard> getTestPlayedCard() {
         return List.of(
                 new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
@@ -50,66 +53,78 @@ class TestCombinationWithModifier {
     void testSingleJoker() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard());
         final Combination combination = hand.evaluateCombination();
-        assertEquals(45, combination.getBasePoints().basePoints());
+        assertEquals(EXPECTED_POINTS_STD, combination.getBasePoints().basePoints());
         assertEquals(3, combination.getMultiplier().multiplier());
-        final var joker = new JokerSupplierImpl().getJokerList().get(3);
+        final int indexSelected = 3;
+        final var joker = new JokerSupplierImpl().getJokerList().get(indexSelected);
         setJokerStatus(hand, combination, joker);
         combination.applyModifier(joker.getModifier().get());
-        assertEquals(95, combination.getBasePoints().basePoints());
-        assertEquals(3, combination.getMultiplier().multiplier());
+        final int p = 50;
+        assertEquals(EXPECTED_POINTS_STD + p, combination.getBasePoints().basePoints());
+        assertEquals(EXPECTED_MULTIPLIER_STD, combination.getMultiplier().multiplier());
     }
 
     @Test
     void testSingleJokerNotApplied() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard2());
         final Combination combination = hand.evaluateCombination();
-        final var joker = new JokerSupplierImpl().getJokerList().get(3);
+        final int indexSelected = 3;
+        final var joker = new JokerSupplierImpl().getJokerList().get(indexSelected);
         setJokerStatus(hand, combination, joker);
         combination.applyModifier(joker.getModifier().get());
-        assertEquals(45, combination.getBasePoints().basePoints());
-        assertEquals(3, combination.getMultiplier().multiplier());
+        assertEquals(EXPECTED_POINTS_STD, combination.getBasePoints().basePoints());
+        assertEquals(EXPECTED_MULTIPLIER_STD, combination.getMultiplier().multiplier());
     }
 
     @Test
     void testMultipleJokerAllApplied() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard());
         final Combination combination = hand.evaluateCombination();
-        final var joker1 = new JokerSupplierImpl().getJokerList().get(3);
+        final int indexSelected = 3;
+        final var joker1 = new JokerSupplierImpl().getJokerList().get(indexSelected);
         setJokerStatus(hand, combination, joker1);
-        final var joker2 = new JokerSupplierImpl().getJokerList().get(1);
+        final int indexSelected2 = 1;
+        final var joker2 = new JokerSupplierImpl().getJokerList().get(indexSelected2);
         setJokerStatus(hand, combination, joker2);
         combination.applyModifier(joker1.getModifier().get());
         combination.applyModifier(joker2.getModifier().get());
-        assertEquals(45 + 50, combination.getBasePoints().basePoints());
-        assertEquals(3 * 2, combination.getMultiplier().multiplier());
+        final int p = 50;
+        final int mul = 2;
+        assertEquals(EXPECTED_POINTS_STD + p, combination.getBasePoints().basePoints());
+        assertEquals(EXPECTED_MULTIPLIER_STD * mul, combination.getMultiplier().multiplier());
     }
 
     @Test
     void testMultipleJokerNoneApplied() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard2());
         final Combination combination = hand.evaluateCombination();
-        final var joker1 = new JokerSupplierImpl().getJokerList().get(3);
+        final int indexSelected = 3;
+        final var joker1 = new JokerSupplierImpl().getJokerList().get(indexSelected);
         setJokerStatus(hand, combination, joker1);
-        final var joker2 = new JokerSupplierImpl().getJokerList().get(1);
+        final int indexSelected2 = 1;
+        final var joker2 = new JokerSupplierImpl().getJokerList().get(indexSelected2);
         setJokerStatus(hand, combination, joker2);
         combination.applyModifier(joker1.getModifier().get());
         combination.applyModifier(joker2.getModifier().get());
-        assertEquals(45, combination.getBasePoints().basePoints());
-        assertEquals(3, combination.getMultiplier().multiplier());
+        assertEquals(EXPECTED_POINTS_STD, combination.getBasePoints().basePoints());
+        assertEquals(EXPECTED_MULTIPLIER_STD, combination.getMultiplier().multiplier());
     }
 
     @Test
     void testMultipleJokerOneApplied() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard2());
         final Combination combination = hand.evaluateCombination();
-        final var joker1 = new JokerSupplierImpl().getJokerList().get(3);
+        final int indexSelected = 3;
+        final var joker1 = new JokerSupplierImpl().getJokerList().get(indexSelected);
         setJokerStatus(hand, combination, joker1);
-        final var joker2 = new JokerSupplierImpl().getJokerList().get(4);
+        final int indexSelected2 = 4;
+        final var joker2 = new JokerSupplierImpl().getJokerList().get(indexSelected2);
         setJokerStatus(hand, combination, joker2);
         combination.applyModifier(joker1.getModifier().get());
         combination.applyModifier(joker2.getModifier().get());
-        assertEquals(45, combination.getBasePoints().basePoints());
-        assertEquals(3 * 2, combination.getMultiplier().multiplier());
+        assertEquals(EXPECTED_POINTS_STD, combination.getBasePoints().basePoints());
+        final int mul = 2;
+        assertEquals(EXPECTED_MULTIPLIER_STD * mul, combination.getMultiplier().multiplier());
     }
 
 }

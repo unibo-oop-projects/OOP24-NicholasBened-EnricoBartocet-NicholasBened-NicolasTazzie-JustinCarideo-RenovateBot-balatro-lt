@@ -54,7 +54,7 @@ final class TestSlot {
         this.slot.addAll(list);
         assertEquals(List.of(card, otheCard, otheCard), this.slot.getCards());
 
-        assertThrows(IllegalArgumentException.class, () -> this.slot.addCard(card));
+        assertThrows(IllegalStateException.class, () -> this.slot.addCard(card));
         assertEquals(List.of(card, otheCard, otheCard), this.slot.getCards());
     }
 

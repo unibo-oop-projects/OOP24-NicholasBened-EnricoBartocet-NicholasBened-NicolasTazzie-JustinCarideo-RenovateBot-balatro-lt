@@ -3,6 +3,8 @@ package it.unibo.balatrolt.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Preconditions;
+
 import it.unibo.balatrolt.model.api.Card;
 import it.unibo.balatrolt.model.api.Slot;
 
@@ -36,11 +38,8 @@ public final class SlotImpl implements Slot {
 
     @Override
     public void addCard(final Card card) {
-        try {
-            assert getSize() + 1 <= getCapacity();
-        } catch (AssertionError e) {
-            throw new AssertionError(e);
-        }
+        Preconditions.checkState(getSize() + 1 <= getCapacity(),
+        "The slot is full, cannot add the card", card);
         this.slot.add(card);
     }
 

@@ -18,7 +18,7 @@ import it.unibo.balatrolt.model.impl.combination.CombinationImpl;
 
 /**
  * Unit tests for Combination Calculators.
- * Author: Justin Carideo
+ * @author Justin Carideo
  */
 class TestCalculators {
 

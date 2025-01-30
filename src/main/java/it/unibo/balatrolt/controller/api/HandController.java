@@ -1,21 +1,21 @@
 package it.unibo.balatrolt.controller.api;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
+import java.util.List;
 
+/**
+ * Controls every aspect of the player's hand
+ */
 public interface HandController {
-    /**
-     * @return
-     */
-    boolean hasNext();
-
-    /**
-     * @return
-     */
-    PlayableCard next();
 
     /**
      *
-     * @return the number of slots in the hand.
+     * @return the number of card the player can hold.
      */
     int numHandSlot();
+
+    /**
+     *
+     * @return  the name of the cards in the player's hand.
+     */
+    List<String> getHand();
 }

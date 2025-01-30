@@ -1,33 +1,23 @@
 package it.unibo.balatrolt.controller.impl;
 
-import java.util.Iterator;
+import java.util.List;
 
 import it.unibo.balatrolt.controller.api.HandController;
-import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.levels.Ante;
-import it.unibo.balatrolt.model.api.levels.AnteFactory;
-import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
+import it.unibo.balatrolt.model.impl.levels.BlindCards;
 
+/**
+ * implementation of the hand's controller.
+ */
 public class HandControllerImpl implements HandController{
-    private Iterator<Ante> antes;
-    private int numHandSlot;
+    private final BlindCards blindCards;
+    private final int numHandSlot;
 
+    /**
+     * constructor of the hand's controller.
+     */
     public HandControllerImpl() {
-        AnteFactory anteFactory = new AnteFactoryImpl(0, null, null);
-        anteFactory.generateList(8);
-        //this.numHandSlot = new BlindCards
-    }
-
-    @Override
-    public boolean hasNext() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
-    }
-
-    @Override
-    public PlayableCard next() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
+        this.blindCards = new BlindCards();
+        this.numHandSlot = this.blindCards.getHandCards().size();
     }
 
     @Override
@@ -35,4 +25,10 @@ public class HandControllerImpl implements HandController{
         return this.numHandSlot;
     }
 
+    @Override
+    public List<String> getHand() {
+        return this.blindCards.getHandCards().stream()
+            .map(e -> e.getRank().name() + e.getSuit().name())
+            .toList();
+    }
 }

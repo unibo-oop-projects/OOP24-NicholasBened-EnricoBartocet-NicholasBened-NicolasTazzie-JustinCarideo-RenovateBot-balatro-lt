@@ -1,17 +1,13 @@
 package it.unibo.balatrolt.controller.api;
 
-import it.unibo.balatrolt.model.api.SpecialCard;
-
+/**
+ * controls every aspect of the player's special cards.
+ */
 public interface SpecialCardController {
 
     /**
      *
-     * @return
+     * @return number of Special Card slots.
      */
-    boolean hasNext();
-    /**
-     *
-     * @return the next special card.
-     */
-    SpecialCard next();
+    int numSpecialSlot();
 }

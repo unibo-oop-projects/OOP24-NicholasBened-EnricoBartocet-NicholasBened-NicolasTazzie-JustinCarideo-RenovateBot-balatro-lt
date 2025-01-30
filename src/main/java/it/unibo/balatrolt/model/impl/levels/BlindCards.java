@@ -10,11 +10,19 @@ import it.unibo.balatrolt.model.api.Slot;
 import it.unibo.balatrolt.model.impl.DeckImpl;
 import it.unibo.balatrolt.model.impl.SlotImpl;
 
+/**
+ * Implementation of the blind which holds the
+ * player's hand: creation and management.
+ * @author Benedetti Nicholas
+ */
 public class BlindCards {
     private static final int HAND_SIZE = 7;
     private List<PlayableCard> deck;
     private Slot handSlot;
 
+    /**
+     * Sets all the fields.
+     */
     public BlindCards() {
         this.deck = new DeckImpl().getShuffledCards();
         this.handSlot = new SlotImpl(HAND_SIZE);
@@ -23,16 +31,31 @@ public class BlindCards {
         }
     }
 
+    /**
+     * Returns the remaining cards in the deck.
+     *
+     * @return remaining cards in the deck.
+     */
     public List<PlayableCard> getRemainingDeckCards() {
         return List.copyOf(deck);
     }
 
+    /**
+     * returns the cards holded by the player.
+     *
+     * @return the cards in the player's hand.
+     */
     public List<PlayableCard> getHandCards() {
         return List.copyOf(handSlot.getCards().stream()
                 .map(card -> (PlayableCard) card)
                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Discards the cards given into the player's hand.
+     *
+     * @param toDiscard card to discard.
+     */
     public void discardCards(final List<PlayableCard> toDiscard) {
         Preconditions.checkNotNull(toDiscard);
         Preconditions.checkArgument(toDiscard.size() > 0, "You need to discard at least one card");

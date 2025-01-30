@@ -13,7 +13,7 @@ import it.unibo.balatrolt.model.api.PlayableCard.Suit;
  * Implementation of a normal 52 card deck.
  * @author Benedetti Nicholas
  */
-public final class DeckImpl implements Deck {
+public class DeckImpl implements Deck {
 
     private final List<PlayableCard> deck;
 
@@ -30,12 +30,12 @@ public final class DeckImpl implements Deck {
     }
 
     @Override
-    public List<PlayableCard> getCards() {
+    public final List<PlayableCard> getCards() {
         return List.copyOf(this.deck);
     }
 
     @Override
-    public List<PlayableCard> getShuffledCards() {
+    public final List<PlayableCard> getShuffledCards() {
         final List<PlayableCard> shuffledCards = new ArrayList<>();
         shuffledCards.addAll(deck);
         Collections.shuffle(shuffledCards);

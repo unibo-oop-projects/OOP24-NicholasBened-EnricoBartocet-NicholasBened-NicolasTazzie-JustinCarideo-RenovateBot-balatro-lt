@@ -3,7 +3,6 @@ package it.unibo.balatrolt.model.api.levels;
 import java.util.List;
 
 import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.combination.PlayedHand;
 
 /**
  * Interface used to represent a Blind.
@@ -50,7 +49,7 @@ public interface Blind {
 
     List<PlayableCard> getHandCards();
 
-    void playHand(PlayedHand hand);
+    void playHand(List<PlayableCard> toPlay);
 
     void discardPlayableCards(List<PlayableCard> toDiscard);
 

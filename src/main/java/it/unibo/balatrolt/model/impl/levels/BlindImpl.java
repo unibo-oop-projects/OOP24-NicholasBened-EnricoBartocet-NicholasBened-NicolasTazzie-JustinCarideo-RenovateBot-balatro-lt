@@ -2,10 +2,13 @@ package it.unibo.balatrolt.model.impl.levels;
 
 import java.util.List;
 
-import it.unibo.balatrolt.model.api.DeckModifier;
+import com.google.common.base.Preconditions;
+
 import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.PlayedHand;
 import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.api.levels.BlindModifier;
+import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 
 /**
  * An implementation for the {@link Blind} interface.
@@ -20,10 +23,10 @@ public final class BlindImpl implements Blind {
      * Instance a new BlindImpl starting from the configuration.
      * @param config the configuration for the Blind
      */
-    public BlindImpl(final BlindConfiguration config, final DeckModifier deckModifier) {
-        this.config = config;
+    public BlindImpl(final BlindConfiguration config, final BlindModifier deckModifier) {
+        this.config = Preconditions.checkNotNull(config);
         this.cardsManager = new BlindCards();
-        this.statistics = new BlindStats(deckModifier);
+        this.statistics = new BlindStats(Preconditions.checkNotNull(deckModifier));
     }
 
     @Override
@@ -68,7 +71,8 @@ public final class BlindImpl implements Blind {
     }
 
     @Override
-    public void playHand(PlayedHand hand) {
+    public void playHand(final List<PlayableCard> toPlay) {
+        final PlayedHand hand = new PlayedHandImpl(toPlay);
         if (this.cardsInHand(hand.getCards())) {
             if (this.statistics.getRemainingHands() > 0) {
                 this.cardsManager.discardCards(hand.getCards());

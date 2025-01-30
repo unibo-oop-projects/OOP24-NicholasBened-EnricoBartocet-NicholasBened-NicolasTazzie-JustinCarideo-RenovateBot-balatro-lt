@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * It models the concept of a Slot, where we
  * can place any Card we want.
+ * @author Benedetti Nicholas
  */
 public interface Slot {
 

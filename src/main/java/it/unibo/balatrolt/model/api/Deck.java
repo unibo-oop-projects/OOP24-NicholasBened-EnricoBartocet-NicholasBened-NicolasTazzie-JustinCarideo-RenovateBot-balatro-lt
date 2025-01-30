@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Models a normal 52 card deck.
+ * @author Benedetti Nicholas
  */
 public interface Deck {
 

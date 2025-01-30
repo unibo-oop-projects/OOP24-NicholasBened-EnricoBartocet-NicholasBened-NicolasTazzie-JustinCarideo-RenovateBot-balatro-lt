@@ -8,6 +8,7 @@ import it.unibo.balatrolt.model.api.Slot;
 
 /**
  * Implements Slot interface.
+ * @author Benedetti Nicholas
  */
 public final class SlotImpl implements Slot {
     private final int capacity;

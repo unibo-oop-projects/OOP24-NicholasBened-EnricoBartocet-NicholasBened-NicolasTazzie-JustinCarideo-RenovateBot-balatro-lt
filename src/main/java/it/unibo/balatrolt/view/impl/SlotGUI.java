@@ -20,6 +20,7 @@ import it.unibo.balatrolt.controller.impl.HandControllerImpl;
 /**
  * Creates the part of the GUI containing the
  * slots for the cards (any type).
+ * @author Benedetti Nicholas
  */
 public final class SlotGUI {
     private final HandController handController;

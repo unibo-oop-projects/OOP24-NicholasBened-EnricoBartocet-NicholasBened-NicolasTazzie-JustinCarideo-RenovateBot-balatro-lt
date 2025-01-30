@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 /**
  * Main GUI: here we build and mix togheter all the
  * parts that will form the final GUI.
+ * @author Benedetti Nicholas
  */
 public class GUI extends JFrame {
 

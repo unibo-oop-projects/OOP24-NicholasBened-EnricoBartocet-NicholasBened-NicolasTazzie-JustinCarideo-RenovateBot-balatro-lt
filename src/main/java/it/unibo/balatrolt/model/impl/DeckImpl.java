@@ -10,6 +10,7 @@ import it.unibo.balatrolt.model.api.PlayableCard.Suit;
 
 /**
  * Implementation of a normal 52 card deck.
+ * @author Benedetti Nicholas
  */
 public final class DeckImpl implements Deck {
 

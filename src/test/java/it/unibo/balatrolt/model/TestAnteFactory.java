@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.api.levels.AnteFactory;
+import it.unibo.balatrolt.model.api.levels.BlindModifier;
 import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
+import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
 
 class TestAnteFactory {
     private static final int ANTE_ID = 1;
@@ -22,12 +24,14 @@ class TestAnteFactory {
     private BinaryOperator<Integer> baseChipsCalculator;
     private UnaryOperator<Integer> rewardCalculator;
     private AnteFactory factory;
+    private BlindModifier blindModifier;
 
     @BeforeEach
     void init() {
+        this.blindModifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
         baseChipsCalculator = (a, b) -> a * 10 + (b + 2) * 4;
         rewardCalculator = UnaryOperator.identity();
-        this.factory = new AnteFactoryImpl(NUM_BLINDS, baseChipsCalculator, rewardCalculator);
+        this.factory = new AnteFactoryImpl(NUM_BLINDS, baseChipsCalculator, rewardCalculator, blindModifier);
     }
 
     @Test
@@ -47,9 +51,12 @@ class TestAnteFactory {
 
     @Test
     void testInvalidFactory() {
-        assertThrows(IllegalArgumentException.class, () -> new AnteFactoryImpl(0, baseChipsCalculator, rewardCalculator));
-        assertThrows(NullPointerException.class, () -> new AnteFactoryImpl(NUM_BLINDS, null, rewardCalculator));
-        assertThrows(NullPointerException.class, () -> new AnteFactoryImpl(NUM_BLINDS, baseChipsCalculator, null));
+        // Used to avoid line length > 130 characters
+        final var npException = NullPointerException.class;
+        final var argException = IllegalArgumentException.class;
+        assertThrows(argException, () -> new AnteFactoryImpl(0, baseChipsCalculator, rewardCalculator, blindModifier));
+        assertThrows(npException, () -> new AnteFactoryImpl(NUM_BLINDS, null, rewardCalculator, blindModifier));
+        assertThrows(npException, () -> new AnteFactoryImpl(NUM_BLINDS, baseChipsCalculator, null, blindModifier));
     }
 
     @Test

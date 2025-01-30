@@ -1,7 +1,6 @@
 package it.unibo.balatrolt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -14,7 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindFactory;
+import it.unibo.balatrolt.model.api.levels.BlindModifier;
 import it.unibo.balatrolt.model.impl.levels.BlindFactoryImpl;
+import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
 
 class TestBlindFactory {
     private static final int NUM_BLINDS = 5;
@@ -27,9 +28,10 @@ class TestBlindFactory {
 
     @BeforeEach
     void init() {
+        final BlindModifier blindModifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
         baseChipsCalculator = (a, b) -> a * 10 + (b + 2) * 4;
         rewardCalculator = UnaryOperator.identity();
-        this.factory = new BlindFactoryImpl(baseChipsCalculator, rewardCalculator);
+        this.factory = new BlindFactoryImpl(baseChipsCalculator, rewardCalculator, blindModifier);
     }
 
     @Test
@@ -44,7 +46,7 @@ class TestBlindFactory {
         assertEquals(baseChipsCalculator.apply(ANTE_ID, BLIND_ID), newBlind.getMinimumChips());
         assertEquals(rewardCalculator.apply(BLIND_ID), newBlind.getReward());
         assertEquals(0, newBlind.getCurrentChips());
-        assertFalse(newBlind.isOver());
+        assertEquals(Blind.Status.IN_GAME, newBlind.getStatus());
     }
 
     @Test

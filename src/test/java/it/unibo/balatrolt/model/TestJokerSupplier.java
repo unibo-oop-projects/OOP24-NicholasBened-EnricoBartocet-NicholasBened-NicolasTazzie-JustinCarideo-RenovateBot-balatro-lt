@@ -21,6 +21,12 @@ import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
 import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
 
 final class TestJokerSupplier {
+    private static final int DOUBLER_INDEX = 0;
+    private static final int DIAMOND_DOUBLER_INDEX = 1;
+    private static final int DONOUR_INDEX = 2;
+    private static final int KING_DONOUR_INDEX = 3;
+    private static final int HEART_DOUBLER_INDEX = 4;
+    private static final int SEVENTH_DONOUR_INDEX = 5;
     private static final double DOUBLER_MUL = 2;
     private static final int DONOUR_BP = 50;
     private static final double INIT_MUL = 1;
@@ -30,59 +36,71 @@ final class TestJokerSupplier {
 
     @Test
     void testTheDoubler() {
-        final Joker j = js.doubler();
+        final Joker j = js.getJokerList().get(DOUBLER_INDEX);
         final double m = INIT_MUL;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         final Modifier mod = getMod(j, stats);
-        assertFalse(mod.getBasePointMapper().isPresent());
-        assertTrue(mod.getMultiplierMapper().isPresent());
-        assertEquals(m * DOUBLER_MUL, mod.getMultiplierMapper().get().apply(m));
+        final var bpMapper = mod.getBasePointMapper();
+        final var mulMapper = mod.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
+        assertEquals(m * DOUBLER_MUL, mulMapper.get().apply(m));
     }
 
     @Test
     void testTheDoublerWithCondition() {
-        Joker j = js.diamondDoubler(); // diamond is present
+        Joker j = js.getJokerList().get(DIAMOND_DOUBLER_INDEX); // diamond is present
         final double m = INIT_MUL;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         Modifier mod = getMod(j, stats);
-        assertFalse(mod.getBasePointMapper().isPresent());
-        assertTrue(mod.getMultiplierMapper().isPresent());
-        assertEquals(m * DOUBLER_MUL, mod.getMultiplierMapper().get().apply(m));
-        j = js.heartDoubler(); // heart is not present
+        var bpMapper = mod.getBasePointMapper();
+        var mulMapper = mod.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
+        assertEquals(m * DOUBLER_MUL, mulMapper.get().apply(m));
+        j = js.getJokerList().get(HEART_DOUBLER_INDEX); // heart is not present
         assertTrue(j.getModifier().isPresent());
         mod = getMod(j, stats);
-        assertFalse(mod.getBasePointMapper().isPresent());
-        assertFalse(mod.getMultiplierMapper().isPresent());
+        bpMapper = mod.getBasePointMapper();
+        mulMapper = mod.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
     }
 
     @Test
     void testTheDonour() {
-        final Joker j = js.donour();
+        final Joker j = js.getJokerList().get(DONOUR_INDEX);
         final int bp = INIT_BP;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         final Modifier mod = getMod(j, stats);
-        assertTrue(mod.getBasePointMapper().isPresent());
-        assertFalse(mod.getMultiplierMapper().isPresent());
-        assertEquals(bp + DONOUR_BP, mod.getBasePointMapper().get().apply(bp));
+        final var bpMapper = mod.getBasePointMapper();
+        final var mulMapper = mod.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
+        assertEquals(bp + DONOUR_BP, bpMapper.get().apply(bp));
     }
 
     @Test
     void testTheDonourWithCondition() {
-        Joker j = js.kingDonour(); // king is present
+        Joker j = js.getJokerList().get(KING_DONOUR_INDEX); // king is present
         final int bp = INIT_BP;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
         Modifier mod = getMod(j, stats);
-        assertTrue(mod.getBasePointMapper().isPresent());
-        assertFalse(mod.getMultiplierMapper().isPresent());
-        assertEquals(bp + DONOUR_BP, mod.getBasePointMapper().get().apply(bp));
-        j = js.seventhDonour(); // seven is not present
+        var bpMapper = mod.getBasePointMapper();
+        var mulMapper = mod.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
+        assertEquals(bp + DONOUR_BP, bpMapper.get().apply(bp));
+        j = js.getJokerList().get(SEVENTH_DONOUR_INDEX); // seven is not present
         mod = getMod(j, stats);
-        assertFalse(mod.getBasePointMapper().isPresent());
-        assertFalse(mod.getMultiplierMapper().isPresent());
+        bpMapper = mod.getBasePointMapper();
+        mulMapper = mod.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
     }
 
     private Modifier getMod(final Joker j, final ModifierStatsSupplier stats) {
@@ -102,11 +120,11 @@ final class TestJokerSupplier {
 
     private Set<PlayableCard> getTestHoldingCards() {
         return Set.of(
-                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
-                new PlayableCardImpl(new Pair<>(Rank.FOUR, Suit.DIAMONDS)),
-                new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.SPADES)),
-                new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
-                new PlayableCardImpl(new Pair<>(Rank.TWO, Suit.DIAMONDS)));
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.FOUR, Suit.DIAMONDS)),
+            new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.SPADES)),
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.TWO, Suit.DIAMONDS)));
     }
 
     private Set<PlayableCard> getTestPlayedCard() {
@@ -114,7 +132,6 @@ final class TestJokerSupplier {
             new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
             new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
             new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
-            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES))
-        );
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES)));
     }
 }

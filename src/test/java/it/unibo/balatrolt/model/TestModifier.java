@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,18 +44,24 @@ final class TestModifier {
         final int basePoints = INIT_B_P;
         final double multipler = INIT_MUL;
         // only basePoints
-        assertTrue(m.getBasePointMapper().isPresent());
-        assertFalse(m.getMultiplierMapper().isPresent());
-        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
+        var bpMapper = m.getBasePointMapper();
+        var mulMapper = m.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
+        assertEquals(basePoints + DELTA_B_P, bpMapper.get().apply(basePoints));
         // only multiplier
         m = builder().addMultiplierModifier(p -> p + DELTA_MUL).build();
-        assertFalse(m.getBasePointMapper().isPresent());
-        assertTrue(m.getMultiplierMapper().isPresent());
-        assertEquals(multipler + DELTA_MUL, m.getMultiplierMapper().get().apply(multipler));
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
+        assertEquals(multipler + DELTA_MUL, mulMapper.get().apply(multipler));
         // both
         m = getStandardModifier();
-        assertTrue(m.getBasePointMapper().isPresent());
-        assertTrue(m.getMultiplierMapper().isPresent());
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
         assertEquals(multipler + DELTA_MUL, m.getMultiplierMapper().get().apply(multipler));
         assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
     }
@@ -73,19 +80,23 @@ final class TestModifier {
         final double mul = INIT_MUL;
         final int baseP = INIT_B_P;
         modifier.setGameStatus(getMockStatus());
-        // validStatus
-        assertTrue(modifier.getBasePointMapper().isPresent());
-        assertTrue(modifier.getMultiplierMapper().isPresent());
+        // valid status
+        var bpMapper = modifier.getBasePointMapper();
+        var mulMapper = modifier.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
         // It should be f -> g = f + DELTA_B_P -> h = g + DELTA_B_P2
         // and          f -> g = f + DELTA_MUL -> h = g * DELTA_MUL2
-        assertEquals(baseP + DELTA_B_P + DELTA_B_P2, modifier.getBasePointMapper().get().apply(baseP));
-        assertEquals((mul + DELTA_MUL) * DELTA_MUL2, modifier.getMultiplierMapper().get().apply(mul));
+        assertEquals(baseP + DELTA_B_P + DELTA_B_P2, bpMapper.get().apply(baseP));
+        assertEquals((mul + DELTA_MUL) * DELTA_MUL2, mulMapper.get().apply(mul));
         base = getModifierWithPCardCondFalse();
         modifier = getMergedModifier(base);
         modifier.setGameStatus(getMockStatus());
+        bpMapper = modifier.getBasePointMapper();
+        mulMapper = modifier.getMultiplierMapper();
         // invalid status
-        assertFalse(modifier.getBasePointMapper().isPresent());
-        assertFalse(modifier.getMultiplierMapper().isPresent());
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
     }
 
     @Test
@@ -93,13 +104,17 @@ final class TestModifier {
         final int basePoints = INIT_B_P;
         Modifier m = getModifierWithPCardCondTrue();
         m.setGameStatus(getMockStatus());
-        assertTrue(m.getBasePointMapper().isPresent());
-        assertTrue(m.getMultiplierMapper().isPresent());
-        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
+        var bpMapper = m.getBasePointMapper();
+        var mulMapper = m.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
+        assertEquals(basePoints + DELTA_B_P, bpMapper.get().apply(basePoints));
         m = getModifierWithPCardCondFalse();
         m.setGameStatus(getMockStatus());
-        assertFalse(m.getBasePointMapper().isPresent());
-        assertFalse(m.getMultiplierMapper().isPresent());
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
     }
 
     private Modifier getModifierWithPCardCondFalse() {
@@ -125,14 +140,18 @@ final class TestModifier {
         final int basePoints = INIT_B_P;
         Modifier m = getModifierWithHCardCondTrue();
         m.setGameStatus(getMockStatus());
-        assertTrue(m.getBasePointMapper().isPresent());
-        assertTrue(m.getMultiplierMapper().isPresent());
-        assertEquals(multipler + DELTA_MUL, m.getMultiplierMapper().get().apply(multipler));
-        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
+        var bpMapper = m.getBasePointMapper();
+        var mulMapper = m.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
+        assertEquals(multipler + DELTA_MUL, mulMapper.get().apply(multipler));
+        assertEquals(basePoints + DELTA_B_P, bpMapper.get().apply(basePoints));
         m = getModifierWithHCardCondFalse();
         m.setGameStatus(getMockStatus());
-        assertFalse(m.getBasePointMapper().isPresent());
-        assertFalse(m.getMultiplierMapper().isPresent());
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
     }
 
     private Modifier getModifierWithHCardCondTrue() {
@@ -158,14 +177,18 @@ final class TestModifier {
         final int basePoints = INIT_B_P;
         Modifier m = getModifierWithCombCondTrue();
         m.setGameStatus(getMockStatus());
-        assertTrue(m.getBasePointMapper().isPresent());
-        assertTrue(m.getMultiplierMapper().isPresent());
-        assertEquals(multipler + DELTA_MUL, m.getMultiplierMapper().get().apply(multipler));
-        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
+        var bpMapper = m.getBasePointMapper();
+        var mulMapper = m.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
+        assertEquals(multipler + DELTA_MUL, mulMapper.get().apply(multipler));
+        assertEquals(basePoints + DELTA_B_P, bpMapper.get().apply(basePoints));
         m = getModifierWithCombCondFalse();
         m.setGameStatus(getMockStatus());
-        assertFalse(m.getBasePointMapper().isPresent());
-        assertFalse(m.getMultiplierMapper().isPresent());
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
     }
 
     private Modifier getModifierWithCombCondFalse() {
@@ -188,14 +211,18 @@ final class TestModifier {
         final int basePoints = INIT_B_P;
         Modifier m = getModifierWithCurrCondTrue();
         m.setGameStatus(getMockStatus());
-        assertTrue(m.getBasePointMapper().isPresent());
-        assertTrue(m.getMultiplierMapper().isPresent());
-        assertEquals(multipler + DELTA_MUL, m.getMultiplierMapper().get().apply(multipler));
-        assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
+        var bpMapper = m.getBasePointMapper();
+        var mulMapper = m.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
+        assertEquals(multipler + DELTA_MUL, mulMapper.get().apply(multipler));
+        assertEquals(basePoints + DELTA_B_P, bpMapper.get().apply(basePoints));
         m = getModifierWithCombCurrFalse();
         m.setGameStatus(getMockStatus());
-        assertFalse(m.getBasePointMapper().isPresent());
-        assertFalse(m.getMultiplierMapper().isPresent());
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
     }
 
     @Test
@@ -205,32 +232,54 @@ final class TestModifier {
         // both with true conditions
         Modifier m = getModifierFromTwoMerges(getModifierWithCombCondTrue(), getModifierWithHCardCondTrue());
         m.setGameStatus(getMockStatus());
-        assertTrue(m.getBasePointMapper().isPresent());
-        assertTrue(m.getMultiplierMapper().isPresent());
-        assertEquals(basePoints + DELTA_B_P + DELTA_B_P, m.getBasePointMapper().get().apply(INIT_B_P));
-        assertEquals(multipler + DELTA_MUL, + DELTA_MUL, m.getMultiplierMapper().get().apply(INIT_MUL));
+        var bpMapper = m.getBasePointMapper();
+        var mulMapper = m.getMultiplierMapper();
+        assertTrue(bpMapper.isPresent());
+        assertTrue(mulMapper.isPresent());
+        assertEquals(basePoints + DELTA_B_P + DELTA_B_P, bpMapper.get().apply(INIT_B_P));
+        assertEquals(multipler + DELTA_MUL + DELTA_MUL, mulMapper.get().apply(INIT_MUL));
         // first with false condition
         m = getModifierFromTwoMerges(getModifierWithCombCondFalse(), getModifierWithHCardCondTrue());
         m.setGameStatus(getMockStatus());
-        assertFalse(m.getBasePointMapper().isPresent());
-        assertFalse(m.getMultiplierMapper().isPresent());
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
         // second with false condition
         m = getModifierFromTwoMerges(getModifierWithCombCondTrue(), getModifierWithHCardCondFalse());
         m.setGameStatus(getMockStatus());
-        assertFalse(m.getBasePointMapper().isPresent());
-        assertFalse(m.getMultiplierMapper().isPresent());
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
         // both with false conditions
         m = getModifierFromTwoMerges(getModifierWithCombCondFalse(), getModifierWithHCardCondFalse());
         m.setGameStatus(getMockStatus());
-        assertFalse(m.getBasePointMapper().isPresent());
-        assertFalse(m.getMultiplierMapper().isPresent());
+        bpMapper = m.getBasePointMapper();
+        mulMapper = m.getMultiplierMapper();
+        assertFalse(bpMapper.isPresent());
+        assertFalse(mulMapper.isPresent());
     }
 
-    private Modifier getModifierFromTwoMerges(Modifier m1, Modifier m2) {
+    private Modifier getModifierFromTwoMerges(final Modifier m1, final Modifier m2) {
         return builder()
             .merge(m1)
             .merge(m2)
             .build();
+    }
+
+    @Test
+    void testInconsistentState() {
+        final Modifier m = getModifierWithCombCondTrue();
+        // without setting state
+        assertThrows(IllegalStateException.class, m::getBasePointMapper);
+        assertThrows(IllegalStateException.class, m::getMultiplierMapper);
+        // setting state once and then forgetting to set
+        m.setGameStatus(getMockStatus());
+        assertDoesNotThrow(m::getBasePointMapper);
+        assertDoesNotThrow(m::getMultiplierMapper);
+        assertThrows(IllegalStateException.class, m::getBasePointMapper);
+        assertThrows(IllegalStateException.class, m::getMultiplierMapper);
     }
 
     @Test

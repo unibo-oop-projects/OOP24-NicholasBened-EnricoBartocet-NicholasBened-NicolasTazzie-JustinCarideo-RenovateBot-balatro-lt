@@ -9,7 +9,7 @@ import it.unibo.balatrolt.model.api.Modifier;
 /**
  * A {@link Modifier} that has two inner Modifiers.
  */
-public class DoubleModifier extends ModifierDecorator {
+public final class DoubleModifier extends ModifierDecorator {
     private final Modifier secondBase;
 
     /**
@@ -19,7 +19,7 @@ public class DoubleModifier extends ModifierDecorator {
      */
     public DoubleModifier(final Modifier baseModifier, final Modifier toMerge) {
         super(baseModifier);
-        this.secondBase = toMerge;
+        this.secondBase = new ModifierFromExisting(Optional.absent(), Optional.absent(), toMerge);
     }
 
     @Override

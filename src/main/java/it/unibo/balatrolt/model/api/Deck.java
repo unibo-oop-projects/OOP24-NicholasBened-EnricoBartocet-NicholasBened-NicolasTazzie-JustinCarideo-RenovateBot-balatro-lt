@@ -12,5 +12,7 @@ public interface Deck {
      *
      * @return a List<PlayableCard> representing a normal 52 card deck
      */
-    List<PlayableCard> getDeck();
+    List<PlayableCard> getCards();
+
+    List<PlayableCard> getShuffledCards();
 }

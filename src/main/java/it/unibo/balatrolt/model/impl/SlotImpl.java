@@ -52,7 +52,7 @@ public final class SlotImpl implements Slot {
     }
 
     @Override
-    public List<Card> getCards() {
+    public List<? extends Card> getCards() {
         return List.copyOf(this.slot);
     }
 

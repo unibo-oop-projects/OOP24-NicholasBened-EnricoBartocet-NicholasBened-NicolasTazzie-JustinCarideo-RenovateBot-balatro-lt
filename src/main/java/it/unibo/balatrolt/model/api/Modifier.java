@@ -14,14 +14,23 @@ import it.unibo.balatrolt.model.api.combination.Multiplier;
  */
 public interface Modifier {
     /**
-     * @return Optional.empty() if conditions are not verified, otherwise an UnaryOperator. 
+     * Getter for multiplier mapper.
+     * Before calling this method setGameStatus() should be called.
+     * @return Optional.empty() if conditions are not verified, otherwise an UnaryOperator.
      * mapping the new value a {@link Multiplier} should have
+     * @throws IllegalStateException if the Modifier value is inconsistent (e.g. when the game status is not set before
+     * calling the method)
      */
     Optional<UnaryOperator<Double>> getMultiplierMapper();
 
     /**
+     * Getter for BasePoints mapper.
+     * Before calling this method setGameStatus() should be called.
+     *
      * @return Optional.empty() if conditions are not verified, otherwise an UnaryOperator.
-     * mapping the new value {@link BasePoints} should have
+     * mapping the new value a {@link BasePoints} should have
+     * @throws IllegalStateException if the Modifier value is inconsistent (e.g. when the game status is not set before
+     * calling the method)
      */
     Optional<UnaryOperator<Integer>> getBasePointMapper();
 

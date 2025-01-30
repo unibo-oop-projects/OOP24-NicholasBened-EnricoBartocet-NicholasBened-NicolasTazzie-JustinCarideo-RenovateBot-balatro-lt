@@ -9,7 +9,6 @@ import java.util.List;
  */
 public interface Slot {
 
-
     /**
      * @return the elements of the Slot.
      */
@@ -57,5 +56,5 @@ public interface Slot {
     /**
      * @return the list of the cards contained in the Slot.
      */
-    List<Card> getCards();
+    List<? extends Card> getCards();
 }

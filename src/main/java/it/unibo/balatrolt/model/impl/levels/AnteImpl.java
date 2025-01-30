@@ -7,6 +7,7 @@ import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.api.levels.BlindModifier;
 
 /**
  * An implementation of the {@link Ante} interface.
@@ -21,11 +22,12 @@ public final class AnteImpl implements Ante {
      * Initialize an Ante from his number.
      * @param config the configuration of the Ante
      */
-    public AnteImpl(final AnteConfiguration config) {
+    public AnteImpl(final AnteConfiguration config, final BlindModifier modifier) {
         this.configuration = config;
         this.blinds = new BlindFactoryImpl(
             config.baseChipCalc(),
-            config.rewardCalc()
+            config.rewardCalc(),
+            modifier
         ).createList(config.numBlinds(), config.id());
     }
 

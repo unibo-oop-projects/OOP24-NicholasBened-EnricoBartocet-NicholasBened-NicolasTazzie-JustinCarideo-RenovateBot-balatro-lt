@@ -1,27 +1,31 @@
 package it.unibo.balatrolt.model.impl.levels;
 
-import it.unibo.balatrolt.model.api.DeckModifier;
+import com.google.common.base.Preconditions;
+
+import it.unibo.balatrolt.model.api.levels.BlindModifier;
 
 public class BlindStats {
-    private static final int BASE_HANDS = 4;
-    private static final int BASE_DISCARDS = 4;
+    public static final int BASE_HANDS = 4;
+    public static final int BASE_DISCARDS = 4;
+    private final BlindModifier modifier;
     private int chips;
     private int remainingHands;
     private int remainingDiscards;
 
-    public BlindStats(final DeckModifier modifier) {
+    public BlindStats(final BlindModifier modifier) {
         this.chips = 0;
-        this.remainingHands = modifier.newHands(BASE_HANDS);
-        this.remainingDiscards = modifier.newDiscards(BASE_DISCARDS);
+        this.modifier = Preconditions.checkNotNull(modifier);
+        this.remainingHands = modifier.getNewHands(BASE_HANDS);
+        this.remainingDiscards = modifier.getNewDiscards(BASE_DISCARDS);
     }
 
     public int getCurrentChips() {
         return this.chips;
     }
 
-    public void incrementChips(int handChips) {
-        assert handChips >= 0;
-        this.chips += handChips;
+    public void incrementChips(final int handChips) {
+        Preconditions.checkArgument(handChips >= 0, "The number of chips earned cannot be negative");
+        this.chips += this.modifier.getNewChips(handChips);
     }
 
     public int getRemainingHands() {

@@ -22,11 +22,12 @@ public final class BlindImpl implements Blind {
     /**
      * Instance a new BlindImpl starting from the configuration.
      * @param config the configuration for the Blind
+     * @param blindModifier the modifier that tells how to change the statistics of the Blind
      */
-    public BlindImpl(final BlindConfiguration config, final BlindModifier deckModifier) {
+    public BlindImpl(final BlindConfiguration config, final BlindModifier blindModifier) {
         this.config = Preconditions.checkNotNull(config);
         this.cardsManager = new BlindCards();
-        this.statistics = new BlindStats(Preconditions.checkNotNull(deckModifier));
+        this.statistics = new BlindStats(Preconditions.checkNotNull(blindModifier));
     }
 
     @Override
@@ -45,14 +46,14 @@ public final class BlindImpl implements Blind {
     }
 
     @Override
-    public void incrementChips(final int handChips) {
-        this.statistics.incrementChips(handChips);
-    }
-
-    @Override
-    public boolean isOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isOver'");
+    public Status getStatus() {
+        if (this.getRemainingHands() > 0) {
+            return Status.IN_GAME;
+        }
+        if (this.getCurrentChips() >= this.getMinimumChips()) {
+            return Status.DEFEATED;
+        }
+        return Status.GAME_OVER;
     }
 
     @Override
@@ -78,16 +79,20 @@ public final class BlindImpl implements Blind {
                 this.cardsManager.discardCards(hand.getCards());
                 this.statistics.decrementHands();
                 this.statistics.incrementChips(hand.evaluateCombination().getChips());
+            } else {
+                throw new IllegalStateException("There aren't hands left");
             }
         }
     }
 
     @Override
-    public void discardPlayableCards(List<PlayableCard> toDiscard) {
+    public void discardPlayableCards(final List<PlayableCard> toDiscard) {
         if (this.cardsInHand(toDiscard)) {
             if (this.statistics.getRemainingDiscards() > 0) {
                 this.cardsManager.discardCards(toDiscard);
                 this.statistics.decrementDiscards();
+            } else {
+                throw new IllegalStateException("There aren't discards left");
             }
         }
     }

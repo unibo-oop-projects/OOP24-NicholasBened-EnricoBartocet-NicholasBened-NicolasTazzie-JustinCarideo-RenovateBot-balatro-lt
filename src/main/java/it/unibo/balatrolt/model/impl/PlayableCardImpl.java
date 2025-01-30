@@ -7,6 +7,7 @@ import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
  * Implements a PlayableCard, made of a Rank and a Suit.
+ * @author Benedetti Nicholas
  */
 public final class PlayableCardImpl implements PlayableCard {
 

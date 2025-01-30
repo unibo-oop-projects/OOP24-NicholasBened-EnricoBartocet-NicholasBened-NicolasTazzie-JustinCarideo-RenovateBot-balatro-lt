@@ -3,6 +3,7 @@ package it.unibo.balatrolt.model.api;
 /**
  * An interface modelling a PlayableCard (of standard 52 card deck),
  * it has a rank and a suit.
+ * @author Benedetti Nicholas
  */
 public interface PlayableCard extends Card {
 

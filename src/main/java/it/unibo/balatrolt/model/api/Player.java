@@ -1,15 +1,39 @@
 package it.unibo.balatrolt.model.api;
 
+import java.util.List;
+
+/**
+ * Represents a player in the game.
+ */
 public interface Player {
 
+    /**
+     * Returns the player's deck.
+     * @return the player's deck
+     */
     Deck getDeck();
 
-    Slot getHandSlot();
+    /**
+     * Returns the player's special cards.
+     * @return
+     */
+    List<SpecialCard> getSpecialCardSlot();
 
-    Slot getSpecialCardSlot();
+    /**
+     * Adds a special card to the player's special card slot.
+     * @param card to add.
+     */
+    void addSpecialCard(final SpecialCard card);
 
-    void addCurrency(Currency value);
+    /**
+     * Adds money to the player's total wealth.
+     * @param value the amount of money to add.
+     */
+    void addCurrency(final int value);
 
-    Currency getCurrency();
-
+    /**
+     * Returns the player's money.
+     * @return the player's money.
+     */
+    int getCurrency();
 }

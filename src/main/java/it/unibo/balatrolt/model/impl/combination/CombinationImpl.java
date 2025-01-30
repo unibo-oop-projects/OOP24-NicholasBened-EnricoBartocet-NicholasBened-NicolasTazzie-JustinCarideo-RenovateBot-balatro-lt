@@ -38,11 +38,13 @@ public class CombinationImpl implements Combination {
 
     @Override
     public void applyModifier(final Modifier mod) {
-        if (mod.getBasePointMapper().isPresent()) {
-            this.points = new BasePointsImpl(mod.getBasePointMapper().get().apply(this.points.basePoints()));
+        var multiplierMapper = mod.getMultiplierMapper();
+        var basePointsMapper = mod.getBasePointMapper();
+        if (basePointsMapper.isPresent()) {
+            this.points = new BasePointsImpl(basePointsMapper.get().apply(this.points.basePoints()));
         }
-        if (mod.getMultiplierMapper().isPresent()) {
-            this.multiplier = new MultiplierImpl(mod.getMultiplierMapper().get().apply(this.multiplier.multiplier()));
+        if (multiplierMapper.isPresent()) {
+            this.multiplier = new MultiplierImpl(multiplierMapper.get().apply(this.multiplier.multiplier()));
         }
     }
 

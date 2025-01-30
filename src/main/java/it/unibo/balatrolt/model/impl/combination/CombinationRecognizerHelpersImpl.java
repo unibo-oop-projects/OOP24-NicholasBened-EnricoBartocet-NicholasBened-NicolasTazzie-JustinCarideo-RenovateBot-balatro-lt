@@ -29,7 +29,7 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
     public CombinationRecognizer pairRecognizer() {
         return hand -> hand.size() >= PAIR_SIZE &&
             hand.stream()
-                .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
+                .collect(Collectors.groupingBy(p -> p.getRank(), Collectors.counting()))
                 .entrySet()
                 .stream()
                 .anyMatch(e -> e.getValue() == PAIR_SIZE);
@@ -39,11 +39,11 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
     public CombinationRecognizer twoPairRecognizer() {
         return hand -> hand.size() >= FOUR_SIZE &&
             hand.stream()
-            .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
-            .entrySet()
-            .stream()
-            .filter(e -> e.getValue() == PAIR_SIZE)
-            .toList().size() == PAIR_SIZE;
+                .collect(Collectors.groupingBy(p -> p.getRank(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() == PAIR_SIZE)
+                .toList().size() == PAIR_SIZE;
     }
 
     @Override
@@ -91,7 +91,8 @@ public class CombinationRecognizerHelpersImpl implements CombinationRecognizerHe
 
     @Override
     public CombinationRecognizer fullHouseRecognizer() {
-        return hand -> pairRecognizer().recognize(hand) &&
+        return hand -> hand.size() == FULL_HAND &&
+            pairRecognizer().recognize(hand) &&
             threeOfAKindRecognizer().recognize(hand);
     }
 

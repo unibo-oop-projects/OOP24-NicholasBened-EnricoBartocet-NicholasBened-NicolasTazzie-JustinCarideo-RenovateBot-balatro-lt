@@ -46,6 +46,14 @@ public class TestCalculators {
 		);
 	}
 
+    private List<PlayableCard> getTestPlayedCard() {
+        return List.of(
+                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
+                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+                new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES)));
+    }
+
     /**
      * Test whether the hand is an high card.
      */
@@ -85,5 +93,10 @@ public class TestCalculators {
         var result = this.factory.threeOfAKindCalculator().compute(CombinationType.THREE_OF_A_KIND, hand);
         assertEquals(expected.getBasePoints().basePoints(), result.getBasePoints().basePoints());
         assertTrue(expected.getMultiplier().multiplier() == result.getMultiplier().multiplier());
+        this.hand = getTestPlayedCard();
+        var expected2 = new CombinationImpl(45, 3, CombinationType.THREE_OF_A_KIND);
+        var result2 = this.factory.threeOfAKindCalculator().compute(CombinationType.THREE_OF_A_KIND, hand);
+        assertEquals(expected2.getBasePoints().basePoints(), result2.getBasePoints().basePoints());
+        assertTrue(expected2.getMultiplier().multiplier() == result2.getMultiplier().multiplier());
     }
 }

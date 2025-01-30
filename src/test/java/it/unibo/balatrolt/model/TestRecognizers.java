@@ -44,12 +44,21 @@ public class TestRecognizers {
 		);
 	}
 
+    private List<PlayableCard> getTestPlayedCard() {
+        return List.of(
+                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
+                new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+                new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES)));
+    }
+
     /**
      * Test whether the hand is an high card.
      */
     @Test
     public void testHighCard() {
         assertTrue(this.helper.highCardRecognizer().recognize(hand));
+        assertTrue(this.helper.highCardRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -58,6 +67,7 @@ public class TestRecognizers {
     @Test
     public void testPair() {
         assertFalse(this.helper.pairRecognizer().recognize(hand));
+        assertFalse(this.helper.pairRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -66,6 +76,7 @@ public class TestRecognizers {
     @Test
     public void testTwoPair() {
         assertFalse(this.helper.twoPairRecognizer().recognize(hand));
+        assertFalse(this.helper.twoPairRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -74,6 +85,7 @@ public class TestRecognizers {
     @Test
     public void testThreeOfAKind() {
         assertFalse(this.helper.threeOfAKindRecognizer().recognize(hand));
+        assertTrue(this.helper.threeOfAKindRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -82,6 +94,7 @@ public class TestRecognizers {
     @Test
     public void testStraight() {
         assertTrue(this.helper.straightRecognizer().recognize(hand));
+        assertFalse(this.helper.straightRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -90,6 +103,7 @@ public class TestRecognizers {
     @Test
     public void testFlush() {
         assertFalse(this.helper.flushRecognizer().recognize(hand));
+        assertFalse(this.helper.flushRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -98,6 +112,7 @@ public class TestRecognizers {
     @Test
     public void testFullHouse() {
         assertFalse(this.helper.fullHouseRecognizer().recognize(hand));
+        assertFalse(this.helper.fullHouseRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -106,6 +121,7 @@ public class TestRecognizers {
     @Test
     public void testFourOfAKind() {
         assertFalse(this.helper.fourOfAKindRecognizer().recognize(hand));
+        assertFalse(this.helper.fourOfAKindRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -114,6 +130,7 @@ public class TestRecognizers {
     @Test
     public void testStraightFlush() {
         assertFalse(this.helper.straightFlushRecognizer().recognize(hand));
+        assertFalse(this.helper.straightFlushRecognizer().recognize(getTestPlayedCard()));
     }
 
     /**
@@ -122,5 +139,6 @@ public class TestRecognizers {
     @Test
     public void testRoyalFlush() {
         assertFalse(this.helper.royalFlushRecognizer().recognize(hand));
+        assertFalse(this.helper.royalFlushRecognizer().recognize(getTestPlayedCard()));
     }
 }

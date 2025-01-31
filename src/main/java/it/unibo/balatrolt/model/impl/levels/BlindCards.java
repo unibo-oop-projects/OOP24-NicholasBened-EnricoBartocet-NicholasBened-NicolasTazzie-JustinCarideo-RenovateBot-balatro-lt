@@ -17,8 +17,8 @@ import it.unibo.balatrolt.model.impl.SlotImpl;
  */
 public class BlindCards {
     private static final int HAND_SIZE = 7;
-    private List<PlayableCard> deck;
-    private Slot handSlot;
+    private final List<PlayableCard> deck;
+    private final Slot handSlot;
 
     /**
      * Sets all the fields.
@@ -58,7 +58,7 @@ public class BlindCards {
      */
     public void discardCards(final List<PlayableCard> toDiscard) {
         Preconditions.checkNotNull(toDiscard);
-        Preconditions.checkArgument(toDiscard.size() > 0, "You need to discard at least one card");
+        Preconditions.checkArgument(!toDiscard.isEmpty(), "You need to discard at least one card");
         for (final PlayableCard card : toDiscard) {
             deck.remove(card);
             handSlot.remove(card);

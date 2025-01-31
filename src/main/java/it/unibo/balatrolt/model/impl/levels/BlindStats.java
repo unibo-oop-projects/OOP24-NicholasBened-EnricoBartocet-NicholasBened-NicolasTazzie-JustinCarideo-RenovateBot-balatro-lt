@@ -10,7 +10,13 @@ import it.unibo.balatrolt.model.api.levels.BlindModifier;
  * @author Benedetti Nicholas
  */
 public class BlindStats {
+    /**
+     * Constant for the base number of hand the player can play.
+     */
     public static final int BASE_HANDS = 4;
+    /**
+     * Constant for the base number of discards the player can do.
+     */
     public static final int BASE_DISCARDS = 4;
     private final BlindModifier modifier;
     private int chips;
@@ -64,7 +70,7 @@ public class BlindStats {
     }
 
     /**
-     * Decrements remaining discards
+     * Decrements remaining discards.
      */
     public void decrementDiscards() {
         this.remainingDiscards--;

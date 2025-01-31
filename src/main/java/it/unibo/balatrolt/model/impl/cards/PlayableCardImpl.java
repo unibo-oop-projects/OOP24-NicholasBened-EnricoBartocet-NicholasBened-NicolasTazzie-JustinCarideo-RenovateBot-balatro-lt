@@ -63,9 +63,6 @@ public final class PlayableCardImpl implements PlayableCard {
             return false;
         }
         final PlayableCardImpl other = (PlayableCardImpl) obj;
-        if (rank != other.rank) {
-            return false;
-        } else
-        return suit == other.suit;
+        return (rank == other.rank) && (suit == other.suit);
     }
 }

@@ -25,13 +25,28 @@ public class GUI extends JFrame {
      * @throws IOException
      */
     public GUI(final int size) throws IOException {
+        //creating left panel
+        this.buildLeftPanel();
+
+        //creating slots panel
+        this.buildSlotPanel();
+
+        this.setVisible(size);
+    }
+
+    private void setVisible(final int size) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(WIDTH_EXPAND * size, HEIGHT_EXPAND * size);
+        this.setVisible(true);
+    }
 
+    private void buildLeftPanel() {
         //creating left panel
         final JPanel leftPanel = new LeftGUI().build();
         this.add(leftPanel, BorderLayout.WEST);
+    }
 
+    private void buildSlotPanel() {
         //creating slots panel
         try {
             final JPanel slotPanel = new SlotGUI().build(this.getSize());
@@ -39,7 +54,5 @@ public class GUI extends JFrame {
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);
         }
-
-        this.setVisible(true);
     }
 }

@@ -6,7 +6,7 @@ import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.PlayerStatus;
-import it.unibo.balatrolt.model.api.SpecialCard;
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 /**
  * An immutable implementation of {@link PlayerStatus}.

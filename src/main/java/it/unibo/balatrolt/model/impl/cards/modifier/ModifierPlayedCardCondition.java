@@ -1,12 +1,12 @@
-package it.unibo.balatrolt.model.impl.modifier;
+package it.unibo.balatrolt.model.impl.cards.modifier;
 
 import static com.google.common.base.Preconditions.checkState;
 
 import java.util.Set;
 import java.util.function.Predicate;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
  * Implementation of ConditionalModifier checking if the played cards satisfies the specified condition.
@@ -16,7 +16,7 @@ public final class ModifierPlayedCardCondition extends ConditionalModifier<Set<P
      * @param base base modifier
      * @param condition condition on played cards to satisfy
      */
-    public ModifierPlayedCardCondition(final Modifier base, final Predicate<Set<PlayableCard>> condition) {
+    public ModifierPlayedCardCondition(final CombinationModifier base, final Predicate<Set<PlayableCard>> condition) {
         super(base, condition);
     }
 

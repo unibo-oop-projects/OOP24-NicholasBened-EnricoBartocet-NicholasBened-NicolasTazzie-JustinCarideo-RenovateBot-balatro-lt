@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl.modifier;
+package it.unibo.balatrolt.model.impl.cards.modifier;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -8,7 +8,7 @@ import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
  * A modifier which checks whether a condition is satisfied before suppling the
@@ -24,7 +24,7 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
      * @param condition to satisfy
      * @param modifier  base modifier
      */
-    protected ConditionalModifier(final Modifier modifier, final Predicate<X> condition) {
+    protected ConditionalModifier(final CombinationModifier modifier, final Predicate<X> condition) {
         super(modifier);
         this.condition = checkNotNull(condition, "Condition can't be null");
     }

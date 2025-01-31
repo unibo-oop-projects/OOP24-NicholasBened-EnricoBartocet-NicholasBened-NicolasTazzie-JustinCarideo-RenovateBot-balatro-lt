@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards.modifier;
 
 import java.util.function.UnaryOperator;
 
@@ -12,7 +12,7 @@ import it.unibo.balatrolt.model.api.combination.Multiplier;
  * Interface modelling the concept of Multiplier.
  * Essentially it supplies UnaryOperators mapping BasePoints and Multipliers when some conditions are verified.
  */
-public interface Modifier {
+public interface CombinationModifier {
     /**
      * Getter for multiplier mapper.
      * Before calling this method setGameStatus() should be called.

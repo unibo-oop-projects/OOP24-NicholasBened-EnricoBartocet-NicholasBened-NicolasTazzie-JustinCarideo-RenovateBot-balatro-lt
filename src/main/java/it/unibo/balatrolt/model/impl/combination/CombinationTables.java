@@ -3,7 +3,7 @@ package it.unibo.balatrolt.model.impl.combination;
 import java.util.Collections;
 import java.util.Map;
 
-import it.unibo.balatrolt.model.api.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.impl.Pair;
 

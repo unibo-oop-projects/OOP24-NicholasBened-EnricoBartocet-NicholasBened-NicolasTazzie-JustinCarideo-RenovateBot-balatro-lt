@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 import it.unibo.balatrolt.model.api.Deck;
-import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.PlayableCard.Rank;
-import it.unibo.balatrolt.model.api.PlayableCard.Suit;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
+import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
 
 /**
  * Implementation of a normal 52 card deck.

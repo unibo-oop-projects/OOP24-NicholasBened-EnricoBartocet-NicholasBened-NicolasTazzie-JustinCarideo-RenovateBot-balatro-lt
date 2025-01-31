@@ -2,6 +2,8 @@ package it.unibo.balatrolt.model.api;
 
 import java.util.List;
 
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+
 /**
  * Interface to represent a deck of {@link PlayableCard Playable Cards}.
  */

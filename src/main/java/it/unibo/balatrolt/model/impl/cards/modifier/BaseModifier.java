@@ -1,11 +1,11 @@
-package it.unibo.balatrolt.model.impl.modifier;
+package it.unibo.balatrolt.model.impl.cards.modifier;
 
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
+import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
 
 /**
  * A basic modifier.
@@ -13,7 +13,7 @@ import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
  * It can contain one of them or both depending on how is constructed.
  * modification without checking any condition and doesn't need any status
  */
-public final class BaseModifier implements Modifier {
+public final class BaseModifier implements CombinationModifier {
     private final Optional<UnaryOperator<Double>> multiplierMod;
     private final Optional<UnaryOperator<Integer>> basePointMod;
 

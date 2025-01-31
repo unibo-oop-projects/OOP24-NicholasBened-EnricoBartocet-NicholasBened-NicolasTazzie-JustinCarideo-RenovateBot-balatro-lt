@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards.specialcard;
 
 import java.util.List;
 

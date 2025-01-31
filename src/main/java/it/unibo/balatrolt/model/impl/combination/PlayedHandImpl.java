@@ -7,7 +7,7 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.impl.Pair;
-import it.unibo.balatrolt.model.api.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.combination.CombinationCalculator;
 import it.unibo.balatrolt.model.api.combination.CombinationCalculatorFactory;

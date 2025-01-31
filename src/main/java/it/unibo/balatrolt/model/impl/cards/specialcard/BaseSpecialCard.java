@@ -1,9 +1,9 @@
-package it.unibo.balatrolt.model.impl.specialcard;
+package it.unibo.balatrolt.model.impl.cards.specialcard;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.SpecialCard;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 /**
  * It's a Basic SpecialCard, it has a name and a description, but doesn't have
@@ -38,7 +38,7 @@ public abstract class BaseSpecialCard implements SpecialCard {
     }
 
     @Override
-    public final Optional<Modifier> getModifier() {
+    public final Optional<CombinationModifier> getModifier() {
         return getInnerModifier();
     }
 
@@ -46,7 +46,7 @@ public abstract class BaseSpecialCard implements SpecialCard {
      * It should return an inner modifier relative to the specific implementation.
      * @return inner modifier
      */
-    protected abstract Optional<Modifier> getInnerModifier();
+    protected abstract Optional<CombinationModifier> getInnerModifier();
 
     @Override
     public final int getShopPrice() {

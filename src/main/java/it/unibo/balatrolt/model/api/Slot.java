@@ -2,6 +2,8 @@ package it.unibo.balatrolt.model.api;
 
 import java.util.List;
 
+import it.unibo.balatrolt.model.api.cards.Card;
+
 /**
  * It models the concept of a Slot, where we
  * can place any Card we want.

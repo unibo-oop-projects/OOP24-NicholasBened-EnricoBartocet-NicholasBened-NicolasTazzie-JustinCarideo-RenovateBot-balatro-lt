@@ -2,8 +2,8 @@ package it.unibo.balatrolt.model.api.levels;
 
 import java.util.List;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.PlayerStatus;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
 
 /**
  * Interface used to represent a Blind.

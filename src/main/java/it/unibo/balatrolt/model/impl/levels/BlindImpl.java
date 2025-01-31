@@ -7,16 +7,16 @@ import java.util.stream.Collectors;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
-import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.PlayerStatus;
-import it.unibo.balatrolt.model.api.SpecialCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindConfiguration;
 import it.unibo.balatrolt.model.api.levels.BlindModifier;
+import it.unibo.balatrolt.model.impl.cards.modifier.ModifierStatsSupplierBuilderImpl;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
-import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
 
 /**
  * An implementation for the {@link Blind} interface.

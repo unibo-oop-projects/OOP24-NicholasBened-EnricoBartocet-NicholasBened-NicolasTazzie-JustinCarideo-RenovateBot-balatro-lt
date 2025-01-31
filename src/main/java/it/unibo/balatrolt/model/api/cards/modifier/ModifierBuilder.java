@@ -1,9 +1,10 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards.modifier;
 
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
@@ -70,7 +71,7 @@ public interface ModifierBuilder {
      * @param toMerge modifier to merge
      * @return current modifierBuilder status
      */
-    ModifierBuilder merge(Modifier toMerge);
+    ModifierBuilder merge(CombinationModifier toMerge);
 
     /**
      * Builds the modifier.
@@ -80,5 +81,5 @@ public interface ModifierBuilder {
      * To see how the merge works, refer to its documentation.
      * @return modifier
      */
-    Modifier build();
+    CombinationModifier build();
 }

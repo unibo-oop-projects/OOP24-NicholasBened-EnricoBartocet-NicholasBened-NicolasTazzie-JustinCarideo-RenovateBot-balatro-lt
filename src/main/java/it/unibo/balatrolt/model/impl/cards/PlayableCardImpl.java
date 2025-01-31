@@ -1,9 +1,10 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.cards;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
+import it.unibo.balatrolt.model.impl.Pair;
 
 /**
  * Implements a PlayableCard, made of a Rank and a Suit.
@@ -37,7 +38,7 @@ public final class PlayableCardImpl implements PlayableCard {
     }
 
     @Override
-    public Optional<Modifier> getModifier() {
+    public Optional<CombinationModifier> getModifier() {
         return Optional.absent();
     }
 

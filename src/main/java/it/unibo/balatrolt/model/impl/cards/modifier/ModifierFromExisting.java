@@ -1,11 +1,11 @@
-package it.unibo.balatrolt.model.impl.modifier;
+package it.unibo.balatrolt.model.impl.cards.modifier;
 
 import java.util.function.UnaryOperator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
  * Special modifier that wraps and existing modifier.
@@ -23,7 +23,7 @@ public final class ModifierFromExisting extends ModifierDecorator {
     public ModifierFromExisting(
             final Optional<UnaryOperator<Double>> multiplierMod,
             final Optional<UnaryOperator<Integer>> basePointMod,
-            final Modifier modifier) {
+            final CombinationModifier modifier) {
         super(modifier);
         this.basePointMod = checkNotNull(basePointMod);
         this.multiplierMod = checkNotNull(multiplierMod);

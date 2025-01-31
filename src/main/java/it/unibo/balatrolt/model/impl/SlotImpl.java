@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 
-import it.unibo.balatrolt.model.api.Card;
 import it.unibo.balatrolt.model.api.Slot;
+import it.unibo.balatrolt.model.api.cards.Card;
 
 /**
  * Implements Slot interface.

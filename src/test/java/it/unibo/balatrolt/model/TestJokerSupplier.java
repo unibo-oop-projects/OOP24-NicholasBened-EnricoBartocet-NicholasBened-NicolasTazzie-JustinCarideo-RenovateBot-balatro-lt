@@ -9,16 +9,16 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.balatrolt.model.api.combination.Combination;
-import it.unibo.balatrolt.model.api.Joker;
-import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
-import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.PlayableCard.Rank;
-import it.unibo.balatrolt.model.api.PlayableCard.Suit;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
+import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
+import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
 import it.unibo.balatrolt.model.impl.Pair;
-import it.unibo.balatrolt.model.impl.PlayableCardImpl;
-import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
-import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
+import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
+import it.unibo.balatrolt.model.impl.cards.modifier.ModifierStatsSupplierBuilderImpl;
+import it.unibo.balatrolt.model.impl.cards.specialcard.JokerSupplierImpl;
 
 final class TestJokerSupplier {
     private static final int DOUBLER_INDEX = 0;
@@ -40,7 +40,7 @@ final class TestJokerSupplier {
         final double m = INIT_MUL;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
-        final Modifier mod = getMod(j, stats);
+        final CombinationModifier mod = getMod(j, stats);
         final var bpMapper = mod.getBasePointMapper();
         final var mulMapper = mod.getMultiplierMapper();
         assertFalse(bpMapper.isPresent());
@@ -54,7 +54,7 @@ final class TestJokerSupplier {
         final double m = INIT_MUL;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
-        Modifier mod = getMod(j, stats);
+        CombinationModifier mod = getMod(j, stats);
         var bpMapper = mod.getBasePointMapper();
         var mulMapper = mod.getMultiplierMapper();
         assertFalse(bpMapper.isPresent());
@@ -75,7 +75,7 @@ final class TestJokerSupplier {
         final int bp = INIT_BP;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
-        final Modifier mod = getMod(j, stats);
+        final CombinationModifier mod = getMod(j, stats);
         final var bpMapper = mod.getBasePointMapper();
         final var mulMapper = mod.getMultiplierMapper();
         assertTrue(bpMapper.isPresent());
@@ -89,7 +89,7 @@ final class TestJokerSupplier {
         final int bp = INIT_BP;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
-        Modifier mod = getMod(j, stats);
+        CombinationModifier mod = getMod(j, stats);
         var bpMapper = mod.getBasePointMapper();
         var mulMapper = mod.getMultiplierMapper();
         assertTrue(bpMapper.isPresent());
@@ -103,8 +103,8 @@ final class TestJokerSupplier {
         assertFalse(mulMapper.isPresent());
     }
 
-    private Modifier getMod(final Joker j, final ModifierStatsSupplier stats) {
-        final Modifier mod = j.getModifier().get();
+    private CombinationModifier getMod(final Joker j, final ModifierStatsSupplier stats) {
+        final CombinationModifier mod = j.getModifier().get();
         mod.setGameStatus(stats);
         return mod;
     }

@@ -1,4 +1,6 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards.specialcard;
+
+import it.unibo.balatrolt.model.api.cards.Card;
 
 /**
  * An interface modelling the concept of a SpecialCard.

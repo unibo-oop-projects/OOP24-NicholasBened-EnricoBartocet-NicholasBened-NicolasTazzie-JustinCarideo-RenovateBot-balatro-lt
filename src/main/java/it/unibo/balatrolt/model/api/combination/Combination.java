@@ -1,6 +1,6 @@
 package it.unibo.balatrolt.model.api.combination;
 
-import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
  * Interface that models the Combination played.
@@ -50,7 +50,7 @@ public interface Combination {
      * Applies the specified modifier to the combination.
      * @param mod the modifier to be applied
      */
-    void applyModifier(Modifier mod);
+    void applyModifier(CombinationModifier mod);
 
     /**
      * Gets the type of combination.

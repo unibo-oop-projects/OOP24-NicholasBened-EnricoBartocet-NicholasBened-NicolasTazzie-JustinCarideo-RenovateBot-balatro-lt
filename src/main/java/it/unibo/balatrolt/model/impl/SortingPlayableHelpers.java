@@ -2,7 +2,7 @@ package it.unibo.balatrolt.model.impl;
 
 import java.util.List;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
 
 /**
  * Support class that orders list of PlayableCard.

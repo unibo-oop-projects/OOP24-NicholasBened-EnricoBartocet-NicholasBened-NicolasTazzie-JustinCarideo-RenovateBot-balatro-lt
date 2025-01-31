@@ -2,6 +2,8 @@ package it.unibo.balatrolt.model.api;
 
 import java.util.Map;
 
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
+
 /**
  * Interface that models the concept of a shop. It's used to buy the special cards
  * used by the player to power-up combinations.

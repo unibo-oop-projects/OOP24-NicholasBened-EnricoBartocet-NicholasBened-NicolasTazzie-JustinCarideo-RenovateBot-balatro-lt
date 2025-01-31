@@ -7,12 +7,12 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.PlayableCard.Rank;
-import it.unibo.balatrolt.model.api.PlayableCard.Suit;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.impl.Pair;
-import it.unibo.balatrolt.model.impl.PlayableCardImpl;
+import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.combination.CombinationCalculatorFactoryImpl;
 import it.unibo.balatrolt.model.impl.combination.CombinationImpl;
 

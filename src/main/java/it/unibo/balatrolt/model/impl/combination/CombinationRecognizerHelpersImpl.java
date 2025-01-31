@@ -3,8 +3,8 @@ package it.unibo.balatrolt.model.impl.combination;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.combination.CombinationRecognizer;
 import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
 import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;

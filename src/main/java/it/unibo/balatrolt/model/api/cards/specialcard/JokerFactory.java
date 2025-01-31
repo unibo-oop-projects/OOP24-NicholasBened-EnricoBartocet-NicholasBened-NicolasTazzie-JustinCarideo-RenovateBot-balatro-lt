@@ -1,7 +1,10 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards.specialcard;
 
 import java.util.Set;
 import java.util.function.Predicate;
+
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
  * A {@link Joker} factory.
@@ -23,7 +26,7 @@ public interface JokerFactory {
      * @param basePrice Joker's price in the shop
      * @return joker with a modifier
      */
-    Joker withModifier(String name, String description, int basePrice, Modifier modifier);
+    Joker withModifier(String name, String description, int basePrice, CombinationModifier modifier);
 
     /**
      * Creates a {@link Joker} with a effect and a random price.
@@ -32,7 +35,7 @@ public interface JokerFactory {
      * @param modifier Joker's effect
      * @return joker with a modifier
      */
-    Joker withModifierAndRandomPrice(String name, String description, Modifier modifier);
+    Joker withModifierAndRandomPrice(String name, String description, CombinationModifier modifier);
 
     /**
      * Creates a new {@link Joker} from an existing one, adding a playable card bound.

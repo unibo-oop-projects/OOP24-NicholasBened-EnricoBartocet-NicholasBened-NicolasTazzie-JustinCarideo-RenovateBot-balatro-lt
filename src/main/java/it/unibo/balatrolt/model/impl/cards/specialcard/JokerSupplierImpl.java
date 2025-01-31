@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl.specialcard;
+package it.unibo.balatrolt.model.impl.cards.specialcard;
 
 import java.util.List;
 import java.util.Random;
@@ -6,13 +6,13 @@ import java.util.Set;
 
 import com.google.common.base.Supplier;
 
-import it.unibo.balatrolt.model.api.Joker;
-import it.unibo.balatrolt.model.api.JokerFactory;
-import it.unibo.balatrolt.model.api.JokerSupplier;
-import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.PlayableCard.Rank;
-import it.unibo.balatrolt.model.api.PlayableCard.Suit;
-import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
+import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
+import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
+import it.unibo.balatrolt.model.api.cards.specialcard.JokerSupplier;
+import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
 /**
  * Joker supplier implementation.

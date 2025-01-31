@@ -8,7 +8,7 @@ import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.Player;
 import it.unibo.balatrolt.model.api.PlayerStatus;
 import it.unibo.balatrolt.model.api.Slot;
-import it.unibo.balatrolt.model.api.SpecialCard;
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 /**
  * The implementation of the Player interface.

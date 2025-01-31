@@ -10,18 +10,18 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
+import it.unibo.balatrolt.model.api.cards.modifier.ModifierBuilder;
+import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.combination.Combination;
-import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.ModifierBuilder;
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
-import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
-import it.unibo.balatrolt.model.api.PlayableCard.Rank;
-import it.unibo.balatrolt.model.api.PlayableCard.Suit;
 import it.unibo.balatrolt.model.impl.Pair;
-import it.unibo.balatrolt.model.impl.PlayableCardImpl;
-import it.unibo.balatrolt.model.impl.modifier.ModifierBuilderImpl;
-import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
+import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
+import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
+import it.unibo.balatrolt.model.impl.cards.modifier.ModifierStatsSupplierBuilderImpl;
 
 final class TestModifier {
     private static final int CURR_QTY_FALSE = 5;
@@ -40,7 +40,7 @@ final class TestModifier {
 
     @Test
     void testBaseModifier() {
-        Modifier m = builder().addBasePointsModifier(p -> p + DELTA_B_P).build();
+        CombinationModifier m = builder().addBasePointsModifier(p -> p + DELTA_B_P).build();
         final int basePoints = INIT_B_P;
         final double multipler = INIT_MUL;
         // only basePoints
@@ -66,7 +66,7 @@ final class TestModifier {
         assertEquals(basePoints + DELTA_B_P, m.getBasePointMapper().get().apply(basePoints));
     }
 
-    private Modifier getStandardModifier() {
+    private CombinationModifier getStandardModifier() {
         return builder()
                 .addBasePointsModifier(p -> p + DELTA_B_P)
                 .addMultiplierModifier(p -> p + DELTA_MUL)
@@ -75,8 +75,8 @@ final class TestModifier {
 
     @Test
     void testMerge() {
-        Modifier base = getModifierWithPCardCondTrue();
-        Modifier modifier = getMergedModifier(base);
+        CombinationModifier base = getModifierWithPCardCondTrue();
+        CombinationModifier modifier = getMergedModifier(base);
         final double mul = INIT_MUL;
         final int baseP = INIT_B_P;
         modifier.setGameStatus(getMockStatus());
@@ -102,7 +102,7 @@ final class TestModifier {
     @Test
     void testPlayedCardModifier() {
         final int basePoints = INIT_B_P;
-        Modifier m = getModifierWithPCardCondTrue();
+        CombinationModifier m = getModifierWithPCardCondTrue();
         m.setGameStatus(getMockStatus());
         var bpMapper = m.getBasePointMapper();
         var mulMapper = m.getMultiplierMapper();
@@ -117,7 +117,7 @@ final class TestModifier {
         assertFalse(mulMapper.isPresent());
     }
 
-    private Modifier getModifierWithPCardCondFalse() {
+    private CombinationModifier getModifierWithPCardCondFalse() {
         return builder()
                 .merge(getStandardModifier())
                 .addPlayedCardBound(c -> c.stream()
@@ -126,7 +126,7 @@ final class TestModifier {
                 .build();
     }
 
-    private Modifier getModifierWithPCardCondTrue() {
+    private CombinationModifier getModifierWithPCardCondTrue() {
         return builder()
                 .merge(getStandardModifier())
                 .addPlayedCardBound(c -> c.contains(
@@ -138,7 +138,7 @@ final class TestModifier {
     void testHoldingCardModifier() {
         final double multipler = INIT_MUL;
         final int basePoints = INIT_B_P;
-        Modifier m = getModifierWithHCardCondTrue();
+        CombinationModifier m = getModifierWithHCardCondTrue();
         m.setGameStatus(getMockStatus());
         var bpMapper = m.getBasePointMapper();
         var mulMapper = m.getMultiplierMapper();
@@ -154,7 +154,7 @@ final class TestModifier {
         assertFalse(mulMapper.isPresent());
     }
 
-    private Modifier getModifierWithHCardCondTrue() {
+    private CombinationModifier getModifierWithHCardCondTrue() {
         return builder()
                 .merge(getStandardModifier())
                 .addHoldingCardBound(c -> c.contains(
@@ -162,7 +162,7 @@ final class TestModifier {
                 .build();
     }
 
-    private Modifier getModifierWithHCardCondFalse() {
+    private CombinationModifier getModifierWithHCardCondFalse() {
         return builder()
                 .merge(getStandardModifier())
                 .addHoldingCardBound(c -> c.stream()
@@ -175,7 +175,7 @@ final class TestModifier {
     void testCurrentCombinationModifier() {
         final double multipler = INIT_MUL;
         final int basePoints = INIT_B_P;
-        Modifier m = getModifierWithCombCondTrue();
+        CombinationModifier m = getModifierWithCombCondTrue();
         m.setGameStatus(getMockStatus());
         var bpMapper = m.getBasePointMapper();
         var mulMapper = m.getMultiplierMapper();
@@ -191,14 +191,14 @@ final class TestModifier {
         assertFalse(mulMapper.isPresent());
     }
 
-    private Modifier getModifierWithCombCondFalse() {
+    private CombinationModifier getModifierWithCombCondFalse() {
         return builder()
                 .merge(getStandardModifier())
                 .addCombinationBound(c -> c.equals(CombinationType.ROYAL_FLUSH))
                 .build();
     }
 
-    private Modifier getModifierWithCombCondTrue() {
+    private CombinationModifier getModifierWithCombCondTrue() {
         return builder()
                 .merge(getStandardModifier())
                 .addCombinationBound(c -> c.equals(CombinationType.TWO_PAIR))
@@ -209,7 +209,7 @@ final class TestModifier {
     void testCurrentCurrencyModifier() {
         final double multipler = INIT_MUL;
         final int basePoints = INIT_B_P;
-        Modifier m = getModifierWithCurrCondTrue();
+        CombinationModifier m = getModifierWithCurrCondTrue();
         m.setGameStatus(getMockStatus());
         var bpMapper = m.getBasePointMapper();
         var mulMapper = m.getMultiplierMapper();
@@ -230,7 +230,7 @@ final class TestModifier {
         final double multipler = INIT_MUL;
         final int basePoints = INIT_B_P;
         // both with true conditions
-        Modifier m = getModifierFromTwoMerges(getModifierWithCombCondTrue(), getModifierWithHCardCondTrue());
+        CombinationModifier m = getModifierFromTwoMerges(getModifierWithCombCondTrue(), getModifierWithHCardCondTrue());
         m.setGameStatus(getMockStatus());
         var bpMapper = m.getBasePointMapper();
         var mulMapper = m.getMultiplierMapper();
@@ -261,7 +261,7 @@ final class TestModifier {
         assertFalse(mulMapper.isPresent());
     }
 
-    private Modifier getModifierFromTwoMerges(final Modifier m1, final Modifier m2) {
+    private CombinationModifier getModifierFromTwoMerges(final CombinationModifier m1, final CombinationModifier m2) {
         return builder()
             .merge(m1)
             .merge(m2)
@@ -270,7 +270,7 @@ final class TestModifier {
 
     @Test
     void testInconsistentState() {
-        final Modifier m = getModifierWithCombCondTrue();
+        final CombinationModifier m = getModifierWithCombCondTrue();
         // without setting state
         assertThrows(IllegalStateException.class, m::getBasePointMapper);
         assertThrows(IllegalStateException.class, m::getMultiplierMapper);
@@ -290,14 +290,14 @@ final class TestModifier {
         assertThrows(IllegalStateException.class, () -> builder().addPlayedCardBound(c -> true).build());
     }
 
-    private Modifier getModifierWithCurrCondTrue() {
+    private CombinationModifier getModifierWithCurrCondTrue() {
         return builder()
                 .merge(getStandardModifier())
                 .addCurrentCurrencyBound(c -> c < CURR_QTY_TRUE)
                 .build();
     }
 
-    private Modifier getModifierWithCombCurrFalse() {
+    private CombinationModifier getModifierWithCombCurrFalse() {
         return builder()
                 .merge(getStandardModifier())
                 .addCurrentCurrencyBound(c -> c < CURR_QTY_FALSE)
@@ -321,7 +321,7 @@ final class TestModifier {
                 new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES)));
     }
 
-    private Modifier getMergedModifier(final Modifier base) {
+    private CombinationModifier getMergedModifier(final CombinationModifier base) {
         return builder()
                 .merge(base)
                 .addBasePointsModifier(p -> p + DELTA_B_P2)

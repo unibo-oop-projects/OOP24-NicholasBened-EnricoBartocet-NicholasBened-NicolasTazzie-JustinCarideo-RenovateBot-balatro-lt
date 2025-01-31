@@ -2,7 +2,7 @@ package it.unibo.balatrolt.model.api.combination;
 
 import java.util.List;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
 
 /**
  * Interface that models the concept of the cards

@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards;
 
 /**
  * An interface modelling a PlayableCard (of standard 52 card deck),

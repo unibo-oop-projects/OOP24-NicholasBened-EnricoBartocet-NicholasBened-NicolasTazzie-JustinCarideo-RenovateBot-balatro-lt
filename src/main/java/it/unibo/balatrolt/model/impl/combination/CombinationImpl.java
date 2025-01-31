@@ -2,7 +2,7 @@ package it.unibo.balatrolt.model.impl.combination;
 
 import com.google.common.base.Preconditions;
 
-import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 import it.unibo.balatrolt.model.api.combination.BasePoints;
 import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.combination.Multiplier;
@@ -48,7 +48,7 @@ public final class CombinationImpl implements Combination {
     }
 
     @Override
-    public void applyModifier(final Modifier mod) {
+    public void applyModifier(final CombinationModifier mod) {
         final var multiplierMapper = mod.getMultiplierMapper();
         final var basePointsMapper = mod.getBasePointMapper();
         if (basePointsMapper.isPresent()) {

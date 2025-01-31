@@ -1,7 +1,8 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards.modifier;
 
 import java.util.Set;
 
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**

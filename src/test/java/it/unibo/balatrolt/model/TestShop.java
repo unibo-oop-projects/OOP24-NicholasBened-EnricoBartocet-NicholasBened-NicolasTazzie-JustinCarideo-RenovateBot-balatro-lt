@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.Joker;
-import it.unibo.balatrolt.model.api.JokerSupplier;
 import it.unibo.balatrolt.model.api.Shop;
+import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
+import it.unibo.balatrolt.model.api.cards.specialcard.JokerSupplier;
+import it.unibo.balatrolt.model.impl.cards.specialcard.JokerSupplierImpl;
 import it.unibo.balatrolt.model.impl.shop.JokerShop;
-import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
 
 class TestShop {
     private static final int DELTA_PRICE = 3;

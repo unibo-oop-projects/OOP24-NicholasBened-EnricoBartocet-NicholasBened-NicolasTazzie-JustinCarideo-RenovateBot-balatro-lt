@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl.modifier;
+package it.unibo.balatrolt.model.impl.cards.modifier;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -7,23 +7,23 @@ import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Modifier;
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
+import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
 
 /**
  * A decorator for modifier.
  * If canApply is false, then it returns an empty optional.
  */
-public abstract class ModifierDecorator implements Modifier {
+public abstract class ModifierDecorator implements CombinationModifier {
     private Optional<ModifierStatsSupplier> stats = Optional.absent();
-    private final Modifier base;
+    private final CombinationModifier base;
     private boolean multiplierMapperReady;
     private boolean basePointsMapperReady;
 
     /**
      * @param modifier base modifier
      */
-    public ModifierDecorator(final Modifier modifier) {
+    public ModifierDecorator(final CombinationModifier modifier) {
         this.base = checkNotNull(modifier, "Modifier can't be null");
     }
 

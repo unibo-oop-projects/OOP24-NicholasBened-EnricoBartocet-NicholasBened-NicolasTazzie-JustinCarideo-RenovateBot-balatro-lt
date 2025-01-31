@@ -1,15 +1,15 @@
-package it.unibo.balatrolt.model.impl.specialcard;
+package it.unibo.balatrolt.model.impl.cards.specialcard;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Joker;
-import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
+import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
 
 /**
  * Implementation of {@link Joker}.
  */
 public final class JokerImpl extends BaseSpecialCard implements Joker {
-    private final Optional<Modifier> modifier;
+    private final Optional<CombinationModifier> modifier;
 
     /**
      * Joker constructor.
@@ -20,13 +20,13 @@ public final class JokerImpl extends BaseSpecialCard implements Joker {
      * @param modifier    modifier
      * @throws NullPointerException if the modifier is null
      */
-    public JokerImpl(final String name, final String description, final int price, final Modifier modifier) {
+    public JokerImpl(final String name, final String description, final int price, final CombinationModifier modifier) {
         super(name, description, price);
         this.modifier = Optional.fromNullable(modifier);
     }
 
     @Override
-    protected Optional<Modifier> getInnerModifier() {
+    protected Optional<CombinationModifier> getInnerModifier() {
         return this.modifier;
     }
 

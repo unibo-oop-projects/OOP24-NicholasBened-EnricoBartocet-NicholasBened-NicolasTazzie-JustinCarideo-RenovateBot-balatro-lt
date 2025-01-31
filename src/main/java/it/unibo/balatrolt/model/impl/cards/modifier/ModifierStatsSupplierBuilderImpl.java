@@ -1,13 +1,13 @@
-package it.unibo.balatrolt.model.impl.modifier;
+package it.unibo.balatrolt.model.impl.cards.modifier;
 
 import java.util.Set;
 
 import com.google.common.base.Optional;
 
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsBuilder;
+import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
-import it.unibo.balatrolt.model.api.ModifierStatsBuilder;
-import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
-import it.unibo.balatrolt.model.api.PlayableCard;
 
 /**
  * Implementation of {@link ModifierStatsSupplier}.

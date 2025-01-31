@@ -2,6 +2,8 @@ package it.unibo.balatrolt.model.api;
 
 import java.util.List;
 
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
+
 /**
  * Represents a player in the game.
  */

@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 
 import com.google.common.base.Supplier;
 
-import it.unibo.balatrolt.model.api.Joker;
 import it.unibo.balatrolt.model.api.Shop;
-import it.unibo.balatrolt.model.api.SpecialCard;
-import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
+import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
+import it.unibo.balatrolt.model.impl.cards.specialcard.JokerSupplierImpl;
 
 /**
  * A shop that is only supplied with Jokers.

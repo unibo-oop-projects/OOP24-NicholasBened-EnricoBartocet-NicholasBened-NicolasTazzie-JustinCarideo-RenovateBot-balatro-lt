@@ -10,13 +10,13 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.Slot;
-import it.unibo.balatrolt.model.api.PlayableCard.Rank;
-import it.unibo.balatrolt.model.api.PlayableCard.Suit;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.impl.Pair;
-import it.unibo.balatrolt.model.impl.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.SlotImpl;
+import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
 
 /**
  * Tester for Slot and it's methods.

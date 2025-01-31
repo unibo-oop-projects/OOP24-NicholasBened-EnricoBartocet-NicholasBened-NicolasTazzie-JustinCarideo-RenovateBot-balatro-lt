@@ -1,23 +1,23 @@
-package it.unibo.balatrolt.model.impl.modifier;
+package it.unibo.balatrolt.model.impl.cards.modifier;
 
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 
-import it.unibo.balatrolt.model.api.Modifier;
+import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
- * A {@link Modifier} that has two inner Modifiers.
+ * A {@link CombinationModifier} that has two inner Modifiers.
  */
 public final class DoubleModifier extends ModifierDecorator {
-    private final Modifier secondBase;
+    private final CombinationModifier secondBase;
 
     /**
      * Constructor.
      * @param baseModifier first modifier to wrap (base)
      * @param toMerge second modifier to wrap (to merge)
      */
-    public DoubleModifier(final Modifier baseModifier, final Modifier toMerge) {
+    public DoubleModifier(final CombinationModifier baseModifier, final CombinationModifier toMerge) {
         super(baseModifier);
         this.secondBase = new ModifierFromExisting(Optional.absent(), Optional.absent(), toMerge);
     }

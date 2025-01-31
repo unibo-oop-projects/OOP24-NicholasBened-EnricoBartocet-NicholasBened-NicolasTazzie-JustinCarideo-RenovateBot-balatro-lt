@@ -95,4 +95,52 @@ class TestCalculators {
         assertEquals(expected2.getBasePoints().basePoints(), result2.getBasePoints().basePoints());
         assertEquals(expected2.getMultiplier().multiplier(), result2.getMultiplier().multiplier());
     }
+
+    /**
+     * Test whether the hand is a four of a kind.
+     */
+    @Test
+    void testFourOfAKind() {
+        final List<PlayableCard> hand = List.of(
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.SPADES)),
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.HEARTS)),
+            new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
+            new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS))
+        );
+        final var expected = new CombinationImpl(80, 7, CombinationType.FOUR_OF_A_KIND);
+        final var result = this.factory.fourOfAKindCalculator().compute(CombinationType.FOUR_OF_A_KIND, hand);
+        assertEquals(expected.getBasePoints().basePoints(), result.getBasePoints().basePoints());
+        assertEquals(expected.getMultiplier().multiplier(), result.getMultiplier().multiplier());
+    }
+
+    /**
+     * Test whether the hand is a five-card combination.
+     */
+    @Test
+    void testFiveCardsCombination() {
+        final List<PlayableCard> hand = List.of(
+            new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.SPADES)),
+            new PlayableCardImpl(new Pair<>(Rank.QUEEN, Suit.HEARTS)),
+            new PlayableCardImpl(new Pair<>(Rank.JACK, Suit.DIAMONDS)),
+            new PlayableCardImpl(new Pair<>(Rank.TEN, Suit.CLUBS))
+        );
+        final var expected = new CombinationImpl(81, 4, CombinationType.STRAIGHT);
+        final var result = this.factory.fiveCardsCalculator().compute(CombinationType.STRAIGHT, hand);
+        assertEquals(expected.getBasePoints().basePoints(), result.getBasePoints().basePoints());
+        assertEquals(expected.getMultiplier().multiplier(), result.getMultiplier().multiplier());
+
+        final List<PlayableCard> hand2 = List.of(
+            new PlayableCardImpl(new Pair<>(Rank.ACE, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.KING, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.QUEEN, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.JACK, Suit.CLUBS)),
+            new PlayableCardImpl(new Pair<>(Rank.TEN, Suit.CLUBS))
+        );
+        final var expected2 = new CombinationImpl(201, 8, CombinationType.ROYAL_FLUSH);
+        final var result2 = this.factory.fiveCardsCalculator().compute(CombinationType.ROYAL_FLUSH, hand2);
+        assertEquals(expected2.getBasePoints().basePoints(), result2.getBasePoints().basePoints());
+        assertEquals(expected2.getMultiplier().multiplier(), result2.getMultiplier().multiplier());
+    }
 }

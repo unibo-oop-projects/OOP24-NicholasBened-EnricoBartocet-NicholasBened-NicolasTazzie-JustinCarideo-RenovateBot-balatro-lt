@@ -45,7 +45,7 @@ public final class PlayedHandImpl implements PlayedHand {
     public PlayedHandImpl(final List<PlayableCard> hand) {
         Preconditions.checkArgument(hand.size() > EMPTY_HAND && hand.size() <= FULL_HAND,
         "Hand played must be within 1 or 5 cards");
-        this.hand = hand;
+        this.hand = Collections.unmodifiableList(hand);
     }
 
     @Override

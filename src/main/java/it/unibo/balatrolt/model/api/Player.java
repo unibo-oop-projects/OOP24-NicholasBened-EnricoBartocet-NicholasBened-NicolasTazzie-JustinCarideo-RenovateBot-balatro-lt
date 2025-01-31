@@ -15,25 +15,31 @@ public interface Player {
 
     /**
      * Returns the player's special cards.
-     * @return
+     * @return a list containing the player's special cards
      */
     List<SpecialCard> getSpecialCardSlot();
 
     /**
      * Adds a special card to the player's special card slot.
-     * @param card to add.
+     * @param card to add
      */
-    void addSpecialCard(final SpecialCard card);
+    void addSpecialCard(SpecialCard card);
 
     /**
      * Adds money to the player's total wealth.
-     * @param value the amount of money to add.
+     * @param value the amount of money to add
      */
-    void addCurrency(final int value);
+    void addCurrency(int value);
 
     /**
      * Returns the player's money.
-     * @return the player's money.
+     * @return the player's money
      */
     int getCurrency();
+
+    /**
+     * Returns the status of the Player.
+     * @return the player's status
+     */
+    PlayerStatus getStatus();
 }

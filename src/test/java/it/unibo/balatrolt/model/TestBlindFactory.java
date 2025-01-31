@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindFactory;
-import it.unibo.balatrolt.model.api.levels.BlindModifier;
 import it.unibo.balatrolt.model.impl.levels.BlindFactoryImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
 
@@ -28,10 +27,13 @@ class TestBlindFactory {
 
     @BeforeEach
     void init() {
-        final BlindModifier blindModifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
         baseChipsCalculator = (a, b) -> a * 10 + (b + 2) * 4;
         rewardCalculator = UnaryOperator.identity();
-        this.factory = new BlindFactoryImpl(baseChipsCalculator, rewardCalculator, blindModifier);
+        this.factory = new BlindFactoryImpl(
+            baseChipsCalculator,
+            rewardCalculator,
+            new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2)
+        );
     }
 
     @Test

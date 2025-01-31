@@ -6,13 +6,14 @@ import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.Player;
+import it.unibo.balatrolt.model.api.PlayerStatus;
 import it.unibo.balatrolt.model.api.Slot;
 import it.unibo.balatrolt.model.api.SpecialCard;
 
 /**
  * The implementation of the Player interface.
  */
-public class PlayerImpl implements Player {
+public final class PlayerImpl implements Player {
     private static final int SLOT_SIZE = 5;
     private final BuffedDeck deck;
     private final Slot specialCardSlot;
@@ -40,13 +41,13 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public void addSpecialCard(SpecialCard card) {
+    public void addSpecialCard(final SpecialCard card) {
         Preconditions.checkNotNull(card, "cannot add null card");
         this.specialCardSlot.addCard(card);
     }
 
     @Override
-    public void addCurrency(int value) {
+    public void addCurrency(final int value) {
         Preconditions.checkArgument(value >= 0, "cannot add negative value");
         this.currency += value;
     }
@@ -54,5 +55,10 @@ public class PlayerImpl implements Player {
     @Override
     public int getCurrency() {
         return this.currency;
+    }
+
+    @Override
+    public PlayerStatus getStatus() {
+        return new PlayerStatusImpl(deck, getSpecialCardSlot(), currency);
     }
 }

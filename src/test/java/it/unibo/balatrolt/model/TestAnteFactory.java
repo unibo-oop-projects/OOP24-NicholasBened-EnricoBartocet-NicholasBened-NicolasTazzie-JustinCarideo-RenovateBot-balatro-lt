@@ -24,14 +24,14 @@ class TestAnteFactory {
     private BinaryOperator<Integer> baseChipsCalculator;
     private UnaryOperator<Integer> rewardCalculator;
     private AnteFactory factory;
-    private BlindModifier blindModifier;
+    private BlindModifier modifier;
 
     @BeforeEach
     void init() {
-        this.blindModifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
+        this.modifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
         baseChipsCalculator = (a, b) -> a * 10 + (b + 2) * 4;
         rewardCalculator = UnaryOperator.identity();
-        this.factory = new AnteFactoryImpl(NUM_BLINDS, baseChipsCalculator, rewardCalculator, blindModifier);
+        this.factory = new AnteFactoryImpl(NUM_BLINDS, baseChipsCalculator, rewardCalculator, this.modifier);
     }
 
     @Test
@@ -54,9 +54,9 @@ class TestAnteFactory {
         // Used to avoid line length > 130 characters
         final var npException = NullPointerException.class;
         final var argException = IllegalArgumentException.class;
-        assertThrows(argException, () -> new AnteFactoryImpl(0, baseChipsCalculator, rewardCalculator, blindModifier));
-        assertThrows(npException, () -> new AnteFactoryImpl(NUM_BLINDS, null, rewardCalculator, blindModifier));
-        assertThrows(npException, () -> new AnteFactoryImpl(NUM_BLINDS, baseChipsCalculator, null, blindModifier));
+        assertThrows(argException, () -> new AnteFactoryImpl(0, baseChipsCalculator, rewardCalculator, modifier));
+        assertThrows(npException, () -> new AnteFactoryImpl(NUM_BLINDS, null, rewardCalculator, modifier));
+        assertThrows(npException, () -> new AnteFactoryImpl(NUM_BLINDS, baseChipsCalculator, null, modifier));
     }
 
     @Test

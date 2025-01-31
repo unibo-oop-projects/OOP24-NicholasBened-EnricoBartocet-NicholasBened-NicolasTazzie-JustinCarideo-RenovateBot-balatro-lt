@@ -1,14 +1,22 @@
 package it.unibo.balatrolt.model.impl.levels;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
+import it.unibo.balatrolt.model.api.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.PlayableCard;
-import it.unibo.balatrolt.model.api.combination.PlayedHand;
+import it.unibo.balatrolt.model.api.PlayerStatus;
+import it.unibo.balatrolt.model.api.SpecialCard;
+import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.api.levels.BlindConfiguration;
 import it.unibo.balatrolt.model.api.levels.BlindModifier;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
+import it.unibo.balatrolt.model.impl.modifier.ModifierStatsSupplierBuilderImpl;
 
 /**
  * An implementation for the {@link Blind} interface.
@@ -22,12 +30,12 @@ public final class BlindImpl implements Blind {
     /**
      * Instance a new BlindImpl starting from the configuration.
      * @param config the configuration for the Blind
-     * @param blindModifier the modifier that tells how to change the statistics of the Blind
+     * @param modifier the modifier that tells how to change the statistics of the Blind
      */
-    public BlindImpl(final BlindConfiguration config, final BlindModifier blindModifier) {
+    public BlindImpl(final BlindConfiguration config, final BlindModifier modifier) {
         this.config = Preconditions.checkNotNull(config);
         this.cardsManager = new BlindCards();
-        this.statistics = new BlindStats(Preconditions.checkNotNull(blindModifier));
+        this.statistics = new BlindStats(Preconditions.checkNotNull(modifier));
     }
 
     @Override
@@ -72,29 +80,31 @@ public final class BlindImpl implements Blind {
     }
 
     @Override
-    public void playHand(final List<PlayableCard> toPlay) {
-        final PlayedHand hand = new PlayedHandImpl(toPlay);
-        if (this.cardsInHand(hand.getCards())) {
-            if (this.statistics.getRemainingHands() > 0) {
-                this.cardsManager.discardCards(hand.getCards());
-                this.statistics.decrementHands();
-                this.statistics.incrementChips(hand.evaluateCombination().getChips());
-            } else {
-                throw new IllegalStateException("There aren't hands left");
-            }
-        }
+    public void playHand(final List<PlayableCard> toPlay, final PlayerStatus playerStatus) {
+        Preconditions.checkNotNull(toPlay);
+        Preconditions.checkArgument(!toPlay.isEmpty(), "You need to play at least 1 card");
+        Preconditions.checkState(this.cardsInHand(toPlay), "The Cards played need to be in your hand");
+        Preconditions.checkState(this.statistics.getRemainingHands() > 0, "There aren't hands left");
+        this.cardsManager.discardCards(toPlay);
+        this.statistics.decrementHands();
+        final Combination combination = new PlayedHandImpl(toPlay).evaluateCombination();
+        playerStatus.specialCards().stream()
+            .map(SpecialCard::getModifier)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .forEach(m -> {
+                m.setGameStatus(getGameStatus(combination, toPlay, playerStatus));
+                combination.applyModifier(m);
+            });
+        this.statistics.incrementChips(combination.getChips());
     }
 
     @Override
     public void discardPlayableCards(final List<PlayableCard> toDiscard) {
-        if (this.cardsInHand(toDiscard)) {
-            if (this.statistics.getRemainingDiscards() > 0) {
-                this.cardsManager.discardCards(toDiscard);
-                this.statistics.decrementDiscards();
-            } else {
-                throw new IllegalStateException("There aren't discards left");
-            }
-        }
+        Preconditions.checkState(this.cardsInHand(toDiscard), "The cards must be in your hand");
+        Preconditions.checkState(this.statistics.getRemainingDiscards() > 0, "There aren't discards left");
+        this.cardsManager.discardCards(toDiscard);
+        this.statistics.decrementDiscards();
     }
 
     @Override
@@ -109,5 +119,22 @@ public final class BlindImpl implements Blind {
 
     private boolean cardsInHand(final List<PlayableCard> cards) {
         return cards.stream().allMatch(c -> this.cardsManager.getHandCards().contains(c));
+    }
+
+    private ModifierStatsSupplier getGameStatus(
+        final Combination comb,
+        final List<PlayableCard> toPlay,
+        final PlayerStatus playerStatus
+    ) {
+        return new ModifierStatsSupplierBuilderImpl()
+            .addCurrentCombination(comb.getCombinationType())
+            .addHoldingCards(listToSet(this.getHandCards()))
+            .addPlayedCards(listToSet(toPlay))
+            .addCurrentCurrency(playerStatus.currency())
+            .build();
+    }
+
+    private <T> Set<T> listToSet(final List<T> list) {
+        return list.stream().collect(Collectors.toSet());
     }
 }

@@ -3,6 +3,7 @@ package it.unibo.balatrolt.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.List;
 import java.util.function.UnaryOperator;
 
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,9 @@ import static it.unibo.balatrolt.model.impl.BuffedDeckFactory.createPurple;
 import static it.unibo.balatrolt.model.impl.BuffedDeckFactory.getList;
 
 import it.unibo.balatrolt.model.api.BuffedDeck;
+import it.unibo.balatrolt.model.impl.PlayerStatusImpl;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
-import it.unibo.balatrolt.model.impl.levels.BlindConfiguration;
+import it.unibo.balatrolt.model.impl.levels.BlindConfigurationImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindStats;
 
@@ -68,11 +70,11 @@ class TestBuffedDeck {
         final UnaryOperator<Integer> discards,
         final UnaryOperator<Integer> chips
     ) {
-        final var blind = new BlindImpl(new BlindConfiguration(0, 0, 0), deck.getModifier());
+        final var blind = new BlindImpl(new BlindConfigurationImpl(0, 0, 0), deck.getModifier());
         assertEquals(hands.apply(BlindStats.BASE_HANDS), blind.getRemainingHands());
         assertEquals(discards.apply(BlindStats.BASE_DISCARDS), blind.getRemainingDiscards());
         final var toPlay = blind.getHandCards().subList(0, 3);
-        blind.playHand(toPlay);
+        blind.playHand(toPlay, new PlayerStatusImpl(deck, List.of(), 0));
         final var combinationChips = new PlayedHandImpl(toPlay).evaluateCombination().getChips();
         assertEquals(chips.apply(combinationChips), blind.getCurrentChips());
     }

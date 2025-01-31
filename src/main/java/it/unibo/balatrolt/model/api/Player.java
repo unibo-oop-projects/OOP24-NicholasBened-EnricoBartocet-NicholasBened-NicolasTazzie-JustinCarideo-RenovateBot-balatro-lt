@@ -11,7 +11,7 @@ public interface Player {
      * Returns the player's deck.
      * @return the player's deck
      */
-    Deck getDeck();
+    BuffedDeck getDeck();
 
     /**
      * Returns the player's special cards.

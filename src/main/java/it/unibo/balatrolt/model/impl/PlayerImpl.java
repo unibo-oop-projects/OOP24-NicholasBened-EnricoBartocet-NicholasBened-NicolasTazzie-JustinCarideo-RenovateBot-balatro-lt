@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 
-import it.unibo.balatrolt.model.api.Deck;
+import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.Player;
 import it.unibo.balatrolt.model.api.Slot;
 import it.unibo.balatrolt.model.api.SpecialCard;
@@ -14,7 +14,7 @@ import it.unibo.balatrolt.model.api.SpecialCard;
  */
 public class PlayerImpl implements Player {
     private static final int SLOT_SIZE = 5;
-    private final Deck deck;
+    private final BuffedDeck deck;
     private final Slot specialCardSlot;
     private int currency;
 
@@ -22,13 +22,13 @@ public class PlayerImpl implements Player {
      * Constructor for the Player.
      * @param deck the deck of the player.
      */
-    public PlayerImpl(final Deck deck) {
+    public PlayerImpl(final BuffedDeck deck) {
         this.deck = deck;
         this.specialCardSlot = new SlotImpl(SLOT_SIZE);
     }
 
     @Override
-    public Deck getDeck() {
+    public BuffedDeck getDeck() {
         return this.deck;
     }
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Preconditions;
+
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination;
@@ -39,6 +41,7 @@ public final class PlayedHandImpl implements PlayedHand {
      * @param hand
      */
     public PlayedHandImpl(final List<PlayableCard> hand) {
+        Preconditions.checkArgument(hand.size() <= 0 || hand.size() > 5, "Hand played must be within 1 or 5 cards");
         this.hand = hand;
     }
 

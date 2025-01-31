@@ -17,14 +17,24 @@ public final class CombinationCalculatorFactoryImpl implements CombinationCalcul
 
     private final CombinationTables table = new CombinationTables();
 
-    private Function<List<PlayableCard>, Integer> computeFiveCards() {
+    /**
+     * This method gives a function that compute the value
+     * with all cards played.
+     * @return function computing all cards
+     */
+    private Function<List<PlayableCard>, Integer> computeAllCards() {
         return hand -> hand
             .stream()
             .map(p -> table.convertRank(p.getRank()))
             .reduce(0, (i, j) -> i + j);
     }
 
-    private Function<List<PlayableCard>, Integer> computeBelowFiveCards(final int n) {
+    /**
+     * Compute n equal cards.
+     * @param n
+     * @return
+     */
+    private Function<List<PlayableCard>, Integer> computeNCards(final int n) {
         return hand -> hand.stream()
             .collect(Collectors.groupingBy(PlayableCard::getRank))
             .entrySet()
@@ -34,6 +44,11 @@ public final class CombinationCalculatorFactoryImpl implements CombinationCalcul
             .reduce(0, (i, j) -> i + j);
     }
 
+    /**
+     * General method for obtaining a calculator.
+     * @param fun for getting the value that depends on the cards played
+     * @return a new combination calculator based on the cards played
+     */
     private CombinationCalculator general(final Function<List<PlayableCard>, Integer> fun) {
         return (type, hand) -> {
             final int value = fun.apply(hand);
@@ -51,23 +66,23 @@ public final class CombinationCalculatorFactoryImpl implements CombinationCalcul
 
     @Override
     public CombinationCalculator pairsCalculator() {
-        return general(computeBelowFiveCards(2));
+        return general(computeNCards(2));
     }
 
     @Override
     public CombinationCalculator threeOfAKindCalculator() {
-        return general(computeBelowFiveCards(3));
+        return general(computeNCards(3));
     }
 
 
     @Override
     public CombinationCalculator fourOfAKindCalculator() {
-        return general(computeBelowFiveCards(4));
+        return general(computeNCards(4));
     }
 
     @Override
     public CombinationCalculator fiveCardsCalculator() {
-        return general(computeFiveCards());
+        return general(computeAllCards());
     }
 
 }

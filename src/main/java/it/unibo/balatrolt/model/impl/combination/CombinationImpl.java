@@ -18,6 +18,7 @@ import it.unibo.balatrolt.model.api.combination.Multiplier;
  */
 public final class CombinationImpl implements Combination {
 
+    private static final int EMPTY_VALUE = 0;
     private final CombinationType type;
     private Multiplier multiplier;
     private BasePoints points;
@@ -29,9 +30,8 @@ public final class CombinationImpl implements Combination {
      * @param t
      */
     public CombinationImpl(final int points, final double multiplier, final CombinationType t) {
-        Preconditions.checkArgument(points < 0, "Points can't negative");
-        Preconditions.checkArgument(multiplier < 0, "Multiplier can't negative");
-        Preconditions.checkArgument(t == null, "Invalid combination type");
+        Preconditions.checkArgument(points >= EMPTY_VALUE, "Points can't negative");
+        Preconditions.checkArgument(multiplier >= EMPTY_VALUE, "Multiplier can't negative");
         this.multiplier = new MultiplierImpl(multiplier);
         this.type = t;
         this.points = new BasePointsImpl(points);

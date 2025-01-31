@@ -32,7 +32,7 @@ public final class CombinationCalculatorFactoryImpl implements CombinationCalcul
     /**
      * Compute n equal cards.
      * @param n
-     * @return
+     * @return a function that count n equal cards
      */
     private Function<List<PlayableCard>, Integer> computeNCards(final int n) {
         return hand -> hand.stream()

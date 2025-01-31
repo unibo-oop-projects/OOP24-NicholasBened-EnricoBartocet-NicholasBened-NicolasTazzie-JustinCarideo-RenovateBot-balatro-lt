@@ -83,11 +83,12 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
 
     @Override
     public CombinationRecognizer flushRecognizer() {
-        return hand ->  hand.stream()
-            .collect(Collectors.groupingBy(PlayableCard::getSuit, Collectors.counting()))
-            .entrySet()
-            .stream()
-            .anyMatch(e -> e.getValue() == FULL_HAND);
+        return hand -> hand.size() == FULL_HAND
+            && hand.stream()
+                .collect(Collectors.groupingBy(PlayableCard::getSuit, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .anyMatch(e -> e.getValue() == FULL_HAND);
     }
 
     @Override
@@ -99,9 +100,9 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
 
     @Override
     public CombinationRecognizer fourOfAKindRecognizer() {
-        return hand -> !hand.isEmpty()
+        return hand -> hand.size() >= FOUR_SIZE
             && hand.stream()
-                .collect(Collectors.groupingBy(p -> p, Collectors.counting()))
+                .collect(Collectors.groupingBy(PlayableCard::getRank, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .anyMatch(e -> e.getValue() == FOUR_SIZE);

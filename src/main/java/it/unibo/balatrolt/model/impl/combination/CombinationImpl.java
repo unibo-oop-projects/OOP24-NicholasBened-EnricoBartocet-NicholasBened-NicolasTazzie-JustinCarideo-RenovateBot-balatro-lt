@@ -1,5 +1,7 @@
 package it.unibo.balatrolt.model.impl.combination;
 
+import com.google.common.base.Preconditions;
+
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.combination.BasePoints;
 import it.unibo.balatrolt.model.api.combination.Combination;
@@ -27,6 +29,9 @@ public final class CombinationImpl implements Combination {
      * @param t
      */
     public CombinationImpl(final int points, final double multiplier, final CombinationType t) {
+        Preconditions.checkArgument(points < 0, "Points can't negative");
+        Preconditions.checkArgument(multiplier < 0, "Multiplier can't negative");
+        Preconditions.checkArgument(t == null, "Invalid combination type");
         this.multiplier = new MultiplierImpl(multiplier);
         this.type = t;
         this.points = new BasePointsImpl(points);

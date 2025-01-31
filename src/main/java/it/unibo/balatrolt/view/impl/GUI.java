@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 /**
  * Main GUI: here we build and mix togheter all the
  * parts that will form the final GUI.
+ * @author Benedetti Nicholas
  */
 public class GUI extends JFrame {
 
@@ -33,7 +34,7 @@ public class GUI extends JFrame {
 
         //creating slots panel
         try {
-            final JPanel slotPanel = new SlotGUI().build();
+            final JPanel slotPanel = new SlotGUI().build(this.getSize());
             this.add(slotPanel);
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);

@@ -16,7 +16,7 @@ import it.unibo.balatrolt.model.impl.specialcard.JokerSupplierImpl;
 /**
  * A shop that is only supplied with Jokers.
  */
-public class JokerShop implements Shop {
+public final class JokerShop implements Shop {
     private Map<SpecialCard, Integer> cards = Map.of();
     private final Supplier<Joker> supplier = new JokerSupplierImpl();
     private final int size;
@@ -38,11 +38,9 @@ public class JokerShop implements Shop {
 
     @Override
     public boolean buy(final SpecialCard toBuy, final int money) {
-        if (this.cards.containsKey(toBuy)) {
-            if (this.cards.get(toBuy) < money) {
-                this.cards.remove(toBuy);
-                return true;
-            }
+        if (this.cards.containsKey(toBuy) && this.cards.get(toBuy) < money) {
+            this.cards.remove(toBuy);
+            return true;
         }
         return false;
     }
@@ -53,7 +51,7 @@ public class JokerShop implements Shop {
             this.cards = Stream.iterate(0, i -> i < this.size, i -> i + 1)
                 .map(i -> this.supplier.get())
                 .distinct()
-                .collect(Collectors.toMap(j -> j, j -> j.getShopPrice()));
+                .collect(Collectors.toMap(j -> j, Joker::getShopPrice));
         }
     }
 }

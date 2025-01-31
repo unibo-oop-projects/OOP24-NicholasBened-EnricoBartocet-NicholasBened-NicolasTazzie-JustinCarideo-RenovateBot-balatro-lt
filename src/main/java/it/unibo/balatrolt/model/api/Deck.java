@@ -3,13 +3,19 @@ package it.unibo.balatrolt.model.api;
 import java.util.List;
 
 /**
- * Models a normal 52 card deck.
+ * Interface to represent a deck of {@link PlayableCard Playable Cards}.
  */
 public interface Deck {
 
     /**
-     *
-     * @return a List<PlayableCard> representing a normal 52 card deck
+     * Returns an immutable list of cards that composes the deck.
+     * @return a List<PlayableCard> representing a deck
      */
-    List<PlayableCard> getDeck();
+    List<PlayableCard> getCards();
+
+    /**
+     * Returns a shuffled copy of the cards.
+     * @return a list containing a shuffled copy of the cards
+     */
+    List<PlayableCard> getShuffledCards();
 }

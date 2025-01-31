@@ -5,9 +5,9 @@ import java.util.List;
 /**
  * It models the concept of a Slot, where we
  * can place any Card we want.
+ * @author Benedetti Nicholas
  */
 public interface Slot {
-
 
     /**
      * @return the elements of the Slot.
@@ -56,5 +56,5 @@ public interface Slot {
     /**
      * @return the list of the cards contained in the Slot.
      */
-    List<Card> getCards();
+    List<? extends Card> getCards();
 }

@@ -24,6 +24,9 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
     private final JokerFactory factory = new JokerFactoryImpl();
     private final Random r = new Random();
 
+    /**
+     * Constructor.
+     */
     public JokerSupplierImpl() {
         this.jokers = List.of(
             this.doubler(),

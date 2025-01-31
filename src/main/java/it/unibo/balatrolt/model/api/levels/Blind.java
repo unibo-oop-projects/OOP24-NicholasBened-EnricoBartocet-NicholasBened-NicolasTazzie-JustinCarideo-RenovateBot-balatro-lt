@@ -3,6 +3,7 @@ package it.unibo.balatrolt.model.api.levels;
 import java.util.List;
 
 import it.unibo.balatrolt.model.api.PlayableCard;
+import it.unibo.balatrolt.model.api.PlayerStatus;
 
 /**
  * Interface used to represent a Blind.
@@ -72,8 +73,9 @@ public interface Blind {
     /**
      * Play a list of cards.
      * @param toPlay the list of cards to play
+     * @param playerStatus the status of the player, used to calculate the chips
      */
-    void playHand(List<PlayableCard> toPlay);
+    void playHand(List<PlayableCard> toPlay, PlayerStatus playerStatus);
 
     /**
      * Discard a list of cards.

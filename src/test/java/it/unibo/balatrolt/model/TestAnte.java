@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.levels.Ante;
-import it.unibo.balatrolt.model.api.levels.BlindModifier;
 import it.unibo.balatrolt.model.impl.levels.AnteConfiguration;
 import it.unibo.balatrolt.model.impl.levels.AnteImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
@@ -27,10 +26,9 @@ class TestAnte {
 
     @BeforeEach
     void init() {
-        final BlindModifier blindModifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
         this.ante = new AnteImpl(
             new AnteConfiguration(ANTE_ID, NUM_BLINDS, (a, b) -> a * b, UnaryOperator.identity()),
-            blindModifier
+            new BlindModifierImpl(n -> n + 1, n -> n - 1, n -> n * 2)
         );
     }
 

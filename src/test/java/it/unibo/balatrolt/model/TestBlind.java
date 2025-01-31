@@ -13,8 +13,10 @@ import org.junit.jupiter.api.Test;
 import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindModifier;
+import it.unibo.balatrolt.model.impl.BuffedDeckImpl;
+import it.unibo.balatrolt.model.impl.PlayerStatusImpl;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
-import it.unibo.balatrolt.model.impl.levels.BlindConfiguration;
+import it.unibo.balatrolt.model.impl.levels.BlindConfigurationImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindStats;
@@ -29,7 +31,10 @@ class TestBlind {
     @BeforeEach
     void init() {
         this.blindModifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
-        this.blind = new BlindImpl(new BlindConfiguration(BLIND_ID, BASE_CHIPS, REWARD), blindModifier);
+        this.blind = new BlindImpl(
+            new BlindConfigurationImpl(BLIND_ID, BASE_CHIPS, REWARD),
+            blindModifier
+        );
     }
 
     @Test
@@ -45,8 +50,8 @@ class TestBlind {
 
     @Test
     void testConfiguration() {
-        assertThrows(IllegalArgumentException.class, () -> new BlindConfiguration(BLIND_ID, -BASE_CHIPS, REWARD));
-        assertThrows(IllegalArgumentException.class, () -> new BlindConfiguration(BLIND_ID, BASE_CHIPS, -REWARD));
+        assertThrows(IllegalArgumentException.class, () -> new BlindConfigurationImpl(BLIND_ID, -BASE_CHIPS, REWARD));
+        assertThrows(IllegalArgumentException.class, () -> new BlindConfigurationImpl(BLIND_ID, BASE_CHIPS, -REWARD));
     }
 
     @Test
@@ -69,7 +74,7 @@ class TestBlind {
         for (int i = 0; i < this.blindModifier.getNewHands(BlindStats.BASE_HANDS); i++) {
             assertEquals(Blind.Status.IN_GAME, this.blind.getStatus());
             final List<PlayableCard> toPlay = this.blind.getHandCards().subList(0, 2);
-            this.blind.playHand(toPlay);
+            this.blind.playHand(toPlay, new PlayerStatusImpl(new BuffedDeckImpl("Test", "Test", blindModifier), List.of(), 0));
             toPlay.forEach(c -> assertFalse(this.blind.getHandCards().contains(c)));
             chips += this.blindModifier.getNewChips(new PlayedHandImpl(toPlay).evaluateCombination().getChips());
         }

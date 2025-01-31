@@ -22,7 +22,7 @@ public final class AnteFactoryImpl implements AnteFactory {
     private final int numBlinds;
     private final BinaryOperator<Integer> baseChipCalc;
     private final UnaryOperator<Integer> rewardCalc;
-    private final BlindModifier modifier;
+    private final BlindModifier blindModifier;
 
     /**
      * Initialize the factory specifying the number of blinds and the functions needed for the Blinds.
@@ -30,7 +30,7 @@ public final class AnteFactoryImpl implements AnteFactory {
      * @param numBlinds the number of {@link Blind} present in the Ante
      * @param baseChipCalc the function that computes the minimum chips required to defeat the Blind, given the Ante and Blind IDs
      * @param rewardCalc the function that computes the reward given when defeating the Blind, given the Blind ID
-     * @param blindModifier the modifier that tells how to change the statistics of the Blind
+     * @param blindModifier the player that will be used to create Blinds
      */
     public AnteFactoryImpl(
         final int numBlinds,
@@ -42,12 +42,12 @@ public final class AnteFactoryImpl implements AnteFactory {
         this.numBlinds = numBlinds;
         this.baseChipCalc = Preconditions.checkNotNull(baseChipCalc);
         this.rewardCalc = Preconditions.checkNotNull(rewardCalc);
-        this.modifier = Preconditions.checkNotNull(blindModifier);
+        this.blindModifier = Preconditions.checkNotNull(blindModifier);
     }
 
     @Override
     public Ante fromId(final int id) {
-        return new AnteImpl(new AnteConfiguration(id, numBlinds, baseChipCalc, rewardCalc), modifier);
+        return new AnteImpl(new AnteConfiguration(id, numBlinds, baseChipCalc, rewardCalc), blindModifier);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package it.unibo.balatrolt.model.impl.combination;
 
+import com.google.common.base.Preconditions;
+
 import it.unibo.balatrolt.model.api.Modifier;
 import it.unibo.balatrolt.model.api.combination.BasePoints;
 import it.unibo.balatrolt.model.api.combination.Combination;
@@ -14,13 +16,22 @@ import it.unibo.balatrolt.model.api.combination.Multiplier;
  * This class can be modify only with applyModifier method.
  * @author Justin Carideo
  */
-public class CombinationImpl implements Combination {
+public final class CombinationImpl implements Combination {
 
+    private final CombinationType type;
     private Multiplier multiplier;
     private BasePoints points;
-    private CombinationType type = CombinationType.HIGH_CARD;
 
+    /**
+     * Constructor for declaring a combination.
+     * @param points
+     * @param multiplier
+     * @param t
+     */
     public CombinationImpl(final int points, final double multiplier, final CombinationType t) {
+        Preconditions.checkArgument(points < 0, "Points can't negative");
+        Preconditions.checkArgument(multiplier < 0, "Multiplier can't negative");
+        Preconditions.checkArgument(t == null, "Invalid combination type");
         this.multiplier = new MultiplierImpl(multiplier);
         this.type = t;
         this.points = new BasePointsImpl(points);
@@ -38,17 +49,19 @@ public class CombinationImpl implements Combination {
 
     @Override
     public void applyModifier(final Modifier mod) {
-        if (mod.getBasePointMapper().isPresent()) {
-            this.points = new BasePointsImpl(mod.getBasePointMapper().get().apply(this.points.basePoints()));
+        final var multiplierMapper = mod.getMultiplierMapper();
+        final var basePointsMapper = mod.getBasePointMapper();
+        if (basePointsMapper.isPresent()) {
+            this.points = new BasePointsImpl(basePointsMapper.get().apply(this.points.basePoints()));
         }
-        if (mod.getMultiplierMapper().isPresent()) {
-            this.multiplier = new MultiplierImpl(mod.getMultiplierMapper().get().apply(this.multiplier.multiplier()));
+        if (multiplierMapper.isPresent()) {
+            this.multiplier = new MultiplierImpl(multiplierMapper.get().apply(this.multiplier.multiplier()));
         }
     }
 
     @Override
     public int getChips() {
-        return (int) Math.round((double)this.points.basePoints() * this.multiplier.multiplier());
+        return (int) Math.round(this.points.basePoints() * this.multiplier.multiplier());
     }
 
     @Override

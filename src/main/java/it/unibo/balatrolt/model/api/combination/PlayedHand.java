@@ -13,7 +13,7 @@ public interface PlayedHand {
     /**
      * In this case we use a list because
      * sorting could be important for evaluating
-     * the combination
+     * the combination.
      * @return the list of cards played
      */
     List<PlayableCard> getCards();

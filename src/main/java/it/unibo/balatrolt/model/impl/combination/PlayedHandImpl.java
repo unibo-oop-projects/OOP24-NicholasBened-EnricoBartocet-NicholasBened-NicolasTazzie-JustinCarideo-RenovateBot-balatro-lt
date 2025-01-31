@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Preconditions;
+
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.api.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination;
@@ -27,7 +29,7 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
  * container of the result.
  * @author Justin Carideo
  */
-public class PlayedHandImpl implements PlayedHand {
+public final class PlayedHandImpl implements PlayedHand {
 
     private final List<PlayableCard> hand;
     private final CombinationRecognizerHelpers helper = new CombinationRecognizerHelpersImpl();
@@ -39,6 +41,7 @@ public class PlayedHandImpl implements PlayedHand {
      * @param hand
      */
     public PlayedHandImpl(final List<PlayableCard> hand) {
+        Preconditions.checkArgument(hand.size() <= 0 || hand.size() > 5, "Hand played must be within 1 or 5 cards");
         this.hand = hand;
     }
 
@@ -73,7 +76,7 @@ public class PlayedHandImpl implements PlayedHand {
     private CombinationType evaluateBest() {
         return combinationTable.stream()
             .map(p -> new Pair<>(p.e1(), p.e2().recognize(hand)))
-            .filter(p -> p.e2())
+            .filter(Pair::e2)
             .toList().getLast().e1();
     }
 

@@ -3,6 +3,9 @@ package it.unibo.balatrolt.view.impl;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+
+import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
@@ -13,13 +16,10 @@ import it.unibo.balatrolt.view.api.View;
 
 public class SwingView implements View {
     private SwingMainRound mainRoundView;
+    private final MasterController controller;
 
-    public SwingView(SwingMainRound mainRoundView) {
-        try {
-            this.mainRoundView = new SwingMainRound();
-        } catch (Exception e) {
-            throw new ExceptionInInitializerError(e);
-        }
+    public SwingView(final MasterController controller) {
+        this.controller = Preconditions.checkNotNull(controller);
     }
 
     @Override
@@ -36,8 +36,7 @@ public class SwingView implements View {
 
     @Override
     public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showRound'");
+        updateHand(playableCards);
     }
 
     @Override
@@ -99,5 +98,14 @@ public class SwingView implements View {
     public void showYouWon() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showYouWon'");
+    }
+
+    @Override
+    public void showMainMenu() {
+        try {
+            this.mainRoundView = new SwingMainRound();
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e);
+        }
     }
 }

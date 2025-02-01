@@ -2,7 +2,11 @@ package it.unibo.balatrolt;
 
 import java.io.IOException;
 
-import it.unibo.balatrolt.view.impl.SwingMainRound;
+import it.unibo.balatrolt.controller.api.BalatroEvent;
+import it.unibo.balatrolt.controller.api.MasterController;
+import it.unibo.balatrolt.controller.impl.MasterControllerImpl;
+import it.unibo.balatrolt.view.api.View;
+import it.unibo.balatrolt.view.impl.SwingView;
 
 /**
  * Entry point of the app, it launches the GUI
@@ -19,6 +23,9 @@ final class LaunchApp {
      * @throws IOException
      */
     public static void main(final String[] args) throws java.io.IOException {
-        new SwingMainRound();
+        final MasterController controller = new MasterControllerImpl();
+        final View view = new SwingView(controller);
+        controller.attachView(view);
+        controller.handleEvent(BalatroEvent.MAIN_MENU, null);
     }
 }

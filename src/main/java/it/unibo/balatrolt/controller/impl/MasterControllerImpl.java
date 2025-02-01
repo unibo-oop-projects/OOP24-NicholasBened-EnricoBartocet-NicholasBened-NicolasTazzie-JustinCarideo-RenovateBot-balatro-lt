@@ -25,7 +25,7 @@ public class MasterControllerImpl implements MasterController {
 
     private final Set<View> views = new HashSet<>();
     private final Map<DeckInfo, BuffedDeck> deckTranslator = new HashMap<>();
-    private Set<BalatroEvent> nextEvents = Set.of(BalatroEvent.INIT_GAME);
+    private Set<BalatroEvent> nextEvents = Set.of(BalatroEvent.MAIN_MENU);
 
     private LevelsController levels;
     private PlayerController player;
@@ -39,6 +39,7 @@ public class MasterControllerImpl implements MasterController {
     public void handleEvent(final BalatroEvent e, final Optional<?> data) {
         checkState(this.nextEvents.contains(e));
         switch (e) {
+            case MAIN_MENU -> views.forEach(View::showMainMenu);
             case INIT_GAME -> views.forEach(v -> v.showDecks(deckTranslator.keySet()));
             case CHOOSE_DECK -> {
                 setControllers(data);

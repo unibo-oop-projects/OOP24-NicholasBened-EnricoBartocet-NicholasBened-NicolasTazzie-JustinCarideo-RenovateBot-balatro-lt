@@ -7,6 +7,10 @@ import java.util.Set;
  */
 public enum BalatroEvent {
     /**
+     * TODO: add description.
+     */
+    MAIN_MENU,
+    /**
      * The user started a new game.
      */
     INIT_GAME,
@@ -44,6 +48,7 @@ public enum BalatroEvent {
      */
     public Set<BalatroEvent> getNextPossibleEvents() {
         return switch (this) {
+            case MAIN_MENU -> Set.of(INIT_GAME);
             case INIT_GAME -> Set.of(CHOOSE_DECK);
             case CHOOSE_DECK -> Set.of(CHOOSE_BLIND);
             case CHOOSE_BLIND, DISCARD_CARDS -> Set.of(DISCARD_CARDS, PLAY_CARDS);

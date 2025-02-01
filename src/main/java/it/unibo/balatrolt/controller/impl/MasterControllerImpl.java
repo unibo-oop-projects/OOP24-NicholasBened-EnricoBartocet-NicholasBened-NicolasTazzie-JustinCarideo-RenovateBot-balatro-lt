@@ -37,7 +37,7 @@ public class MasterControllerImpl implements MasterController {
 
     @Override
     public void handleEvent(final BalatroEvent e, final Optional<?> data) {
-        checkState(this.nextEvents.contains(e));
+        checkState(this.nextEvents.contains(e), "Invalid event received: " + e.toString());
         switch (e) {
             case MAIN_MENU -> views.forEach(View::showMainMenu);
             case INIT_GAME -> views.forEach(v -> v.showDecks(deckTranslator.keySet()));

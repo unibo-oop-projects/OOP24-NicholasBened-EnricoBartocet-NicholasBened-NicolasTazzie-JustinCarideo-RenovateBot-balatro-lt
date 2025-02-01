@@ -1,7 +1,12 @@
 package it.unibo.balatrolt.view.impl;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.List;
 import java.util.Set;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.google.common.base.Preconditions;
 
@@ -15,27 +20,49 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.view.api.View;
 
 public class SwingView implements View {
+    private JFrame frame = new JFrame();
+    private JPanel panel;
     private SwingMainRound mainRoundView;
     private final MasterController controller;
 
     public SwingView(final MasterController controller) {
         this.controller = Preconditions.checkNotNull(controller);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize((int) (screenSize.getWidth() * 0.5), (int) (screenSize.getHeight() * 0.5));
+        frame.setLocationByPlatform(true);
+    }
+
+    @Override
+    public void showMainMenu() {
+        panel = new MainMenu(controller, "Play");
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
     @Override
     public void showDecks(final Set<DeckInfo> setMap) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showDecks'");
+        frame.remove(panel);
+        panel = new DeckSelector(controller, setMap);
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
     @Override
     public void showAnte(final AnteInfo anteInfo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showAnte'");
+        frame.remove(panel);
+        panel = new AnteView(controller, anteInfo);
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
     @Override
     public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards) {
+        try {
+            this.mainRoundView = new SwingMainRound();
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e);
+        }
         updateHand(playableCards);
     }
 
@@ -98,14 +125,5 @@ public class SwingView implements View {
     public void showYouWon() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showYouWon'");
-    }
-
-    @Override
-    public void showMainMenu() {
-        try {
-            this.mainRoundView = new SwingMainRound();
-        } catch (Exception e) {
-            throw new ExceptionInInitializerError(e);
-        }
     }
 }

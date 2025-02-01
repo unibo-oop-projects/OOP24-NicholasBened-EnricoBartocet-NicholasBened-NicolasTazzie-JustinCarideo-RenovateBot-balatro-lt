@@ -16,4 +16,6 @@ public interface LevelsController {
     BlindStats getCurrentBlindStats();
 
     List<PlayableCardInfo> getHand();
+
+    void discardCards(List<PlayableCardInfo> cards);
 }

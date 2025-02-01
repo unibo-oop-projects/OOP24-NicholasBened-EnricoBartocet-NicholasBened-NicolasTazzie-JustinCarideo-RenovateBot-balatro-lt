@@ -17,7 +17,9 @@ public interface View {
 
     void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards);
 
-    void updateHand();
+    void updateHand(List<PlayableCardInfo> playableCards);
+
+    void updateBlindStatistics(BlindStats stats);
 
     void updateCombinationStatus();
 

@@ -1,6 +1,8 @@
 package it.unibo.balatrolt.controller.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 
@@ -12,6 +14,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.model.api.BuffedDeck;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
@@ -23,6 +26,7 @@ public class LevelsControllerImpl implements LevelsController {
     private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b + 4;
 
     private final List<Ante> anteList;
+    private final Map<PlayableCardInfo, PlayableCard> cardsTranslator = new HashMap<>();
     private int currAnte;
 
     /**
@@ -33,6 +37,7 @@ public class LevelsControllerImpl implements LevelsController {
         this.anteList = new AnteFactoryImpl(NUM_BLINDS, BASE_CHIP_CALCULATOR, REWARD_CALCULATOR, deck.getModifier())
             .generateList(NUM_ANTE);
         this.currAnte = 0;
+        deck.getCards().forEach(c -> cardsTranslator.put(new PlayableCardInfo(c.getRank().name(), c.getSuit().name()), c));
     }
 
     @Override
@@ -62,6 +67,11 @@ public class LevelsControllerImpl implements LevelsController {
             .toList();
     }
 
+    @Override
+    public void discardCards(List<PlayableCardInfo> cards) {
+        this.currentBlind().discardPlayableCards(cards.stream().map(c -> this.cardsTranslator.get(c)).toList());
+    }
+
     private Ante currentAnte() {
         return this.anteList.get(this.currAnte);
     }
@@ -73,4 +83,5 @@ public class LevelsControllerImpl implements LevelsController {
     private BlindInfo getBlindInfo(final Blind blind) {
         return new BlindInfo(blind.getBlindNumber(), blind.getMinimumChips(), blind.getReward());
     }
+
 }

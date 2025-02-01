@@ -31,7 +31,7 @@ public class SwingView implements View {
     }
 
     @Override
-    public void updateHand() {
+    public void updateHand(final List<PlayableCardInfo> playableCards) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateHand'");
     }
@@ -64,5 +64,11 @@ public class SwingView implements View {
     public void updateSpecialCards() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
+    }
+
+    @Override
+    public void updateBlindStatistics(BlindStats stats) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateBlindStatistics'");
     }
 }

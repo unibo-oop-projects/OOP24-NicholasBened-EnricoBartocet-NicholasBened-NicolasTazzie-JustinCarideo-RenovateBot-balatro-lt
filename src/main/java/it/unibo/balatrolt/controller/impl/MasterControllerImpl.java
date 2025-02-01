@@ -4,38 +4,30 @@ import static com.google.common.base.Preconditions.checkState;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BinaryOperator;
-import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.controller.api.BalatroEvent;
+import it.unibo.balatrolt.controller.api.LevelsController;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.Player;
-import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.impl.BuffedDeckFactory;
 import it.unibo.balatrolt.model.impl.PlayerImpl;
-import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
 import it.unibo.balatrolt.view.api.View;
 
 public class MasterControllerImpl implements MasterController {
-    private static final int NUM_ANTE = 8;
-    private static final int NUM_BLINDS = 3;
-    private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> a * 150 + b * 10;
-    private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b + 4;
 
     private final Set<View> views = new HashSet<>();
     private final Map<DeckInfo, BuffedDeck> deckTranslator = new HashMap<>();
     private Set<BalatroEvent> nextEvents = Set.of(BalatroEvent.INIT_GAME);
 
-    private List<Ante> anteList;
     private Player player;
+    private LevelsController levelsController;
 
     public MasterControllerImpl() {
         final var decks = BuffedDeckFactory.getList();
@@ -49,7 +41,7 @@ public class MasterControllerImpl implements MasterController {
             case INIT_GAME -> views.forEach(v -> v.showDecks(deckTranslator.keySet()));
             case CHOOSE_DECK -> {
                 setDeck(data);
-                views.forEach(View::showAnte);
+                views.forEach(v -> v.showAnte(this.levelsController.getCurrentAnteInfo()));
             }
             case CHOOSE_BLIND -> throw new UnsupportedOperationException("Unimplemented case: " + e);
             case DISCARD_CARDS -> throw new UnsupportedOperationException("Unimplemented case: " + e);
@@ -72,7 +64,6 @@ public class MasterControllerImpl implements MasterController {
         Preconditions.checkArgument(data.get() instanceof DeckInfo, "The data received alongside the event isn't a DeckInfo");
         final var deck = deckTranslator.get((DeckInfo) data.get());
         this.player = new PlayerImpl(deck);
-        this.anteList = new AnteFactoryImpl(NUM_BLINDS, BASE_CHIP_CALCULATOR, REWARD_CALCULATOR, deck.getModifier())
-            .generateList(NUM_ANTE);
+        this.levelsController = new LevelsControllerImpl(deck);
     }
 }

@@ -1,36 +1,64 @@
 package it.unibo.balatrolt.controller.impl;
 
 import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.UnaryOperator;
+
+import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.controller.api.LevelsController;
+import it.unibo.balatrolt.controller.api.communication.AnteInfo;
+import it.unibo.balatrolt.controller.api.communication.BlindInfo;
+import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.levels.Ante;
+import it.unibo.balatrolt.model.api.levels.Blind;
+import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
 
 public class LevelsControllerImpl implements LevelsController {
-    private final List<Ante> antes;
-    private final int numHandSlot;
+    private static final int NUM_ANTE = 8;
+    private static final int NUM_BLINDS = 3;
+    private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> a * 150 + b * 10;
+    private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b + 4;
+
+    private final List<Ante> anteList;
     private int currAnte;
-    private int currBlind;
 
     /**
-     * constructor of the hand's controller.
+     * Constructor of the levels controller.
      */
-    public LevelsControllerImpl(List<Ante> antes) {
+    public LevelsControllerImpl(final BuffedDeck deck) {
+        Preconditions.checkNotNull(deck);
+        this.anteList = new AnteFactoryImpl(NUM_BLINDS, BASE_CHIP_CALCULATOR, REWARD_CALCULATOR, deck.getModifier())
+            .generateList(NUM_ANTE);
         this.currAnte = 0;
-        this.currBlind = 0;
-        this.antes = antes;
-        this.numHandSlot = this.antes.get(this.currAnte).getBlinds().get(this.currBlind).getHandCards().size();
     }
 
     @Override
-    public int numHandSlot() {
-        return this.numHandSlot;
+    public AnteInfo getCurrentAnteInfo() {
+        return new AnteInfo(
+            this.currentAnte().getAnteNumber(),
+            this.currentAnte().getBlinds().stream().map(this::getBlindInfo).toList(),
+            this.currentBlind().getBlindNumber()
+        );
     }
 
     @Override
     public List<String> getHand() {
-        return this.antes.get(this.currAnte).getBlinds().get(this.currBlind).getHandCards()
+        return this.currentBlind().getHandCards()
             .stream()
             .map(e -> e.getRank().name() + e.getSuit().name())
             .toList();
+    }
+
+    private Ante currentAnte() {
+        return this.anteList.get(this.currAnte);
+    }
+
+    private Blind currentBlind() {
+        return this.currentAnte().getCurrentBlind().get();
+    }
+
+    private BlindInfo getBlindInfo(final Blind blind) {
+        return new BlindInfo(blind.getBlindNumber(), blind.getMinimumChips(), blind.getReward());
     }
 }

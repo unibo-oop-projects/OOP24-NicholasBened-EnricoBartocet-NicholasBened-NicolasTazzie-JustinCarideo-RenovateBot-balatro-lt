@@ -2,18 +2,19 @@ package it.unibo.balatrolt.view.impl;
 
 import java.util.Set;
 
+import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.view.api.View;
 
 public class SwingView implements View {
     @Override
-    public void showDecks(Set<DeckInfo> setMap) {
+    public void showDecks(final Set<DeckInfo> setMap) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showDecks'");
     }
 
     @Override
-    public void showAnte() {
+    public void showAnte(final AnteInfo anteInfo) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showAnte'");
     }

@@ -2,9 +2,11 @@ package it.unibo.balatrolt.controller.api;
 
 import java.util.List;
 
+import it.unibo.balatrolt.controller.api.communication.AnteInfo;
+
 public interface LevelsController {
 
-    int numHandSlot();
+    AnteInfo getCurrentAnteInfo();
 
     List<String> getHand();
 }

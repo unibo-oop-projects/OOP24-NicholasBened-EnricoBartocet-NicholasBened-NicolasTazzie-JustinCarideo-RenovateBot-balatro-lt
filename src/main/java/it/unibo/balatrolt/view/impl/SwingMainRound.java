@@ -1,6 +1,8 @@
 package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,6 +34,8 @@ public class SwingMainRound extends JPanel {
         slotPanel = this.buildSlotPanel();
 
         this.setVisible(true);
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize((int) (screenSize.getWidth() * 0.7), (int) (screenSize.getHeight() * 0.7));
     }
 
     public void updateHand(List<String> hand) {

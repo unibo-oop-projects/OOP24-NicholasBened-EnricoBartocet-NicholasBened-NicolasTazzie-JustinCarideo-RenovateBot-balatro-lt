@@ -76,4 +76,28 @@ public class SwingView implements View {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
     }
+
+    @Override
+    public void updateBlindStatistics(BlindStats stats) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateBlindStatistics'");
+    }
+
+    @Override
+    public void showBlindDefeated() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showBlindDefeated'");
+    }
+
+    @Override
+    public void showGameOver() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showGameOver'");
+    }
+
+    @Override
+    public void showYouWon() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showYouWon'");
+    }
 }

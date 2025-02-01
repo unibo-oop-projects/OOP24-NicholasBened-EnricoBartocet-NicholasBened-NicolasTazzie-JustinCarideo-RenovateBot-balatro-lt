@@ -11,13 +11,19 @@ import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 
 public interface View {
-    void showDecks(Set<DeckInfo> setMap);
+    void showDecks(Set<DeckInfo> decks);
 
     void showAnte(AnteInfo anteInfo);
 
     void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards);
 
-    void updateHand(List<PlayableCardInfo> hand);
+    void showBlindDefeated();
+
+    void showGameOver();
+
+    void updateHand(List<PlayableCardInfo> playableCards);
+
+    void updateBlindStatistics(BlindStats stats);
 
     void updateCombinationStatus();
 
@@ -28,4 +34,6 @@ public interface View {
     void showShop();
 
     void updateSpecialCards();
+
+    void showYouWon();
 }

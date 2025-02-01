@@ -2,7 +2,7 @@ package it.unibo.balatrolt;
 
 import java.io.IOException;
 
-import it.unibo.balatrolt.view.impl.GUI;
+import it.unibo.balatrolt.view.impl.SwingMainRound;
 
 /**
  * Entry point of the app, it launches the GUI
@@ -21,6 +21,6 @@ final class LaunchApp {
      * @throws IOException
      */
     public static void main(final String[] args) throws java.io.IOException {
-        new GUI(APP_SIZE);
+        new SwingMainRound(APP_SIZE);
     }
 }

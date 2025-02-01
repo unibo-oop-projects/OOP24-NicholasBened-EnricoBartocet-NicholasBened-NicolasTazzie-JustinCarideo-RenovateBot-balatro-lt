@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  * parts that will form the final GUI.
  * @author Benedetti Nicholas
  */
-public class GUI extends JFrame {
+public class SwingMainRound extends JFrame {
 
     static final long serialVersionUID = 1L;
     private static final int WIDTH_EXPAND = 70;
@@ -24,7 +24,7 @@ public class GUI extends JFrame {
      *
      * @throws IOException
      */
-    public GUI(final int size) throws IOException {
+    public SwingMainRound(final int size) throws IOException {
         //creating left panel
         this.buildLeftPanel();
 
@@ -49,7 +49,8 @@ public class GUI extends JFrame {
     private void buildSlotPanel() {
         //creating slots panel
         try {
-            final JPanel slotPanel = new SlotGUI().build(this.getSize());
+            System.out.println(this.getSize().height);
+            final JPanel slotPanel = new SlotGUI();
             this.add(slotPanel);
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);

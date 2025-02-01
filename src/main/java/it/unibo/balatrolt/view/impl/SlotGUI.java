@@ -1,7 +1,6 @@
 package it.unibo.balatrolt.view.impl;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -30,27 +29,40 @@ public final class SlotGUI extends JPanel {
      * Sets the controller and the number of
      * hand and special card slot.
      */
-    public SlotGUI() throws IOException {
+    public SlotGUI(List<String> cards) throws IOException {
         super(new GridBagLayout());
         this.setBackground(Color.green.darker().darker().darker());
 
         updateSpecialSlot();
         updateCardSlot();
-        updateHand(List.of("ACEHEARTS", "THREEHEARTS"));
+        updateHand(cards);
     }
 
+    /**
+     * Updates the hand slot with the new cards.
+     * @param hand the new cards to show.
+     */
     public void updateHand(List<String> hand) {
         buildHandSlot(hand, numHandSlot);
     }
 
+    /**
+     * Updates the special slot with the new cards.
+     */
     public void updateSpecialSlot() {
         buildSpecialSlot();
     }
 
+    /**
+     * Updates the card slot with the new cards.
+     */
     public void updateCardSlot() {
         buildCardSlot();
     }
 
+    /**
+     * Builds the special slot.
+     */
     private void buildSpecialSlot() {
         final JPanel speciaSlot = new JPanel(new GridLayout(1, NUM_SPECIAL_SLOT));
         final GridBagConstraints gbc = new GridBagConstraints();
@@ -74,6 +86,9 @@ public final class SlotGUI extends JPanel {
         this.add(speciaSlot, gbc);
     }
 
+    /**
+     * Builds the card slot.
+     */
     private void buildCardSlot() {
         final JPanel cardSlot = new JPanel(new GridLayout(1, NUM_CARD_SLOT));
         final GridBagConstraints gbc = new GridBagConstraints();
@@ -99,6 +114,11 @@ public final class SlotGUI extends JPanel {
         this.add(cardSlot, gbc);
     }
 
+    /**
+     * Builds the hand slot.
+     * @param hand the cards to show.
+     * @param numHandSlot the number of hand slot.
+     */
     private void buildHandSlot(List<String> hand, int numHandSlot) {
         final JPanel handSlot = new JPanel(new GridLayout(1, numHandSlot));
         final GridBagConstraints gbc = new GridBagConstraints();

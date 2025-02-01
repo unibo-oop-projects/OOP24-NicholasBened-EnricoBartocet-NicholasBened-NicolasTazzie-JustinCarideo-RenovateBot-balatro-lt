@@ -10,8 +10,6 @@ import it.unibo.balatrolt.view.impl.SwingMainRound;
  */
 final class LaunchApp {
 
-    public static final int APP_SIZE = 20;
-
     private LaunchApp() {}
 
     /**
@@ -21,6 +19,6 @@ final class LaunchApp {
      * @throws IOException
      */
     public static void main(final String[] args) throws java.io.IOException {
-        new SwingMainRound(APP_SIZE);
+        new SwingMainRound();
     }
 }

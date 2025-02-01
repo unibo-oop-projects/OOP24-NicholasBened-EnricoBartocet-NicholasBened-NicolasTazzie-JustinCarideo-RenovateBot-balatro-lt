@@ -9,6 +9,8 @@ import com.google.common.base.Preconditions;
 import it.unibo.balatrolt.controller.api.LevelsController;
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
+import it.unibo.balatrolt.controller.api.communication.BlindStats;
+import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.api.levels.Blind;
@@ -34,7 +36,7 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     @Override
-    public AnteInfo getCurrentAnteInfo() {
+    public AnteInfo getCurrentAnte() {
         return new AnteInfo(
             this.currentAnte().getAnteNumber(),
             this.currentAnte().getBlinds().stream().map(this::getBlindInfo).toList(),
@@ -43,10 +45,20 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     @Override
-    public List<String> getHand() {
+    public BlindInfo getCurrentBlindInfo() {
+        return this.getBlindInfo(this.currentBlind());
+    }
+
+    @Override
+    public BlindStats getCurrentBlindStats() {
+        return new BlindStats(this.currentBlind().getCurrentChips(), this.currentBlind().getRemainingHands(), this.currentBlind().getRemainingDiscards());
+    }
+
+    @Override
+    public List<PlayableCardInfo> getHand() {
         return this.currentBlind().getHandCards()
             .stream()
-            .map(e -> e.getRank().name() + e.getSuit().name())
+            .map(c -> new PlayableCardInfo(c.getRank().name(), c.getSuit().name()))
             .toList();
     }
 

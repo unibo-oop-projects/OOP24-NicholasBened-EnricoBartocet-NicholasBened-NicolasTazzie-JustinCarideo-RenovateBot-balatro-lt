@@ -13,11 +13,10 @@ import com.google.common.base.Preconditions;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.LevelsController;
 import it.unibo.balatrolt.controller.api.MasterController;
+import it.unibo.balatrolt.controller.api.PlayerController;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.model.api.BuffedDeck;
-import it.unibo.balatrolt.model.api.Player;
 import it.unibo.balatrolt.model.impl.BuffedDeckFactory;
-import it.unibo.balatrolt.model.impl.PlayerImpl;
 import it.unibo.balatrolt.view.api.View;
 
 public class MasterControllerImpl implements MasterController {
@@ -26,8 +25,8 @@ public class MasterControllerImpl implements MasterController {
     private final Map<DeckInfo, BuffedDeck> deckTranslator = new HashMap<>();
     private Set<BalatroEvent> nextEvents = Set.of(BalatroEvent.INIT_GAME);
 
-    private Player player;
-    private LevelsController levelsController;
+    private LevelsController levels;
+    private PlayerController player;
 
     public MasterControllerImpl() {
         final var decks = BuffedDeckFactory.getList();
@@ -41,9 +40,11 @@ public class MasterControllerImpl implements MasterController {
             case INIT_GAME -> views.forEach(v -> v.showDecks(deckTranslator.keySet()));
             case CHOOSE_DECK -> {
                 setDeck(data);
-                views.forEach(v -> v.showAnte(this.levelsController.getCurrentAnteInfo()));
+                views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
             }
-            case CHOOSE_BLIND -> throw new UnsupportedOperationException("Unimplemented case: " + e);
+            case CHOOSE_BLIND -> {
+                views.forEach(v -> v.showRound(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.levels.getHand()));
+            }
             case DISCARD_CARDS -> throw new UnsupportedOperationException("Unimplemented case: " + e);
             case PLAY_CARDS -> throw new UnsupportedOperationException("Unimplemented case: " + e);
             case OPEN_SHOP -> throw new UnsupportedOperationException("Unimplemented case: " + e);
@@ -63,7 +64,7 @@ public class MasterControllerImpl implements MasterController {
         Preconditions.checkArgument(data.isPresent(), "No deck was received alongside the event");
         Preconditions.checkArgument(data.get() instanceof DeckInfo, "The data received alongside the event isn't a DeckInfo");
         final var deck = deckTranslator.get((DeckInfo) data.get());
-        this.player = new PlayerImpl(deck);
-        this.levelsController = new LevelsControllerImpl(deck);
+        this.levels = new LevelsControllerImpl(deck);
+        this.player = new PlayerControllerImpl(deck);
     }
 }

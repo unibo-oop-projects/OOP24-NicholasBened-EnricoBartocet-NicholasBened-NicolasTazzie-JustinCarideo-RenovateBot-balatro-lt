@@ -1,9 +1,14 @@
 package it.unibo.balatrolt.view.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
+import it.unibo.balatrolt.controller.api.communication.BlindInfo;
+import it.unibo.balatrolt.controller.api.communication.BlindStats;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
+import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
+import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.view.api.View;
 
 public class SwingView implements View {
@@ -20,7 +25,7 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showRound() {
+    public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showRound'");
     }

@@ -89,14 +89,19 @@ public final class BuffedDeckFactory {
     public static Set<BuffedDeck> getList() {
         final Set<BuffedDeck> toReturn = new HashSet<>();
         final Method[] methods = BuffedDeckFactory.class.getMethods();
-        for (final Method method: methods) {
-            if (method.getName().startsWith("create") && method.getParameterCount() == 0) {
-                try {
+        try {
+            for (final Method method: methods) {
+                if (method.getName().startsWith("create") && method.getParameterCount() == 0) {
                     toReturn.add((BuffedDeck) method.invoke(null));
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    // TODO: Handle Exception
                 }
             }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            toReturn.clear();
+            toReturn.add(new BuffedDeckImpl(
+                "Default",
+                "No actions are made",
+                new BlindModifierImpl(UnaryOperator.identity(), UnaryOperator.identity(), UnaryOperator.identity())
+            ));
         }
         return toReturn;
     }

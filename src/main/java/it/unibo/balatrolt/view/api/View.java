@@ -3,8 +3,11 @@ package it.unibo.balatrolt.view.api;
 import java.util.Set;
 
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
+import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 
 public interface View {
+    void notifyErrror(String name, String desc);
+
     void showDecks(Set<DeckInfo> setMap);
 
     void showAnte();
@@ -19,7 +22,9 @@ public interface View {
 
     void updatePlayedCards();
 
-    void showShop();
+    void showShop(Set<SpecialCardInfo> toSell);
+
+    void updateShopCards(Set<SpecialCardInfo> toSell);
 
     void updateSpecialCards();
 }

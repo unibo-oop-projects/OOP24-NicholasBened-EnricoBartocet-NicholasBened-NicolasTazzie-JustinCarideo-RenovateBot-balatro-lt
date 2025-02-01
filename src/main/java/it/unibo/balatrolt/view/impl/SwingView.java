@@ -3,9 +3,13 @@ package it.unibo.balatrolt.view.impl;
 import java.util.Set;
 
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
+import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
+import it.unibo.balatrolt.view.api.ShopView;
 import it.unibo.balatrolt.view.api.View;
 
 public class SwingView implements View {
+    private ShopView shop = new ShopViewImpl(null);
+
     @Override
     public void showDecks(Set<DeckInfo> setMap) {
         // TODO Auto-generated method stub
@@ -49,14 +53,24 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showShop() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showShop'");
-    }
-
-    @Override
     public void updateSpecialCards() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
+    }
+
+    @Override
+    public void showShop(Set<SpecialCardInfo> toSell) {
+        this.shop.showShop(toSell);
+    }
+
+    @Override
+    public void notifyErrror(String name, String desc) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'notifyErrror'");
+    }
+
+    @Override
+    public void updateShopCards(Set<SpecialCardInfo> toSell) {
+        this.shop.updateCards(toSell);
     }
 }

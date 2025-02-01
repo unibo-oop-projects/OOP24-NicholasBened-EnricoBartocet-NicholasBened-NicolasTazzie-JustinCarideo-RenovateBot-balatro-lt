@@ -48,14 +48,37 @@ public class MasterControllerImpl implements MasterController {
                 views.forEach(v -> v.showRound(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.levels.getHand()));
             }
             case DISCARD_CARDS -> {
-                discardCards(data);
+                this.levels.discardCards(checkPlayableCards(data));
                 views.forEach(v -> v.updateHand(this.levels.getHand()));
                 views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
             }
-            case PLAY_CARDS -> throw new UnsupportedOperationException("Unimplemented case: " + e);
+            case PLAY_CARDS -> {
+                this.levels.playCards(checkPlayableCards(data), this.player.getPlayerStatus());
+                switch (this.levels.getRoundStatus()) {
+                    case IN_GAME -> {
+                        views.forEach(v -> v.updateHand(this.levels.getHand()));
+                        views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
+                    }
+                    case BLIND_DEFEATED -> {
+                        this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
+                        this.levels.updateAnte();
+                        if (this.levels.isOver()) {
+                            views.forEach(View::showYouWon);
+                        } else {
+                            views.forEach(View::showBlindDefeated);
+                        }
+                    }
+                    case BLIND_WON -> {
+                        views.forEach(View::showGameOver);
+                    }
+                }
+            }
             case OPEN_SHOP -> throw new UnsupportedOperationException("Unimplemented case: " + e);
             case BUY_CARD -> throw new UnsupportedOperationException("Unimplemented case: " + e);
-            case CLOSE_SHOP -> throw new UnsupportedOperationException("Unimplemented case: " + e);
+            case CLOSE_SHOP -> {
+                this.levels.updateAnte();
+                views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
+            }
             default -> throw new IllegalStateException("Invalid Event received");
         }
         this.nextEvents = e.getNextPossibleEvents();
@@ -74,10 +97,10 @@ public class MasterControllerImpl implements MasterController {
         this.player = new PlayerControllerImpl(deck);
     }
 
-    private void discardCards(final Optional<?> data) {
+    private List<PlayableCardInfo> checkPlayableCards(final Optional<?> data) {
         Preconditions.checkArgument(data.isPresent(), "No cards were received alongside the event");
         Preconditions.checkArgument(data.get() instanceof List, "The data received alongside the event isn't a List");
         final var cards = (List<?>) data.get();
-        this.levels.discardCards(cards.stream().map(c -> (PlayableCardInfo)c).toList());
+        return cards.stream().map(c -> (PlayableCardInfo) c).toList();
     }
 }

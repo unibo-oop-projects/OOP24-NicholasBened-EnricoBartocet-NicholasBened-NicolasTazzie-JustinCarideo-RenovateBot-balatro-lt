@@ -13,7 +13,9 @@ import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
+import it.unibo.balatrolt.controller.api.communication.RoundStatus;
 import it.unibo.balatrolt.model.api.BuffedDeck;
+import it.unibo.balatrolt.model.api.PlayerStatus;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.api.levels.Blind;
@@ -68,8 +70,36 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     @Override
+    public void playCards(final List<PlayableCardInfo> cards, final PlayerStatus player) {
+        this.currentBlind().playHand(cards.stream().map(cardsTranslator::get).toList(), player);
+    }
+
+    @Override
     public void discardCards(List<PlayableCardInfo> cards) {
-        this.currentBlind().discardPlayableCards(cards.stream().map(c -> this.cardsTranslator.get(c)).toList());
+        this.currentBlind().discardPlayableCards(cards.stream().map(cardsTranslator::get).toList());
+    }
+
+    @Override
+    public RoundStatus getRoundStatus() {
+        return switch(this.currentBlind().getStatus()) {
+            case DEFEATED -> RoundStatus.BLIND_DEFEATED;
+            case GAME_OVER -> RoundStatus.BLIND_WON;
+            case IN_GAME -> RoundStatus.IN_GAME;
+        };
+    }
+
+    @Override
+    public void updateAnte() {
+        if (this.currentAnte().isOver()) {
+            this.currAnte++;
+        } else if (this.currentBlind().getStatus().equals(Blind.Status.DEFEATED)) {
+            this.currentAnte().nextBlind();
+        }
+    }
+
+    @Override
+    public boolean isOver() {
+        return this.anteList.size() > this.currAnte;
     }
 
     private Ante currentAnte() {
@@ -83,5 +113,4 @@ public class LevelsControllerImpl implements LevelsController {
     private BlindInfo getBlindInfo(final Blind blind) {
         return new BlindInfo(blind.getBlindNumber(), blind.getMinimumChips(), blind.getReward());
     }
-
 }

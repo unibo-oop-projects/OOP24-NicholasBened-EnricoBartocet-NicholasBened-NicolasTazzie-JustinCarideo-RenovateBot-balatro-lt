@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.view.impl;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.List;
@@ -22,7 +23,8 @@ import it.unibo.balatrolt.view.api.View;
 public class SwingView implements View {
     private JFrame frame = new JFrame();
     private JPanel panel;
-    private SwingMainRound mainRoundView;
+    private JPanel leftPanel;
+    private JPanel centerPanel;
     private final MasterController controller;
 
     public SwingView(final MasterController controller) {
@@ -58,17 +60,23 @@ public class SwingView implements View {
 
     @Override
     public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards) {
+        frame.remove(panel);
+        panel = new JPanel(new BorderLayout());
+        leftPanel = new LeftGUI().build();
+        panel.add(leftPanel, BorderLayout.WEST);
         try {
-            this.mainRoundView = new SwingMainRound();
+            centerPanel = new SlotGUI(playableCards, specialCards);
+            panel.add(centerPanel, BorderLayout.CENTER);
         } catch (Exception e) {
             throw new ExceptionInInitializerError(e);
         }
-        updateHand(playableCards);
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
     @Override
     public void updateHand(List<PlayableCardInfo> hand) {
-        mainRoundView.updateHand(hand.stream()
+        ((SlotGUI) centerPanel).updateHand(hand.stream()
             .map(card -> card.rank() + card.suit())
             .toList());
     }

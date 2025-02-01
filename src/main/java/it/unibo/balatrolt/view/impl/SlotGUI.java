@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 
 import com.google.common.base.Preconditions;
 
+import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
+import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
+
 /**
  * Creates the part of the GUI containing the
  * slots for the cards (any type).
@@ -31,13 +34,17 @@ public final class SlotGUI extends JPanel {
      * Sets the controller and the number of
      * hand and special card slot.
      */
-    public SlotGUI(List<String> cards) throws IOException {
+    public SlotGUI(List<PlayableCardInfo> cards, List<SpecialCardInfo> specialCards) throws IOException {
         super(new GridBagLayout());
         this.setBackground(Color.green.darker().darker().darker());
 
-        updateSpecialSlot(List.of());
+        updateSpecialSlot(specialCards.stream()
+            .map(card -> card.name())
+            .toList());
         updateCardSlot(List.of());
-        updateHand(cards);
+        updateHand(cards.stream()
+            .map(card -> card.rank() + card.suit())
+            .toList());
     }
 
     /**
@@ -74,7 +81,7 @@ public final class SlotGUI extends JPanel {
         for (int i = 0; i < MAX_SPECIAL_SLOT; i++) {
             final JButton card = new JButton();
             try {
-                final Image img = ImageIO.read(getClass().getResource("/ACESPADES.png"));
+                final Image img = ImageIO.read(getClass().getResource("/JOKER.png"));
                 card.setIcon(new ImageIcon(img));
                 speciaSlot.add(card);
             } catch (IOException e) {

@@ -3,10 +3,17 @@ package it.unibo.balatrolt.controller.api;
 import java.util.List;
 
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
+import it.unibo.balatrolt.controller.api.communication.BlindInfo;
+import it.unibo.balatrolt.controller.api.communication.BlindStats;
+import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 
 public interface LevelsController {
 
-    AnteInfo getCurrentAnteInfo();
+    AnteInfo getCurrentAnte();
 
-    List<String> getHand();
+    BlindInfo getCurrentBlindInfo();
+
+    BlindStats getCurrentBlindStats();
+
+    List<PlayableCardInfo> getHand();
 }

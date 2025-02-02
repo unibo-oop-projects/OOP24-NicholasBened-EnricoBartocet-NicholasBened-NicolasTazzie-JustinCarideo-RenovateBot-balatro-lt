@@ -123,8 +123,9 @@ public class SwingView implements View {
 
     @Override
     public void showGameOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showGameOver'");
+        frame.remove(panel);
+        frame.add(new GameOver());
+        frame.setVisible(true);
     }
 
     @Override

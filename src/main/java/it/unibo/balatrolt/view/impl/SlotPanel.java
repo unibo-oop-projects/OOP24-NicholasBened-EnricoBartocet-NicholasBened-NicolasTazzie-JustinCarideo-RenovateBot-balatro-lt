@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.view.impl;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
@@ -38,6 +39,7 @@ public class SlotPanel<X> extends JPanel {
      */
     public SlotPanel(final int slotSize, Supplier<Boolean> canClick, Consumer<X> consumer) {
         super(new GridLayout(1, slotSize));
+        super.setBackground(Color.green.darker().darker().darker());
         this.consumer = Preconditions.checkNotNull(consumer);
         this.canClick = Preconditions.checkNotNull(canClick);
         this.slotSize = Preconditions.checkNotNull(slotSize);
@@ -54,6 +56,7 @@ public class SlotPanel<X> extends JPanel {
         this.slots.put(card.cardName(), card.obj());
         final JButton button = new JButton();
         button.setBackground(getBackground());
+        button.setBorderPainted(false);
         button.setActionCommand(card.cardName());
         button.addActionListener(e -> {
             if (this.canClick.get()) {

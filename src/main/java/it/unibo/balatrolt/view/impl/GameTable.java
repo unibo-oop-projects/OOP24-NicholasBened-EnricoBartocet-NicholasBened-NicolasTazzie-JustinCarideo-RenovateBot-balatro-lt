@@ -66,7 +66,7 @@ public class GameTable extends JPanel {
             }
         );
         cards.forEach(c -> this.handSlot.addObject(this.slotTranslator(c)));
-        this.build(this.handSlot, 0, 2, 2, 2, GridBagConstraints.PAGE_END, RIDIM);
+        this.build(this.handSlot, 0, 2, 3, 2, GridBagConstraints.PAGE_END, RIDIM);
 
         /**
          * Creating slot for the played cards.
@@ -81,7 +81,7 @@ public class GameTable extends JPanel {
                 this.repaint();
             }
         );
-        this.build(this.playedSlot, 0, 1, 1, 1, GridBagConstraints.CENTER, RIDIM);
+        this.build(this.playedSlot, 0, 1, 3, 1, GridBagConstraints.CENTER, RIDIM);
 
         /**
          * Creating slot for the special cards.
@@ -108,7 +108,7 @@ public class GameTable extends JPanel {
                 this.selectedCards.clear();
             }
         });
-        this.build(playButton, 0, 3, 1, 0, GridBagConstraints.LINE_START, 0);
+        this.build(playButton, 0, 3, 1, 0, GridBagConstraints.LINE_END, 0);
 
         /**
          * Creating the discard button
@@ -124,7 +124,7 @@ public class GameTable extends JPanel {
                 this.selectedCards.clear();
             }
         });
-        this.build(discardButton, 0, 3, 1, 0, GridBagConstraints.LINE_END, 0);
+        this.build(discardButton, 2, 3, 1, 0, GridBagConstraints.LINE_START, 0);
     }
 
     public void updateHand(List<PlayableCardInfo> newCards) {
@@ -173,7 +173,11 @@ public class GameTable extends JPanel {
         return new SlotPanel.SlotObject<>(card, card.name().toUpperCase());
     }
 
-    public void setDiscardEnabled(boolean b) {
-        this.discardButton.setEnabled(b);
+    /**
+     * returns true if the discard button is enabled.
+     * @param isEnable true if the discard button is enable.
+     */
+    public void setDiscardEnabled(boolean isEnable) {
+        this.discardButton.setEnabled(isEnable);
     }
 }

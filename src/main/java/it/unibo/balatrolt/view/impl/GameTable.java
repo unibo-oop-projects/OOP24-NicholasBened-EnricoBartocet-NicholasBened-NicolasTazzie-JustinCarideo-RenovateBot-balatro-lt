@@ -88,7 +88,7 @@ public class GameTable extends JPanel {
          */
         this.specialSlot = new SlotPanel<>(
             MAX_SPECIAL_CARDS,
-            () -> true,
+            () -> false,
             card -> {}
         );
         specialCards.forEach(c -> this.specialSlot.addObject(this.slotTranslator(c)));
@@ -161,7 +161,7 @@ public class GameTable extends JPanel {
      * @return SlotObject representing the card's name and itself.
      */
     private SlotPanel.SlotObject<PlayableCardInfo> slotTranslator(PlayableCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.rank().toUpperCase() + card.suit().toUpperCase());
+        return new SlotPanel.SlotObject<>(card, card.rank() + card.suit());
     }
 
     /**
@@ -170,7 +170,7 @@ public class GameTable extends JPanel {
      * @return SlotObject representing the card's name and itself.
      */
     private SlotPanel.SlotObject<SpecialCardInfo> slotTranslator(SpecialCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.name().toUpperCase());
+        return new SlotPanel.SlotObject<>(card, "JOKER");
     }
 
     /**

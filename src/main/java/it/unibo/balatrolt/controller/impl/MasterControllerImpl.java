@@ -79,12 +79,12 @@ public class MasterControllerImpl implements MasterController {
                                     this.levels.getCurrentBlindStats()));
                         }
                         this.levels.updateAnte();
-                        System.out.println(this.player.getPlayerStatus());
+                        System.out.println("currency: " + this.player.getPlayerStatus().currency());
                     }
                     case BLIND_WON -> {
                         views.forEach(v -> v.showGameOver(this.levels.getCurrentBlindInfo(),
                         this.levels.getCurrentBlindStats()));
-                        System.out.println(this.player.getPlayerStatus());
+                        System.out.println("currency: " + this.player.getPlayerStatus().currency());
                     }
                 }
                 System.out.println(this.levels.getCurrentBlindStats());
@@ -108,7 +108,7 @@ public class MasterControllerImpl implements MasterController {
             case CLOSE_SHOP -> {
                 this.levels.updateAnte();
                 views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
-                System.out.println(this.player.getPlayerStatus());
+                System.out.println("currency: " + this.player.getPlayerStatus().currency());
             }
             default -> throw new IllegalStateException("Invalid Event received");
         }

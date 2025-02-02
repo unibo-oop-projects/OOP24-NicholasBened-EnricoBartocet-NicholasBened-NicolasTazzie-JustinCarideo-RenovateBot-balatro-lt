@@ -66,7 +66,7 @@ public class SlotPanel<X> extends JPanel {
             }
         });
         try {
-            final Image img = ImageIO.read(getClass().getResource("/" + card.cardName() + ".png"));
+            final Image img = ImageIO.read(getClass().getResource("/" + card.cardName().toUpperCase() + ".png"));
             button.setIcon(new ImageIcon(img));
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);

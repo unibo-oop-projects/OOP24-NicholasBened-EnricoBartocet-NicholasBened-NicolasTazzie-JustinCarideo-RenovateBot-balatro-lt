@@ -55,6 +55,7 @@ public class MasterControllerImpl implements MasterController {
             case CHOOSE_BLIND -> {
                 views.forEach(v -> v.showRound(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(),
                         this.player.getSpecialCards(), this.levels.getHand()));
+                        System.out.println(this.player.getSpecialCards());
             }
             case DISCARD_CARDS -> {
                 this.levels.discardCards(checkPlayableCards(data));
@@ -71,14 +72,17 @@ public class MasterControllerImpl implements MasterController {
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
                         if (this.levels.isOver()) {
-                            views.forEach(v -> v.showYouWon(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats()));
+                            views.forEach(v -> v.showYouWon(this.levels.getCurrentBlindInfo(),
+                                    this.levels.getCurrentBlindStats()));
                         } else {
-                            views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats()));
+                            views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(),
+                                    this.levels.getCurrentBlindStats()));
                         }
                         this.levels.updateAnte();
                     }
                     case BLIND_WON -> {
-                        views.forEach(v -> v.showGameOver(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats()));
+                        views.forEach(v -> v.showGameOver(this.levels.getCurrentBlindInfo(),
+                                this.levels.getCurrentBlindStats()));
                     }
                 }
                 System.out.println(this.levels.getCurrentBlindStats());
@@ -118,7 +122,9 @@ public class MasterControllerImpl implements MasterController {
         Preconditions.checkArgument(data.get() instanceof SpecialCardInfo,
                 "The data received alongside the event isn't a SpecialCardInfo");
         final var card = (SpecialCardInfo) data.get();
-        if (this.shop.buyCard(card, this.player.getPlayerStatus().currency())) {
+        if (this.shop.buyCard(card, this.player.getPlayerStatus().currency())
+                && this.shop.translateCard(card).isPresent()) {
+            this.player.addSpecialCard(this.shop.translateCard(card).get());
             this.player.addCurrency(-card.price());
             return true;
         } else {

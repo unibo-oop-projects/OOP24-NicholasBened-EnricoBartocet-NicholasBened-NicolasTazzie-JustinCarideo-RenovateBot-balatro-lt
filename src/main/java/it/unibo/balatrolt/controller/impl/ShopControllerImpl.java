@@ -34,6 +34,7 @@ public class ShopControllerImpl implements ShopController {
 
     @Override
     public Set<SpecialCardInfo> getCards() {
+        this.buildTransaltor();
         return this.cardTranslator.keySet();
     }
 

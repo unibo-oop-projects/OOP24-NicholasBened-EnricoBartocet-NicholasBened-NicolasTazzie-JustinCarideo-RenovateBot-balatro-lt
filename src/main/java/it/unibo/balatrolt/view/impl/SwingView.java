@@ -16,8 +16,9 @@ import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
-import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
+import it.unibo.balatrolt.view.api.ShopView;
+import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.view.api.View;
 
 /**
@@ -49,6 +50,8 @@ public class SwingView implements View {
         frame.add(panel);
         frame.setVisible(true);
     }
+
+    private ShopView shop = new ShopViewImpl(null, null);
 
     @Override
     public void showDecks(final Set<DeckInfo> setMap) {
@@ -108,12 +111,6 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showShop() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showShop'");
-    }
-
-    @Override
     public void updateSpecialCards() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
@@ -140,5 +137,21 @@ public class SwingView implements View {
     public void showYouWon() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showYouWon'");
+    }
+
+    @Override
+    public void showShop(Set<SpecialCardInfo> toSell) {
+        this.shop.updateCards(toSell);
+    }
+
+    @Override
+    public void notifyErrror(String name, String desc) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'notifyErrror'");
+    }
+
+    @Override
+    public void updateShopCards(Set<SpecialCardInfo> toSell) {
+        this.shop.updateCards(toSell);
     }
 }

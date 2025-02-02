@@ -11,10 +11,12 @@ import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 
 /**
- * View master interface.
- * The view interfaces directly with the MasterController.
+ * Interface representing the view in the application.
  */
 public interface View {
+
+    void notifyErrror(String name, String desc);
+
     /**
      * Shows the main menu.
      */
@@ -81,9 +83,18 @@ public interface View {
     void updatePlayedCards();
 
     /**
-     * Shows the shop.
+     * Shows the shop with the given set of special cards to sell.
+     *
+     * @param toSell the set of special cards available for sale
      */
-    void showShop();
+    void showShop(Set<SpecialCardInfo> toSell);
+
+    /**
+     * Updates the shop with the given set of special cards to sell.
+     *
+     * @param toSell the set of special cards available for sale
+     */
+    void updateShopCards(Set<SpecialCardInfo> toSell);
 
     /**
      * Updates the special cards.

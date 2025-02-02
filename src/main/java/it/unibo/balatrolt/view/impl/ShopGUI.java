@@ -2,8 +2,9 @@ package it.unibo.balatrolt.view.impl;
 
 import javax.swing.JPanel;
 
+import it.unibo.balatrolt.controller.impl.MasterControllerImpl;
+
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -37,7 +38,7 @@ public class ShopGUI extends JFrame {
     private void buildShopPanel() {
         // creating left panel
         System.out.println(this.getSize());
-        final JPanel shopPanel = new ShopViewImpl(this.getSize());
+        final JPanel shopPanel = new ShopViewImpl(new MasterControllerImpl(), this.getSize());
         this.add(shopPanel, BorderLayout.CENTER);
     }
 }

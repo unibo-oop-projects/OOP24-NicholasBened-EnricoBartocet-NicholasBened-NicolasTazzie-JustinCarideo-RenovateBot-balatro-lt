@@ -8,7 +8,7 @@ import it.unibo.balatrolt.view.api.ShopView;
 import it.unibo.balatrolt.view.api.View;
 
 public class SwingView implements View {
-    private ShopView shop = new ShopViewImpl(null);
+    private ShopView shop = new ShopViewImpl(null, null);
 
     @Override
     public void showDecks(Set<DeckInfo> setMap) {
@@ -60,7 +60,7 @@ public class SwingView implements View {
 
     @Override
     public void showShop(Set<SpecialCardInfo> toSell) {
-        this.shop.showShop(toSell);
+        this.shop.updateCards(toSell);
     }
 
     @Override

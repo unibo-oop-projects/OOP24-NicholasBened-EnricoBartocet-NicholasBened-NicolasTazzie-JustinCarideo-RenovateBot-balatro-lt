@@ -125,7 +125,7 @@ public class MasterControllerImpl implements MasterController {
         if (this.shop.buyCard(card, this.player.getPlayerStatus().currency())
                 && this.shop.translateCard(card).isPresent()) {
             this.player.addSpecialCard(this.shop.translateCard(card).get());
-            this.player.addCurrency(-card.price());
+            this.player.spendCurrency(card.price());
             return true;
         } else {
             return false;

@@ -50,6 +50,7 @@ public class MasterControllerImpl implements MasterController {
             }
             case CHOOSE_DECK -> {
                 setControllers(data);
+                this.levels.updateAnte();
                 views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
             }
             case CHOOSE_BLIND -> {
@@ -78,7 +79,6 @@ public class MasterControllerImpl implements MasterController {
                             views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(),
                                     this.levels.getCurrentBlindStats()));
                         }
-                        this.levels.updateAnte();
                         System.out.println("currency: " + this.player.getPlayerStatus().currency());
                     }
                     case BLIND_WON -> {

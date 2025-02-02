@@ -2,17 +2,13 @@ package it.unibo.balatrolt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.function.UnaryOperator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.impl.levels.AnteConfiguration;
@@ -54,13 +50,10 @@ class TestAnte {
     void testBlindAdvancement() {
         for (int i = 0; i < NUM_BLINDS; i++) {
             assertFalse(this.ante.isOver());
-            assertNotEquals(Optional.absent(), this.ante.getCurrentBlind());
             this.ante.nextBlind();
         }
-        assertEquals(Optional.absent(), this.ante.getCurrentBlind());
-        assertTrue(this.ante.isOver());
+        assertEquals(NUM_BLINDS, this.ante.getCurrentBlind().getBlindNumber() + 1);
         this.ante.nextBlind();
-        assertEquals(Optional.absent(), this.ante.getCurrentBlind());
-        assertTrue(this.ante.isOver());
+        assertEquals(NUM_BLINDS, this.ante.getCurrentBlind().getBlindNumber() + 1);
     }
 }

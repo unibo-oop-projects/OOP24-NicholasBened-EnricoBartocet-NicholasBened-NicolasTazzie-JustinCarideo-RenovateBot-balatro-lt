@@ -107,7 +107,7 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     private Blind currentBlind() {
-        return this.currentAnte().getCurrentBlind().get();
+        return this.currentAnte().getCurrentBlind();
     }
 
     private BlindInfo getBlindInfo(final Blind blind) {

@@ -44,9 +44,9 @@ class TestAnteFactory {
         final Ante newAnte = this.factory.fromId(ANTE_ID);
         assertEquals(ANTE_ID, newAnte.getAnteNumber());
         assertEquals(NUM_BLINDS, newAnte.getBlinds().size());
-        final int blindId = newAnte.getCurrentBlind().get().getBlindNumber();
-        assertEquals(baseChipsCalculator.apply(ANTE_ID, blindId), newAnte.getCurrentBlind().get().getMinimumChips());
-        assertEquals(rewardCalculator.apply(blindId), newAnte.getCurrentBlind().get().getReward());
+        final int blindId = newAnte.getCurrentBlind().getBlindNumber();
+        assertEquals(baseChipsCalculator.apply(ANTE_ID, blindId), newAnte.getCurrentBlind().getMinimumChips());
+        assertEquals(rewardCalculator.apply(blindId), newAnte.getCurrentBlind().getReward());
     }
 
     @Test

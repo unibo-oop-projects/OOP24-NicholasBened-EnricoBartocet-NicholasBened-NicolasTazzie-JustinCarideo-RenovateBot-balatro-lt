@@ -26,7 +26,7 @@ import it.unibo.balatrolt.view.api.View;
  * Implementation of the View interface.
  */
 public class SwingView implements View {
-    private static final int RIDIM = 2;
+    private static final float RIDIM = 1.5f;
     private final MasterController controller;
     private JFrame frame = new JFrame();
     private JPanel panel;

@@ -40,6 +40,16 @@ public class PlayerControllerImpl implements PlayerController {
         this.player.addCurrency(reward);
     }
 
+    @Override
+    public void spendCurrency(int money) {
+        this.player.spendCurrency(money);
+    }
+
+    @Override
+    public void addSpecialCard(SpecialCard card) {
+        this.player.addSpecialCard(card);
+    }
+
     private SpecialCardInfo getSpecialCardInfo(final SpecialCard card) {
         return new SpecialCardInfo(card.getName(), card.getDescription(), card.getToSellValue());
     }

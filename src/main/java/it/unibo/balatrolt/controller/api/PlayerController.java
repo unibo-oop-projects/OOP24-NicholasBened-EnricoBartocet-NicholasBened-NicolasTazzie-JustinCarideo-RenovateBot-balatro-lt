@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.model.api.PlayerStatus;
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 public interface PlayerController {
 
@@ -12,4 +13,9 @@ public interface PlayerController {
     PlayerStatus getPlayerStatus();
 
     void addCurrency(int reward);
+
+    void spendCurrency(int money);
+
+    void addSpecialCard(SpecialCard card);
+
 }

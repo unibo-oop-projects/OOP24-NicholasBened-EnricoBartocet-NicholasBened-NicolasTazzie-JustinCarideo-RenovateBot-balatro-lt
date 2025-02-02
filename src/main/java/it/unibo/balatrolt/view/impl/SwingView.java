@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.google.common.base.Preconditions;
@@ -34,6 +35,7 @@ public class SwingView implements View {
 
     /**
      * Sets the frame and it's size.
+     *
      * @param controller the MasterController to use.
      */
     public SwingView(final MasterController controller) {
@@ -46,12 +48,12 @@ public class SwingView implements View {
 
     @Override
     public void showMainMenu() {
+        // ROBA DI NICO DA CANCELLARE
+        //panel = new ShopViewImpl(controller, null);
         panel = new MainMenu(controller, "Play");
         frame.add(panel);
         frame.setVisible(true);
     }
-
-    private ShopView shop = new ShopViewImpl(null, null);
 
     @Override
     public void showDecks(final Set<DeckInfo> setMap) {
@@ -70,7 +72,8 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards) {
+    public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards,
+            List<PlayableCardInfo> playableCards) {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
         leftPanel = new LeftGUI().build();
@@ -116,37 +119,42 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showBlindDefeated() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showBlindDefeated'");
+    public void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats) {
+        this.panel.remove(this.centerPanel);
+        this.centerPanel = new BlindOver(this.controller, "BLIND DEFEATED", blindInfo, blindStats);
+        this.panel.add(this.centerPanel, BorderLayout.CENTER);
+        this.centerPanel.setVisible(true);
     }
 
     @Override
-    public void showGameOver() {
+    public void showGameOver(BlindInfo blindInfo, BlindStats blindStats) {
         frame.remove(panel);
         frame.add(new GameOver());
         frame.setVisible(true);
     }
 
     @Override
-    public void showYouWon() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showYouWon'");
+    public void showYouWon(BlindInfo blindInfo, BlindStats blindStats) {
+        this.panel.remove(this.centerPanel);
+        this.centerPanel = new BlindOver(this.controller, "YOU WON THE ENTIRE GAME", blindInfo, blindStats);
+        this.panel.add(this.centerPanel, BorderLayout.CENTER);
+        this.centerPanel.setVisible(true);
     }
 
     @Override
-    public void showShop(Set<SpecialCardInfo> toSell) {
-        this.shop.updateCards(toSell);
+    public void showShop() {
+        this.panel.remove(centerPanel);
+        this.centerPanel = new ShopViewImpl(controller, null);
+        this.panel.add(centerPanel, BorderLayout.CENTER);
     }
 
     @Override
     public void notifyErrror(String name, String desc) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notifyErrror'");
+        JOptionPane.showMessageDialog(this.panel, name, desc, JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
     public void updateShopCards(Set<SpecialCardInfo> toSell) {
-        this.shop.updateCards(toSell);
+        ((ShopView) this.centerPanel).updateCards(toSell);
     }
 }

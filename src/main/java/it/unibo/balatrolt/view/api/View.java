@@ -48,12 +48,12 @@ public interface View {
     /**
      * Shows the blind defeated screen.
      */
-    void showBlindDefeated();
+    void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
 
     /**
      * Shows the game over screen.
      */
-    void showGameOver();
+    void showGameOver(BlindInfo blindInfo, BlindStats blindStats);
 
     /**
      * Updates the player's hand.
@@ -78,11 +78,9 @@ public interface View {
     void updateScore();
 
     /**
-     * Shows the shop with the given set of special cards to sell.
-     *
-     * @param toSell the set of special cards available for sale
+     * Shows the shop.
      */
-    void showShop(Set<SpecialCardInfo> toSell);
+    void showShop();
 
     /**
      * Updates the shop with the given set of special cards to sell.
@@ -98,6 +96,8 @@ public interface View {
 
     /**
      * Shows the WINNING screen.
+     * @param blindStats
+     * @param blindInfo
      */
-    void showYouWon();
+    void showYouWon(BlindInfo blindInfo, BlindStats blindStats);
 }

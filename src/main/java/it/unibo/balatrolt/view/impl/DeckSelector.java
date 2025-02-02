@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.google.common.base.Optional;
@@ -34,7 +35,11 @@ public class DeckSelector extends JPanel {
         list.setSelectedIndex(-1);
         var button = new JButton("Select");
         button.addActionListener(e -> {
-            controller.handleEvent(BalatroEvent.CHOOSE_DECK, Optional.of(decksTranslator.get((list.getSelectedItem()))));
+            try {
+                controller.handleEvent(BalatroEvent.CHOOSE_DECK, Optional.of(decksTranslator.get((list.getSelectedItem()))));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "You have to chose a deck", "DECK", JOptionPane.ERROR_MESSAGE);
+            }
         });
         add(button, BorderLayout.SOUTH);
         setVisible(true);

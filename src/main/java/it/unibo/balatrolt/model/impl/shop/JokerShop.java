@@ -38,7 +38,7 @@ public final class JokerShop implements Shop {
 
     @Override
     public boolean buy(final SpecialCard toBuy, final int money) {
-        if (this.cards.containsKey(toBuy) && this.cards.get(toBuy) < money) {
+        if (this.cards.containsKey(toBuy) && this.cards.get(toBuy) <= money) {
             this.cards.remove(toBuy);
             return true;
         }

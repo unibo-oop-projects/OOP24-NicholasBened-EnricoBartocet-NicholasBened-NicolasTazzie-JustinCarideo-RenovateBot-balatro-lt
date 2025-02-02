@@ -25,27 +25,9 @@ import it.unibo.balatrolt.view.api.ShopView;
 
 public final class ShopViewImpl extends JPanel implements ShopView {
     private final MasterController controller;
-    // private final Dimension guiSize;
-    // private final DescPanel descriptionPanel;
     private final JButton buyButton;
     private final ShopInnerLogic logic;
     private final List<JButton> cardButtons = new LinkedList<>();
-    /*
-     * private final class DescPanel extends JPanel {
-     * private final JLabel desc;
-     * 
-     * public DescPanel() {
-     * super(new FlowLayout());
-     * this.desc = new JLabel();
-     * this.setMaximumSize(new Dimension(guiSize.width / 100, guiSize.height));
-     * this.add(desc);
-     * }
-     * 
-     * public void updateDescription(final String desc) {
-     * this.desc.setText(desc);
-     * }
-     * }
-     */
 
     public ShopViewImpl(final MasterController controller, final Dimension guiSize) {
         super(new GridBagLayout());
@@ -57,7 +39,6 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         this.buyButton.addActionListener(e -> {
             this.controller.handleEvent(BalatroEvent.BUY_CARD, this.logic.getSelectedCard());
         });
-        // this.descriptionPanel = new DescPanel();
         this.updateCards(Set.of(
                 new SpecialCardInfo("card1", "Card price 10", 10),
                 new SpecialCardInfo("card2", "Card price 11", 11),
@@ -71,7 +52,6 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         final JButton card = new JButton(name);
         card.addActionListener(e -> {
             this.logic.hitCard(new SpecialCardInfo(name, desc, price));
-            // JOptionPane.showMessageDialog(this, name);
             this.redraw();
             var btn = (JButton) e.getSource();
             if (this.logic.isCardSelected()) {
@@ -107,12 +87,6 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         return gbc;
     }
 
-    /* private GridBagConstraints getDescPanelConstraint() {
-        final var gbc = getOuterConstraints(0, 1);
-        gbc.anchor = GridBagConstraints.PAGE_END;
-        return gbc;
-    } */
-
     private GridBagConstraints getOuterConstraints(final int x, final int y) {
         final var gbc = new GridBagConstraints();
         gbc.gridx = x;
@@ -140,7 +114,6 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         }
         this.add(shopTitle, this.getOuterConstraints(1, 0));
         this.add(p, this.getOuterConstraints(1, 1));
-        // this.add(this.descriptionPanel, this.getDescPanelConstraint());
         this.add(new JPanel(), this.getOuterConstraints(2, 2));
         this.add(this.getBuyOrContinuePanel(), this.getOuterConstraints(2, 1));
         this.redraw();

@@ -15,20 +15,24 @@ import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.LevelsController;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.PlayerController;
+import it.unibo.balatrolt.controller.api.ShopController;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
+import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.impl.BuffedDeckFactory;
 import it.unibo.balatrolt.view.api.View;
 
 public class MasterControllerImpl implements MasterController {
 
+    private static final int SHOP_SIZE = 3;
     private final Set<View> views = new HashSet<>();
     private final Map<DeckInfo, BuffedDeck> deckTranslator = new HashMap<>();
     private Set<BalatroEvent> nextEvents = Set.of(BalatroEvent.MAIN_MENU);
 
     private LevelsController levels;
     private PlayerController player;
+    private ShopController shop;
 
     public MasterControllerImpl() {
         final var decks = BuffedDeckFactory.getList();
@@ -40,13 +44,17 @@ public class MasterControllerImpl implements MasterController {
         checkState(this.nextEvents.contains(e), "Invalid event received: " + e.toString());
         switch (e) {
             case MAIN_MENU -> views.forEach(View::showMainMenu);
-            case INIT_GAME -> views.forEach(v -> v.showDecks(deckTranslator.keySet()));
+            case INIT_GAME -> {
+                this.shop = new ShopControllerImpl(SHOP_SIZE);
+                views.forEach(v -> v.showDecks(deckTranslator.keySet()));
+            }
             case CHOOSE_DECK -> {
                 setControllers(data);
                 views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
             }
             case CHOOSE_BLIND -> {
-                views.forEach(v -> v.showRound(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.levels.getHand()));
+                views.forEach(v -> v.showRound(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(),
+                        this.player.getSpecialCards(), this.levels.getHand()));
             }
             case DISCARD_CARDS -> {
                 this.levels.discardCards(checkPlayableCards(data));
@@ -73,9 +81,24 @@ public class MasterControllerImpl implements MasterController {
                         views.forEach(View::showGameOver);
                     }
                 }
+                System.out.println(this.levels.getCurrentBlindStats());
             }
-            case OPEN_SHOP -> throw new UnsupportedOperationException("Unimplemented case: " + e);
-            case BUY_CARD -> throw new UnsupportedOperationException("Unimplemented case: " + e);
+            case OPEN_SHOP -> {
+                this.shop.openShop();
+                views.forEach(v -> {
+                    v.showShop();
+                    v.updateShopCards(this.shop.getCards());
+                });
+            }
+            case BUY_CARD -> {
+                if (!buySpecialCard(data)) {
+                    views.forEach(v -> v.notifyErrror("Shop", "Currency is not enought"));
+                } else {
+                    views.forEach(v -> {
+                        v.updateShopCards(this.shop.getCards());
+                    });
+                }
+            }
             case CLOSE_SHOP -> {
                 this.levels.updateAnte();
                 views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
@@ -90,9 +113,23 @@ public class MasterControllerImpl implements MasterController {
         views.add(v);
     }
 
+    private boolean buySpecialCard(final Optional<?> data) {
+        Preconditions.checkArgument(data.isPresent(), "No card was received alongside the event");
+        Preconditions.checkArgument(data.get() instanceof SpecialCardInfo,
+                "The data received alongside the event isn't a SpecialCardInfo");
+        final var card = (SpecialCardInfo) data.get();
+        if (this.shop.buyCard(card, this.player.getPlayerStatus().currency())) {
+            this.player.addCurrency(-card.price());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private void setControllers(final Optional<?> data) {
         Preconditions.checkArgument(data.isPresent(), "No deck was received alongside the event");
-        Preconditions.checkArgument(data.get() instanceof DeckInfo, "The data received alongside the event isn't a DeckInfo");
+        Preconditions.checkArgument(data.get() instanceof DeckInfo,
+                "The data received alongside the event isn't a DeckInfo");
         final var deck = deckTranslator.get((DeckInfo) data.get());
         this.levels = new LevelsControllerImpl(deck);
         this.player = new PlayerControllerImpl(deck);

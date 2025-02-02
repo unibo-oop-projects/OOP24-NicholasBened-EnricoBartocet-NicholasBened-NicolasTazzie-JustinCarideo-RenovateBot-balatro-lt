@@ -34,6 +34,7 @@ public class SwingView implements View {
 
     /**
      * Sets the frame and it's size.
+     * 
      * @param controller the MasterController to use.
      */
     public SwingView(final MasterController controller) {
@@ -46,12 +47,12 @@ public class SwingView implements View {
 
     @Override
     public void showMainMenu() {
-        panel = new MainMenu(controller, "Play");
+        // ROBA DI NICO DA CANCELLARE
+        panel = new ShopViewImpl(controller, null);
+        // panel = new MainMenu(controller, "Play");
         frame.add(panel);
         frame.setVisible(true);
     }
-
-    private ShopView shop = new ShopViewImpl(null, null);
 
     @Override
     public void showDecks(final Set<DeckInfo> setMap) {
@@ -70,7 +71,8 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards) {
+    public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards,
+            List<PlayableCardInfo> playableCards) {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
         leftPanel = new LeftGUI().build();
@@ -134,8 +136,10 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showShop(Set<SpecialCardInfo> toSell) {
-        this.shop.updateCards(toSell);
+    public void showShop() {
+        this.panel.remove(centerPanel);
+        this.centerPanel = new ShopViewImpl(controller, null);
+        this.panel.add(centerPanel, BorderLayout.CENTER);
     }
 
     @Override
@@ -146,6 +150,6 @@ public class SwingView implements View {
 
     @Override
     public void updateShopCards(Set<SpecialCardInfo> toSell) {
-        this.shop.updateCards(toSell);
+        ((ShopView) this.centerPanel).updateCards(toSell);
     }
 }

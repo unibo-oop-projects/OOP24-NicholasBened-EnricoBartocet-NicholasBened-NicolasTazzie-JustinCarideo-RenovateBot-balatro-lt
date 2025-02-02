@@ -1,7 +1,9 @@
 package it.unibo.balatrolt.controller.api;
 
-import java.util.Map;
+import java.util.Set;
 
+import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
+import it.unibo.balatrolt.model.api.Shop;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 /**
@@ -14,7 +16,7 @@ public interface ShopController {
      * @param currentMoney Current quantity of money.
      * @return Whether the card is bought or not.
      */
-    boolean buyCard(SpecialCard card, int currentMoney);
+    boolean buyCard(SpecialCardInfo card, int currentMoney);
 
     /**
      * It opens the {@link Shop}, supplying it with new cards.
@@ -25,5 +27,5 @@ public interface ShopController {
      * Returns the {@link SpecialCard} sold in the shop and its value.
      * @return special cards sold in the shop
      */
-    Map<SpecialCard, Integer> getCards();
+    Set<SpecialCardInfo> getCards();
 }

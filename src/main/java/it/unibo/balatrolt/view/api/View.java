@@ -78,11 +78,9 @@ public interface View {
     void updateScore();
 
     /**
-     * Shows the shop with the given set of special cards to sell.
-     *
-     * @param toSell the set of special cards available for sale
+     * Shows the shop.
      */
-    void showShop(Set<SpecialCardInfo> toSell);
+    void showShop();
 
     /**
      * Updates the shop with the given set of special cards to sell.

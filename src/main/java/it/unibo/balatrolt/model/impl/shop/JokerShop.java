@@ -57,6 +57,6 @@ public final class JokerShop implements Shop {
 
     @Override
     public void reset() {
-        this.cards.clear();
+        this.cards = Map.of();
     }
 }

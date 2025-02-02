@@ -39,12 +39,6 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         this.buyButton.addActionListener(e -> {
             this.controller.handleEvent(BalatroEvent.BUY_CARD, this.logic.getSelectedCard());
         });
-        this.updateCards(Set.of(
-                new SpecialCardInfo("card1", "Card price 10", 10),
-                new SpecialCardInfo("card2", "Card price 11", 11),
-                new SpecialCardInfo("card3", "Card price 12", 12),
-                new SpecialCardInfo("card4", "Card price 13", 13),
-                new SpecialCardInfo("card5", "Card price 14", 14)));
     }
 
     private JPanel getCardWithLabel(final String name, final String desc, final int price) {

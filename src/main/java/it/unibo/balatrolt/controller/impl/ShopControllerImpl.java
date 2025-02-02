@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.google.common.base.Optional;
+
 import it.unibo.balatrolt.controller.api.ShopController;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.model.api.Shop;
@@ -45,5 +47,13 @@ public class ShopControllerImpl implements ShopController {
             e.getKey().getDescription(),
              e.getValue()),
             e -> e.getKey()));
+    }
+
+    @Override
+    public Optional<SpecialCard> translateCard(SpecialCardInfo specialCard) {
+        if(!this.cardTranslator.containsKey(specialCard)) {
+            return Optional.absent();
+        }
+        return Optional.of(this.cardTranslator.get(specialCard));
     }
 }

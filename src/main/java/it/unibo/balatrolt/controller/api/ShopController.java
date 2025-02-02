@@ -2,6 +2,8 @@ package it.unibo.balatrolt.controller.api;
 
 import java.util.Set;
 
+import com.google.common.base.Optional;
+
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.model.api.Shop;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
@@ -24,8 +26,15 @@ public interface ShopController {
     void openShop();
 
     /**
-     * Returns the {@link SpecialCard} sold in the shop and its value.
+     * Returns the {@link SpecialCardInfo} sold in the shop.
      * @return special cards sold in the shop
      */
     Set<SpecialCardInfo> getCards();
+
+    /**
+     * Translates the {@link SpecialCardInfo} into a real {@link SpecialCard}
+     * if present in the shop.
+     * @return the translated card if present in the shop.
+     */
+    Optional<SpecialCard> translateCard(SpecialCardInfo specialCard);
 }

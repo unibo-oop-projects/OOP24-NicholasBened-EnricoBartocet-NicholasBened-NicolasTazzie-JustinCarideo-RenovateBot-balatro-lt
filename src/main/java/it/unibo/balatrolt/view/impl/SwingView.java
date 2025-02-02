@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.google.common.base.Preconditions;
@@ -48,8 +49,8 @@ public class SwingView implements View {
     @Override
     public void showMainMenu() {
         // ROBA DI NICO DA CANCELLARE
-        panel = new ShopViewImpl(controller, null);
-        // panel = new MainMenu(controller, "Play");
+        //panel = new ShopViewImpl(controller, null);
+        panel = new MainMenu(controller, "Play");
         frame.add(panel);
         frame.setVisible(true);
     }
@@ -150,8 +151,7 @@ public class SwingView implements View {
 
     @Override
     public void notifyErrror(String name, String desc) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notifyErrror'");
+        JOptionPane.showMessageDialog(this.panel, name, desc, JOptionPane.ERROR_MESSAGE);
     }
 
     @Override

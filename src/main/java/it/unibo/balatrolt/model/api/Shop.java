@@ -29,4 +29,9 @@ public interface Shop {
      * Supplies the shop with brand new SpecialCards.
      */
     void supply();
+
+    /**
+     * It resets the shop.
+     */
+    void reset();
 }

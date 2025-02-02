@@ -54,4 +54,9 @@ public final class JokerShop implements Shop {
                 .collect(Collectors.toMap(j -> j, Joker::getShopPrice));
         }
     }
+
+    @Override
+    public void reset() {
+        this.cards.clear();
+    }
 }

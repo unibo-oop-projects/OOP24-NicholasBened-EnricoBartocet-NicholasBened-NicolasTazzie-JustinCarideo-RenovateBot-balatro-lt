@@ -3,7 +3,6 @@ package it.unibo.balatrolt.model.impl.levels;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.api.levels.Ante;
@@ -44,26 +43,26 @@ public final class AnteImpl implements Ante {
     }
 
     @Override
-    public Optional<Blind> getCurrentBlind() {
-        return Optional.fromJavaUtil(
-            this.blinds.stream()
+    public Blind getCurrentBlind() {
+        return this.blinds.stream()
             .map(blinds::indexOf)
             .filter(n -> n == this.currentBlind)
             .map(blinds::get)
             .findAny()
-        );
+            .get();
     }
 
     @Override
     public void nextBlind() {
-        if (!this.isOver()) {
+        if (this.currentBlind + 1 < this.configuration.numBlinds()) {
             this.currentBlind++;
         }
     }
 
     @Override
     public boolean isOver() {
-        return this.currentBlind >= this.configuration.numBlinds();
+        return this.currentBlind + 1 >= this.configuration.numBlinds() &&
+            this.getCurrentBlind().getStatus() != Blind.Status.IN_GAME;
     }
 
 }

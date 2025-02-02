@@ -26,7 +26,7 @@ import it.unibo.balatrolt.view.api.View;
  * Implementation of the View interface.
  */
 public class SwingView implements View {
-    private static final int RIDIM = 2;
+    private static final float RIDIM = 1.5f;
     private final MasterController controller;
     private JFrame frame = new JFrame();
     private JPanel panel;
@@ -35,7 +35,7 @@ public class SwingView implements View {
 
     /**
      * Sets the frame and it's size.
-     * 
+     *
      * @param controller the MasterController to use.
      */
     public SwingView(final MasterController controller) {
@@ -48,8 +48,7 @@ public class SwingView implements View {
 
     @Override
     public void showMainMenu() {
-        // ROBA DI NICO DA CANCELLARE
-        //panel = new ShopViewImpl(controller, null);
+        if (panel != null) frame.remove(panel);
         panel = new MainMenu(controller, "Play");
         frame.add(panel);
         frame.setVisible(true);
@@ -128,10 +127,10 @@ public class SwingView implements View {
 
     @Override
     public void showGameOver(BlindInfo blindInfo, BlindStats blindStats) {
-        this.panel.remove(this.centerPanel);
-        this.centerPanel = new BlindOver(this.controller, "GAME OVER", blindInfo, blindStats);
-        this.panel.add(this.centerPanel, BorderLayout.CENTER);
-        this.centerPanel.setVisible(true);
+        frame.remove(panel);
+        panel = new GameOver(controller);
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
     @Override

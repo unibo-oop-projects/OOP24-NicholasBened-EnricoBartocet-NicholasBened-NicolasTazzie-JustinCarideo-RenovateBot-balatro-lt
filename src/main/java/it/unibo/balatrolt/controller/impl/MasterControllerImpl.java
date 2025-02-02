@@ -62,15 +62,15 @@ public class MasterControllerImpl implements MasterController {
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
-                        this.levels.updateAnte();
                         if (this.levels.isOver()) {
-                            views.forEach(View::showYouWon);
+                            views.forEach(v -> v.showYouWon(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats()));
                         } else {
-                            views.forEach(View::showBlindDefeated);
+                            views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats()));
                         }
+                        this.levels.updateAnte();
                     }
                     case BLIND_WON -> {
-                        views.forEach(View::showGameOver);
+                        views.forEach(v -> v.showGameOver(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats()));
                     }
                 }
             }

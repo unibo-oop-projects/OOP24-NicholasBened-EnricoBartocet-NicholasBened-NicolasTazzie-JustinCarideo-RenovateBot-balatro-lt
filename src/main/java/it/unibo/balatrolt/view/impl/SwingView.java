@@ -118,21 +118,27 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showBlindDefeated() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showBlindDefeated'");
+    public void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats) {
+        this.panel.remove(this.centerPanel);
+        this.centerPanel = new BlindOver(this.controller, "BLIND DEFEATED", blindInfo, blindStats);
+        this.panel.add(this.centerPanel, BorderLayout.CENTER);
+        this.centerPanel.setVisible(true);
     }
 
     @Override
-    public void showGameOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showGameOver'");
+    public void showGameOver(BlindInfo blindInfo, BlindStats blindStats) {
+        this.panel.remove(this.centerPanel);
+        this.centerPanel = new BlindOver(this.controller, "GAME OVER", blindInfo, blindStats);
+        this.panel.add(this.centerPanel, BorderLayout.CENTER);
+        this.centerPanel.setVisible(true);
     }
 
     @Override
-    public void showYouWon() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showYouWon'");
+    public void showYouWon(BlindInfo blindInfo, BlindStats blindStats) {
+        this.panel.remove(this.centerPanel);
+        this.centerPanel = new BlindOver(this.controller, "YOU WON THE ENTIRE GAME", blindInfo, blindStats);
+        this.panel.add(this.centerPanel, BorderLayout.CENTER);
+        this.centerPanel.setVisible(true);
     }
 
     @Override

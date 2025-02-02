@@ -48,12 +48,12 @@ public interface View {
     /**
      * Shows the blind defeated screen.
      */
-    void showBlindDefeated();
+    void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
 
     /**
      * Shows the game over screen.
      */
-    void showGameOver();
+    void showGameOver(BlindInfo blindInfo, BlindStats blindStats);
 
     /**
      * Updates the player's hand.
@@ -96,6 +96,8 @@ public interface View {
 
     /**
      * Shows the WINNING screen.
+     * @param blindStats
+     * @param blindInfo
      */
-    void showYouWon();
+    void showYouWon(BlindInfo blindInfo, BlindStats blindStats);
 }

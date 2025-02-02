@@ -30,6 +30,7 @@ public class SwingView implements View {
     private JPanel panel;
     private JPanel leftPanel;
     private JPanel centerPanel;
+
     /**
      * Sets the frame and it's size.
      * @param controller the MasterController to use.
@@ -72,20 +73,20 @@ public class SwingView implements View {
         leftPanel = new LeftGUI().build();
         panel.add(leftPanel, BorderLayout.WEST);
         try {
-            centerPanel = new SlotGUI(this.controller, playableCards, specialCards);
+            centerPanel = new GameTable(this.controller, playableCards, specialCards);
             panel.add(centerPanel, BorderLayout.CENTER);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ExceptionInInitializerError(e);
         }
         frame.add(panel);
         frame.setVisible(true);
+        updateBlindStatistics(stats);
     }
 
     @Override
     public void updateHand(List<PlayableCardInfo> hand) {
-        ((SlotGUI) centerPanel).updateHand(hand.stream()
-            .map(card -> card.rank() + card.suit())
-            .toList());
+        ((GameTable) this.centerPanel).updateHand(hand);
     }
 
     @Override
@@ -120,8 +121,7 @@ public class SwingView implements View {
 
     @Override
     public void updateBlindStatistics(BlindStats stats) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateBlindStatistics'");
+        ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override

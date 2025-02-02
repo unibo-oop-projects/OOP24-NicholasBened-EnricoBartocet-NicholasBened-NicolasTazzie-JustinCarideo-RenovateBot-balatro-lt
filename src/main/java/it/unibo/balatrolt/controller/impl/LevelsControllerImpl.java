@@ -24,7 +24,7 @@ import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
 public class LevelsControllerImpl implements LevelsController {
     private static final int NUM_ANTE = 8;
     private static final int NUM_BLINDS = 3;
-    private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> (a + 1) * 150 + b * 10;
+    private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> (a + 1) * (a + 1) * 150 + b * 10;
     private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b + 4;
 
     private final List<Ante> anteList;
@@ -45,7 +45,7 @@ public class LevelsControllerImpl implements LevelsController {
     @Override
     public AnteInfo getCurrentAnte() {
         return new AnteInfo(
-            this.currentAnte().getAnteNumber(),
+            this.currentAnte().getAnteNumber() + 1,
             this.currentAnte().getBlinds().stream().map(this::getBlindInfo).toList(),
             this.currentBlind().getBlindNumber()
         );
@@ -111,6 +111,6 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     private BlindInfo getBlindInfo(final Blind blind) {
-        return new BlindInfo(blind.getBlindNumber(), blind.getMinimumChips(), blind.getReward());
+        return new BlindInfo(blind.getBlindNumber() + 1, blind.getMinimumChips(), blind.getReward());
     }
 }

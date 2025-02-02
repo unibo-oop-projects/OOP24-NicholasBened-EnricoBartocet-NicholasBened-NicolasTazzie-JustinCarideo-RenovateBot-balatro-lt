@@ -44,6 +44,7 @@ public class SwingView implements View {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize((int) (screenSize.getWidth() / RIDIM), (int) (screenSize.getHeight() / RIDIM));
         frame.setLocationByPlatform(true);
+        frame.setMinimumSize(new Dimension(1000, 600));
     }
 
     @Override

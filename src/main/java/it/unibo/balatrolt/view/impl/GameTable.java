@@ -1,7 +1,9 @@
 package it.unibo.balatrolt.view.impl;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.google.common.base.Optional;
@@ -26,17 +29,20 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
  * of the given param X.
  */
 public class GameTable extends JPanel {
+    private static final Color BG_COLOR = Color.green.darker().darker().darker();
     private static final int MAX_PLAYED_CARDS = 5;
     private static final int MAX_SPECIAL_CARDS = 5;
     private static final float BASE_WEIGHT = 0.2f;
     private static final int RIDIM = 28;
     private static final int JB_FONT_SIZE = 18;
+
     private final MasterController controller;
-    private SlotPanel<PlayableCardInfo> handSlot;
+    private final SlotPanel<PlayableCardInfo> handSlot;
     private SlotPanel<PlayableCardInfo> playedSlot;
-    private SlotPanel<SpecialCardInfo> specialSlot;
-    private List<PlayableCardInfo> selectedCards;
-    private JButton discardButton;
+    private final SlotPanel<SpecialCardInfo> specialSlot;
+    private final List<PlayableCardInfo> selectedCards = new ArrayList<>();
+    private final JButton discardButton;
+    private final JPanel centerPanel;
 
     /**
      * Represent the game table, with the cards in the player's hand,
@@ -48,16 +54,27 @@ public class GameTable extends JPanel {
      * @throws IOException
      */
     public GameTable(MasterController controller, List<PlayableCardInfo> cards, List<SpecialCardInfo> specialCards) {
-        super(new GridBagLayout());
-        this.setBackground(Color.green.darker().darker().darker());
+        super(new BorderLayout());
+        this.setBackground(BG_COLOR);
         this.controller = Preconditions.checkNotNull(controller);
-        this.selectedCards = new ArrayList<>();
+
+        final JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        northPanel.setBackground(BG_COLOR);
+        this.add(northPanel, BorderLayout.NORTH);
+        this.centerPanel = new JPanel(new GridBagLayout());
+        this.centerPanel.setBackground(BG_COLOR);
+        this.add(centerPanel, BorderLayout.CENTER);
+        final JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 20));
+        southPanel.setBackground(BG_COLOR);
+        this.add(southPanel, BorderLayout.SOUTH);
+
         /**
          * Creating slot for the cards in hand.
          */
         this.handSlot = new SlotPanel<>(
             cards.size(),
             () -> this.selectedCards.size() < MAX_PLAYED_CARDS,
+            () -> true,
             card -> {
                 this.selectedCards.add(card);
                 this.playedSlot.addObject(slotTranslator(card));
@@ -66,13 +83,14 @@ public class GameTable extends JPanel {
             }
         );
         cards.forEach(c -> this.handSlot.addObject(this.slotTranslator(c)));
-        this.build(this.handSlot, 0, 2, 3, 2, GridBagConstraints.PAGE_END, RIDIM);
+        this.buildSlot(this.handSlot, 1);
 
         /**
          * Creating slot for the played cards.
          */
         this.playedSlot = new SlotPanel<>(
             MAX_PLAYED_CARDS,
+            () -> true,
             () -> true,
             card -> {
                 this.selectedCards.remove(card);
@@ -81,18 +99,19 @@ public class GameTable extends JPanel {
                 this.repaint();
             }
         );
-        this.build(this.playedSlot, 0, 1, 3, 1, GridBagConstraints.CENTER, RIDIM);
+        this.buildSlot(this.playedSlot, 0);
 
         /**
          * Creating slot for the special cards.
          */
         this.specialSlot = new SlotPanel<>(
             MAX_SPECIAL_CARDS,
+            () -> true,
             () -> false,
-            card -> {}
+            card -> JOptionPane.showMessageDialog(this, card.name() + ":\n" + card.description(), "Special Card Info", JOptionPane.INFORMATION_MESSAGE)
         );
         specialCards.forEach(c -> this.specialSlot.addObject(this.slotTranslator(c)));
-        this.build(this.specialSlot, 0, 0, 1, 1,GridBagConstraints.FIRST_LINE_START, RIDIM);
+        northPanel.add(specialSlot);
 
         /**
          * Creating the play button.
@@ -108,7 +127,7 @@ public class GameTable extends JPanel {
                 this.selectedCards.clear();
             }
         });
-        this.build(playButton, 0, 3, 1, 0, GridBagConstraints.LINE_END, 0);
+        southPanel.add(playButton, BorderLayout.SOUTH);
 
         /**
          * Creating the discard button
@@ -117,6 +136,7 @@ public class GameTable extends JPanel {
         discardButton.setBackground(Color.RED);
         discardButton.setForeground(Color.WHITE);
         discardButton.setFont(new Font("Arial", Font.PLAIN, JB_FONT_SIZE));
+        discardButton.setPreferredSize(playButton.getPreferredSize());
         discardButton.addActionListener(e -> {
             if (!this.selectedCards.isEmpty()) {
                 this.playedSlot.removeAll();
@@ -124,7 +144,7 @@ public class GameTable extends JPanel {
                 this.selectedCards.clear();
             }
         });
-        this.build(discardButton, 2, 3, 1, 0, GridBagConstraints.LINE_START, 0);
+        southPanel.add(discardButton, BorderLayout.SOUTH);
     }
 
     public void updateHand(List<PlayableCardInfo> newCards) {
@@ -133,51 +153,29 @@ public class GameTable extends JPanel {
     }
 
     /**
-     * Adds the slot given to the GameTable panel
-     * applying the given constraints.
-     *
-     * @param slot to which the constraints will be applied.
-     * @param x position of gridx.
-     * @param y position of gridy.
-     * @param width how many cells has to occupy starting from @param x
-     * @param multiplier multiplier for weighty.
-     * @param anchor enum indicating where to anchor.
-     */
-    private void build(Component component, int x, int y, int width, int multiplier, int anchor, int inset) {
-        final GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = x;
-        gbc.gridy = y;
-        gbc.weightx = BASE_WEIGHT;
-        gbc.weighty = BASE_WEIGHT * multiplier;
-        gbc.gridwidth = width;
-        gbc.insets = new Insets(inset , RIDIM, RIDIM, RIDIM);
-        gbc.anchor = anchor;
-        this.add(component, gbc);
-    }
-
-    /**
-     *
-     * @param card to translate.
-     * @return SlotObject representing the card's name and itself.
-     */
-    private SlotPanel.SlotObject<PlayableCardInfo> slotTranslator(PlayableCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.rank() + card.suit());
-    }
-
-    /**
-     *
-     * @param card to translate.
-     * @return SlotObject representing the card's name and itself.
-     */
-    private SlotPanel.SlotObject<SpecialCardInfo> slotTranslator(SpecialCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, "JOKER");
-    }
-
-    /**
-     * returns true if the discard button is enabled.
      * @param isEnable true if the discard button is enable.
      */
     public void setDiscardEnabled(boolean isEnable) {
         this.discardButton.setEnabled(isEnable);
+    }
+
+    private void buildSlot(Component component, int y) {
+        final GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = y;
+        gbc.weightx = BASE_WEIGHT;
+        gbc.weighty = BASE_WEIGHT * 2;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(5, RIDIM, 5, RIDIM);
+        gbc.anchor = GridBagConstraints.PAGE_END;
+        this.centerPanel.add(component, gbc);
+    }
+
+    private SlotPanel.SlotObject<PlayableCardInfo> slotTranslator(PlayableCardInfo card) {
+        return new SlotPanel.SlotObject<>(card, card.rank() + " " + card.suit(), card.rank() + card.suit());
+    }
+
+    private SlotPanel.SlotObject<SpecialCardInfo> slotTranslator(SpecialCardInfo card) {
+        return new SlotPanel.SlotObject<>(card, card.name(), "JOKER");
     }
 }

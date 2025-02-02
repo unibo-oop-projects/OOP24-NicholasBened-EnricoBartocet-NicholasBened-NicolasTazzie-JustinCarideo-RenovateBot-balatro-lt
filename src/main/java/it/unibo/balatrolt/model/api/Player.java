@@ -33,6 +33,8 @@ public interface Player {
      */
     void addCurrency(int value);
 
+    void spendCurrency(int money);
+
     /**
      * Returns the player's money.
      * @return the player's money

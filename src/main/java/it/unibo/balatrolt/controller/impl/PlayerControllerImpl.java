@@ -41,6 +41,11 @@ public class PlayerControllerImpl implements PlayerController {
     }
 
     @Override
+    public void spendCurrency(int money) {
+        this.player.spendCurrency(money);
+    }
+
+    @Override
     public void addSpecialCard(SpecialCard card) {
         this.player.addSpecialCard(card);
     }

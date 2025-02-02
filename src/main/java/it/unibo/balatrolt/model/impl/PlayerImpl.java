@@ -53,6 +53,13 @@ public final class PlayerImpl implements Player {
     }
 
     @Override
+    public void spendCurrency(final int money) {
+        Preconditions.checkArgument(money > 0, "cannot remove negative value");
+        Preconditions.checkState(this.currency - money >= 0, "Insufficient currency");
+        this.currency -= money;
+    }
+
+    @Override
     public int getCurrency() {
         return this.currency;
     }

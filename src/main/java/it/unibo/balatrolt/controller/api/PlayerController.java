@@ -14,6 +14,8 @@ public interface PlayerController {
 
     void addCurrency(int reward);
 
+    void spendCurrency(int money);
+
     void addSpecialCard(SpecialCard card);
 
 }

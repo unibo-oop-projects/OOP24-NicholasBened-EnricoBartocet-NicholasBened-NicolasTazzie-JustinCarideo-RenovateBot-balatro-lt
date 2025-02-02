@@ -52,7 +52,7 @@ public enum BalatroEvent {
             case INIT_GAME -> Set.of(CHOOSE_DECK);
             case CHOOSE_DECK -> Set.of(CHOOSE_BLIND);
             case CHOOSE_BLIND, DISCARD_CARDS -> Set.of(DISCARD_CARDS, PLAY_CARDS);
-            case PLAY_CARDS -> Set.of(DISCARD_CARDS, PLAY_CARDS, OPEN_SHOP);
+            case PLAY_CARDS -> Set.of(DISCARD_CARDS, PLAY_CARDS, OPEN_SHOP, MAIN_MENU);
             case BUY_CARD, OPEN_SHOP -> Set.of(BUY_CARD, CLOSE_SHOP);
             case CLOSE_SHOP -> Set.of(CHOOSE_BLIND);
         };

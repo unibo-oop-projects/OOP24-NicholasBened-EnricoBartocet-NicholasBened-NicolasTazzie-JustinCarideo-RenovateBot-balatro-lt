@@ -48,8 +48,7 @@ public class SwingView implements View {
 
     @Override
     public void showMainMenu() {
-        // ROBA DI NICO DA CANCELLARE
-        //panel = new ShopViewImpl(controller, null);
+        if (panel != null) frame.remove(panel);
         panel = new MainMenu(controller, "Play");
         frame.add(panel);
         frame.setVisible(true);
@@ -129,7 +128,8 @@ public class SwingView implements View {
     @Override
     public void showGameOver(BlindInfo blindInfo, BlindStats blindStats) {
         frame.remove(panel);
-        frame.add(new GameOver());
+        panel = new GameOver(controller);
+        frame.add(panel);
         frame.setVisible(true);
     }
 

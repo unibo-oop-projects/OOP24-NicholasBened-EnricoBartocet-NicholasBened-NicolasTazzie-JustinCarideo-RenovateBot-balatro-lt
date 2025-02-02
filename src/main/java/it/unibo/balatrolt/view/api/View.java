@@ -78,11 +78,6 @@ public interface View {
     void updateScore();
 
     /**
-     * Shows the played cards.
-     */
-    void updatePlayedCards();
-
-    /**
      * Shows the shop with the given set of special cards to sell.
      *
      * @param toSell the set of special cards available for sale

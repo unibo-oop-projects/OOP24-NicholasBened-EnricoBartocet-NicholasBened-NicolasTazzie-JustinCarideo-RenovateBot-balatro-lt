@@ -35,8 +35,8 @@ public class GameTable extends JPanel {
     private SlotPanel<PlayableCardInfo> handSlot;
     private SlotPanel<PlayableCardInfo> playedSlot;
     private SlotPanel<SpecialCardInfo> specialSlot;
-    private JButton discardButton;
     private List<PlayableCardInfo> selectedCards;
+    private JButton discardButton;
 
     /**
      * Represent the game table, with the cards in the player's hand,
@@ -88,7 +88,7 @@ public class GameTable extends JPanel {
          */
         this.specialSlot = new SlotPanel<>(
             MAX_SPECIAL_CARDS,
-            () -> false,
+            () -> true,
             card -> {}
         );
         specialCards.forEach(c -> this.specialSlot.addObject(this.slotTranslator(c)));
@@ -103,10 +103,12 @@ public class GameTable extends JPanel {
         playButton.setFont(new Font("Arial", Font.PLAIN, JB_FONT_SIZE));
         playButton.addActionListener(e-> {
             if (!this.selectedCards.isEmpty()) {
+                this.playedSlot.removeAll();
                 this.controller.handleEvent(BalatroEvent.PLAY_CARDS, Optional.of(this.selectedCards));
+                this.selectedCards.clear();
             }
         });
-        this.build(playButton, 0, 3, 1, 0, GridBagConstraints.CENTER, 0);
+        this.build(playButton, 0, 3, 1, 0, GridBagConstraints.LINE_START, 0);
 
         /**
          * Creating the discard button
@@ -122,7 +124,7 @@ public class GameTable extends JPanel {
                 this.selectedCards.clear();
             }
         });
-        this.build(discardButton, 1, 3, 1, 0, GridBagConstraints.CENTER, 0);
+        this.build(discardButton, 0, 3, 1, 0, GridBagConstraints.LINE_END, 0);
     }
 
     public void updateHand(List<PlayableCardInfo> newCards) {

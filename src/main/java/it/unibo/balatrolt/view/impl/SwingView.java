@@ -105,12 +105,6 @@ public class SwingView implements View {
     }
 
     @Override
-    public void updatePlayedCards() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updatePlayedCards'");
-    }
-
-    @Override
     public void updateSpecialCards() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");

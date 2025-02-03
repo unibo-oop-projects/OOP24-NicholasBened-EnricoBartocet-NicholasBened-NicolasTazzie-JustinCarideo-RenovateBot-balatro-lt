@@ -13,25 +13,36 @@ public interface Combination {
      */
     enum CombinationType {
         /** High card combination. */
-        HIGH_CARD,
+        HIGH_CARD("High Card"),
         /** A pair combination. */
-        PAIR,
+        PAIR("Pair"),
         /** Two pairs combination. */
-        TWO_PAIR,
+        TWO_PAIR("Two Pair"),
         /** Three of a kind combination. */
-        THREE_OF_A_KIND,
+        THREE_OF_A_KIND("Three of a kind"),
         /** Straight combination. */
-        STRAIGHT,
+        STRAIGHT("Straight"),
         /** Flush combination. */
-        FLUSH,
+        FLUSH("Flush"),
         /** Full house combination. */
-        FULL_HOUSE,
+        FULL_HOUSE("Full House"),
         /** Four of a kind combination. */
-        FOUR_OF_A_KIND,
+        FOUR_OF_A_KIND("Four of a kind"),
         /** Straight flush combination. */
-        STRAIGHT_FLUSH,
+        STRAIGHT_FLUSH("Straight Flush"),
         /** Royal flush combination. */
-        ROYAL_FLUSH
+        ROYAL_FLUSH("Royal Flush");
+
+        private final String name;
+
+        private CombinationType(final String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 
     /**

@@ -43,6 +43,7 @@ public class ScorePanel extends JPanel {
         currentScore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         currentScore.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
         currentScore.setBackground(Color.GREEN.darker());
+        currentScore.setOpaque(true);
         return currentScore;
     }
 
@@ -63,6 +64,7 @@ public class ScorePanel extends JPanel {
         minimumScoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         minimumScoreLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
         minimumScoreLabel.setBackground(Color.MAGENTA.darker());
+        minimumScoreLabel.setOpaque(true);
         return minimumScoreLabel;
     }
 

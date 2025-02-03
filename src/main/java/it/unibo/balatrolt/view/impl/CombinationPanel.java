@@ -23,15 +23,17 @@ public class CombinationPanel extends JPanel {
         pointsLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pointsLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
         pointsLabel.setBackground(Color.BLUE.darker());
+        pointsLabel.setOpaque(true);
         return pointsLabel;
     }
 
     private JLabel getMultiplierLabel() {
-        final JLabel pointsLabel = new JLabel();
-        pointsLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        pointsLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
-        pointsLabel.setBackground(Color.RED.darker());
-        return pointsLabel;
+        final JLabel multiplierLabel = new JLabel();
+        multiplierLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        multiplierLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
+        multiplierLabel.setBackground(Color.RED.darker());
+        multiplierLabel.setOpaque(true);
+        return multiplierLabel;
     }
 
 }

@@ -78,6 +78,7 @@ public class GameTable extends JPanel {
             card -> {
                 this.selectedCards.add(card);
                 this.playedSlot.addObject(slotTranslator(card));
+                this.controller.handleEvent(BalatroEvent.STAGE_CARDS, Optional.of(this.selectedCards));
                 this.revalidate();
                 this.repaint();
             }
@@ -95,6 +96,7 @@ public class GameTable extends JPanel {
             card -> {
                 this.selectedCards.remove(card);
                 this.handSlot.addObject(slotTranslator(card));
+                this.controller.handleEvent(BalatroEvent.STAGE_CARDS, Optional.of(this.selectedCards));
                 this.revalidate();
                 this.repaint();
             }

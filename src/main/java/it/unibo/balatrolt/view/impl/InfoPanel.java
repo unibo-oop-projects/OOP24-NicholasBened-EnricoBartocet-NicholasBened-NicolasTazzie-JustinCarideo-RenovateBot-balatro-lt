@@ -16,34 +16,26 @@ import javax.swing.SwingConstants;
 
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
+import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 
 /**
  * Creates the left part of the main GUI.
  */
-public class InfoPanel {
-    private static final int SIZE_BIG_BLIND = 36;
-    private final BlindInfo info;
-    private final BlindStats stats;
+public class InfoPanel extends JPanel {
+
+    private TitlePanel titlePanel;
+    private ScorePanel scorePanel;
+    private CombinationPanel combinationPanel;
 
     public InfoPanel(BlindInfo info, BlindStats stats, List<PlayableCardInfo> playableCards) {
-        final JPanel infoPanel = new JPanel(new GridLayout(4, 1));
-        this.stats = stats;
-        this.info = info;
-    }
-
-    /**
-     * @return the completed left panel
-     */
-    public final JPanel build() {
-        final JPanel leftPanel = new JPanel(new GridLayout(4, 1));
-
-        leftPanel.add(new TitlePanel(this.info));
-        leftPanel.add(new ScorePanel(this.info, this.stats));
-
-        final JLabel multiplicators = new JLabel("--somma carte-- X --moltiplicatori--", SwingConstants.CENTER);
-        multiplicators.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        leftPanel.add(new CombinationPanel());
+        this.setLayout(new GridLayout(4, 1));
+        this.titlePanel = new TitlePanel(info);
+        this.scorePanel = new ScorePanel(info, stats);
+        this.combinationPanel = new CombinationPanel();
+        this.add(this.titlePanel);
+        this.add(this.scorePanel);
+        this.add(this.combinationPanel);
 
         final JPanel infoPanel = new JPanel(new BorderLayout());
         infoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -51,7 +43,7 @@ public class InfoPanel {
         final JPanel leftInfoPanel = new JPanel(new GridLayout(2, 1));
 
         final ActionListener al = e -> {
-            JOptionPane.showMessageDialog(leftPanel, "ciaooooo");
+            JOptionPane.showMessageDialog(this, "ciaooooo");
         };
 
         final JButton infoButton = new JButton("Run info");
@@ -83,10 +75,15 @@ public class InfoPanel {
         rightInfoPanel.add(money);
         rightInfoPanel.add(ante);
         rightInfoPanel.add(round);
-
+        this.add(infoPanel);
         infoPanel.add(rightInfoPanel);
-        leftPanel.add(infoPanel);
+    }
 
-        return leftPanel;
+    public void updateCombination(final CombinationInfo info) {
+        
+    }
+
+    public void updateBlindStatistics(final BlindStats stats) {
+        
     }
 }

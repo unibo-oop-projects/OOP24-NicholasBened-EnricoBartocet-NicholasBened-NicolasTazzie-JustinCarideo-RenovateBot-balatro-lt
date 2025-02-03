@@ -24,12 +24,13 @@ public class SlotPanel<X> extends JPanel {
     private Map<String, X> slots;
     private Consumer<X> consumer;
     private Supplier<Boolean> canClick;
+    private Supplier<Boolean> canRemove;
 
     /**
      * It holds the full obj to eventually give it back to the controller
      * and holds the name of the card to set the image.
      */
-    record SlotObject<X>(X obj, String cardName) {}
+    record SlotObject<X>(X obj, String cardName, String cardPath) {}
 
     /**
      * Sets the parameters of the panel.
@@ -37,11 +38,12 @@ public class SlotPanel<X> extends JPanel {
      * @param canClick possibility to click
      * @param consumer action to perform with the pressed card. THE CARD GETS DELETED BY DEFAULT.
      */
-    public SlotPanel(final int slotSize, Supplier<Boolean> canClick, Consumer<X> consumer) {
+    public SlotPanel(final int slotSize, Supplier<Boolean> canClick, Supplier<Boolean> canRemove, Consumer<X> consumer) {
         super(new GridLayout(1, slotSize));
-        super.setBackground(Color.green.darker().darker().darker());
+        super.setBackground(Color.DARK_GRAY);
         this.consumer = Preconditions.checkNotNull(consumer);
         this.canClick = Preconditions.checkNotNull(canClick);
+        this.canRemove = Preconditions.checkNotNull(canRemove);
         this.slotSize = Preconditions.checkNotNull(slotSize);
         this.slots = new HashMap<>();
     }
@@ -61,12 +63,14 @@ public class SlotPanel<X> extends JPanel {
         button.addActionListener(e -> {
             if (this.canClick.get()) {
                 this.consumer.accept(this.slots.get(e.getActionCommand()));
-                this.slots.remove(e.getActionCommand());
-                this.remove((JButton)e.getSource());
+                if (this.canRemove.get()) {
+                    this.slots.remove(e.getActionCommand());
+                    this.remove((JButton)e.getSource());
+                }
             }
         });
         try {
-            final Image img = ImageIO.read(getClass().getResource("/" + card.cardName().toUpperCase() + ".png"));
+            final Image img = ImageIO.read(getClass().getResource("/" + card.cardPath().toUpperCase() + ".png"));
             button.setIcon(new ImageIcon(img));
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);

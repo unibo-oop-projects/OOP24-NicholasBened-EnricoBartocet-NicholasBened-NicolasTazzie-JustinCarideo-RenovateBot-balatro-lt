@@ -98,7 +98,7 @@ public class MasterControllerImpl implements MasterController {
             }
             case BUY_CARD -> {
                 if (!buySpecialCard(data)) {
-                    views.forEach(v -> v.notifyErrror("Shop", "Currency is not enought"));
+                    views.forEach(v -> v.notifyErrror("You don't have enough money", "Shop"));
                 } else {
                     views.forEach(v -> {
                         v.updateShopCards(this.shop.getCards());

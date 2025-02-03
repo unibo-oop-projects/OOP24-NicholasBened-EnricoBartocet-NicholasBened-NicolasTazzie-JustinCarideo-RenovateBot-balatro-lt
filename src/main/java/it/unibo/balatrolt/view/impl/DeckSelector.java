@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -43,7 +43,7 @@ public class DeckSelector extends JPanel {
      * @param controller the master controller.
      * @param decks to choose from.
      */
-    public DeckSelector(MasterController controller, Set<DeckInfo> decks) {
+    public DeckSelector(MasterController controller, List<DeckInfo> decks) {
         setLayout(new GridBagLayout());
         decks.forEach(d -> {
             this.decksTranslator.put(d.name(), d);

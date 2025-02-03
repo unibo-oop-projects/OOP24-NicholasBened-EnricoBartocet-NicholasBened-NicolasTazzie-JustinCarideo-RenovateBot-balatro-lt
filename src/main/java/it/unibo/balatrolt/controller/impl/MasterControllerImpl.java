@@ -46,7 +46,7 @@ public class MasterControllerImpl implements MasterController {
             case MAIN_MENU -> views.forEach(View::showMainMenu);
             case INIT_GAME -> {
                 this.shop = new ShopControllerImpl(SHOP_SIZE);
-                views.forEach(v -> v.showDecks(deckTranslator.keySet()));
+                views.forEach(v -> v.showDecks(deckTranslator.keySet().stream().toList()));
             }
             case CHOOSE_DECK -> {
                 setControllers(data);

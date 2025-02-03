@@ -56,7 +56,7 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showDecks(final Set<DeckInfo> setMap) {
+    public void showDecks(final List<DeckInfo> setMap) {
         frame.remove(panel);
         panel = new DeckSelector(this.controller, setMap);
         frame.add(panel);

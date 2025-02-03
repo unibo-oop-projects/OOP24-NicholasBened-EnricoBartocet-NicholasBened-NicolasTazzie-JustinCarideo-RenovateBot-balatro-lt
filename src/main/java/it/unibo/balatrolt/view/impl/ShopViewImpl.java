@@ -98,7 +98,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
             }
         });
         try {
-            final Image img = ImageIO.read(getClass().getResource("/JOKER.png"));
+            final Image img = ImageIO.read(getClass().getResource("/img/JOKER.png"));
             card.setIcon(new ImageIcon(img));
         } catch (final IOException e) {
             JOptionPane.showMessageDialog(this, "Image could not be loaded", "ERROR", JOptionPane.ERROR_MESSAGE);

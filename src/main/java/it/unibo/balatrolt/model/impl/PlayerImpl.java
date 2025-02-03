@@ -68,4 +68,9 @@ public final class PlayerImpl implements Player {
     public PlayerStatus getStatus() {
         return new PlayerStatusImpl(deck, getSpecialCardSlot(), currency);
     }
+
+    @Override
+    public int getMaxSpecialCards() {
+        return SLOT_SIZE;
+    }
 }

@@ -46,4 +46,6 @@ public interface Player {
      * @return the player's status
      */
     PlayerStatus getStatus();
+
+    int getMaxSpecialCards();
 }

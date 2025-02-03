@@ -26,7 +26,7 @@ public interface View {
      * Shows the decks to choose from.
      * @param decks to choose from.
      */
-    void showDecks(Set<DeckInfo> decks);
+    void showDecks(List<DeckInfo> decks);
 
     /**
      * Shows the ante information: the current blind,

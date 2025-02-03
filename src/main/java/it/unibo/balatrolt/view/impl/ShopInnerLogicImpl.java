@@ -1,20 +1,15 @@
 package it.unibo.balatrolt.view.impl;
 
-import java.util.Set;
-
 import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.view.api.ShopInnerLogic;
 
+/**
+ * Implementation of {@link ShopInnerLogic}.
+ */
 public class ShopInnerLogicImpl implements ShopInnerLogic {
-    // private Set<SpecialCardInfo> toSell = Set.of();
     private Optional<SpecialCardInfo> selected = Optional.absent();
-
-    @Override
-    public void setCardsToSell(Set<SpecialCardInfo> toSell) {
-        //this.toSell = toSell;
-    }
 
     @Override
     public boolean isCardSelected() {
@@ -22,11 +17,12 @@ public class ShopInnerLogicImpl implements ShopInnerLogic {
     }
 
     @Override
-    public void hitCard(SpecialCardInfo specialCardInfo) {
-        if(this.selected.equals(Optional.of(specialCardInfo))) {
+    public void hitCard(final SpecialCardInfo specialCardInfo) {
+        final Optional<SpecialCardInfo> toSelect = Optional.fromNullable(specialCardInfo);
+        if(this.selected.equals(toSelect)) {
             this.selected = Optional.absent();
         } else {
-            this.selected = Optional.of(specialCardInfo);
+            this.selected = toSelect;
         }
     }
 

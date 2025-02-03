@@ -1,5 +1,7 @@
 package it.unibo.balatrolt.view.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -27,12 +29,21 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.view.api.ShopInnerLogic;
 import it.unibo.balatrolt.view.api.ShopView;
 
+/**
+ * Implementation of {@link ShopView}.
+ * It also extends a {@link JPanel}, so it can be used to replace an existing one.
+ */
 public final class ShopViewImpl extends JPanel implements ShopView {
     private final MasterController controller;
     private final JButton buyButton;
     private final ShopInnerLogic logic;
     private final List<JButton> cardButtons = new LinkedList<>();
 
+    /**
+     * Constructor.
+     * @param controller controller to attach.
+     * @param guiSize current size of the GUI.
+     */
     public ShopViewImpl(final MasterController controller, final Dimension guiSize) {
         super(new GridBagLayout());
         this.logic = new ShopInnerLogicImpl();
@@ -43,6 +54,23 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         this.buyButton.addActionListener(e -> {
             this.controller.handleEvent(BalatroEvent.BUY_CARD, this.logic.getSelectedCard());
         });
+    }
+
+    @Override
+    public void updateCards(final Set<SpecialCardInfo> toSell) {
+        this.removeAll();
+        checkNotNull(toSell);
+        final var shopTitle = new JLabel("Shop");
+        shopTitle.setFont(new Font("Bauhaus 93", Font.PLAIN, 100));
+        final JPanel p = new JPanel(new GridLayout(1, toSell.size()));
+        for (final var card : toSell) {
+            p.add(this.getCardWithPriceLblPanel(card.name(), card.description(), card.price()));
+        }
+        this.add(shopTitle, this.getGBConstraints(1, 0, GridBagConstraints.PAGE_END));
+        this.add(p, this.getGBConstraints(1, 1, GridBagConstraints.PAGE_END));
+        this.add(invisiblePanel(), this.getGBConstraints(2, 2, GridBagConstraints.PAGE_END));
+        this.add(this.getBuyOrContinuePanel(), this.getGBConstraints(2, 1, GridBagConstraints.PAGE_END));
+        this.redraw();
     }
 
     private JPanel getCardWithPriceLblPanel(final String name, final String desc, final int price) {
@@ -60,7 +88,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         try {
             final Image img = ImageIO.read(getClass().getResource("/JOKER.png"));
             card.setIcon(new ImageIcon(img));
-        } catch (IOException e) {
+        } catch (final IOException e) {
             JOptionPane.showMessageDialog(this, "Image could not be loaded", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         final JButton info = new JButton("info");
@@ -112,23 +140,6 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         this.cardButtons.forEach(e -> e.setBorder(
             BorderFactory.createLineBorder(e.getParent().getBackground())));
         this.repaint();
-    }
-
-    @Override
-    public void updateCards(final Set<SpecialCardInfo> toSell) {
-        this.removeAll();
-        this.logic.setCardsToSell(toSell);
-        final var shopTitle = new JLabel("Shop");
-        shopTitle.setFont(new Font("Bauhaus 93", Font.PLAIN, 100));
-        final JPanel p = new JPanel(new GridLayout(1, toSell.size()));
-        for (final var card : toSell) {
-            p.add(this.getCardWithPriceLblPanel(card.name(), card.description(), card.price()));
-        }
-        this.add(shopTitle, this.getGBConstraints(1, 0, GridBagConstraints.PAGE_END));
-        this.add(p, this.getGBConstraints(1, 1, GridBagConstraints.PAGE_END));
-        this.add(invisiblePanel(), this.getGBConstraints(2, 2, GridBagConstraints.PAGE_END));
-        this.add(this.getBuyOrContinuePanel(), this.getGBConstraints(2, 1, GridBagConstraints.PAGE_END));
-        this.redraw();
     }
 
     private JPanel invisiblePanel() {

@@ -6,16 +6,18 @@ import java.util.Set;
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
+import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
+import it.unibo.balatrolt.model.api.combination.Combination;
 
 /**
  * Interface representing the view in the application.
  */
 public interface View {
 
-    void notifyErrror(String name, String desc);
+    void notifyErrror(String title, String desc);
 
     /**
      * Shows the main menu.
@@ -70,12 +72,12 @@ public interface View {
     /**
      * Updates the combination status.
      */
-    void updateCombinationStatus();
+    void updateCombinationStatus(CombinationInfo combination);
 
     /**
      * Updates the score.
      */
-    void updateScore();
+    void updateScore(BlindStats stats);
 
     /**
      * Shows the shop.

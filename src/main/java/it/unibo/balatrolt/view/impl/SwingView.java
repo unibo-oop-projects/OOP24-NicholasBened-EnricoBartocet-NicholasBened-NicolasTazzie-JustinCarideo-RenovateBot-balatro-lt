@@ -16,6 +16,7 @@ import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
+import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.view.api.ShopView;
@@ -30,7 +31,7 @@ public class SwingView implements View {
     private final MasterController controller;
     private JFrame frame = new JFrame();
     private JPanel panel;
-    private JPanel leftPanel;
+    private InfoPanel infoPanel;
     private JPanel centerPanel;
 
     /**
@@ -76,8 +77,8 @@ public class SwingView implements View {
             List<PlayableCardInfo> playableCards) {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
-        leftPanel = new LeftGUI().build();
-        panel.add(leftPanel, BorderLayout.WEST);
+        infoPanel = new InfoPanel(info, stats, playableCards);
+        panel.add(infoPanel, BorderLayout.WEST);
         try {
             centerPanel = new GameTable(this.controller, playableCards, specialCards);
             panel.add(centerPanel, BorderLayout.CENTER);
@@ -96,15 +97,15 @@ public class SwingView implements View {
     }
 
     @Override
-    public void updateCombinationStatus() {
+    public void updateCombinationStatus(CombinationInfo combination) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCombinationStatus'");
+        this.infoPanel.updateCombination(combination);
     }
 
     @Override
-    public void updateScore() {
+    public void updateScore(BlindStats stats) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateScore'");
+        this.infoPanel.updateScore(stats);
     }
 
     @Override
@@ -150,8 +151,8 @@ public class SwingView implements View {
     }
 
     @Override
-    public void notifyErrror(String name, String desc) {
-        JOptionPane.showMessageDialog(this.panel, name, desc, JOptionPane.ERROR_MESSAGE);
+    public void notifyErrror(String title, String desc) {
+        JOptionPane.showMessageDialog(this.panel, desc, title, JOptionPane.ERROR_MESSAGE);
     }
 
     @Override

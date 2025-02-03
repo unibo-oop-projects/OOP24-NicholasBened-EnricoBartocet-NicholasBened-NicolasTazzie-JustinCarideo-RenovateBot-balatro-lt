@@ -8,6 +8,11 @@ package it.unibo.balatrolt.model.api.combination;
 public interface CombinationRecognizerHelpers {
 
     /**
+     * @return an error card recognizer
+     */
+    CombinationRecognizer errorCardRecognizer();
+
+    /**
      * @return an high card recognizer
      */
     CombinationRecognizer highCardRecognizer();

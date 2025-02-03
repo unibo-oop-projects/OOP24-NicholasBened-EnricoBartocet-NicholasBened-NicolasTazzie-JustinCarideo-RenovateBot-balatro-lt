@@ -8,6 +8,11 @@ package it.unibo.balatrolt.model.api.combination;
 public interface CombinationCalculatorFactory {
 
     /**
+     * @return a CombinationCalculator for error card
+     */
+    CombinationCalculator errorCardCalculator();
+
+    /**
      * @return a CombinationCalculator for high card
      */
     CombinationCalculator highCardCalculator();

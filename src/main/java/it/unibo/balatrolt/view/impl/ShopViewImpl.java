@@ -2,8 +2,10 @@ package it.unibo.balatrolt.view.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.GridBagConstraints;
@@ -38,6 +40,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
     private final JButton buyButton;
     private final ShopInnerLogic logic;
     private final List<JButton> cardButtons = new LinkedList<>();
+    private final JPanel innerPanel = new JPanel(new FlowLayout());
 
     /**
      * Constructor.
@@ -45,37 +48,46 @@ public final class ShopViewImpl extends JPanel implements ShopView {
      * @param guiSize current size of the GUI.
      */
     public ShopViewImpl(final MasterController controller, final Dimension guiSize) {
-        super(new GridBagLayout());
+        super(new BorderLayout());
+        this.setBackground(Color.LIGHT_GRAY);
+        final var shopTitle = new JLabel("Shop");
+        shopTitle.setFont(new Font("Bauhaus 93", Font.PLAIN, 100));
+        final var titlePanel = new JPanel(new FlowLayout());
+        titlePanel.setBackground(this.getBackground());
+        titlePanel.add(shopTitle);
+        this.add(titlePanel, BorderLayout.NORTH);
+        this.add(innerPanel, BorderLayout.CENTER);
         this.logic = new ShopInnerLogicImpl();
         // this.guiSize = guiSize;
         this.controller = controller;
-        this.setBackground(Color.ORANGE);
         this.buyButton = new JButton("Buy");
         this.buyButton.addActionListener(e -> {
             this.controller.handleEvent(BalatroEvent.BUY_CARD, this.logic.getSelectedCard());
         });
+        this.add(this.getBuyOrContinuePanel(), BorderLayout.SOUTH);
     }
 
     @Override
     public void updateCards(final Set<SpecialCardInfo> toSell) {
-        this.removeAll();
         checkNotNull(toSell);
-        final var shopTitle = new JLabel("Shop");
-        shopTitle.setFont(new Font("Bauhaus 93", Font.PLAIN, 100));
-        final JPanel p = new JPanel(new GridLayout(1, toSell.size()));
-        for (final var card : toSell) {
-            p.add(this.getCardWithPriceLblPanel(card.name(), card.description(), card.price()));
-        }
-        this.add(shopTitle, this.getGBConstraints(1, 0, GridBagConstraints.PAGE_END));
-        this.add(p, this.getGBConstraints(1, 1, GridBagConstraints.PAGE_END));
-        this.add(invisiblePanel(), this.getGBConstraints(2, 2, GridBagConstraints.PAGE_END));
-        this.add(this.getBuyOrContinuePanel(), this.getGBConstraints(2, 1, GridBagConstraints.PAGE_END));
+        this.logic.reset();
+        getInnerPanel(toSell);
         this.redraw();
+    }
+
+    private void getInnerPanel(final Set<SpecialCardInfo> toSell) {
+        this.innerPanel.removeAll();
+        this.innerPanel.setBackground(this.getBackground());
+        final JPanel cardContainer = new JPanel(new GridLayout(1, toSell.size()));
+        for (final var card : toSell) {
+            cardContainer.add(this.getCardWithPriceLblPanel(card.name(), card.description(), card.price()));
+        }
+        this.innerPanel.add(cardContainer);
     }
 
     private JPanel getCardWithPriceLblPanel(final String name, final String desc, final int price) {
         final JPanel ret = new JPanel(new GridBagLayout());
-        final JButton card = new JButton(name);
+        final JButton card = new JButton();
         card.setContentAreaFilled(false);
         card.addActionListener(e -> {
             this.logic.hitCard(new SpecialCardInfo(name, desc, price));
@@ -91,30 +103,41 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         } catch (final IOException e) {
             JOptionPane.showMessageDialog(this, "Image could not be loaded", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        final JButton info = new JButton("info");
+        final JButton info = new JButton();
+        try {
+            final Image img = ImageIO.read(getClass().getResource("/INFO.png"));
+            info.setIcon(new ImageIcon(img));
+        } catch (final IOException e) {
+            JOptionPane.showMessageDialog(this, "Info image could not be loaded", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
         info.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, desc, "Card description", JOptionPane.INFORMATION_MESSAGE);
         });
+        info.setContentAreaFilled(false);
+        info.setBorder(BorderFactory.createLineBorder(this.getBackground()));
         ret.add(getPriceLable(price), getGBConstraints(0, 0, GridBagConstraints.CENTER));
         ret.add(card, getGBConstraints(0, 1, GridBagConstraints.CENTER));
-        ret.add(info, getGBConstraints(0, 2, GridBagConstraints.CENTER));
+        ret.add(new JLabel(name, JLabel.CENTER), getGBConstraints(0, 2, GridBagConstraints.CENTER));
+        ret.add(info, getGBConstraints(0, 3, GridBagConstraints.CENTER));
         ret.setBackground(this.getBackground());
         cardButtons.add(card);
         return ret;
     }
 
     private JLabel getPriceLable(final int price) {
-        final var lbl = new JLabel(Integer.toString(price));
+        final var lbl = new JLabel(Integer.toString(price) + "$");
         lbl.setFont(new Font("Bauhaus 93", Font.PLAIN, 23));
         return lbl;
     }
 
     private JPanel getBuyOrContinuePanel() {
-        final var panel = new JPanel(new GridLayout(2, 0));
+        final var panel = new JPanel(new FlowLayout());
         final JButton continueGame = new JButton("Continue");
         continueGame.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
         this.buyButton.setFont(continueGame.getFont());
         this.buyButton.setBackground(Color.RED);
+        this.buyButton.setForeground(Color.WHITE);
+        this.buyButton.setPreferredSize(continueGame.getPreferredSize());
         continueGame.setBackground(Color.BLUE);
         continueGame.setForeground(Color.WHITE);
         continueGame.addActionListener(e -> {
@@ -122,6 +145,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         });
         panel.add(buyButton);
         panel.add(continueGame);
+        panel.setBackground(this.getBackground());
         return panel;
     }
 
@@ -136,15 +160,15 @@ public final class ShopViewImpl extends JPanel implements ShopView {
     }
 
     private void redraw() {
-        this.buyButton.setVisible(this.logic.isCardSelected());
+        this.buyButton.setEnabled(this.logic.isCardSelected());
         this.cardButtons.forEach(e -> e.setBorder(
             BorderFactory.createLineBorder(e.getParent().getBackground())));
         this.repaint();
     }
 
-    private JPanel invisiblePanel() {
+    /* private JPanel invisiblePanel() {
         final var p = new JPanel();
         p.setBackground(this.getBackground());
         return p;
-    }
+    } */
 }

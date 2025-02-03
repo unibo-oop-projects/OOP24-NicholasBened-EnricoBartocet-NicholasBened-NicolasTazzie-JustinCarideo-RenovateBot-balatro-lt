@@ -30,4 +30,9 @@ public class ShopInnerLogicImpl implements ShopInnerLogic {
     public Optional<SpecialCardInfo> getSelectedCard() {
         return this.selected;
     }
+
+    @Override
+    public void reset() {
+        this.selected = Optional.absent();
+    }
 }

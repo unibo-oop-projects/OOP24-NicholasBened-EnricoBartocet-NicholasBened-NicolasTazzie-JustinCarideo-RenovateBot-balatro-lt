@@ -25,4 +25,9 @@ public interface ShopInnerLogic {
      * @return selected card. Optiona.absent() if not present
      */
     Optional<SpecialCardInfo> getSelectedCard();
+
+    /**
+     * Resets the shop logic.
+     */
+    void reset();
 }

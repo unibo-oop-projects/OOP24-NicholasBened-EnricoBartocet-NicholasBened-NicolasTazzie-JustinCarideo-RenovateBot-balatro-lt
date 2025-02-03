@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import com.google.common.base.Preconditions;
 
 /**
@@ -76,7 +77,7 @@ public class SlotPanel<X> extends JPanel {
             }
         });
         try {
-            final Image img = ImageIO.read(getClass().getResource("/" + card.cardPath().toUpperCase() + ".png"));
+            final Image img = ImageIO.read(getClass().getResource("/img/" + card.cardPath() + ".png"));
             button.setIcon(new ImageIcon(img.getScaledInstance(this.buttonWidth, this.buttonHeight, Image.SCALE_DEFAULT)));
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);

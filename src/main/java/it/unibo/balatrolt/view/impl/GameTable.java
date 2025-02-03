@@ -130,7 +130,7 @@ public class GameTable extends JPanel {
             () -> false,
             card -> JOptionPane.showMessageDialog(this, deck.name() + " deck:\n" + deck.desc(), "Deck Info", JOptionPane.INFORMATION_MESSAGE)
         );
-        deckSlot.addObject(new SlotPanel.SlotObject<>(deck, "Deck", "img/decks/" + deck.name() + "_DECK"));
+        deckSlot.addObject(new SlotPanel.SlotObject<>(deck, "Deck", "decks/" + deck.name() + "_DECK"));
         final JPanel deckSlotContainer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         deckSlotContainer.setOpaque(false);
         deckSlotContainer.add(deckSlot);
@@ -198,10 +198,10 @@ public class GameTable extends JPanel {
     }
 
     private SlotPanel.SlotObject<PlayableCardInfo> slotTranslator(PlayableCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.rank() + " " + card.suit(), "img/cards/" + card.rank() + card.suit());
+        return new SlotPanel.SlotObject<>(card, card.rank() + " " + card.suit(), "cards/" + card.rank().toUpperCase() + card.suit().toUpperCase());
     }
 
     private SlotPanel.SlotObject<SpecialCardInfo> slotTranslator(SpecialCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.name(), "img/JOKER");
+        return new SlotPanel.SlotObject<>(card, card.name(), "JOKER");
     }
 }

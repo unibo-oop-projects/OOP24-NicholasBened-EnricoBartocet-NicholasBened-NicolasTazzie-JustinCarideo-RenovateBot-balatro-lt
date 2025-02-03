@@ -13,14 +13,23 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
-
+/**
+ * Shows the game over GUI
+ */
 public class GameOver extends JPanel {
+    private static final String FONT = "JOKERMAN";
+    private static final float TEXT_SIZE = 40f;
     private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 
+    /**
+     * builds the GUI.
+     * @param controller master controller.
+     */
     GameOver(MasterController controller) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         final JPanel gameOverPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -48,9 +57,7 @@ public class GameOver extends JPanel {
         accept.setAlignmentY(Component.CENTER_ALIGNMENT);
         buttons.add(accept);
         buttons.setOpaque(false);;
-        /**
-         * Setting decline button.
-         */
+
         final JButton decline = new JButton("Quit");
         decline.setFont(new Font("Jokerman", Font.BOLD, 45));
         decline.setForeground(Color.WHITE.brighter());
@@ -71,9 +78,26 @@ public class GameOver extends JPanel {
         this.setVisible(true);
     }
 
+    /**
+     * Gives back the requested font with the given size.
+     */
+    private Font getFont(String nameFont, float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, 15);
+        try {
+            font = Font.createFont(
+                Font.TRUETYPE_FONT,
+                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
+            );
+            font = font.deriveFont(fontSize);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cannot load font");
+        }
+        return font;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, -250, -130, this);
+        g.drawImage(image, 0, 0, this);
     }
 }

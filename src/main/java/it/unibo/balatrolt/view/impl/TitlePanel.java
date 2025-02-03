@@ -40,6 +40,7 @@ public class TitlePanel extends JPanel{
         titleBlind.setText(getBlindTitle());
         titleBlind.setFont(new Font("Bauhaus 93", Font.BOLD, SIZE_TITLE_BLIND));
         titleBlind.setBackground(color);
+        titleBlind.setOpaque(true);
         titleBlind.setHorizontalAlignment(SwingConstants.CENTER);
         return titleBlind;
     }
@@ -47,8 +48,9 @@ public class TitlePanel extends JPanel{
     private JLabel getRewardLabel(final Color color) {
         final JLabel rewardLabel = new JLabel();
         rewardLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        rewardLabel.setBackground(color);
+        rewardLabel.setBackground(color.brighter());
         rewardLabel.setText("$" + info.reward());
+        rewardLabel.setOpaque(true);
         rewardLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SIZE_TITLE_BLIND));
         rewardLabel.setHorizontalAlignment(SwingConstants.CENTER);
         return rewardLabel;

@@ -17,11 +17,15 @@ import it.unibo.balatrolt.controller.api.LevelsController;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.PlayerController;
 import it.unibo.balatrolt.controller.api.ShopController;
+import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.model.api.BuffedDeck;
+import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.impl.BuffedDeckFactory;
+import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 import it.unibo.balatrolt.view.api.View;
 
 /**
@@ -65,6 +69,9 @@ public class MasterControllerImpl implements MasterController {
                         this.player.getSpecialCards(), this.levels.getHand()));
                         System.out.println(this.player.getSpecialCards());
             }
+            case STAGE_CARDS -> {
+                recognizeCombination(data);
+            }
             case DISCARD_CARDS -> {
                 this.levels.discardCards(checkPlayableCards(data));
                 views.forEach(v -> v.updateHand(this.levels.getHand()));
@@ -76,6 +83,7 @@ public class MasterControllerImpl implements MasterController {
                     case IN_GAME -> {
                         views.forEach(v -> v.updateHand(this.levels.getHand()));
                         views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
+                        views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
@@ -158,5 +166,16 @@ public class MasterControllerImpl implements MasterController {
         Preconditions.checkArgument(data.get() instanceof List, "The data received alongside the event isn't a List");
         final var cards = (List<?>) data.get();
         return cards.stream().map(c -> (PlayableCardInfo) c).toList();
+    }
+
+    private void recognizeCombination(final Optional<?> data) {
+        Preconditions.checkArgument(data.isPresent(), "No list was received alongside the event");
+        Preconditions.checkArgument(data.get() instanceof List,
+                "The data received alongside the event isn't a list");
+        final var cards = (List<?>) data.get();
+        final List<PlayableCard> list = this.levels.translatePlayableCard(cards.stream().map(c -> (PlayableCardInfo) c).toList());
+        final Combination combination = new PlayedHandImpl(list).evaluateCombination();
+        this.views.forEach(v -> v.updateCombinationStatus(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier())));
+        System.out.println(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier()));
     }
 }

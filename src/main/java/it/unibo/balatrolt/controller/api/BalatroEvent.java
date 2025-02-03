@@ -30,6 +30,7 @@ public enum BalatroEvent {
      * The player played some cards.
      */
     PLAY_CARDS,
+    STAGE_CARDS,
     /**
      * The player opened the shop.
      */
@@ -51,8 +52,9 @@ public enum BalatroEvent {
             case MAIN_MENU -> Set.of(INIT_GAME);
             case INIT_GAME -> Set.of(CHOOSE_DECK);
             case CHOOSE_DECK -> Set.of(CHOOSE_BLIND);
-            case CHOOSE_BLIND, DISCARD_CARDS -> Set.of(DISCARD_CARDS, PLAY_CARDS);
-            case PLAY_CARDS -> Set.of(DISCARD_CARDS, PLAY_CARDS, OPEN_SHOP, MAIN_MENU);
+            case CHOOSE_BLIND, DISCARD_CARDS -> Set.of(STAGE_CARDS);
+            case STAGE_CARDS -> Set.of(PLAY_CARDS, DISCARD_CARDS ,STAGE_CARDS);
+            case PLAY_CARDS -> Set.of(STAGE_CARDS, OPEN_SHOP, MAIN_MENU);
             case BUY_CARD, OPEN_SHOP -> Set.of(BUY_CARD, CLOSE_SHOP);
             case CLOSE_SHOP -> Set.of(CHOOSE_BLIND);
         };

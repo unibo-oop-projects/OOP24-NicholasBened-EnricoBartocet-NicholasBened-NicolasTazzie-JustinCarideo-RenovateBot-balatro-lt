@@ -2,7 +2,6 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -18,31 +17,31 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
 public class ScorePanel extends JPanel {
 
     private static final int SCORE_DIM = 36;
-    private final BlindInfo info;
-    private final BlindStats stats;
+    private final JLabel minimumScoreLabel;
+    private final JLabel currentScoreLabel;
 
     public ScorePanel(BlindInfo info, BlindStats stats) {
-        this.stats = stats;
-        this.info = info;
         this.setLayout(new BorderLayout());
         final JPanel mainScoreContainer = new JPanel(new BorderLayout());
         mainScoreContainer.add(getMainTitleLabel(), BorderLayout.CENTER);
         mainScoreContainer.setPreferredSize(new Dimension(0, 100));
         this.add(mainScoreContainer, BorderLayout.NORTH);
-
-        final JPanel scoreContainer = new JPanel(new GridLayout(1, 2, 0, 0));
-        scoreContainer.add(getCurrentScorePanel());
-        scoreContainer.add(getMinimumScoreLabel());
+        this.currentScoreLabel = getCurrentScorePanel(stats);
+        this.minimumScoreLabel = getMinimumScoreLabel(info);
+        final JPanel scoreContainer = new JPanel(new GridLayout(1, 2));
+        scoreContainer.add(currentScoreLabel);
+        scoreContainer.add(minimumScoreLabel);
         this.add(scoreContainer, BorderLayout.CENTER);
 
     }
 
-    private Component getCurrentScorePanel() {
+    private JLabel getCurrentScorePanel(BlindStats stats) {
         final JLabel currentScore = new JLabel();
-        currentScore.setText(String.valueOf(this.stats.chips()));
+        currentScore.setText(String.valueOf(stats.chips()));
         currentScore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         currentScore.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
         currentScore.setBackground(Color.GREEN.darker());
+        currentScore.setOpaque(true);
         return currentScore;
     }
 
@@ -57,13 +56,19 @@ public class ScorePanel extends JPanel {
         return scoreLabel;
     }
 
-    private JLabel getMinimumScoreLabel() {
+    private JLabel getMinimumScoreLabel(BlindInfo info) {
         final JLabel minimumScoreLabel = new JLabel();
-        minimumScoreLabel.setText(String.valueOf(this.info.minimumChips()));
+        minimumScoreLabel.setText(String.valueOf(info.minimumChips()));
         minimumScoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         minimumScoreLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
         minimumScoreLabel.setBackground(Color.MAGENTA.darker());
+        minimumScoreLabel.setOpaque(true);
         return minimumScoreLabel;
+    }
+
+    public void updateScore(BlindStats stats) {
+        // TODO Auto-generated method stub
+        this.currentScoreLabel.setText(String.valueOf(stats.chips()));
     }
 
 }

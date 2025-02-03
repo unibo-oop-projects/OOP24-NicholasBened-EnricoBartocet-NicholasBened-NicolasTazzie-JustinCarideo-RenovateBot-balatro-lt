@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,47 +14,37 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import it.unibo.balatrolt.controller.api.communication.BlindInfo;
+import it.unibo.balatrolt.controller.api.communication.BlindStats;
+import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
+
 /**
  * Creates the left part of the main GUI.
  */
-public class LeftGUI {
+public class InfoPanel {
     private static final int SIZE_BIG_BLIND = 36;
+    private final BlindInfo info;
+    private final BlindStats stats;
+
+    public InfoPanel(BlindInfo info, BlindStats stats, List<PlayableCardInfo> playableCards) {
+        final JPanel infoPanel = new JPanel(new GridLayout(4, 1));
+        this.stats = stats;
+        this.info = info;
+    }
 
     /**
      * @return the completed left panel
      */
     public final JPanel build() {
-        final JPanel leftPanel = new JPanel(new GridLayout(5, 1));
-        //leftPanel.setBackground(Color.darkGray.darker());
+        final JPanel leftPanel = new JPanel(new GridLayout(4, 1));
 
-        //first block
-        final JPanel blind = new JPanel();
-        blind.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        blind.setBackground(Color.orange.darker());
-        final JLabel str = new JLabel("Big Blind");
-        str.setFont(new Font("Bauhaus 93", Font.PLAIN, SIZE_BIG_BLIND));
-        blind.add(str, BorderLayout.CENTER);
-        leftPanel.add(blind);
+        leftPanel.add(new TitlePanel(this.info));
+        leftPanel.add(new ScorePanel(this.info, this.stats));
 
-        //second block
-        final JPanel blindInfo = new JPanel();
-        blindInfo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        blindInfo.setBackground(Color.orange.darker().darker());
-        final JLabel str1 = new JLabel("Score at least: ---based on the round---");
-        blindInfo.add(str1);
-        leftPanel.add(blindInfo);
-
-        //third block
-        final JLabel score = new JLabel("round score: xxxxx", SwingConstants.CENTER);
-        score.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        leftPanel.add(score);
-
-        //fourth block
         final JLabel multiplicators = new JLabel("--somma carte-- X --moltiplicatori--", SwingConstants.CENTER);
         multiplicators.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        leftPanel.add(multiplicators);
+        leftPanel.add(new CombinationPanel());
 
-        //fifth block
         final JPanel infoPanel = new JPanel(new BorderLayout());
         infoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 

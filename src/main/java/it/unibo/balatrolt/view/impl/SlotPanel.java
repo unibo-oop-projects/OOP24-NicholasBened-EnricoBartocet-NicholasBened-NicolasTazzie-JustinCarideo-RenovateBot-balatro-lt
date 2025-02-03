@@ -70,7 +70,7 @@ public class SlotPanel<X> extends JPanel {
             }
         });
         try {
-            final Image img = ImageIO.read(getClass().getResource("/" + card.cardPath().toUpperCase() + ".png"));
+            final Image img = ImageIO.read(getClass().getResource("/img/" + card.cardPath() + ".png"));
             button.setIcon(new ImageIcon(img));
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);

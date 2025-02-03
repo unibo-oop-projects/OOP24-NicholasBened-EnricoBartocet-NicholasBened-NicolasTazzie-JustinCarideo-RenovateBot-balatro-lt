@@ -172,10 +172,10 @@ public class GameTable extends JPanel {
     }
 
     private SlotPanel.SlotObject<PlayableCardInfo> slotTranslator(PlayableCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.rank() + " " + card.suit(), "img/cards/" + card.rank() + card.suit());
+        return new SlotPanel.SlotObject<>(card, card.rank() + " " + card.suit(), "cards/" + card.rank().toUpperCase() + card.suit().toUpperCase());
     }
 
     private SlotPanel.SlotObject<SpecialCardInfo> slotTranslator(SpecialCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.name(), "img/JOKER");
+        return new SlotPanel.SlotObject<>(card, card.name(), "JOKER");
     }
 }

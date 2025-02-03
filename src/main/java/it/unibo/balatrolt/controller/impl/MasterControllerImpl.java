@@ -83,6 +83,7 @@ public class MasterControllerImpl implements MasterController {
                     case IN_GAME -> {
                         views.forEach(v -> v.updateHand(this.levels.getHand()));
                         views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
+                        views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());

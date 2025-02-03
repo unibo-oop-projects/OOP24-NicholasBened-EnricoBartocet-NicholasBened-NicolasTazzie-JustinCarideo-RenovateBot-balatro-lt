@@ -15,7 +15,7 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
  */
 public interface View {
 
-    void notifyErrror(String name, String desc);
+    void notifyErrror(String title, String desc);
 
     /**
      * Shows the main menu.

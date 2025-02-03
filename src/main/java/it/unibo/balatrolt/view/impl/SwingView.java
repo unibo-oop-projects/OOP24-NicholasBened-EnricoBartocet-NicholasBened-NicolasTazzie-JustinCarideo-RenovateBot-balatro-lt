@@ -150,8 +150,8 @@ public class SwingView implements View {
     }
 
     @Override
-    public void notifyErrror(String name, String desc) {
-        JOptionPane.showMessageDialog(this.panel, name, desc, JOptionPane.ERROR_MESSAGE);
+    public void notifyErrror(String title, String desc) {
+        JOptionPane.showMessageDialog(this.panel, desc, title, JOptionPane.ERROR_MESSAGE);
     }
 
     @Override

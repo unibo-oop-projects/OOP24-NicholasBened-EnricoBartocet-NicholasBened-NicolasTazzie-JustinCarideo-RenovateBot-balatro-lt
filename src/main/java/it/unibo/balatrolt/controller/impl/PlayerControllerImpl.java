@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.controller.api.PlayerController;
+import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.Player;
@@ -53,6 +54,11 @@ public class PlayerControllerImpl implements PlayerController {
     @Override
     public int getMaxSpecialCards() {
         return this.player.getMaxSpecialCards();
+    }
+
+    @Override
+    public DeckInfo getDeck() {
+        return new DeckInfo(this.player.getDeck().getName(), this.player.getDeck().getDescription());
     }
 
     private SpecialCardInfo getSpecialCardInfo(final SpecialCard card) {

@@ -66,7 +66,7 @@ public class MasterControllerImpl implements MasterController {
             }
             case CHOOSE_BLIND -> {
                 views.forEach(v -> v.showRound(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(),
-                        this.player.getSpecialCards(), this.levels.getHand()));
+                        this.player.getSpecialCards(), this.levels.getHand(), this.player.getDeck()));
                         System.out.println(this.player.getSpecialCards());
             }
             case STAGE_CARDS -> {

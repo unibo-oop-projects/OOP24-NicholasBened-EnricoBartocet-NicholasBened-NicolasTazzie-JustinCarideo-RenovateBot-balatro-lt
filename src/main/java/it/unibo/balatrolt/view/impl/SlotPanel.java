@@ -21,6 +21,8 @@ import com.google.common.base.Preconditions;
  */
 public class SlotPanel<X> extends JPanel {
     private final int slotSize;
+    private final int buttonWidth;
+    private final int buttonHeight;
     private Map<String, X> slots;
     private Consumer<X> consumer;
     private Supplier<Boolean> canClick;
@@ -38,14 +40,18 @@ public class SlotPanel<X> extends JPanel {
      * @param canClick possibility to click
      * @param consumer action to perform with the pressed card. THE CARD GETS DELETED BY DEFAULT.
      */
-    public SlotPanel(final int slotSize, Supplier<Boolean> canClick, Supplier<Boolean> canRemove, Consumer<X> consumer) {
+    public SlotPanel(final int slotSize, int buttonWidth, int buttonHeigth, Supplier<Boolean> canClick, Supplier<Boolean> canRemove, Consumer<X> consumer) {
         super(new GridLayout(1, slotSize));
         super.setBackground(Color.DARK_GRAY);
+        Preconditions.checkArgument(buttonWidth >= 0);
+        Preconditions.checkArgument(buttonHeigth >= 0);
         this.consumer = Preconditions.checkNotNull(consumer);
         this.canClick = Preconditions.checkNotNull(canClick);
         this.canRemove = Preconditions.checkNotNull(canRemove);
         this.slotSize = Preconditions.checkNotNull(slotSize);
         this.slots = new HashMap<>();
+        this.buttonWidth = buttonWidth;
+        this.buttonHeight = buttonHeigth;
     }
 
     /**
@@ -71,7 +77,7 @@ public class SlotPanel<X> extends JPanel {
         });
         try {
             final Image img = ImageIO.read(getClass().getResource("/" + card.cardPath().toUpperCase() + ".png"));
-            button.setIcon(new ImageIcon(img));
+            button.setIcon(new ImageIcon(img.getScaledInstance(this.buttonWidth, this.buttonHeight, Image.SCALE_DEFAULT)));
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);
         }

@@ -10,7 +10,6 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
-import it.unibo.balatrolt.model.api.combination.Combination;
 
 /**
  * Interface representing the view in the application.
@@ -45,7 +44,7 @@ public interface View {
      * @param specialCards the special cards the player has.
      * @param playableCards the cards in the player's hand.
      */
-    void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards);
+    void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards, DeckInfo deck);
 
     /**
      * Shows the blind defeated screen.

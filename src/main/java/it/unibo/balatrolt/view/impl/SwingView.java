@@ -74,13 +74,13 @@ public class SwingView implements View {
 
     @Override
     public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards,
-            List<PlayableCardInfo> playableCards) {
+            List<PlayableCardInfo> playableCards, DeckInfo deck) {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
         infoPanel = new InfoPanel(info, stats, playableCards);
         panel.add(infoPanel, BorderLayout.WEST);
         try {
-            centerPanel = new GameTable(this.controller, playableCards, specialCards);
+            centerPanel = new GameTable(this.controller, playableCards, specialCards, deck);
             panel.add(centerPanel, BorderLayout.CENTER);
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,10 +129,10 @@ public class SwingView implements View {
 
     @Override
     public void showGameOver(BlindInfo blindInfo, BlindStats blindStats) {
-        frame.remove(panel);
-        panel = new GameOver(controller);
-        frame.add(panel);
-        frame.setVisible(true);
+        panel.remove(centerPanel);
+        centerPanel = new GameOver(controller);
+        panel.add(centerPanel, BorderLayout.CENTER);
+        centerPanel.setVisible(true);
     }
 
     @Override

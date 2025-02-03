@@ -23,7 +23,8 @@ import it.unibo.balatrolt.controller.api.MasterController;
  */
 public class GameOver extends JPanel {
     private static final String FONT = "JOKERMAN";
-    private static final float TEXT_SIZE = 40f;
+    private static final float BUTTON_SIZE = 65f;
+    private static final float TEXT_SIZE = 70f;
     private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 
     /**
@@ -34,7 +35,7 @@ public class GameOver extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         final JPanel gameOverPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         final JLabel gameOver = new JLabel("Game Over");
-        gameOver.setFont(new Font("Snap ITC", Font.BOLD, 70));
+        gameOver.setFont(getFont("SNAP_ITC", TEXT_SIZE));
         gameOver.setForeground(Color.WHITE.brighter());
         gameOverPanel.setOpaque(false);
         gameOverPanel.add(gameOver);
@@ -49,7 +50,7 @@ public class GameOver extends JPanel {
         this.add(buttons);
         this.add(Box.createGlue());
         final JButton accept = new JButton("New Game");
-        accept.setFont(new Font("Jokerman", Font.BOLD, 45));
+        accept.setFont(getFont(FONT, BUTTON_SIZE));
         accept.setForeground(Color.WHITE.brighter());
         accept.setContentAreaFilled(false);
         accept.setBorder(null);
@@ -59,7 +60,7 @@ public class GameOver extends JPanel {
         buttons.setOpaque(false);;
 
         final JButton decline = new JButton("Quit");
-        decline.setFont(new Font("Jokerman", Font.BOLD, 45));
+        decline.setFont(getFont(FONT, BUTTON_SIZE));
         decline.setForeground(Color.WHITE.brighter());
         decline.setContentAreaFilled(false);
         decline.setBorder(null);

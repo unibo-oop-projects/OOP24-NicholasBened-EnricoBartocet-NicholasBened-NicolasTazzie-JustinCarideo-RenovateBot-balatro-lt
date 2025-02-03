@@ -71,12 +71,12 @@ public class LevelsControllerImpl implements LevelsController {
 
     @Override
     public void playCards(final List<PlayableCardInfo> cards, final PlayerStatus player) {
-        this.currentBlind().playHand(cards.stream().map(cardsTranslator::get).toList(), player);
+        this.currentBlind().playHand(this.translatePlayableCard(cards), player);
     }
 
     @Override
     public void discardCards(List<PlayableCardInfo> cards) {
-        this.currentBlind().discardPlayableCards(cards.stream().map(cardsTranslator::get).toList());
+        this.currentBlind().discardPlayableCards(this.translatePlayableCard(cards));
     }
 
     @Override
@@ -98,6 +98,11 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     @Override
+    public List<PlayableCard> translatePlayableCard(List<PlayableCardInfo> cards) {
+        return cards.stream().map(cardsTranslator::get).toList();
+    }
+
+    @Override
     public boolean isOver() {
         return this.currAnte >= this.anteList.size();
     }
@@ -113,4 +118,5 @@ public class LevelsControllerImpl implements LevelsController {
     private BlindInfo getBlindInfo(final Blind blind) {
         return new BlindInfo(blind.getBlindNumber() + 1, blind.getMinimumChips(), blind.getReward());
     }
+
 }

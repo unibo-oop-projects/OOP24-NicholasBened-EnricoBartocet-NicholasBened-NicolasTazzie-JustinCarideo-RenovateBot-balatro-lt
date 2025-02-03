@@ -14,9 +14,9 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 public class CombinationPanel extends JPanel {
 
     private static final int SCORE_DIM = 30;
-    private JLabel combinationLabel;
-    private JLabel basePointsLabel;
-    private JLabel multiplierLabel;
+    private final JLabel combinationLabel;
+    private final JLabel basePointsLabel;
+    private final JLabel multiplierLabel;
 
     public CombinationPanel(CombinationInfo info) {
         this.setLayout(new BorderLayout());
@@ -24,7 +24,9 @@ public class CombinationPanel extends JPanel {
         basePointsLabel = getBasePointsLabel(info);
         multiplierLabel = getMultiplierLabel(info);
         final JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(1, 2));
+        final int row = 1;
+        final int col = 2;
+        mainPanel.setLayout(new GridLayout(row, col));
         mainPanel.add(basePointsLabel);
         mainPanel.add(multiplierLabel);
         updateCombination(info);

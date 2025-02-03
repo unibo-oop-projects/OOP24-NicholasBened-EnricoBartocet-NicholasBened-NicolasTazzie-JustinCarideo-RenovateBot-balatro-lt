@@ -12,6 +12,7 @@ public interface Combination {
      * Enum representing the different types of poker combinations.
      */
     enum CombinationType {
+        ERROR_CARD(" "),
         /** High card combination. */
         HIGH_CARD("High Card"),
         /** A pair combination. */

@@ -22,6 +22,11 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
     private final List<Rank> ranks = List.of(Rank.values());
 
     @Override
+    public CombinationRecognizer errorCardRecognizer() {
+        return List::isEmpty;
+    }
+
+    @Override
     public CombinationRecognizer highCardRecognizer() {
         return hand -> !hand.isEmpty();
     }

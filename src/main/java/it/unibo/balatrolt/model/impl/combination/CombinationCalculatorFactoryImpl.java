@@ -1,6 +1,7 @@
 package it.unibo.balatrolt.model.impl.combination;
 
 import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,11 @@ public final class CombinationCalculatorFactoryImpl implements CombinationCalcul
             final Pair<Integer, Double> comb = table.convertCombination(type);
             return new CombinationImpl(value + comb.e1(), comb.e2(), type);
         };
+    }
+
+    @Override
+    public CombinationCalculator errorCardCalculator() {
+        return general(hand -> hand.size());
     }
 
     @Override

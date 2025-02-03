@@ -43,8 +43,8 @@ public final class PlayedHandImpl implements PlayedHand {
      * @param hand
      */
     public PlayedHandImpl(final List<PlayableCard> hand) {
-        Preconditions.checkArgument(hand.size() > EMPTY_HAND && hand.size() <= FULL_HAND,
-        "Hand played must be within 1 or 5 cards");
+        Preconditions.checkArgument(hand.size() >= EMPTY_HAND && hand.size() <= FULL_HAND,
+        "Hand played must be within 0 or 5 cards");
         this.hand = Collections.unmodifiableList(hand);
     }
 
@@ -113,7 +113,7 @@ public final class PlayedHandImpl implements PlayedHand {
             case ROYAL_FLUSH:
                 return this.helper.royalFlushRecognizer();
             default:
-                throw new IllegalArgumentException("Invalid argument");
+                return this.helper.errorCardRecognizer();
         }
     }
 
@@ -123,6 +123,8 @@ public final class PlayedHandImpl implements PlayedHand {
      */
     private CombinationCalculator getCalculator(final CombinationType type) {
         switch (type) {
+            case ERROR_CARD:
+                return this.factory.errorCardCalculator();
             case HIGH_CARD:
                 return this.factory.highCardCalculator();
             case PAIR, TWO_PAIR:

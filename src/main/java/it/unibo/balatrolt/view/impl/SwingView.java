@@ -30,7 +30,7 @@ public class SwingView implements View {
     private final MasterController controller;
     private JFrame frame = new JFrame();
     private JPanel panel;
-    private JPanel leftPanel;
+    private JPanel infoPanel;
     private JPanel centerPanel;
 
     /**
@@ -76,8 +76,8 @@ public class SwingView implements View {
             List<PlayableCardInfo> playableCards) {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
-        leftPanel = new LeftGUI().build();
-        panel.add(leftPanel, BorderLayout.WEST);
+        infoPanel = new InfoPanel(info, stats, playableCards).build();
+        panel.add(infoPanel, BorderLayout.WEST);
         try {
             centerPanel = new GameTable(this.controller, playableCards, specialCards);
             panel.add(centerPanel, BorderLayout.CENTER);

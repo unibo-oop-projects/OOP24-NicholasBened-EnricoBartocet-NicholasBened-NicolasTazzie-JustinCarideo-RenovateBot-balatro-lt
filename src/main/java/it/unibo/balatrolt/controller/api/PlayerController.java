@@ -18,4 +18,6 @@ public interface PlayerController {
 
     void addSpecialCard(SpecialCard card);
 
+    int getMaxSpecialCards();
+
 }

@@ -47,7 +47,7 @@ public class MainMenu extends JPanel {
          * Setting the background.
          */
         try {
-            this.image = ImageIO.read(getClass().getResourceAsStream("/SFONDO_MAIN.png"));
+            this.image = ImageIO.read(getClass().getResourceAsStream("/img/MAIN_BACKGROUND.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }

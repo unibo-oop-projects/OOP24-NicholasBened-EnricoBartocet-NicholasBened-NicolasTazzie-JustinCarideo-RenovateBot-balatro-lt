@@ -50,6 +50,11 @@ public class PlayerControllerImpl implements PlayerController {
         this.player.addSpecialCard(card);
     }
 
+    @Override
+    public int getMaxSpecialCards() {
+        return this.player.getMaxSpecialCards();
+    }
+
     private SpecialCardInfo getSpecialCardInfo(final SpecialCard card) {
         return new SpecialCardInfo(card.getName(), card.getDescription(), card.getToSellValue());
     }

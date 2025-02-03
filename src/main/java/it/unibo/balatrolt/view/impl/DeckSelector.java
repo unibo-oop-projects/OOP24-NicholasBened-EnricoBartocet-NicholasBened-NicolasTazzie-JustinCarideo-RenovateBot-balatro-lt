@@ -113,7 +113,7 @@ public class DeckSelector extends JPanel {
         deckPanel.add(deck, getConstraints(0, 0, 0.2, 0.2, 0, 1,
             GridBagConstraints.PAGE_START, GridBagConstraints.VERTICAL, 10, 10, 10, 10));
         try {
-            final Image img = ImageIO.read(getClass().getResource("/" + "JOKER" + ".png"));
+            final Image img = ImageIO.read(getClass().getResource("/" + "img/decks/WHITE_DECK" + ".png"));
             deck.setIcon(new ImageIcon(img));
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);
@@ -162,7 +162,7 @@ public class DeckSelector extends JPanel {
          * Setting the background.
          */
         try {
-            this.image = ImageIO.read(getClass().getResourceAsStream("/SFONDO_MAIN.png"));
+            this.image = ImageIO.read(getClass().getResourceAsStream("/img/MAIN_BACKGROUND.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }

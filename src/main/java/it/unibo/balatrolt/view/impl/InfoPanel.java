@@ -32,7 +32,7 @@ public class InfoPanel extends JPanel {
         this.setLayout(new GridLayout(4, 1));
         this.titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);
-        this.combinationPanel = new CombinationPanel();
+        this.combinationPanel = new CombinationPanel(new CombinationInfo(" ", 0, 0));
         this.add(this.titlePanel);
         this.add(this.scorePanel);
         this.add(this.combinationPanel);
@@ -80,10 +80,10 @@ public class InfoPanel extends JPanel {
     }
 
     public void updateCombination(final CombinationInfo info) {
-        
+        this.combinationPanel.updateCombination(info);
     }
 
-    public void updateBlindStatistics(final BlindStats stats) {
-        
+    public void updateScore(final BlindStats stats) {
+        this.scorePanel.updateScore(stats);
     }
 }

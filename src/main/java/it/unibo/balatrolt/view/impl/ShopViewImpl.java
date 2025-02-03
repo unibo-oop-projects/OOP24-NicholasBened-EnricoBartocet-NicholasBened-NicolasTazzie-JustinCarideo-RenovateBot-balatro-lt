@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -36,6 +37,11 @@ import it.unibo.balatrolt.view.api.ShopView;
  * It also extends a {@link JPanel}, so it can be used to replace an existing one.
  */
 public final class ShopViewImpl extends JPanel implements ShopView {
+    private static final int INFO_Y = 3;
+    private static final int NAME_Y = 2;
+    private static final int CARD_Y = 1;
+    private static final int N_SLOT_ROWS = 1;
+    private static final float GBC_WEIGHT = 0.2f;
     private final MasterController controller;
     private final JButton buyButton;
     private final ShopInnerLogic logic;
@@ -70,15 +76,16 @@ public final class ShopViewImpl extends JPanel implements ShopView {
     @Override
     public void updateCards(final Set<SpecialCardInfo> toSell) {
         checkNotNull(toSell);
+        this.cardButtons.clear();
         this.logic.reset();
-        getInnerPanel(toSell);
+        buildInnerPanel(toSell);
         this.redraw();
     }
 
-    private void getInnerPanel(final Set<SpecialCardInfo> toSell) {
+    private void buildInnerPanel(final Set<SpecialCardInfo> toSell) {
         this.innerPanel.removeAll();
         this.innerPanel.setBackground(this.getBackground());
-        final JPanel cardContainer = new JPanel(new GridLayout(1, toSell.size()));
+        final JPanel cardContainer = new JPanel(new GridLayout(N_SLOT_ROWS, toSell.size()));
         for (final var card : toSell) {
             cardContainer.add(this.getCardWithPriceLblPanel(card.name(), card.description(), card.price()));
         }
@@ -86,10 +93,8 @@ public final class ShopViewImpl extends JPanel implements ShopView {
     }
 
     private JPanel getCardWithPriceLblPanel(final String name, final String desc, final int price) {
-        final JPanel ret = new JPanel(new GridBagLayout());
-        final JButton card = new JButton();
-        card.setContentAreaFilled(false);
-        card.addActionListener(e -> {
+        final JPanel panel = new JPanel(new GridBagLayout());
+        final JButton card = getIconButton("/img/JOKER.png", e -> {
             this.logic.hitCard(new SpecialCardInfo(name, desc, price));
             this.redraw();
             final var btn = (JButton) e.getSource();
@@ -97,32 +102,30 @@ public final class ShopViewImpl extends JPanel implements ShopView {
                 btn.setBorder(BorderFactory.createLineBorder(Color.RED));
             }
         });
-        try {
-            final Image img = ImageIO.read(getClass().getResource("/img/JOKER.png"));
-            card.setIcon(new ImageIcon(img));
-        } catch (final IOException e) {
-            JOptionPane.showMessageDialog(this, "Image could not be loaded", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        final JButton info = new JButton();
-        try {
-            final Image img = ImageIO.read(getClass().getResource("/INFO.png"));
-            info.setIcon(new ImageIcon(img));
-        } catch (final IOException e) {
-            JOptionPane.showMessageDialog(this, "Info image could not be loaded", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        info.addActionListener(e -> {
+        this.cardButtons.add(card);
+        final JButton info = getIconButton("/INFO.png", e -> {
             JOptionPane.showMessageDialog(this, desc, "Card description", JOptionPane.INFORMATION_MESSAGE);
         });
-        info.setContentAreaFilled(false);
-        info.setBorder(BorderFactory.createLineBorder(this.getBackground()));
-        ret.add(getPriceLable(price), getGBConstraints(0, 0, GridBagConstraints.CENTER));
-        ret.add(card, getGBConstraints(0, 1, GridBagConstraints.CENTER));
-        ret.add(new JLabel(name, JLabel.CENTER), getGBConstraints(0, 2, GridBagConstraints.CENTER));
-        ret.add(info, getGBConstraints(0, 3, GridBagConstraints.CENTER));
-        ret.setBackground(this.getBackground());
-        cardButtons.add(card);
-        return ret;
+        panel.add(getPriceLable(price), getGBConstraints(0, 0));
+        panel.add(card, getGBConstraints(0, CARD_Y));
+        panel.add(new JLabel(name, JLabel.CENTER), getGBConstraints(0, NAME_Y));
+        panel.add(info, getGBConstraints(0, INFO_Y));
+        panel.setBackground(this.getBackground());
+        return panel;
     }
+
+    private JButton getIconButton(final String path, final ActionListener action) {
+        final var btn = new JButton();
+        btn.addActionListener(action);
+        try {
+            final Image img = ImageIO.read(getClass().getResource(path));
+            btn.setIcon(new ImageIcon(img));
+        } catch (final IOException e) {
+            JOptionPane.showMessageDialog(this, "Image could not be loaded: " + path, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        btn.setContentAreaFilled(false);
+        return btn;
+    };
 
     private JLabel getPriceLable(final int price) {
         final var lbl = new JLabel(Integer.toString(price) + "$");
@@ -149,13 +152,13 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         return panel;
     }
 
-    private GridBagConstraints getGBConstraints(final int x, final int y, final int anchorType) {
+    private GridBagConstraints getGBConstraints(final int x, final int y) {
         final var gbc = new GridBagConstraints();
         gbc.gridx = x;
         gbc.gridy = y;
-        gbc.weighty = 0.2f;
-        gbc.weightx = 0.2f;
-        gbc.anchor = anchorType;
+        gbc.weighty = GBC_WEIGHT;
+        gbc.weightx = GBC_WEIGHT;
+        gbc.anchor = GridBagConstraints.CENTER;
         return gbc;
     }
 
@@ -165,10 +168,4 @@ public final class ShopViewImpl extends JPanel implements ShopView {
             BorderFactory.createLineBorder(e.getParent().getBackground())));
         this.repaint();
     }
-
-    /* private JPanel invisiblePanel() {
-        final var p = new JPanel();
-        p.setBackground(this.getBackground());
-        return p;
-    } */
 }

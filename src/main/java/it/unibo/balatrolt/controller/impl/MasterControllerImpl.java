@@ -105,7 +105,7 @@ public class MasterControllerImpl implements MasterController {
             }
             case BUY_CARD -> {
                 if (!buySpecialCard(data)) {
-                    views.forEach(v -> v.notifyErrror("You don't have enough money", "Shop"));
+                    views.forEach(v -> v.notifyErrror("Shop", "You don't have enough money"));
                 } else {
                     views.forEach(v -> {
                         v.updateShopCards(this.shop.getCards());
@@ -134,7 +134,8 @@ public class MasterControllerImpl implements MasterController {
                 "The data received alongside the event isn't a SpecialCardInfo");
         final var card = (SpecialCardInfo) data.get();
         if (this.shop.buyCard(card, this.player.getPlayerStatus().currency())
-                && this.shop.translateCard(card).isPresent()) {
+                && this.shop.translateCard(card).isPresent()
+                && this.player.getSpecialCards().size() < this.player.getMaxSpecialCards()) {
             this.player.addSpecialCard(this.shop.translateCard(card).get());
             this.player.spendCurrency(card.price());
             return true;

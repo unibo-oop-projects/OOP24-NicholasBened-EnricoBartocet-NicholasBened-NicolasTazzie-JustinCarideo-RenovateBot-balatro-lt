@@ -1,5 +1,7 @@
 package it.unibo.balatrolt.controller.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,16 +14,24 @@ import it.unibo.balatrolt.model.api.Shop;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 import it.unibo.balatrolt.model.impl.shop.JokerShop;
 
+/**
+ * Implementation of {@link ShopController}.
+ */
 public class ShopControllerImpl implements ShopController {
     private final Shop shop;
     private Map<SpecialCardInfo, SpecialCard> cardTranslator = Map.of();
 
-    public ShopControllerImpl(int shopSize) {
-        this.shop = new JokerShop(shopSize);
+    /**
+     * Constructor.
+     * @param shopSize shop size
+     * @throws NullPointerException if shopSize is null
+     */
+    public ShopControllerImpl(final int shopSize) {
+        this.shop = new JokerShop(checkNotNull(shopSize));
     }
 
     @Override
-    public boolean buyCard(SpecialCardInfo card, int currentMoney) {
+    public boolean buyCard(final SpecialCardInfo card, final int currentMoney) {
         return this.shop.buy(this.cardTranslator.get(card), currentMoney);
     }
 
@@ -51,7 +61,8 @@ public class ShopControllerImpl implements ShopController {
     }
 
     @Override
-    public Optional<SpecialCard> translateCard(SpecialCardInfo specialCard) {
+    public Optional<SpecialCard> translateCard(final SpecialCardInfo specialCard) {
+        checkNotNull(specialCard);
         if(!this.cardTranslator.containsKey(specialCard)) {
             return Optional.absent();
         }

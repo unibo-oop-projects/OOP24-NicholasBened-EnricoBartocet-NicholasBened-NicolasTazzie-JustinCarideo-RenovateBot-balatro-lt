@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.controller.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import java.util.HashMap;
@@ -23,6 +24,9 @@ import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.impl.BuffedDeckFactory;
 import it.unibo.balatrolt.view.api.View;
 
+/**
+ * Implementation of {@link MasterController}.
+ */
 public class MasterControllerImpl implements MasterController {
 
     private static final int SHOP_SIZE = 3;
@@ -34,6 +38,9 @@ public class MasterControllerImpl implements MasterController {
     private PlayerController player;
     private ShopController shop;
 
+    /**
+     * Constructor of {@link MasterContorller}.
+     */
     public MasterControllerImpl() {
         final var decks = BuffedDeckFactory.getList();
         decks.forEach(d -> deckTranslator.put(new DeckInfo(d.getName(), d.getDescription()), d));
@@ -117,6 +124,7 @@ public class MasterControllerImpl implements MasterController {
 
     @Override
     public void attachView(final View v) {
+        checkNotNull(v);
         views.add(v);
     }
 

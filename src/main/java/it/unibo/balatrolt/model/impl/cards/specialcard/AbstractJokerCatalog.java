@@ -7,12 +7,14 @@ import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
+import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
 
 /**
  * An abstract class that provides {@link Joker}.
  */
 public abstract class AbstractJokerCatalog implements JokerCatalog {
     private Map<String, Joker> jokers;
+    private final JokerFactory factory = new JokerFactoryImpl();
 
     protected AbstractJokerCatalog() {
         this.addJokers();
@@ -30,6 +32,10 @@ public abstract class AbstractJokerCatalog implements JokerCatalog {
 
     private final void addJokers() {
         this.jokers = this.getJokersMap();
+    }
+
+    protected final JokerFactory getFactory() {
+        return this.factory;
     }
 
     protected abstract Map<String, Joker> getJokersMap();

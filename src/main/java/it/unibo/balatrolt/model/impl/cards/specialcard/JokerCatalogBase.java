@@ -5,7 +5,6 @@ import java.util.function.UnaryOperator;
 
 import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
-import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
@@ -14,14 +13,13 @@ import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
  */
 public final class JokerCatalogBase extends AbstractJokerCatalog {
     private final static JokerTier TIER = JokerTier.EPIC;
-    private final JokerFactory factory = new JokerFactoryImpl();
 
     public JokerCatalogBase() {
         super();
     }
 
     private Joker fiveBasePoints() {
-        return this.factory.withModifierAndRandomPrice(
+        return super.getFactory().withModifierAndRandomPrice(
             "the fifth point",
          "it adds 5 base points",
          this.getBasePointModifier(b -> b + 5),
@@ -29,7 +27,7 @@ public final class JokerCatalogBase extends AbstractJokerCatalog {
     }
 
     private Joker tenBasePoints() {
-        return this.factory.withModifierAndRandomPrice(
+        return super.getFactory().withModifierAndRandomPrice(
             "the tenth point",
          "it adds 10 base points",
          this.getBasePointModifier(b -> b + 10),
@@ -37,7 +35,7 @@ public final class JokerCatalogBase extends AbstractJokerCatalog {
     }
 
     private Joker twoMultiplier() {
-        return this.factory.withModifierAndRandomPrice(
+        return super.getFactory().withModifierAndRandomPrice(
             "the second multiplier",
          "it adds 2 multiplier",
          this.getMultiplierModifier(m -> m + 2),
@@ -45,7 +43,7 @@ public final class JokerCatalogBase extends AbstractJokerCatalog {
     }
 
     private Joker fourMultiplier() {
-        return this.factory.withModifierAndRandomPrice(
+        return super.getFactory().withModifierAndRandomPrice(
             "the fourth multiplier",
          "it adds 4 multiplier",
          getMultiplierModifier(m -> m + 4),

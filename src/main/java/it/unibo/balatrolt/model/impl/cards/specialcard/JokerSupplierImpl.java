@@ -3,6 +3,7 @@ package it.unibo.balatrolt.model.impl.cards.specialcard;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import com.google.common.base.Supplier;
 
@@ -10,6 +11,7 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
+import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerSupplier;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
@@ -29,7 +31,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
      * Constructor.
      */
     public JokerSupplierImpl() {
-        this.jokers = List.of(
+        final var jokers = List.of(
             this.doubler(),
             this.diamondDoubler(),
             this.donour(),
@@ -37,6 +39,22 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             this.heartDoubler(),
             this.seventhDonour()
         );
+        final JokerCatalog base = new JokerCatalogBase();
+        final JokerCatalog common = new JokerCatalogCommon();
+        List<Joker> jList = jokers;
+        jList = mergeList(jList, concatMultipleTimes(base.getJokerList(), 2));
+        jList = mergeList(jList, concatMultipleTimes(common.getJokerList(), 3));
+        this.jokers = jList;
+    }
+
+    private <X> List<X> mergeList(final List<X> l1, final List<X> l2) {
+        return Stream.concat(l1.stream(), l2.stream()).toList();
+    }
+
+    private List<Joker> concatMultipleTimes(final List<Joker> toConcat, final int n) {
+        return Stream.iterate(0, i -> i < n, i -> i + 1)
+            .flatMap(i -> toConcat.stream())
+            .toList();
     }
 
     @Override

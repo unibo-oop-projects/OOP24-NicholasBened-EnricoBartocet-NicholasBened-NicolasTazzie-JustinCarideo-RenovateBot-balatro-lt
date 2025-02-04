@@ -1,11 +1,8 @@
 package it.unibo.balatrolt.model.impl.cards.specialcard;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
-
-import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
@@ -20,7 +17,7 @@ import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
 /**
  * Catalog of base {@link Joker} with {@link JokerTier} common.
  */
-public final class JokerCatalogCommon implements JokerCatalog {
+public final class JokerCatalogCommon extends AbstractJokerCatalog {
     private static final String THE_FOURTH_MULTIPLIER = "the fourth multiplier";
     private static final String THE_SECOND_MULTIPLIER = "the second multiplier";
     private static final String THE_TENTH_POINT = "the tenth point";
@@ -28,31 +25,6 @@ public final class JokerCatalogCommon implements JokerCatalog {
     private static final JokerTier TIER = JokerTier.COMMON;
     private final JokerCatalog base = new JokerCatalogBase();
     private final JokerFactory factory = new JokerFactoryImpl();
-    private final Map<String, Joker> jokers;
-
-    /**
-     * Constuctor.
-     */
-    public JokerCatalogCommon() {
-        this.jokers = Map.of(
-            this.banker().getName(), this.banker(),
-            this.kingHeartHolder().getName(), this.kingHeartHolder(),
-            this.kingHeartPlayer().getName(), this.kingHeartPlayer(),
-            this.spadesAceHolder().getName(), this.spadesAceHolder(),
-            this.spadesAcePlayer().getName(), this.spadesAcePlayer(),
-            this.whyDiscardTwoHeart().getName(), this.whyDiscardTwoHeart()
-        );
-    }
-
-    @Override
-    public List<Joker> getJokerList() {
-        return this.jokers.values().stream().toList();
-    }
-
-    @Override
-    public Optional<Joker> getJoker(String name) {
-        return Optional.fromNullable(this.jokers.get(name.toLowerCase()));
-    }
 
     private Joker banker() {
         return this.factory.addMoneyBoundToJoker(
@@ -110,5 +82,17 @@ public final class JokerCatalogCommon implements JokerCatalog {
 
     private Predicate<Set<PlayableCard>> checkContains(PlayableCard card) {
         return c -> c.contains(card);
+    }
+
+    @Override
+    protected Map<String, Joker> getJokersMap() {
+        return Map.of(
+            this.banker().getName(), this.banker(),
+            this.kingHeartHolder().getName(), this.kingHeartHolder(),
+            this.kingHeartPlayer().getName(), this.kingHeartPlayer(),
+            this.spadesAceHolder().getName(), this.spadesAceHolder(),
+            this.spadesAcePlayer().getName(), this.spadesAcePlayer(),
+            this.whyDiscardTwoHeart().getName(), this.whyDiscardTwoHeart()
+        );
     }
 }

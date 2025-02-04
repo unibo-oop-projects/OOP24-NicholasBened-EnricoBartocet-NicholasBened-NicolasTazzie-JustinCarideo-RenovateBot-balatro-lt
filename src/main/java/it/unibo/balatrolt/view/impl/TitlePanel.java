@@ -59,7 +59,7 @@ public final class TitlePanel extends JPanel {
         final JLabel rewardLabel = new JLabel();
         rewardLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         rewardLabel.setBackground(color.brighter());
-        rewardLabel.setText("$" + info.reward());
+        rewardLabel.setText("Reward: $" + info.reward());
         rewardLabel.setOpaque(true);
         rewardLabel.setFont(getFont(FONT, SIZE_TITLE_BLIND));
         rewardLabel.setHorizontalAlignment(SwingConstants.CENTER);

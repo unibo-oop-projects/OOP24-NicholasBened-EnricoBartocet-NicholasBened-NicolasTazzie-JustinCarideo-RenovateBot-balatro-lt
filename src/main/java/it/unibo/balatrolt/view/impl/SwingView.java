@@ -76,11 +76,11 @@ public final class SwingView implements View {
     }
 
     @Override
-    public void showSettings(final BlindInfo info, final BlindStats stats, final List<SpecialCardInfo> specialCards, final DeckInfo deck) {
+    public void showSettings(final BlindInfo info, final BlindStats stats, final List<SpecialCardInfo> specialCards, final DeckInfo deck, final int numAnte) {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
         frame.add(panel);
-        infoPanel = new InfoPanel(info, stats);
+        infoPanel = new InfoPanel(info, stats, numAnte);
         rightPanel = new JPanel(new BorderLayout());
         panel.add(rightPanel, BorderLayout.CENTER);
         panel.add(infoPanel, BorderLayout.WEST);
@@ -152,19 +152,14 @@ public final class SwingView implements View {
     }
 
     @Override
-    public void updateHand(final List<PlayableCardInfo> hand) {
+    public void updateGameTable(final List<PlayableCardInfo> hand, BlindStats stats) {
         ((GameTable) this.centerPanel).updateHand(hand);
+        ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override
     public void updateCombinationStatus(final CombinationInfo combination) {
         this.infoPanel.updateCombination(combination);
-    }
-
-    @Override
-    public void updateScore(final BlindStats stats) {
-        // TODO Auto-generated method stub
-        this.infoPanel.updateStats(stats);
     }
 
     @Override
@@ -174,9 +169,17 @@ public final class SwingView implements View {
     }
 
     @Override
-    public void updateBlindStatistics(final BlindStats stats) {
+    public void updateCurrency(int currency) {
+        this.infoPanel.updateCurrency(currency);
+    }
+
+    @Override
+    public void updateAnteInfo(AnteInfo ante) {
+        this.infoPanel.updateAnte(ante);
+    }
+    @Override
+    public void updateScore(final BlindStats stats) {
         this.infoPanel.updateStats(stats);
-        ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override

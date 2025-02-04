@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
@@ -20,8 +21,9 @@ public final class InfoPanel extends JPanel {
      * Builds the info panel.
      * @param info static info about the blind.
      * @param stats statistics about the actual game.
+     * @param numAnte number of antes.
      */
-    public InfoPanel(final BlindInfo info, final BlindStats stats) {
+    public InfoPanel(final BlindInfo info, final BlindStats stats, final int numAnte) {
         this.setLayout(new GridLayout(4, 1));
         final var titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);
@@ -50,5 +52,12 @@ public final class InfoPanel extends JPanel {
         this.handPanel.updateHands(stats);
     }
 
+    public void updateCurrency(int currency) {
+        this.handPanel.updateCurrency(currency);
+    }
+
+    public void updateAnte(AnteInfo info) {
+        this.handPanel.updateAnte(info);
+    }
 
 }

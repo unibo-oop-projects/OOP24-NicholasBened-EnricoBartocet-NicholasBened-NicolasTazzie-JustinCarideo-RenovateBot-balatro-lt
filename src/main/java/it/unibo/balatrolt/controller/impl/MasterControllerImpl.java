@@ -62,8 +62,9 @@ public class MasterControllerImpl implements MasterController {
             case CHOOSE_DECK -> {
                 setControllers(data);
                 this.levels.updateAnte();
-                views.forEach(v -> v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck()));
+                views.forEach(v -> v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck(), this.levels.getNumAnte()));
                 views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
+                views.forEach(v -> v.updateAnteInfo(this.levels.getCurrentAnte()));
             }
             case CHOOSE_BLIND -> {
                 views.forEach(v -> v.showRound(this.levels.getHand()));
@@ -73,32 +74,29 @@ public class MasterControllerImpl implements MasterController {
             }
             case DISCARD_CARDS -> {
                 this.levels.discardCards(checkPlayableCards(data));
-                views.forEach(v -> v.updateHand(this.levels.getHand()));
-                views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
+                views.forEach(v -> v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats()));
                 views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
             }
             case PLAY_CARDS -> {
                 this.levels.playCards(checkPlayableCards(data), this.player.getPlayerStatus());
                 switch (this.levels.getRoundStatus()) {
                     case IN_GAME -> {
-                        views.forEach(v -> v.updateHand(this.levels.getHand()));
-                        views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
+                        views.forEach(v -> v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats()));
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
+                        views.forEach(v -> v.updateCurrency(this.player.getCurrency()));
                         if (this.levels.isOver()) {
                             views.forEach(v -> v.showYouWon());
                         } else {
-                            views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(),
-                                    this.levels.getCurrentBlindStats()));
+                            views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats()));
                         }
-                        System.out.println("currency: " + this.player.getPlayerStatus().currency());
                     }
                     case BLIND_WON -> {
                         views.forEach(v -> v.showGameOver());
-                        System.out.println("currency: " + this.player.getPlayerStatus().currency());
                     }
                 }
+                views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
                 System.out.println(this.levels.getCurrentBlindStats());
             }
             case OPEN_SHOP -> {
@@ -114,14 +112,19 @@ public class MasterControllerImpl implements MasterController {
                 } else {
                     views.forEach(v -> {
                         v.updateShopCards(this.shop.getCards());
+                        v.updateCurrency(this.player.getCurrency());
                     });
                 }
             }
             case CLOSE_SHOP -> {
                 this.levels.updateAnte();
-                views.forEach(v -> v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck()));
-                views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
-                System.out.println("currency: " + this.player.getPlayerStatus().currency());
+                views.forEach(v -> {
+                    v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck(), this.levels.getNumAnte());
+                    v.showAnte(this.levels.getCurrentAnte());
+                    v.updateAnteInfo(this.levels.getCurrentAnte());
+                    v.updateCurrency(this.player.getCurrency());
+                });
+                System.out.println("currency: " + this.player.getCurrency());
             }
             default -> throw new IllegalStateException("Invalid Event received");
         }
@@ -139,7 +142,7 @@ public class MasterControllerImpl implements MasterController {
         Preconditions.checkArgument(data.get() instanceof SpecialCardInfo,
                 "The data received alongside the event isn't a SpecialCardInfo");
         final var card = (SpecialCardInfo) data.get();
-        if (this.shop.buyCard(card, this.player.getPlayerStatus().currency())
+        if (this.shop.buyCard(card, this.player.getCurrency())
                 && this.shop.translateCard(card).isPresent()
                 && this.player.getSpecialCards().size() < this.player.getMaxSpecialCards()) {
             this.player.addSpecialCard(this.shop.translateCard(card).get());
@@ -176,4 +179,5 @@ public class MasterControllerImpl implements MasterController {
         this.views.forEach(v -> v.updateCombinationStatus(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier())));
         System.out.println(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier()));
     }
+
 }

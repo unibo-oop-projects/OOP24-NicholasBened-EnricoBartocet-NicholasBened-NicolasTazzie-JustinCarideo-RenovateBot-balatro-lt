@@ -2,14 +2,11 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.GridLayout;
 
-import java.util.List;
-
 import javax.swing.JPanel;
 
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
-import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 
 /**
  * Creates the left part of the main GUI.
@@ -21,7 +18,7 @@ public class InfoPanel extends JPanel {
     private CombinationPanel combinationPanel;
     private HandPanel handPanel;
 
-    public InfoPanel(BlindInfo info, BlindStats stats, List<PlayableCardInfo> playableCards) {
+    public InfoPanel(BlindInfo info, BlindStats stats) {
         this.setLayout(new GridLayout(4, 1));
         this.titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);

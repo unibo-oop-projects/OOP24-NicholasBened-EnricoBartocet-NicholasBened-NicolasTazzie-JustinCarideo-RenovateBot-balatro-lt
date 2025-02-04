@@ -7,17 +7,18 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 
 public class TitlePanel extends JPanel{
-
+    private static final String FONT = "COPPER_BLACK";
     private static final Color SMALL_BLIND_COLOR = Color.CYAN.darker().darker().darker();
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker().darker();
-    private static final int SIZE_TITLE_BLIND = 36;
+    private static final int SIZE_TITLE_BLIND = 30;
 
     private final BlindInfo info;
 
@@ -51,7 +52,7 @@ public class TitlePanel extends JPanel{
         rewardLabel.setBackground(color.brighter());
         rewardLabel.setText("Reward: $" + info.reward());
         rewardLabel.setOpaque(true);
-        rewardLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SIZE_TITLE_BLIND));
+        rewardLabel.setFont(getFont(FONT, SIZE_TITLE_BLIND));
         rewardLabel.setHorizontalAlignment(SwingConstants.CENTER);
         return rewardLabel;
     }
@@ -72,5 +73,22 @@ public class TitlePanel extends JPanel{
             case 3 -> BOSS_BLIND_COLOR;
             default -> Color.DARK_GRAY;
         };
+    }
+
+    /**
+     * Gives back the requested font with the given size.
+     */
+    private Font getFont(String nameFont, float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, 15);
+        try {
+            font = Font.createFont(
+                Font.TRUETYPE_FONT,
+                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
+            );
+            font = font.deriveFont(fontSize);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cannot load font");
+        }
+        return font;
     }
 }

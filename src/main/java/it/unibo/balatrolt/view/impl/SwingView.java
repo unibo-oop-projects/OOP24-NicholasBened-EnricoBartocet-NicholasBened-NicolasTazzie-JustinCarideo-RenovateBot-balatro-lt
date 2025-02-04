@@ -1,11 +1,15 @@
 package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,11 +31,13 @@ import it.unibo.balatrolt.view.api.View;
  * Implementation of the View interface.
  */
 public class SwingView implements View {
+    private static final int MAX_SPECIAL_CARDS = 5;
     private static final float RIDIM = 1.5f;
     private final MasterController controller;
     private JFrame frame = new JFrame();
     private JPanel panel;
     private InfoPanel infoPanel;
+    private JPanel rightPanel;
     private JPanel centerPanel;
 
     /**
@@ -65,30 +71,74 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showAnte(final AnteInfo anteInfo) {
+    public void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck) {
         frame.remove(panel);
-        panel = new AnteView(this.controller, anteInfo);
+        panel = new JPanel(new BorderLayout());
         frame.add(panel);
+        infoPanel = new InfoPanel(info, stats);
+        rightPanel = new JPanel(new BorderLayout());
+        panel.add(rightPanel, BorderLayout.CENTER);
+        panel.add(infoPanel, BorderLayout.WEST);
+        var northPanel = new JPanel();
+        northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.LINE_AXIS));
+        northPanel.setBackground(Color.GREEN.darker().darker().darker());
+        rightPanel.add(northPanel, BorderLayout.NORTH);
+
+        /**
+         * Creating slot for the special cards.
+         */
+        var specialSlot = new SlotPanel<SpecialCardInfo>(
+            MAX_SPECIAL_CARDS, 75, 100,
+            () -> true,
+            () -> false,
+            card -> JOptionPane.showMessageDialog(frame, card.name() + ":\n" + card.description(), "Special Card Info", JOptionPane.INFORMATION_MESSAGE)
+        );
+        specialCards.forEach(c -> specialSlot.addObject(new SlotPanel.SlotObject<>(c, c.name(), "JOKER")));
+        final var specialSlotContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        specialSlotContainer.setOpaque(false);
+        specialSlotContainer.add(specialSlot);
+
+        /**
+         * Creating slot for the special cards.
+         */
+        var deckSlot = new SlotPanel<>(
+            1, 100, 120,
+            () -> true,
+            () -> false,
+            card -> JOptionPane.showMessageDialog(frame, deck.name() + " deck:\n" + deck.desc(), "Deck Info", JOptionPane.INFORMATION_MESSAGE)
+        );
+        deckSlot.addObject(new SlotPanel.SlotObject<>(deck, "Deck", "decks/" + deck.name() + "_DECK"));
+        final JPanel deckSlotContainer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        deckSlotContainer.setOpaque(false);
+        deckSlotContainer.add(deckSlot);
+
+        northPanel.add(specialSlotContainer);
+        northPanel.add(Box.createHorizontalGlue());
+        northPanel.add(deckSlotContainer);
         frame.setVisible(true);
     }
 
     @Override
-    public void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards,
-            List<PlayableCardInfo> playableCards) {
-        frame.remove(panel);
-        panel = new JPanel(new BorderLayout());
-        infoPanel = new InfoPanel(info, stats, playableCards);
-        panel.add(infoPanel, BorderLayout.WEST);
+    public void showAnte(final AnteInfo anteInfo) {
+        if (centerPanel != null) rightPanel.remove(centerPanel);
+        centerPanel = new AnteView(this.controller, anteInfo);
+        rightPanel.add(centerPanel, BorderLayout.CENTER);
+        frame.setVisible(true);
+    }
+
+
+    @Override
+    public void showRound(List<PlayableCardInfo> playableCards) {
+        rightPanel.remove(centerPanel);
         try {
-            centerPanel = new GameTable(this.controller, playableCards, specialCards);
-            panel.add(centerPanel, BorderLayout.CENTER);
+            centerPanel = new GameTable(this.controller, playableCards);
+            rightPanel.add(centerPanel, BorderLayout.CENTER);
         } catch (Exception e) {
             e.printStackTrace();
             throw new ExceptionInInitializerError(e);
         }
-        frame.add(panel);
-        frame.setVisible(true);
-        updateBlindStatistics(stats);
+        rightPanel.add(centerPanel, BorderLayout.CENTER);
+        this.frame.setVisible(true);
     }
 
     @Override
@@ -98,7 +148,6 @@ public class SwingView implements View {
 
     @Override
     public void updateCombinationStatus(CombinationInfo combination) {
-        // TODO Auto-generated method stub
         this.infoPanel.updateCombination(combination);
     }
 
@@ -109,29 +158,30 @@ public class SwingView implements View {
     }
 
     @Override
-    public void updateSpecialCards() {
+    public void updateSpecialCards(List<SpecialCardInfo> specialCards) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
     }
 
     @Override
     public void updateBlindStatistics(BlindStats stats) {
+        this.infoPanel.updateStats(stats);
         ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override
     public void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats) {
-        this.panel.remove(this.centerPanel);
-        this.centerPanel = new BlindOver(this.controller, "BLIND DEFEATED", blindInfo, blindStats);
-        this.panel.add(this.centerPanel, BorderLayout.CENTER);
-        this.centerPanel.setVisible(true);
+        rightPanel.remove(this.centerPanel);
+        centerPanel = new BlindOver(this.controller, "BLIND DEFEATED", blindInfo, blindStats);
+        rightPanel.add(this.centerPanel, BorderLayout.CENTER);
+        frame.setVisible(true);
     }
 
     @Override
-    public void showGameOver(BlindInfo blindInfo, BlindStats blindStats) {
-        frame.remove(panel);
-        panel = new GameOver(controller);
-        frame.add(panel);
+    public void showGameOver() {
+        panel.remove(rightPanel);
+        rightPanel = new GameOver(controller);
+        panel.add(rightPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
@@ -145,9 +195,9 @@ public class SwingView implements View {
 
     @Override
     public void showShop() {
-        this.panel.remove(centerPanel);
+        this.rightPanel.remove(centerPanel);
         this.centerPanel = new ShopViewImpl(controller, null);
-        this.panel.add(centerPanel, BorderLayout.CENTER);
+        this.rightPanel.add(centerPanel, BorderLayout.CENTER);
     }
 
     @Override
@@ -159,4 +209,5 @@ public class SwingView implements View {
     public void updateShopCards(Set<SpecialCardInfo> toSell) {
         ((ShopView) this.centerPanel).updateCards(toSell);
     }
+
 }

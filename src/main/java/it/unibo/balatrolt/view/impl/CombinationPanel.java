@@ -7,12 +7,13 @@ import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 
 public class CombinationPanel extends JPanel {
-
+    private static final String FONT = "COPPER_BLACK";
     private static final int SCORE_DIM = 30;
     private final JLabel combinationLabel;
     private final JLabel basePointsLabel;
@@ -37,7 +38,7 @@ public class CombinationPanel extends JPanel {
     private JLabel getCombinationLabel(CombinationInfo info) {
         final JLabel combinationLabel = new JLabel();
         combinationLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        combinationLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
+        combinationLabel.setFont(getFont(FONT, SCORE_DIM));
         combinationLabel.setBackground(Color.white);
         combinationLabel.setOpaque(true);
         return combinationLabel;
@@ -46,7 +47,7 @@ public class CombinationPanel extends JPanel {
     private JLabel getBasePointsLabel(CombinationInfo info) {
         final JLabel pointsLabel = new JLabel();
         pointsLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        pointsLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
+        pointsLabel.setFont(getFont(FONT, SCORE_DIM));
         pointsLabel.setBackground(Color.BLUE);
         pointsLabel.setOpaque(true);
         return pointsLabel;
@@ -55,7 +56,7 @@ public class CombinationPanel extends JPanel {
     private JLabel getMultiplierLabel(CombinationInfo info) {
         final JLabel multiplierLabel = new JLabel();
         multiplierLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        multiplierLabel.setFont(new Font("Bauhaus 93", Font.PLAIN, SCORE_DIM));
+        multiplierLabel.setFont(getFont(FONT, SCORE_DIM));
         multiplierLabel.setBackground(Color.RED.darker());
         multiplierLabel.setOpaque(true);
         return multiplierLabel;
@@ -67,4 +68,20 @@ public class CombinationPanel extends JPanel {
         this.multiplierLabel.setText(String.valueOf(info.multiplier()));
     }
 
+    /**
+     * Gives back the requested font with the given size.
+     */
+    private Font getFont(String nameFont, float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, 15);
+        try {
+            font = Font.createFont(
+                Font.TRUETYPE_FONT,
+                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
+            );
+            font = font.deriveFont(fontSize);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cannot load font");
+        }
+        return font;
+    }
 }

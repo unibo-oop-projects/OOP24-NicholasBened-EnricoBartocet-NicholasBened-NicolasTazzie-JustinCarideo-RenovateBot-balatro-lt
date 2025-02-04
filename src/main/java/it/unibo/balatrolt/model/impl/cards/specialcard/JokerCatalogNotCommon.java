@@ -13,7 +13,7 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 /**
  * Catalog of not common {@link Joker}
  */
-public class JokerCatalogNotCommon extends AbstractJokerCatalog {
+public final class JokerCatalogNotCommon extends AbstractJokerCatalog {
     private static final String THE_FOURTH_MULTIPLIER = "the fourth multiplier";
     private static final String THE_TENTH_POINT = "the tenth point";
     private static final String THE_EIGHT_MULTIPLIER = "the eighth multiplier";

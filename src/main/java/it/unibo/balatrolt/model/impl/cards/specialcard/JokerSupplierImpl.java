@@ -39,12 +39,18 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             this.heartDoubler(),
             this.seventhDonour()
         );
-        final JokerCatalog base = new JokerCatalogBase();
-        final JokerCatalog common = new JokerCatalogCommon();
         List<Joker> jList = jokers;
-        jList = mergeList(jList, concatMultipleTimes(base.getJokerList(), 2));
-        jList = mergeList(jList, concatMultipleTimes(common.getJokerList(), 3));
+        jList = getNewJokerList(jList, new JokerCatalogBase(), 1);
+        jList = getNewJokerList(jList, new JokerCatalogCommon(), 3);
+        jList = getNewJokerList(jList, new JokerCatalogNotCommon(), 2);
+        jList = getNewJokerList(jList, new JokerCatalogRare(), 1);
+        jList = getNewJokerList(jList, new JokerCatalogMisc(), 1);
         this.jokers = jList;
+    }
+
+    private List<Joker> getNewJokerList(List<Joker> jokers, JokerCatalog catalog, int repetitions) {
+        catalog = new JokerCatalogCommon();
+        return mergeList(jokers, concatMultipleTimes(catalog.getJokerList(), 1));
     }
 
     private <X> List<X> mergeList(final List<X> l1, final List<X> l2) {

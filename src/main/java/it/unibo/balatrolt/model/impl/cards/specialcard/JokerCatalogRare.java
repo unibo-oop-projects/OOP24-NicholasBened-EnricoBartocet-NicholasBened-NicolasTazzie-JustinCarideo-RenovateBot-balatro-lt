@@ -11,7 +11,7 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
-public class JokerCatalogRare extends AbstractJokerCatalog {
+public final class JokerCatalogRare extends AbstractJokerCatalog {
     private static final int MAX_RAND = 10;
     private static final String THE_TENTH_POINT = "the tenth point";
     private static final String THE_EIGHT_MULTIPLIER = "the eighth multiplier";

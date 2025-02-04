@@ -68,13 +68,7 @@ public interface View {
      * Updates the player's hand.
      * @param playableCards
      */
-    void updateHand(List<PlayableCardInfo> playableCards);
-
-    /**
-     * Updates the blind statistics.
-     * @param stats remaining hands, discards and chips.
-     */
-    void updateBlindStatistics(BlindStats stats);
+    void updateGameTable(List<PlayableCardInfo> playableCards, BlindStats stats);
 
     /**
      * Updates the combination status.

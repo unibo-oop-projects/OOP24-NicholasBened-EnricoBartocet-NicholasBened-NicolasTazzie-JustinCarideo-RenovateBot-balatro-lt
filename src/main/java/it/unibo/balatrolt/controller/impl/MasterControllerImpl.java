@@ -73,32 +73,28 @@ public class MasterControllerImpl implements MasterController {
             }
             case DISCARD_CARDS -> {
                 this.levels.discardCards(checkPlayableCards(data));
-                views.forEach(v -> v.updateHand(this.levels.getHand()));
-                views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
+                views.forEach(v -> v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats()));
                 views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
             }
             case PLAY_CARDS -> {
                 this.levels.playCards(checkPlayableCards(data), this.player.getPlayerStatus());
                 switch (this.levels.getRoundStatus()) {
                     case IN_GAME -> {
-                        views.forEach(v -> v.updateHand(this.levels.getHand()));
-                        views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
+                        views.forEach(v -> v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats()));
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
                         if (this.levels.isOver()) {
                             views.forEach(v -> v.showYouWon());
                         } else {
-                            views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(),
-                                    this.levels.getCurrentBlindStats()));
+                            views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats()));
                         }
-                        System.out.println("currency: " + this.player.getCurrency());
                     }
                     case BLIND_WON -> {
                         views.forEach(v -> v.showGameOver());
-                        System.out.println("currency: " + this.player.getCurrency());
                     }
                 }
+                views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
                 System.out.println(this.levels.getCurrentBlindStats());
             }
             case OPEN_SHOP -> {

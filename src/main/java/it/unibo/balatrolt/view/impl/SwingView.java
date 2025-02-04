@@ -151,18 +151,14 @@ public final class SwingView implements View {
     }
 
     @Override
-    public void updateHand(final List<PlayableCardInfo> hand) {
+    public void updateGameTable(final List<PlayableCardInfo> hand, BlindStats stats) {
         ((GameTable) this.centerPanel).updateHand(hand);
+        ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override
     public void updateCombinationStatus(final CombinationInfo combination) {
         this.infoPanel.updateCombination(combination);
-    }
-
-    @Override
-    public void updateScore(final BlindStats stats) {
-        this.infoPanel.updateStats(stats);
     }
 
     @Override
@@ -172,9 +168,8 @@ public final class SwingView implements View {
     }
 
     @Override
-    public void updateBlindStatistics(final BlindStats stats) {
+    public void updateScore(final BlindStats stats) {
         this.infoPanel.updateStats(stats);
-        ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override

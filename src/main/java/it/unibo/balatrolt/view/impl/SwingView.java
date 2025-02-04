@@ -75,12 +75,11 @@ public final class SwingView implements View {
     }
 
     @Override
-    public void showSettings(final BlindInfo info, final BlindStats stats, final List<SpecialCardInfo> specialCards, final DeckInfo deck) {
+    public void showSettings(final BlindInfo info, final BlindStats stats, final List<SpecialCardInfo> specialCards, final DeckInfo deck, final int numAnte) {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
         frame.add(panel);
-        //TODO
-        infoPanel = new InfoPanel(info, stats, 0);
+        infoPanel = new InfoPanel(info, stats, numAnte);
         rightPanel = new JPanel(new BorderLayout());
         panel.add(rightPanel, BorderLayout.CENTER);
         panel.add(infoPanel, BorderLayout.WEST);
@@ -168,6 +167,15 @@ public final class SwingView implements View {
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
     }
 
+    @Override
+    public void updateCurrency(int currency) {
+        this.infoPanel.updateCurrency(currency);
+    }
+
+    @Override
+    public void updateAnteInfo(AnteInfo ante) {
+        this.infoPanel.updateAnte(ante);
+    }
     @Override
     public void updateScore(final BlindStats stats) {
         this.infoPanel.updateStats(stats);

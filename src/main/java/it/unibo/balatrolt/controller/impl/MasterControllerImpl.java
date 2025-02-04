@@ -62,8 +62,9 @@ public class MasterControllerImpl implements MasterController {
             case CHOOSE_DECK -> {
                 setControllers(data);
                 this.levels.updateAnte();
-                views.forEach(v -> v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck()));
+                views.forEach(v -> v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck(), this.levels.getNumAnte()));
                 views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
+                views.forEach(v -> v.updateAnteInfo(this.levels.getCurrentAnte()));
             }
             case CHOOSE_BLIND -> {
                 views.forEach(v -> v.showRound(this.levels.getHand()));
@@ -84,6 +85,7 @@ public class MasterControllerImpl implements MasterController {
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
+                        views.forEach(v -> v.updateCurrency(this.player.getCurrency()));
                         if (this.levels.isOver()) {
                             views.forEach(v -> v.showYouWon());
                         } else {
@@ -110,13 +112,18 @@ public class MasterControllerImpl implements MasterController {
                 } else {
                     views.forEach(v -> {
                         v.updateShopCards(this.shop.getCards());
+                        v.updateCurrency(this.player.getCurrency());
                     });
                 }
             }
             case CLOSE_SHOP -> {
                 this.levels.updateAnte();
-                views.forEach(v -> v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck()));
-                views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
+                views.forEach(v -> {
+                    v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck(), this.levels.getNumAnte());
+                    v.showAnte(this.levels.getCurrentAnte());
+                    v.updateAnteInfo(this.levels.getCurrentAnte());
+                    v.updateCurrency(this.player.getCurrency());
+                });
                 System.out.println("currency: " + this.player.getCurrency());
             }
             default -> throw new IllegalStateException("Invalid Event received");

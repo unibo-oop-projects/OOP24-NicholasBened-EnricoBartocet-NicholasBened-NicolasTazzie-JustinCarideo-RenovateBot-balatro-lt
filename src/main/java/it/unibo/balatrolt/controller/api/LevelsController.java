@@ -24,6 +24,8 @@ public interface LevelsController {
 
     void playCards(List<PlayableCardInfo> cards, PlayerStatus player);
 
+    int getNumAnte();
+
     RoundStatus getRoundStatus();
 
     List<PlayableCard> translatePlayableCard(List<PlayableCardInfo> cards);

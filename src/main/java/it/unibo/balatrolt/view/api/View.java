@@ -51,7 +51,7 @@ public interface View {
      */
     void showRound(List<PlayableCardInfo> playableCards);
 
-    void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck);
+    void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck, int numAnte);
 
     /**
      * Updates the score in UI.
@@ -79,6 +79,10 @@ public interface View {
      * Shows the blind defeated screen.
      */
     void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
+
+    void updateCurrency(int currency);
+
+    void updateAnteInfo(AnteInfo ante);
 
     /**
      * Shows the shop.

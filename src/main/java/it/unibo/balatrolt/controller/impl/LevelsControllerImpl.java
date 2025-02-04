@@ -98,6 +98,11 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     @Override
+    public int getNumAnte() {
+        return NUM_ANTE;
+    }
+
+    @Override
     public List<PlayableCard> translatePlayableCard(List<PlayableCardInfo> cards) {
         return cards.stream().map(cardsTranslator::get).toList();
     }

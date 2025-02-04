@@ -20,7 +20,7 @@ import it.unibo.balatrolt.controller.api.MasterController;
 public class MainMenu extends JPanel {
     private static final String TITLE_FONT = "SNAP_ITC";
     private static final String BUTTON_FONT = "JOKERMAN";
-    private static final float TITLE_SIZE = 110f;
+    private static final float TITLE_SIZE = 100f;
     private static final float BUTTON_SIZE = 65f;
     private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 

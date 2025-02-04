@@ -9,8 +9,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,10 +34,9 @@ import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 public class DeckSelector extends JPanel {
     private static final String TITLE_FONT = "SNAP_ITC";
     private static final String DESC_DECK_FONT = "COPPER_BLACK";
-    private static final float TITLE_SIZE = 110f;
+    private static final float TITLE_SIZE = 100f;
     private static final float DECK_SIZE = 35f;
     private static final float DESCR_SIZE = 25f;
-    private static final double RIDIM = 3;
     private final Map<String, DeckInfo> decksTranslator = new HashMap<>();
     private String deckName;
     private JLabel labelName;
@@ -71,10 +68,11 @@ public class DeckSelector extends JPanel {
          */
         final JPanel centralMenu = new JPanel(new GridBagLayout());
         centralMenu.setBackground(Color.DARK_GRAY);
-        centralMenu.setPreferredSize(new Dimension(
-            (int) (this.getBounds().width / RIDIM),
-            (int) (this.getBounds().height / RIDIM)
-        ));
+        SwingUtilities.invokeLater(() -> {
+            centralMenu.setPreferredSize(new Dimension(570, 270));
+            revalidate();
+            repaint();
+        });
         this.add(centralMenu, getConstraints(0, 0, 0.2, 1.0, 0,
             GridBagConstraints.PAGE_END, GridBagConstraints.NONE, 0, 0, 50, 0));
         /**
@@ -136,6 +134,7 @@ public class DeckSelector extends JPanel {
          * setting deck description.
          */
         this.deckDescription = new JTextArea();
+        this.deckDescription.setEditable(false);
         this.deckDescription.setLineWrap(true);
         this.deckDescription.setWrapStyleWord(true);
         this.deckDescription.setAlignmentY(Component.CENTER_ALIGNMENT);

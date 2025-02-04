@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.swing.Box;
@@ -119,7 +120,7 @@ public final class SwingView implements View {
                 "Deck Info",
                 JOptionPane.INFORMATION_MESSAGE)
         );
-        deckSlot.addObject(new SlotPanel.SlotObject<>(deck, "Deck", "decks/" + deck.name() + "_DECK"));
+        deckSlot.addObject(new SlotPanel.SlotObject<>(deck, "Deck", "decks/" + deck.name().toUpperCase(Locale.getDefault()) + "_DECK"));
         final JPanel deckSlotContainer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         deckSlotContainer.setOpaque(false);
         deckSlotContainer.add(deckSlot);

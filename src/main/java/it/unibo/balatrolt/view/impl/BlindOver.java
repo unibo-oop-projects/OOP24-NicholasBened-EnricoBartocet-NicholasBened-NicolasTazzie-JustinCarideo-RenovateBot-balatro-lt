@@ -10,10 +10,18 @@ import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
-
+/**
+ * Show the Blind over GUI with statistics and
+ * possibility to open the shop.
+ */
 public class BlindOver extends JPanel {
-
-    public BlindOver(MasterController controller, BlindInfo blindInfo, BlindStats blindStats) {
+    /**
+     * Builds the GUI.
+     * @param controller master controller.
+     * @param blindInfo static info about the blind.
+     * @param blindStats statistic of the game till now.
+     */
+    public BlindOver(final MasterController controller, final BlindInfo blindInfo, final BlindStats blindStats) {
         super(new BorderLayout());
         var button = new JButton("OPEN SHOP");
         button.addActionListener(a -> controller.handleEvent(BalatroEvent.OPEN_SHOP, null));

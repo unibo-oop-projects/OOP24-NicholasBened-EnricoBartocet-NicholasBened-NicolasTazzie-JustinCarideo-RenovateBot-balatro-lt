@@ -11,15 +11,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
-
-public class CombinationPanel extends JPanel {
+/**
+ * Shows the base point, multiplier and combination you would get with
+ * the cards that are selected at that moment (in real-time).
+ */
+public final class CombinationPanel extends JPanel {
     private static final String FONT = "COPPER_BLACK";
     private static final int SCORE_DIM = 30;
     private final JLabel combinationLabel;
     private final JLabel basePointsLabel;
     private final JLabel multiplierLabel;
 
-    public CombinationPanel(CombinationInfo info) {
+    public CombinationPanel(final CombinationInfo info) {
         this.setLayout(new BorderLayout());
         combinationLabel = getCombinationLabel(info);
         basePointsLabel = getBasePointsLabel(info);
@@ -35,7 +38,7 @@ public class CombinationPanel extends JPanel {
         this.add(mainPanel, BorderLayout.CENTER);
     }
 
-    private JLabel getCombinationLabel(CombinationInfo info) {
+    private JLabel getCombinationLabel(final CombinationInfo info) {
         final JLabel combinationLabel = new JLabel();
         combinationLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         combinationLabel.setFont(getFont(FONT, SCORE_DIM));
@@ -44,7 +47,7 @@ public class CombinationPanel extends JPanel {
         return combinationLabel;
     }
 
-    private JLabel getBasePointsLabel(CombinationInfo info) {
+    private JLabel getBasePointsLabel(final CombinationInfo info) {
         final JLabel pointsLabel = new JLabel();
         pointsLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pointsLabel.setFont(getFont(FONT, SCORE_DIM));
@@ -53,7 +56,7 @@ public class CombinationPanel extends JPanel {
         return pointsLabel;
     }
 
-    private JLabel getMultiplierLabel(CombinationInfo info) {
+    private JLabel getMultiplierLabel(final CombinationInfo info) {
         final JLabel multiplierLabel = new JLabel();
         multiplierLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         multiplierLabel.setFont(getFont(FONT, SCORE_DIM));
@@ -62,17 +65,21 @@ public class CombinationPanel extends JPanel {
         return multiplierLabel;
     }
 
-    public void updateCombination(CombinationInfo info) {
+    /**
+     * Updates the informations (base point, multiplier and the combination).
+     * @param info Combination info relaativeto the selected cards.
+     */
+    public void updateCombination(final CombinationInfo info) {
         this.combinationLabel.setText(info.name());
         this.basePointsLabel.setText(String.valueOf(info.points()));
         this.multiplierLabel.setText(String.valueOf(info.multiplier()));
     }
 
-    /**
+    /*
      * Gives back the requested font with the given size.
      */
-    private Font getFont(String nameFont, float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, 15);
+    private Font getFont(final String nameFont, final float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
         try {
             font = Font.createFont(
                 Font.TRUETYPE_FONT,

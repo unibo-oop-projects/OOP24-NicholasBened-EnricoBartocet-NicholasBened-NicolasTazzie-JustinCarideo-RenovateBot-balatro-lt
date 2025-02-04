@@ -17,7 +17,7 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 public interface View {
 
     /**
-     * 
+     *
      * @param title error title.
      * @param desc error message.
      */
@@ -43,14 +43,17 @@ public interface View {
 
     /**
      * Starts the actual game.
-     *
-     * @param info the information of the blind (blind's id, reward, minimum chips).
-     * @param stats the statistics of the blind (remaining hands, discards and chips).
-     * @param specialCards the special cards the player has.
      * @param playableCards the cards in the player's hand.
      */
     void showRound(List<PlayableCardInfo> playableCards);
 
+    /**
+     * Shows the information about the actual game and the cards owned by the player.
+     * @param info static information of the actual game.
+     * @param stats statistics of the actual game.
+     * @param specialCards owned special cards.
+     * @param deck selected deck.
+     */
     void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck);
 
     /**

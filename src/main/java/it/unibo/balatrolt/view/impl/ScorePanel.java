@@ -2,7 +2,6 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GridLayout;
@@ -16,7 +15,9 @@ import javax.swing.SwingConstants;
 
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
-
+/**
+ * Display the scores (actual score and the one to beat).
+ */
 public class ScorePanel extends JPanel {
     static final long serialVersionUID = 1L;
     private static final String SCORE_FONT = "COPPER_BLACK";
@@ -34,7 +35,6 @@ public class ScorePanel extends JPanel {
         this.setLayout(new BorderLayout());
         final JPanel mainScoreContainer = new JPanel(new BorderLayout());
         mainScoreContainer.add(getMainTitleLabel(), BorderLayout.CENTER);
-        mainScoreContainer.setPreferredSize(new Dimension(0, 80));
         this.add(mainScoreContainer, BorderLayout.NORTH);
         this.currentScoreLabel = getCurrentScorePanel(stats);
         this.minimumScoreLabel = getMinimumScoreLabel(info);
@@ -104,7 +104,7 @@ public class ScorePanel extends JPanel {
     /*
      * Gives back the requested font with the given size.
      */
-    private final Font getFont(final String nameFont, final float fontSize) {
+    private Font getFont(final String nameFont, final float fontSize) {
         Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
         try {
             font = Font.createFont(

@@ -9,10 +9,16 @@ import javax.swing.JTextArea;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
-
+/**
+ * Displays the ante and relative blind info.
+ */
 public class AnteView extends JPanel {
-
-    public AnteView(MasterController controller, AnteInfo anteInfo) {
+    /**
+     * Builds the GUI.
+     * @param controller master controller.
+     * @param anteInfo info's of the current ante.
+     */
+    public AnteView(final MasterController controller, final AnteInfo anteInfo) {
         super(new BorderLayout());
         var button = new JButton("START");
         button.addActionListener(a -> controller.handleEvent(BalatroEvent.CHOOSE_BLIND, null));

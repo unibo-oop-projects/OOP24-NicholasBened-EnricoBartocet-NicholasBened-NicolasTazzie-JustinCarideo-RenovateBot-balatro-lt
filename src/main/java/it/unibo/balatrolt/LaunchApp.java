@@ -14,7 +14,7 @@ import it.unibo.balatrolt.view.impl.SwingView;
  */
 final class LaunchApp {
 
-    private LaunchApp() {}
+    private LaunchApp() { }
 
     /**
      * Starts the application.

@@ -30,14 +30,17 @@ import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
  * Represent the game table, formed by some generic SlotPanel<X>
  * of the given param X.
  */
-public class GameTable extends JPanel {
+public final class GameTable extends JPanel {
     static final long serialVersionUID = 1L;
     private static final Color BG_COLOR = Color.green.darker().darker().darker();
     private static final String FONT = "COPPER_BLACK";
     private static final float BASE_WEIGHT = 0.2f;
     private static final float JB_FONT_SIZE = 18f;
+    private static final int JB_WIDTH = 75;
+    private static final int JB_HEIGHT = 95;
     private static final int MAX_PLAYED_CARDS = 5;
     private static final int RIDIM = 28;
+    private static final int BASE_PADDING = 7;
 
     private final MasterController controller;
     private final SlotPanel<PlayableCardInfo> handSlot;
@@ -52,7 +55,6 @@ public class GameTable extends JPanel {
      *
      * @param controller the master controller.
      * @param cards in the player hands.
-     * @param specialCards owned by the player.
      * @throws IOException
      */
     public GameTable(final MasterController controller, final List<PlayableCardInfo> cards) {
@@ -75,7 +77,7 @@ public class GameTable extends JPanel {
          * Creating slot for the cards in hand.
          */
         this.handSlot = new SlotPanel<>(
-            cards.size(), 75, 95,
+            cards.size(), JB_WIDTH, JB_HEIGHT,
             () -> this.selectedCards.size() < MAX_PLAYED_CARDS,
             () -> true,
             card -> {
@@ -93,7 +95,7 @@ public class GameTable extends JPanel {
          * Creating slot for the played cards.
          */
         this.playedSlot = new SlotPanel<>(
-            MAX_PLAYED_CARDS, 75, 95,
+            MAX_PLAYED_CARDS, JB_WIDTH, JB_HEIGHT,
             () -> true,
             () -> true,
             card -> {
@@ -114,7 +116,7 @@ public class GameTable extends JPanel {
         playButton.setBackground(Color.BLUE);
         playButton.setForeground(Color.WHITE);
         playButton.setFont(getFont(FONT, JB_FONT_SIZE));
-        playButton.addActionListener(e-> {
+        playButton.addActionListener(e -> {
             if (!this.selectedCards.isEmpty()) {
                 this.playedSlot.removeAll();
                 this.controller.handleEvent(BalatroEvent.PLAY_CARDS, Optional.of(this.selectedCards));
@@ -141,6 +143,10 @@ public class GameTable extends JPanel {
         southPanel.add(discardButton, BorderLayout.SOUTH);
     }
 
+    /**
+     * updates the GUI with the new cards given.
+     * @param newCards to display.
+     */
     public void updateHand(final List<PlayableCardInfo> newCards) {
         this.handSlot.removeAll();
         newCards.forEach(c -> this.handSlot.addObject(this.slotTranslator(c)));
@@ -160,7 +166,7 @@ public class GameTable extends JPanel {
         gbc.weightx = BASE_WEIGHT;
         gbc.weighty = BASE_WEIGHT * 2;
         gbc.gridwidth = 2;
-        gbc.insets = new Insets(5, RIDIM, 5, RIDIM);
+        gbc.insets = new Insets(BASE_PADDING, RIDIM, BASE_PADDING, RIDIM);
         gbc.anchor = GridBagConstraints.PAGE_END;
         this.centerPanel.add(component, gbc);
     }

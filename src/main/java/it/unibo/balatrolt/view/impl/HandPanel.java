@@ -11,12 +11,18 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
-
+/**
+ * Displays the statistics of the current blind.
+ * (remaining discards, hand and current chip).
+ */
 public class HandPanel extends JPanel {
     static final long serialVersionUID = 1L;
     private final JLabel handLabel = new JLabel();
     private final JLabel discardLabel = new JLabel();
-
+    /**
+     * Builds the GUI.
+     * @param stats statistics of the current blind.
+     */
     public HandPanel(final BlindStats stats) {
         setLayout(new GridLayout(1, 2));
         updateHands(stats);

@@ -61,8 +61,8 @@ public final class AnteImpl implements Ante {
 
     @Override
     public boolean isOver() {
-        return this.currentBlind + 1 >= this.configuration.numBlinds() &&
-            this.getCurrentBlind().getStatus() != Blind.Status.IN_GAME;
+        return this.currentBlind + 1 >= this.configuration.numBlinds()
+            && this.getCurrentBlind().getStatus() != Blind.Status.IN_GAME;
     }
 
 }

@@ -5,9 +5,33 @@ import java.util.List;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 /**
- * Represents a player in the game.
+ * Represents a Player in the game.
  */
 public interface Player {
+
+    /**
+     * Adds a special card to the player's special card slot.
+     * @param card to add
+     */
+    void addSpecialCard(SpecialCard card);
+
+    /**
+     * Sell a special card to earn money.
+     * @param specialCard the card to sell
+     */
+    void sellSpecialCard(SpecialCard specialCard);
+
+    /**
+     * Adds money to the player's total wealth.
+     * @param value the amount of money to add
+     */
+    void addCurrency(int value);
+
+    /**
+     * Spends some money of the Player.
+     * @param money the amount to remove.
+     */
+    void spendCurrency(int money);
 
     /**
      * Returns the player's deck.
@@ -22,20 +46,6 @@ public interface Player {
     List<SpecialCard> getSpecialCardSlot();
 
     /**
-     * Adds a special card to the player's special card slot.
-     * @param card to add
-     */
-    void addSpecialCard(SpecialCard card);
-
-    /**
-     * Adds money to the player's total wealth.
-     * @param value the amount of money to add
-     */
-    void addCurrency(int value);
-
-    void spendCurrency(int money);
-
-    /**
      * Returns the player's money.
      * @return the player's money
      */
@@ -47,7 +57,8 @@ public interface Player {
      */
     PlayerStatus getStatus();
 
+    /**
+     * @return the maximum number of special cards that the Player can have
+     */
     int getMaxSpecialCards();
-
-    void sellSpecialCard(SpecialCard specialCard);
 }

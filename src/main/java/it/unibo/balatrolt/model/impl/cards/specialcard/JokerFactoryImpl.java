@@ -10,6 +10,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
+import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
 /**
@@ -50,7 +51,7 @@ public final class JokerFactoryImpl implements JokerFactory {
     }
 
     @Override
-    public Joker addPlayableCardBoundToJoker(
+    public Joker addPlayedCardBoundToJoker(
             final String name,
             final String description,
             final Joker j,
@@ -86,5 +87,50 @@ public final class JokerFactoryImpl implements JokerFactory {
 
     private int getRandomPrice(JokerTier tier) {
         return priceSupplier.nextInt(MIN_PRICE, MAX_PRICE);
+    }
+
+    @Override
+    public Joker addHoldingCardBoundToJoker(String newName, String newDescription, Joker j,
+            Predicate<Set<PlayableCard>> bound, JokerTier newTier) {
+                return new JokerImpl(
+                    newName,
+                    newDescription,
+                    getRandomPrice(j.getTier()),
+                    new ModifierBuilderImpl()
+                        .merge(j.getModifier().get())
+                        .addHoldingCardBound(bound)
+                        .build(),
+                    newTier
+            );
+    }
+
+    @Override
+    public Joker addMoneyBoundToJoker(String newName, String newDescription, Joker j, Predicate<Integer> bound,
+            JokerTier newTier) {
+                return new JokerImpl(
+                    newName,
+                    newDescription,
+                    getRandomPrice(j.getTier()),
+                    new ModifierBuilderImpl()
+                        .merge(j.getModifier().get())
+                        .addCurrentCurrencyBound(bound)
+                        .build(),
+                    newTier
+            );
+    }
+
+    @Override
+    public Joker addCombinationCardBoundToJoker(String newName, String newDescription, Joker j,
+            Predicate<CombinationType> bound, JokerTier newTier) {
+                return new JokerImpl(
+                    newName,
+                    newDescription,
+                    getRandomPrice(j.getTier()),
+                    new ModifierBuilderImpl()
+                        .merge(j.getModifier().get())
+                        .addCombinationBound(bound)
+                        .build(),
+                    newTier
+            );
     }
 }

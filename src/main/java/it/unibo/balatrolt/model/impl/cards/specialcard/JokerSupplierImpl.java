@@ -85,7 +85,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
     }
 
     private Joker diamondDoubler() {
-        return factory.addPlayableCardBoundToJoker(
+        return factory.addPlayedCardBoundToJoker(
             "The diamond doubler",
             "It doubles the current value of multipler if one of "
             + "the played cards has suit diamond",
@@ -96,7 +96,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
     }
 
     private Joker heartDoubler() {
-        return factory.addPlayableCardBoundToJoker(
+        return factory.addPlayedCardBoundToJoker(
             "The heart doubler",
             "It doubles the current value of multipler if one of "
             + "the played cards has suit heart",
@@ -120,7 +120,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
     }
 
     private Joker kingDonour() {
-        return this.factory.addPlayableCardBoundToJoker(
+        return this.factory.addPlayedCardBoundToJoker(
             "The king donour",
             "It adds 50 base points if the played cards contains a king",
             this.donour(),
@@ -130,7 +130,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
     }
 
     private Joker seventhDonour() {
-        return this.factory.addPlayableCardBoundToJoker(
+        return this.factory.addPlayedCardBoundToJoker(
             "The seventh donour",
             "It adds 50 base points if the played cards contains a seven",
             this.donour(),

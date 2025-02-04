@@ -15,28 +15,32 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
 import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
+import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.cards.modifier.ModifierStatsSupplierBuilderImpl;
-import it.unibo.balatrolt.model.impl.cards.specialcard.JokerSupplierImpl;
+import it.unibo.balatrolt.model.impl.cards.specialcard.JokerCatalogBase;
+import it.unibo.balatrolt.model.impl.cards.specialcard.JokerCatalogMisc;
 
-final class TestJokerSupplier {
-    private static final int DOUBLER_INDEX = 0;
-    private static final int DIAMOND_DOUBLER_INDEX = 1;
-    private static final int DONOUR_INDEX = 2;
-    private static final int KING_DONOUR_INDEX = 3;
-    private static final int HEART_DOUBLER_INDEX = 4;
-    private static final int SEVENTH_DONOUR_INDEX = 5;
+final class TestJokerCatalog {
+    private static final String SEVENTH_DONOUR = "the seventh donour";
+    private static final String KING_DONOUR = "the king donour";
+    private static final String DONOUR = "the donour";
+    private static final String HEART_DOUBLER = "the heart doubler";
+    private static final String DOUBLER = "the doubler";
+    private static final String DIAMOND_DOUBLER = "the diamond doubler";
     private static final double DOUBLER_MUL = 2;
     private static final int DONOUR_BP = 50;
     private static final double INIT_MUL = 1;
     private static final int INIT_BP = 0;
     private static final int CURRENT_CURRENCY = 10;
-    private final JokerSupplierImpl js = new JokerSupplierImpl();
+    private final JokerCatalog base = new JokerCatalogBase();
+    private final JokerCatalog misc = new JokerCatalogMisc();
 
     @Test
     void testTheDoubler() {
-        final Joker j = js.getJokerList().get(DOUBLER_INDEX);
+        assertTrue(this.base.getJoker(DOUBLER).isPresent());
+        final Joker j = this.base.getJoker(DOUBLER).get();
         final double m = INIT_MUL;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
@@ -50,7 +54,8 @@ final class TestJokerSupplier {
 
     @Test
     void testTheDoublerWithCondition() {
-        Joker j = js.getJokerList().get(DIAMOND_DOUBLER_INDEX); // diamond is present
+        assertTrue(this.misc.getJoker(DIAMOND_DOUBLER).isPresent());
+        Joker j = this.misc.getJoker(DIAMOND_DOUBLER).get(); // diamond is present
         final double m = INIT_MUL;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
@@ -60,7 +65,8 @@ final class TestJokerSupplier {
         assertFalse(bpMapper.isPresent());
         assertTrue(mulMapper.isPresent());
         assertEquals(m * DOUBLER_MUL, mulMapper.get().apply(m));
-        j = js.getJokerList().get(HEART_DOUBLER_INDEX); // heart is not present
+        assertTrue(this.misc.getJoker(HEART_DOUBLER).isPresent());
+        j = this.misc.getJoker(HEART_DOUBLER).get(); // heart is not present
         assertTrue(j.getModifier().isPresent());
         mod = getMod(j, stats);
         bpMapper = mod.getBasePointMapper();
@@ -71,7 +77,8 @@ final class TestJokerSupplier {
 
     @Test
     void testTheDonour() {
-        final Joker j = js.getJokerList().get(DONOUR_INDEX);
+        assertTrue(base.getJoker(DONOUR).isPresent());
+        final Joker j = base.getJoker(DONOUR).get();
         final int bp = INIT_BP;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
@@ -85,7 +92,8 @@ final class TestJokerSupplier {
 
     @Test
     void testTheDonourWithCondition() {
-        Joker j = js.getJokerList().get(KING_DONOUR_INDEX); // king is present
+        assertTrue(this.misc.getJoker(KING_DONOUR).isPresent());
+        Joker j = this.misc.getJoker(KING_DONOUR).get(); // king is present
         final int bp = INIT_BP;
         final ModifierStatsSupplier stats = getMockStatus();
         assertTrue(j.getModifier().isPresent());
@@ -95,7 +103,8 @@ final class TestJokerSupplier {
         assertTrue(bpMapper.isPresent());
         assertFalse(mulMapper.isPresent());
         assertEquals(bp + DONOUR_BP, bpMapper.get().apply(bp));
-        j = js.getJokerList().get(SEVENTH_DONOUR_INDEX); // seven is not present
+        assertTrue(this.misc.getJoker(SEVENTH_DONOUR).isPresent());
+        j = this.misc.getJoker(SEVENTH_DONOUR).get(); // seven is not present
         mod = getMod(j, stats);
         bpMapper = mod.getBasePointMapper();
         mulMapper = mod.getMultiplierMapper();

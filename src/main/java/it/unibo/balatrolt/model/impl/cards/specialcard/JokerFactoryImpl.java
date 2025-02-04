@@ -3,7 +3,6 @@ package it.unibo.balatrolt.model.impl.cards.specialcard;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
@@ -70,10 +69,7 @@ public final class JokerFactoryImpl implements JokerFactory {
     }
 
     @Override
-    public Joker merge(final String newName, final String newDescription, final Joker j1, final Joker j2) {
-        final var tier = Stream.of(j1.getTier(), j2.getTier())
-                .max(((a, b) -> a.compareTo(b)))
-                .get();
+    public Joker merge(final String newName, final String newDescription, final Joker j1, final Joker j2, final JokerTier tier) {
         return new JokerImpl(
             newName.toLowerCase(),
             newDescription.toLowerCase(),

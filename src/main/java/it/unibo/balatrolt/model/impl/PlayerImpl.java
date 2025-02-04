@@ -76,8 +76,9 @@ public final class PlayerImpl implements Player {
 
     @Override
     public void sellSpecialCard(SpecialCard specialCard) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sellSpecialCard'");
+        Preconditions.checkNotNull(specialCard, "Cannot sell null card");
+        specialCardSlot.remove(specialCard);
+        addCurrency(specialCard.getToSellValue());
     }
 
 }

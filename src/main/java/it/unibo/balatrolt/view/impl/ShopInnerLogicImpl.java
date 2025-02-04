@@ -8,7 +8,7 @@ import it.unibo.balatrolt.view.api.ShopInnerLogic;
 /**
  * Implementation of {@link ShopInnerLogic}.
  */
-public class ShopInnerLogicImpl implements ShopInnerLogic {
+public final class ShopInnerLogicImpl implements ShopInnerLogic {
     private Optional<SpecialCardInfo> selected = Optional.absent();
 
     @Override
@@ -19,7 +19,7 @@ public class ShopInnerLogicImpl implements ShopInnerLogic {
     @Override
     public void hitCard(final SpecialCardInfo specialCardInfo) {
         final Optional<SpecialCardInfo> toSelect = Optional.fromNullable(specialCardInfo);
-        if(this.selected.equals(toSelect)) {
+        if (this.selected.equals(toSelect)) {
             this.selected = Optional.absent();
         } else {
             this.selected = toSelect;

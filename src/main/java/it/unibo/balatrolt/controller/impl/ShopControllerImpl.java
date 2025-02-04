@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.google.common.base.Optional;
@@ -17,7 +18,7 @@ import it.unibo.balatrolt.model.impl.shop.JokerShop;
 /**
  * Implementation of {@link ShopController}.
  */
-public class ShopControllerImpl implements ShopController {
+public final class ShopControllerImpl implements ShopController {
     private final Shop shop;
     private Map<SpecialCardInfo, SpecialCard> cardTranslator = Map.of();
 
@@ -57,13 +58,13 @@ public class ShopControllerImpl implements ShopController {
             e.getKey().getName(),
             e.getKey().getDescription(),
              e.getValue()),
-            e -> e.getKey()));
+            Entry::getKey));
     }
 
     @Override
     public Optional<SpecialCard> translateCard(final SpecialCardInfo specialCard) {
         checkNotNull(specialCard);
-        if(!this.cardTranslator.containsKey(specialCard)) {
+        if (!this.cardTranslator.containsKey(specialCard)) {
             return Optional.absent();
         }
         return Optional.of(this.cardTranslator.get(specialCard));

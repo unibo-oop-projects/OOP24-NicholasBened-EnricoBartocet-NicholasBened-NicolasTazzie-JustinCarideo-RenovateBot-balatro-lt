@@ -56,7 +56,6 @@ public final class ShopViewImpl extends JPanel implements ShopView {
     /**
      * Constructor.
      * @param controller controller to attach.
-     * @param guiSize current size of the GUI.
      */
     public ShopViewImpl(final MasterController controller) {
         super(new BorderLayout());

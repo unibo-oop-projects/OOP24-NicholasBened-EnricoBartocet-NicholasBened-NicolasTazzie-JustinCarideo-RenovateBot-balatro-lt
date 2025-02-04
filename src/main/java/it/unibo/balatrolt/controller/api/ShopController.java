@@ -34,6 +34,7 @@ public interface ShopController {
     /**
      * Translates the {@link SpecialCardInfo} into a real {@link SpecialCard}
      * if present in the shop.
+     * @param specialCard card to translate
      * @return the translated card if present in the shop.
      * @throws NullPointerException if specialCard is null
      */

@@ -13,7 +13,7 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
  * Creates the left part of the main GUI.
  */
 public final class InfoPanel extends JPanel {
-    static final long serialVersionUID = 1L;
+
     private final ScorePanel scorePanel;
     private final CombinationPanel combinationPanel;
     private final HandPanel handPanel;

@@ -6,15 +6,17 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
+
 /**
  * Displays the statistics of the current blind.
- * (remaining discards, hand and current chip).
+ * (remaining discards, hand, current currency and ante).
  */
 public class HandPanel extends JPanel {
-    static final long serialVersionUID = 1L;
+
     private final JLabel handLabel = new JLabel();
     private final JLabel discardLabel = new JLabel();
     private final JLabel currencyLabel = new JLabel("$0");
@@ -30,11 +32,23 @@ public class HandPanel extends JPanel {
         final JPanel northPanel = new JPanel(new GridLayout(1, 2));
         handLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         discardLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        handLabel.setOpaque(true);
+        discardLabel.setOpaque(true);
+        handLabel.setBackground(Color.YELLOW);
+        discardLabel.setBackground(Color.GREEN.darker());
+        handLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        discardLabel.setHorizontalAlignment(SwingConstants.CENTER);
         northPanel.add(handLabel);
         northPanel.add(discardLabel);
         this.currencyLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        currencyLabel.setOpaque(true);
+        currencyLabel.setBackground(Color.YELLOW);
         final JPanel southPanel = new JPanel(new GridLayout(1, 2));
         anteLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        anteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        anteLabel.setOpaque(true);
+        anteLabel.setBackground(Color.green.darker());
+        currencyLabel.setHorizontalAlignment(SwingConstants.CENTER);
         southPanel.add(anteLabel);
         southPanel.add(currencyLabel);
         this.add(northPanel);
@@ -58,7 +72,7 @@ public class HandPanel extends JPanel {
     }
 
     /**
-     * @param currency
+     * @param info
      */
     public void updateAnte(AnteInfo info) {
         this.anteLabel.setText("Ante :" + String.valueOf(info.id()));;

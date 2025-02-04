@@ -19,7 +19,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
  * Display the scores (actual score and the one to beat).
  */
 public class ScorePanel extends JPanel {
-    static final long serialVersionUID = 1L;
+
     private static final String SCORE_FONT = "COPPER_BLACK";
     private static final float SCORE_SIZE = 36f;
     private final JLabel minimumScoreLabel;
@@ -56,7 +56,7 @@ public class ScorePanel extends JPanel {
         currentScore.setText(String.valueOf(stats.chips()));
         currentScore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         currentScore.setFont(getFont(SCORE_FONT, SCORE_SIZE));
-        currentScore.setBackground(Color.GREEN.darker());
+        currentScore.setBackground(Color.BLUE);
         currentScore.setOpaque(true);
         currentScore.setHorizontalAlignment(SwingConstants.CENTER);
         return currentScore;
@@ -87,7 +87,7 @@ public class ScorePanel extends JPanel {
         minimumScoreLabel.setText(String.valueOf(info.minimumChips()));
         minimumScoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         minimumScoreLabel.setFont(getFont(SCORE_FONT, SCORE_SIZE));
-        minimumScoreLabel.setBackground(Color.MAGENTA.darker());
+        minimumScoreLabel.setBackground(Color.RED.darker());
         minimumScoreLabel.setOpaque(true);
         minimumScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         return minimumScoreLabel;

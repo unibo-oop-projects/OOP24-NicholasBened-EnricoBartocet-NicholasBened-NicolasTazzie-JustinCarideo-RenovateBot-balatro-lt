@@ -20,16 +20,16 @@ import it.unibo.balatrolt.controller.api.communication.BlindInfo;
  */
 public final class TitlePanel extends JPanel {
     static final long serialVersionUID = 1L;
-    private static final String FONT = "COPPER_BLACK";
-    private static final Color SMALL_BLIND_COLOR = Color.CYAN.darker().darker().darker();
-    private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker().darker();
-    private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker().darker();
+    private static final String FONT_COLOR = "COPPER_BLACK";
+    private static final Color SMALL_BLIND_COLOR = Color.CYAN.darker().darker();
+    private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker();
+    private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker();
     private static final int SIZE_TITLE_BLIND = 30;
     private final BlindInfo info;
 
     /**
-     * builds the title.
-     * @param info Blind static information.
+     * 
+     * @param info
      */
     public TitlePanel(final BlindInfo info) {
         this.info = info;
@@ -38,7 +38,6 @@ public final class TitlePanel extends JPanel {
 
         final JPanel titleContainer = new JPanel(new BorderLayout());
         titleContainer.add(getTitle(backgroundColor), BorderLayout.CENTER);
-        titleContainer.setPreferredSize(new Dimension(0, 100));
 
         add(titleContainer, BorderLayout.NORTH);
         add(getRewardLabel(backgroundColor));
@@ -61,7 +60,7 @@ public final class TitlePanel extends JPanel {
         rewardLabel.setBackground(color.brighter());
         rewardLabel.setText("Reward: $" + info.reward());
         rewardLabel.setOpaque(true);
-        rewardLabel.setFont(getFont(FONT, SIZE_TITLE_BLIND));
+        rewardLabel.setFont(getFont(FONT_COLOR, SIZE_TITLE_BLIND));
         rewardLabel.setHorizontalAlignment(SwingConstants.CENTER);
         return rewardLabel;
     }

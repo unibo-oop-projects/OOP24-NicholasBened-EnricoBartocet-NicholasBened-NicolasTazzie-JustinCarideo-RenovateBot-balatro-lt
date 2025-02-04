@@ -9,6 +9,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import org.checkerframework.checker.units.qual.m;
 
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 /**
@@ -42,7 +45,8 @@ public final class CombinationPanel extends JPanel {
         final JLabel combinationLabel = new JLabel();
         combinationLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         combinationLabel.setFont(getFont(FONT, SCORE_DIM));
-        combinationLabel.setBackground(Color.white);
+        combinationLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        combinationLabel.setBackground(Color.GRAY);
         combinationLabel.setOpaque(true);
         return combinationLabel;
     }
@@ -50,6 +54,7 @@ public final class CombinationPanel extends JPanel {
     private JLabel getBasePointsLabel(final CombinationInfo info) {
         final JLabel pointsLabel = new JLabel();
         pointsLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        pointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
         pointsLabel.setFont(getFont(FONT, SCORE_DIM));
         pointsLabel.setBackground(Color.BLUE);
         pointsLabel.setOpaque(true);
@@ -60,6 +65,7 @@ public final class CombinationPanel extends JPanel {
         final JLabel multiplierLabel = new JLabel();
         multiplierLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         multiplierLabel.setFont(getFont(FONT, SCORE_DIM));
+        multiplierLabel.setHorizontalAlignment(SwingConstants.CENTER);
         multiplierLabel.setBackground(Color.RED.darker());
         multiplierLabel.setOpaque(true);
         return multiplierLabel;

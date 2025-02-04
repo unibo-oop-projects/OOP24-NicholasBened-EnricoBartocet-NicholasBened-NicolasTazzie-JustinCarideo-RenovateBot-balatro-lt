@@ -1,6 +1,8 @@
 package it.unibo.balatrolt.controller.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Preconditions;
 
@@ -14,13 +16,42 @@ import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 import it.unibo.balatrolt.model.impl.PlayerImpl;
 import it.unibo.balatrolt.model.impl.PlayerStatusImpl;
 
-public class PlayerControllerImpl implements PlayerController {
+/**
+ * An implementation of the {@link PlayerController}.
+ */
+public final class PlayerControllerImpl implements PlayerController {
 
     private final Player player;
+    private final Map<SpecialCardInfo, SpecialCard> specialCardTranslator = new HashMap<>();
 
+    /**
+     * Create a new PlayerController.
+     * @param deck the deck choosen by the player
+     */
     public PlayerControllerImpl(final BuffedDeck deck) {
         Preconditions.checkNotNull(deck);
         this.player = new PlayerImpl(deck);
+    }
+
+    @Override
+    public void addCurrency(final int reward) {
+        this.player.addCurrency(reward);
+    }
+
+    @Override
+    public void spendCurrency(final int money) {
+        this.player.spendCurrency(money);
+    }
+
+    @Override
+    public void addSpecialCard(final SpecialCard card) {
+        this.player.addSpecialCard(card);
+        this.specialCardTranslator.put(getSpecialCardInfo(card), card);
+    }
+
+    @Override
+    public void sellSpecialCard(final SpecialCardInfo card) {
+        this.player.sellSpecialCard(specialCardTranslator.get(card));
     }
 
     @Override
@@ -39,21 +70,6 @@ public class PlayerControllerImpl implements PlayerController {
     @Override
     public PlayerStatus getPlayerStatus() {
         return new PlayerStatusImpl(this.player.getDeck(), this.player.getSpecialCardSlot(), this.player.getCurrency());
-    }
-
-    @Override
-    public void addCurrency(int reward) {
-        this.player.addCurrency(reward);
-    }
-
-    @Override
-    public void spendCurrency(int money) {
-        this.player.spendCurrency(money);
-    }
-
-    @Override
-    public void addSpecialCard(SpecialCard card) {
-        this.player.addSpecialCard(card);
     }
 
     @Override

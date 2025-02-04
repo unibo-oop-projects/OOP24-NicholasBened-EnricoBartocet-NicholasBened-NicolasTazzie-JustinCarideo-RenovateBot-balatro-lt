@@ -3,15 +3,15 @@ package it.unibo.balatrolt.controller.api;
 import java.util.Set;
 
 /**
- * It represents the events that the view can generate.
+ * It represents the events that the views can generate and that the Controller will handle.
  */
 public enum BalatroEvent {
     /**
-     * TODO: add description.
+     * Notify the views to show the main menu.
      */
     MAIN_MENU,
     /**
-     * The user started a new game.
+     * Notify the views to show the decks.
      */
     INIT_GAME,
     /**
@@ -19,7 +19,7 @@ public enum BalatroEvent {
      */
     CHOOSE_DECK,
     /**
-     * The Blind to play was chosen.
+     * The player confirmed the start the Blind.
      */
     CHOOSE_BLIND,
     /**
@@ -30,6 +30,9 @@ public enum BalatroEvent {
      * The player played some cards.
      */
     PLAY_CARDS,
+    /**
+     * The player added some cards to the stage.
+     */
     STAGE_CARDS,
     /**
      * The player opened the shop.
@@ -40,23 +43,29 @@ public enum BalatroEvent {
      */
     BUY_CARD,
     /**
-     * Th eplayer closed the shop.
+     * The player sold a card.
+     */
+    SELL_CARD,
+    /**
+     * Th player closed the shop.
      */
     CLOSE_SHOP;
 
     /**
-     * @return returns the set of the allowed events that can happen after everyone
+     * Every event has a set of possible events that can happen after it.
+     * @return returns the set of the allowed events that can happen after every event.
      */
     public Set<BalatroEvent> getNextPossibleEvents() {
         return switch (this) {
             case MAIN_MENU -> Set.of(INIT_GAME);
             case INIT_GAME -> Set.of(CHOOSE_DECK);
-            case CHOOSE_DECK -> Set.of(CHOOSE_BLIND);
-            case CHOOSE_BLIND, DISCARD_CARDS -> Set.of(STAGE_CARDS);
-            case STAGE_CARDS -> Set.of(PLAY_CARDS, DISCARD_CARDS ,STAGE_CARDS);
-            case PLAY_CARDS -> Set.of(STAGE_CARDS, OPEN_SHOP, MAIN_MENU);
-            case BUY_CARD, OPEN_SHOP -> Set.of(BUY_CARD, CLOSE_SHOP);
-            case CLOSE_SHOP -> Set.of(CHOOSE_BLIND);
+            case CHOOSE_DECK -> Set.of(CHOOSE_BLIND, SELL_CARD);
+            case CHOOSE_BLIND, DISCARD_CARDS -> Set.of(STAGE_CARDS, SELL_CARD);
+            case STAGE_CARDS -> Set.of(PLAY_CARDS, DISCARD_CARDS, STAGE_CARDS, SELL_CARD);
+            case PLAY_CARDS -> Set.of(STAGE_CARDS, OPEN_SHOP, MAIN_MENU, SELL_CARD);
+            case BUY_CARD, OPEN_SHOP -> Set.of(BUY_CARD, CLOSE_SHOP, SELL_CARD);
+            case CLOSE_SHOP -> Set.of(CHOOSE_BLIND, SELL_CARD);
+            case SELL_CARD -> Set.of(BalatroEvent.values());
         };
     }
 }

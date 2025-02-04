@@ -13,11 +13,10 @@ import it.unibo.balatrolt.view.api.View;
 public interface MasterController {
 
     /**
-     * Handles a {@link BalatroEvent} and interacts with the model entry
-     * points.
+     * Handles a {@link BalatroEvent} and interacts with the model entry points.
      * @param e event type
-     * @param data eventual data that should be passed if the event handler requires.
-     * @throws IllegalArgumentException if data is not compatible with the passed event.
+     * @param data eventual data that should be passed if the event handler requires
+     * @throws IllegalArgumentException if data is not compatible with the passed event
      */
     void handleEvent(BalatroEvent e, Optional<?> data);
 

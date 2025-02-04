@@ -15,8 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
+import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
@@ -42,6 +44,7 @@ public final class SwingView implements View {
     private InfoPanel infoPanel;
     private JPanel rightPanel;
     private JPanel centerPanel;
+    private JPanel specialSlotContainer;
 
     /**
      * Sets the frame and it's size.
@@ -90,25 +93,7 @@ public final class SwingView implements View {
         rightPanel.add(northPanel, BorderLayout.NORTH);
 
         /**
-         * Creating slot for the special cards.
-         */
-        final var specialSlot = new SlotPanel<SpecialCardInfo>(
-            MAX_SPECIAL_CARDS, 75, 100,
-            () -> true,
-            () -> false,
-            card -> JOptionPane.showMessageDialog(
-                frame,
-                card.name() + ":\n" + card.description(),
-                "Special Card Info",
-                JOptionPane.INFORMATION_MESSAGE)
-        );
-        specialCards.forEach(c -> specialSlot.addObject(new SlotPanel.SlotObject<>(c, c.name(), "JOKER")));
-        final var specialSlotContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        specialSlotContainer.setOpaque(false);
-        specialSlotContainer.add(specialSlot);
-
-        /**
-         * Creating slot for the special cards.
+         * Creating slot for the deck.
          */
         final var deckSlot = new SlotPanel<>(
             1, 100, 120,
@@ -124,6 +109,10 @@ public final class SwingView implements View {
         final JPanel deckSlotContainer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         deckSlotContainer.setOpaque(false);
         deckSlotContainer.add(deckSlot);
+
+        specialSlotContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        specialSlotContainer.setOpaque(false);
+        updateSpecialCards(specialCards);
 
         northPanel.add(specialSlotContainer);
         northPanel.add(Box.createHorizontalGlue());
@@ -164,8 +153,29 @@ public final class SwingView implements View {
 
     @Override
     public void updateSpecialCards(final List<SpecialCardInfo> specialCards) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
+        specialSlotContainer.removeAll();
+        /**
+         * Creating slot for the special cards.
+         */
+        var specialSlot = new SlotPanel<SpecialCardInfo>(
+            MAX_SPECIAL_CARDS, 75, 100,
+            () -> true,
+            () -> false,
+            card -> {
+                switch(JOptionPane.showConfirmDialog(
+                    frame,
+                    "\""+ card.name() + "\":\n" + card.description() + "\n\nSell Value: " + card.price() + "$\nDo you want to sell it?",
+                    "Special Card Details",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE)
+                ) {
+                    case JOptionPane.YES_OPTION -> this.controller.handleEvent(BalatroEvent.SELL_CARD, Optional.of(card));
+                    default -> {}
+                }
+            }
+        );
+        specialCards.forEach(c -> specialSlot.addObject(new SlotPanel.SlotObject<>(c, c.name(), "JOKER")));
+        specialSlotContainer.add(specialSlot);
     }
 
     @Override

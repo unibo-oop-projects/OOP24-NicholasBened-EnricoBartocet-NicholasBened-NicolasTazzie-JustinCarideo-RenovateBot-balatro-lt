@@ -145,10 +145,10 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         final JButton continueGame = new JButton("Continue");
         continueGame.setFont(getFont(FONT, BUTTON_SIZE));
         this.buyButton.setFont(continueGame.getFont());
-        this.buyButton.setBackground(Color.RED);
+        this.buyButton.setBackground(Color.decode("#C1121F"));
         this.buyButton.setForeground(Color.WHITE);
         this.buyButton.setPreferredSize(continueGame.getPreferredSize());
-        continueGame.setBackground(Color.BLUE);
+        continueGame.setBackground(Color.decode("#2274A5"));
         continueGame.setForeground(Color.WHITE);
         continueGame.addActionListener(e -> {
             this.controller.handleEvent(BalatroEvent.CLOSE_SHOP, Optional.absent());

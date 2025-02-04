@@ -3,6 +3,7 @@ package it.unibo.balatrolt.controller.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 
@@ -25,13 +26,14 @@ import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
  * An implementation of the {@link LevelsController}.
  */
 public final class LevelsControllerImpl implements LevelsController {
+    private static final Random rand = new Random();
     private static final int NUM_ANTE = 7;
     private static final int NUM_BLINDS = 3;
-    private static final int ANTE_MULTIPLIER = 150;
-    private static final int ANTE_EXP = 3;
-    private static final int BLIND_EXP = 2;
-    private static final int BLIND_MULTIPLIER = 10;
-    private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b + 4;
+    private static final int ANTE_MULTIPLIER = 50 * (rand.nextInt(3) + 1);
+    private static final int ANTE_EXP = 2;
+    private static final int BLIND_EXP = 1;
+    private static final int BLIND_MULTIPLIER = 30 * (rand.nextInt(3) + 1);
+    private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b * 2 + 2 + rand.nextInt(4);
     private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> {
         return (int) Math.pow(a + 1, ANTE_EXP) * ANTE_MULTIPLIER + (int) Math.pow(b + 1, BLIND_EXP) * BLIND_MULTIPLIER;
     };

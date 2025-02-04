@@ -113,7 +113,7 @@ public final class GameTable extends JPanel {
          * Creating the play button.
          */
         final JButton playButton = new JButton("Play Hand");
-        playButton.setBackground(Color.BLUE);
+        playButton.setBackground(Color.decode("#2274A5"));
         playButton.setForeground(Color.WHITE);
         playButton.setFont(getFont(FONT, JB_FONT_SIZE));
         playButton.addActionListener(e -> {
@@ -129,7 +129,7 @@ public final class GameTable extends JPanel {
          * Creating the discard button
          */
         this.discardButton = new JButton("Discard");
-        discardButton.setBackground(Color.RED);
+        discardButton.setBackground(Color.decode("#C1121F"));
         discardButton.setForeground(Color.WHITE);
         discardButton.setFont(getFont(FONT, JB_FONT_SIZE));
         discardButton.setPreferredSize(playButton.getPreferredSize());

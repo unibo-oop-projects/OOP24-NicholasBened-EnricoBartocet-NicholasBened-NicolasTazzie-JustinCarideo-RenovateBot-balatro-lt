@@ -102,7 +102,10 @@ public final class MasterControllerImpl implements MasterController {
                     case BLIND_WON -> this.views.forEach(View::showGameOver);
                     default -> throw new IllegalStateException("Round Status unknown");
                 }
-                this.views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
+                this.views.forEach(v -> {
+                    v.updateScore(this.levels.getCurrentBlindStats());
+                    v.updateCombinationStatus(new CombinationInfo("", 0, 0));
+                });
             }
             case OPEN_SHOP -> {
                 this.shop.openShop();

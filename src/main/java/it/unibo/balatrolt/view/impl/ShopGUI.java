@@ -27,18 +27,17 @@ public class ShopGUI extends JFrame {
      */
     public ShopGUI(final int size) throws IOException {
         // creating left panel
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
-        this.setSize(WIDTH_EXPAND * size, HEIGHT_EXPAND * size);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        setSize(WIDTH_EXPAND * size, HEIGHT_EXPAND * size);
         //System.out.println(this.getSize());
-        this.buildShopPanel();
-        this.setVisible(true);
+        buildShopPanel();
+        setVisible(true);
     }
 
     private void buildShopPanel() {
         // creating left panel
-        System.out.println(this.getSize());
-        final JPanel shopPanel = new ShopViewImpl(new MasterControllerImpl(), this.getSize());
+        final JPanel shopPanel = new ShopViewImpl(new MasterControllerImpl());
         this.add(shopPanel, BorderLayout.CENTER);
     }
 }

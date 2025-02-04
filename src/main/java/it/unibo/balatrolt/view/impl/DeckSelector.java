@@ -1,9 +1,9 @@
 package it.unibo.balatrolt.view.impl;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -30,17 +31,18 @@ import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 /**
  * GUI used to select the deck to play with.
  */
-public class DeckSelector extends JPanel {
+public final class DeckSelector extends JPanel {
+    static final long serialVersionUID = 1L;
     private static final String TITLE_FONT = "SNAP_ITC";
     private static final String DESC_DECK_FONT = "COPPER_BLACK";
     private static final float TITLE_SIZE = 100f;
     private static final float DECK_SIZE = 35f;
     private static final float DESCR_SIZE = 25f;
     private final Map<String, DeckInfo> decksTranslator = new HashMap<>();
+    private final JLabel labelName;
+    private final JTextArea deckDescription;
+    private final JButton deck;
     private String deckName;
-    private JLabel labelName;
-    private JTextArea deckDescription;
-    private JButton deck;
     private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 
     /**
@@ -48,7 +50,7 @@ public class DeckSelector extends JPanel {
      * @param controller the master controller.
      * @param decks to choose from.
      */
-    public DeckSelector(MasterController controller, List<DeckInfo> decks) {
+    public DeckSelector(final MasterController controller, final List<DeckInfo> decks) {
         setLayout(new GridBagLayout());
         decks.forEach(d -> {
             this.decksTranslator.put(d.name(), d);
@@ -60,7 +62,7 @@ public class DeckSelector extends JPanel {
         final JLabel title = new JLabel("BALATRO");
         title.setFont(getFont(TITLE_FONT, TITLE_SIZE));
         title.setForeground(Color.WHITE.brighter());
-        this.add(title, getConstraints(GridBagConstraints.RELATIVE, GridBagConstraints.RELATIVE, 0, 0,
+        add(title, getConstraints(GridBagConstraints.RELATIVE, GridBagConstraints.RELATIVE, 0, 0,
             0, GridBagConstraints.PAGE_START, GridBagConstraints.NONE, 50, 0, 20, 0));
         /**
          * Setting the deck selector.
@@ -68,10 +70,10 @@ public class DeckSelector extends JPanel {
         final JPanel centralMenu = new JPanel(new GridBagLayout());
         centralMenu.setBackground(Color.DARK_GRAY);
         centralMenu.setPreferredSize(new Dimension(
-            (int) (this.getPreferredSize().width * 1.2),
-            (int) (this.getPreferredSize().height * 1.5)
+            (int) (getPreferredSize().width * 1.2),
+            (int) (getPreferredSize().height * 1.5)
         ));
-        this.add(centralMenu, getConstraints(0, 0, 0.2, 1.0, 0,
+        add(centralMenu, getConstraints(0, 0, 0.2, 1.0, 0,
             GridBagConstraints.PAGE_END, GridBagConstraints.NONE, 0, 0, 50, 0));
         /**
          * Adding component to the central menu.
@@ -135,8 +137,8 @@ public class DeckSelector extends JPanel {
         this.deckDescription.setEditable(false);
         this.deckDescription.setLineWrap(true);
         this.deckDescription.setWrapStyleWord(true);
-        this.deckDescription.setAlignmentY(Component.CENTER_ALIGNMENT);
-        this.deckDescription.setFont(getFont(DESC_DECK_FONT, DESCR_SIZE));;
+        this.deckDescription.setAlignmentY(CENTER_ALIGNMENT);
+        this.deckDescription.setFont(getFont(DESC_DECK_FONT, DESCR_SIZE));
         this.deckDescription.setBackground(Color.WHITE);
         this.deckDescription.setOpaque(true);
         this.deckDescription.setForeground(Color.BLACK);
@@ -159,16 +161,18 @@ public class DeckSelector extends JPanel {
          */
         try {
             this.image = ImageIO.read(getClass().getResourceAsStream("/img/MAIN_BACKGROUND.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Cannot load Background");
         }
-        this.setVisible(true);
+        setVisible(true);
     }
 
     /**
      * Create a GribBagConstraint with the given data.
      */
-    private GridBagConstraints getConstraints(int x, int y, double weightx, double weighty, int ipadx, int anchor, int fill, int top, int left, int bottom, int right) {
+    private GridBagConstraints getConstraints(final int x, final int y, final double weightx, final double weighty,
+        final int ipadx, final int anchor, final int fill, final int top, final int left, final int bottom, final int right) {
+
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = x;
         gbc.gridy = y;
@@ -186,36 +190,36 @@ public class DeckSelector extends JPanel {
      */
     private void updateDeck() {
         try {
-            final Image img = ImageIO.read(getClass().getResource("/img/decks/" + this.deckName.toUpperCase() + "_DECK.png"));
+            final Image img = ImageIO.read(getClass().getResource("/img/decks/" + this.deckName.toUpperCase(Locale.getDefault()) + "_DECK.png"));
             this.deck.setIcon(new ImageIcon(img));
         } catch (IOException | IndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(this, "This is the last deck!");
         }
         this.labelName.setText(deckName);
         this.deckDescription.setText(decksTranslator.get(deckName).desc());
-        this.revalidate();
-        this.repaint();
+        revalidate();
+        repaint();
     }
 
-    /**
+    /*
      * Gives back the requested font with the given size.
      */
-    private Font getFont(String nameFont, float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, 15);
+    private Font getFont(final String nameFont, final float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
         try {
             font = Font.createFont(
                 Font.TRUETYPE_FONT,
                 getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
             );
             font = font.deriveFont(fontSize);
-        } catch (Exception e) {
+        } catch (FontFormatException | IOException e) {
             JOptionPane.showMessageDialog(this, "Cannot load font");
         }
         return font;
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this);
     }

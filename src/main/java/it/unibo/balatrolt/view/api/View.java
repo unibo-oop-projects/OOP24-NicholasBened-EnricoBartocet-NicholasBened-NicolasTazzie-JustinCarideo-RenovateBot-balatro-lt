@@ -16,6 +16,11 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
  */
 public interface View {
 
+    /**
+     * 
+     * @param title error title.
+     * @param desc error message.
+     */
     void notifyErrror(String title, String desc);
 
     /**
@@ -58,6 +63,10 @@ public interface View {
      */
     void showGameOver();
 
+    /**
+     * Updates the score in UI.
+     * @param stats blind actual statistics.
+     */
     void updateScore(BlindStats stats);
 
     /**

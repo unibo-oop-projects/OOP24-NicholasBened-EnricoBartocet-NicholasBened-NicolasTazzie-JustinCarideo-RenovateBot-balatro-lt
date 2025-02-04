@@ -4,9 +4,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
@@ -37,6 +37,11 @@ import it.unibo.balatrolt.view.api.ShopView;
  * It also extends a {@link JPanel}, so it can be used to replace an existing one.
  */
 public final class ShopViewImpl extends JPanel implements ShopView {
+    static final long serialVersionUID = 1L;
+    private static final String FONT = "COPPER_BLACK";
+    private static final float TITLE_SIZE = 100f;
+    private static final float PRICE_SIZE = 23f;
+    private static final float BUTTON_SIZE = 18f;
     private static final int INFO_Y = 3;
     private static final int NAME_Y = 2;
     private static final int CARD_Y = 1;
@@ -53,18 +58,17 @@ public final class ShopViewImpl extends JPanel implements ShopView {
      * @param controller controller to attach.
      * @param guiSize current size of the GUI.
      */
-    public ShopViewImpl(final MasterController controller, final Dimension guiSize) {
+    public ShopViewImpl(final MasterController controller) {
         super(new BorderLayout());
         this.setBackground(Color.LIGHT_GRAY);
         final var shopTitle = new JLabel("Shop");
-        shopTitle.setFont(new Font("Bauhaus 93", Font.PLAIN, 100));
+        shopTitle.setFont(getFont(FONT, TITLE_SIZE));
         final var titlePanel = new JPanel(new FlowLayout());
         titlePanel.setBackground(this.getBackground());
         titlePanel.add(shopTitle);
         this.add(titlePanel, BorderLayout.NORTH);
         this.add(innerPanel, BorderLayout.CENTER);
         this.logic = new ShopInnerLogicImpl();
-        // this.guiSize = guiSize;
         this.controller = controller;
         this.buyButton = new JButton("Buy");
         this.buyButton.addActionListener(e -> {
@@ -125,18 +129,18 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         }
         btn.setContentAreaFilled(false);
         return btn;
-    };
+    }
 
     private JLabel getPriceLable(final int price) {
         final var lbl = new JLabel(Integer.toString(price) + "$");
-        lbl.setFont(new Font("Bauhaus 93", Font.PLAIN, 23));
+        lbl.setFont(getFont(FONT, PRICE_SIZE));
         return lbl;
     }
 
     private JPanel getBuyOrContinuePanel() {
         final var panel = new JPanel(new FlowLayout());
         final JButton continueGame = new JButton("Continue");
-        continueGame.setFont(new Font("Bauhaus 93", Font.PLAIN, 18));
+        continueGame.setFont(getFont(FONT, BUTTON_SIZE));
         this.buyButton.setFont(continueGame.getFont());
         this.buyButton.setBackground(Color.RED);
         this.buyButton.setForeground(Color.WHITE);
@@ -167,5 +171,22 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         this.cardButtons.forEach(e -> e.setBorder(
             BorderFactory.createLineBorder(e.getParent().getBackground())));
         this.repaint();
+    }
+
+    /*
+     * Gives back the requested font with the given size.
+     */
+    private Font getFont(final String nameFont, final float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
+        try {
+            font = Font.createFont(
+                Font.TRUETYPE_FONT,
+                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
+            );
+            font = font.deriveFont(fontSize);
+        } catch (FontFormatException | IOException e) {
+            JOptionPane.showMessageDialog(this, "Cannot load font");
+        }
+        return font;
     }
 }

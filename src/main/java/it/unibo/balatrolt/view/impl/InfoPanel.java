@@ -12,22 +12,21 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
  * Creates the left part of the main GUI.
  */
 public class InfoPanel extends JPanel {
+    static final long serialVersionUID = 1L;
+    private final ScorePanel scorePanel;
+    private final CombinationPanel combinationPanel;
+    private final HandPanel handPanel;
 
-    private TitlePanel titlePanel;
-    private ScorePanel scorePanel;
-    private CombinationPanel combinationPanel;
-    private HandPanel handPanel;
-
-    public InfoPanel(BlindInfo info, BlindStats stats) {
+    public InfoPanel(final BlindInfo info, final BlindStats stats) {
         this.setLayout(new GridLayout(4, 1));
-        this.titlePanel = new TitlePanel(info);
+        final var titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);
         this.combinationPanel = new CombinationPanel(new CombinationInfo(" ", 0, 0));
         this.handPanel = new HandPanel(stats);
-        this.add(this.titlePanel);
-        this.add(this.scorePanel);
-        this.add(this.combinationPanel);
-        this.add(this.handPanel);
+        add(titlePanel);
+        add(this.scorePanel);
+        add(this.combinationPanel);
+        add(this.handPanel);
     }
 
     public void updateCombination(final CombinationInfo info) {

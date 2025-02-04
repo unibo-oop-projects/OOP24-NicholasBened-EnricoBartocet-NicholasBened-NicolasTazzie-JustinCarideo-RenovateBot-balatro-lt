@@ -19,29 +19,34 @@ import com.google.common.base.Preconditions;
 /**
  * Represent a Generic panel in which we can store any card.
  * we can also set the action to perform when the buttons are pressed.
+ * @param <X> object the panel has to hold.
  */
-public class SlotPanel<X> extends JPanel {
+public final class SlotPanel<X> extends JPanel {
+    static final long serialVersionUID = 1L;
     private final int slotSize;
     private final int buttonWidth;
     private final int buttonHeight;
-    private Map<String, X> slots;
-    private Consumer<X> consumer;
-    private Supplier<Boolean> canClick;
-    private Supplier<Boolean> canRemove;
+    private final Map<String, X> slots;
+    private final Consumer<X> consumer;
+    private final Supplier<Boolean> canClick;
+    private final Supplier<Boolean> canRemove;
 
-    /**
+    /*
      * It holds the full obj to eventually give it back to the controller
      * and holds the name of the card to set the image.
      */
-    record SlotObject<X>(X obj, String cardName, String cardPath) {}
+    record SlotObject<X>(X obj, String cardName, String cardPath) { }
 
     /**
      * Sets the parameters of the panel.
      * @param slotSize max size of the slot.
-     * @param canClick possibility to click
+     * @param buttonWidth width of the button.
+     * @param buttonHeigth height of the button.
+     * @param canClick possibility to click.
+     * @param canRemove possibility to remove.
      * @param consumer action to perform with the pressed card. THE CARD GETS DELETED BY DEFAULT.
      */
-    public SlotPanel(final int slotSize, int buttonWidth, int buttonHeigth, Supplier<Boolean> canClick, Supplier<Boolean> canRemove, Consumer<X> consumer) {
+    public SlotPanel(final int slotSize, final int buttonWidth, final int buttonHeigth, final Supplier<Boolean> canClick, final Supplier<Boolean> canRemove, final Consumer<X> consumer) {
         super(new GridLayout(1, slotSize));
         super.setBackground(Color.DARK_GRAY);
         Preconditions.checkArgument(buttonWidth >= 0);
@@ -60,7 +65,7 @@ public class SlotPanel<X> extends JPanel {
      * defined Consumer(action to perform) and Supplier (possibility to click).
      * @param card to add.
      */
-    public void addObject(SlotObject<X> card) {
+    public void addObject(final SlotObject<X> card) {
         Preconditions.checkState(this.slots.size() < slotSize);
         this.slots.put(card.cardName(), card.obj());
         final JButton button = new JButton();
@@ -72,7 +77,7 @@ public class SlotPanel<X> extends JPanel {
                 this.consumer.accept(this.slots.get(e.getActionCommand()));
                 if (this.canRemove.get()) {
                     this.slots.remove(e.getActionCommand());
-                    this.remove((JButton)e.getSource());
+                    this.remove((JButton) e.getSource());
                 }
             }
         });

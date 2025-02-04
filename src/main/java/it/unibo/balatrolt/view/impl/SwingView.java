@@ -79,7 +79,8 @@ public final class SwingView implements View {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
         frame.add(panel);
-        infoPanel = new InfoPanel(info, stats);
+        //TODO
+        infoPanel = new InfoPanel(info, stats, 0);
         rightPanel = new JPanel(new BorderLayout());
         panel.add(rightPanel, BorderLayout.CENTER);
         panel.add(infoPanel, BorderLayout.WEST);

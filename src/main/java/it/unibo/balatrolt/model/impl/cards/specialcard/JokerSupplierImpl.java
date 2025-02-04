@@ -22,6 +22,11 @@ import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
  * @author Nicolas Tazzieri - nicolas.tazzieri@studio.unibo.it
  */
 public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
+    private static final int MISC_REP = 1;
+    private static final int RARE_REP = 1;
+    private static final int NOTCOMMON_REP = 2;
+    private static final int COMMON_REP = 3;
+    private static final int BASE_REP = 1;
     private static final int DONOUR_ADDER = 50;
     private final List<Joker> jokers;
     private final JokerFactory factory = new JokerFactoryImpl();
@@ -40,17 +45,16 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             this.seventhDonour()
         );
         List<Joker> jList = jokers;
-        jList = getNewJokerList(jList, new JokerCatalogBase(), 1);
-        jList = getNewJokerList(jList, new JokerCatalogCommon(), 3);
-        jList = getNewJokerList(jList, new JokerCatalogNotCommon(), 2);
-        jList = getNewJokerList(jList, new JokerCatalogRare(), 1);
-        jList = getNewJokerList(jList, new JokerCatalogMisc(), 1);
+        jList = getNewJokerList(jList, new JokerCatalogBase(), BASE_REP);
+        jList = getNewJokerList(jList, new JokerCatalogCommon(), COMMON_REP);
+        jList = getNewJokerList(jList, new JokerCatalogNotCommon(), NOTCOMMON_REP);
+        jList = getNewJokerList(jList, new JokerCatalogRare(), RARE_REP);
+        jList = getNewJokerList(jList, new JokerCatalogMisc(), MISC_REP);
         this.jokers = jList;
     }
 
-    private List<Joker> getNewJokerList(List<Joker> jokers, JokerCatalog catalog, int repetitions) {
-        catalog = new JokerCatalogCommon();
-        return mergeList(jokers, concatMultipleTimes(catalog.getJokerList(), 1));
+    private List<Joker> getNewJokerList(final List<Joker> jokers, final JokerCatalog catalog, final int repetitions) {
+        return mergeList(jokers, concatMultipleTimes(catalog.getJokerList(), repetitions));
     }
 
     private <X> List<X> mergeList(final List<X> l1, final List<X> l2) {
@@ -100,8 +104,7 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             "It doubles the current value of multipler without checking any condition",
             new ModifierBuilderImpl()
                     .addMultiplierModifier(m -> {
-                        final int toMultiply = 2;
-                        return m * toMultiply;
+                        return m * 2;
                     })
                     .build(),
             JokerTier.LEGENDARY

@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.model.impl.cards.specialcard;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -23,8 +24,8 @@ public final class JokerFactoryImpl implements JokerFactory {
     @Override
     public Joker standardJoker(final String name, final String description) {
         return new JokerImpl(
-            name.toLowerCase(),
-            description.toLowerCase(),
+            name.toLowerCase(Locale.getDefault()),
+            description.toLowerCase(Locale.getDefault()),
             getRandomPrice(JokerTier.COMMON),
             null,
             JokerTier.COMMON);
@@ -37,7 +38,12 @@ public final class JokerFactoryImpl implements JokerFactory {
         final int basePrice,
         final CombinationModifier modifier,
         final JokerTier tier) {
-        return new JokerImpl(name.toLowerCase(), description.toLowerCase(), basePrice, modifier, tier);
+        return new JokerImpl(
+            name.toLowerCase(Locale.getDefault()),
+            description.toLowerCase(Locale.getDefault()),
+            basePrice,
+            modifier,
+            tier);
     }
 
     @Override
@@ -46,7 +52,12 @@ public final class JokerFactoryImpl implements JokerFactory {
         final String description,
         final CombinationModifier modifier,
         final JokerTier tier) {
-        return new JokerImpl(name.toLowerCase(), description.toLowerCase(), getRandomPrice(tier), modifier, tier);
+        return new JokerImpl(
+            name.toLowerCase(Locale.getDefault()),
+            description.toLowerCase(Locale.getDefault()),
+            getRandomPrice(tier),
+            modifier,
+            tier);
     }
 
     @Override
@@ -57,8 +68,8 @@ public final class JokerFactoryImpl implements JokerFactory {
             final Predicate<Set<PlayableCard>> bound,
             final JokerTier newTier) {
         return new JokerImpl(
-                name.toLowerCase(),
-                description.toLowerCase(),
+                name.toLowerCase(Locale.getDefault()),
+                description.toLowerCase(Locale.getDefault()),
                 getRandomPrice(j.getTier()),
                 new ModifierBuilderImpl()
                     .merge(j.getModifier().get())
@@ -71,8 +82,8 @@ public final class JokerFactoryImpl implements JokerFactory {
     @Override
     public Joker merge(final String newName, final String newDescription, final Joker j1, final Joker j2, final JokerTier tier) {
         return new JokerImpl(
-            newName.toLowerCase(),
-            newDescription.toLowerCase(),
+            newName.toLowerCase(Locale.getDefault()),
+            newDescription.toLowerCase(Locale.getDefault()),
             getRandomPrice(tier),
             new ModifierBuilderImpl()
                 .merge(j1.getModifier().get())
@@ -81,16 +92,16 @@ public final class JokerFactoryImpl implements JokerFactory {
                 tier);
     }
 
-    private int getRandomPrice(JokerTier tier) {
+    private int getRandomPrice(final JokerTier tier) {
         return priceSupplier.nextInt(MIN_PRICE, MAX_PRICE);
     }
 
     @Override
-    public Joker addHoldingCardBoundToJoker(String newName, String newDescription, Joker j,
-            Predicate<Set<PlayableCard>> bound, JokerTier newTier) {
+    public Joker addHoldingCardBoundToJoker(final String newName, final String newDescription, final Joker j,
+            final Predicate<Set<PlayableCard>> bound, final JokerTier newTier) {
                 return new JokerImpl(
-                    newName.toLowerCase(),
-                    newDescription.toLowerCase(),
+                    newName.toLowerCase(Locale.getDefault()),
+                    newDescription.toLowerCase(Locale.getDefault()),
                     getRandomPrice(j.getTier()),
                     new ModifierBuilderImpl()
                         .merge(j.getModifier().get())
@@ -101,26 +112,30 @@ public final class JokerFactoryImpl implements JokerFactory {
     }
 
     @Override
-    public Joker addMoneyBoundToJoker(String newName, String newDescription, Joker j, Predicate<Integer> bound,
-            JokerTier newTier) {
-                return new JokerImpl(
-                    newName.toLowerCase(),
-                    newDescription.toLowerCase(),
-                    getRandomPrice(j.getTier()),
-                    new ModifierBuilderImpl()
-                        .merge(j.getModifier().get())
-                        .addCurrentCurrencyBound(bound)
-                        .build(),
-                    newTier
-            );
+    public Joker addMoneyBoundToJoker(
+        final String newName,
+        final String newDescription,
+        final Joker j,
+        final Predicate<Integer> bound,
+        final JokerTier newTier) {
+            return new JokerImpl(
+                newName.toLowerCase(Locale.getDefault()),
+                newDescription.toLowerCase(Locale.getDefault()),
+                getRandomPrice(j.getTier()),
+                new ModifierBuilderImpl()
+                    .merge(j.getModifier().get())
+                    .addCurrentCurrencyBound(bound)
+                    .build(),
+                newTier
+        );
     }
 
     @Override
-    public Joker addCombinationCardBoundToJoker(String newName, String newDescription, Joker j,
-            Predicate<CombinationType> bound, JokerTier newTier) {
+    public Joker addCombinationCardBoundToJoker(final String newName, final String newDescription, final Joker j,
+            final Predicate<CombinationType> bound, final JokerTier newTier) {
                 return new JokerImpl(
-                    newName.toLowerCase(),
-                    newDescription.toLowerCase(),
+                    newName.toLowerCase(Locale.getDefault()),
+                    newDescription.toLowerCase(Locale.getDefault()),
                     getRandomPrice(j.getTier()),
                     new ModifierBuilderImpl()
                         .merge(j.getModifier().get())

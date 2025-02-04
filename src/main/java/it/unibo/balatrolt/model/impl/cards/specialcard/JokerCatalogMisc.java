@@ -11,16 +11,15 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 
 /**
- * A catalog containing Miscelleous {@link Joker}
+ * A catalog containing Miscelleous {@link Joker}.
  */
 public final class JokerCatalogMisc extends AbstractJokerCatalog {
     private static final String DOUBLER = "the doubler";
     private static final String DONOUR = "the donour";
-    private JokerCatalog base = new JokerCatalogBase();
+    private final JokerCatalog base = new JokerCatalogBase();
 
     @Override
     protected Map<String, Joker> getJokersMap() {
-       this.base = new JokerCatalogBase();
        return Map.of(
             this.kingDonour().getName(), this.kingDonour(),
             this.seventhDonour().getName(), this.seventhDonour(),

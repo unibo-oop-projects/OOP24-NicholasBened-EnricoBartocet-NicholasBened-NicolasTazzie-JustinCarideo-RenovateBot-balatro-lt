@@ -9,7 +9,7 @@ import com.google.common.base.Optional;
  */
 public interface JokerCatalog {
     /**
-     * It returns the list of jokers contained in the catalog
+     * It returns the list of jokers contained in the catalog.
      * @return joker list
      */
     List<Joker> getJokerList();

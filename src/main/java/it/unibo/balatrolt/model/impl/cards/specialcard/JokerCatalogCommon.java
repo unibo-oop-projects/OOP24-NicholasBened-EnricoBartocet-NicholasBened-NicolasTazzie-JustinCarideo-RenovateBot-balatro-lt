@@ -22,7 +22,7 @@ public final class JokerCatalogCommon extends AbstractJokerCatalog {
     private static final String THE_TENTH_POINT = "the tenth point";
     private static final String THE_FIFTH_POINT = "the fifth point";
     private static final JokerTier TIER = JokerTier.COMMON;
-    private JokerCatalog base = new JokerCatalogBase();
+    private final JokerCatalog base = new JokerCatalogBase();
 
     private Joker banker() {
         return super.getFactory().addMoneyBoundToJoker(
@@ -78,13 +78,12 @@ public final class JokerCatalogCommon extends AbstractJokerCatalog {
              TIER);
     }
 
-    private Predicate<Set<PlayableCard>> checkContains(PlayableCard card) {
+    private Predicate<Set<PlayableCard>> checkContains(final PlayableCard card) {
         return c -> c.contains(card);
     }
 
     @Override
     protected Map<String, Joker> getJokersMap() {
-        base = new JokerCatalogBase();
         return Map.of(
             this.banker().getName(), this.banker(),
             this.kingHeartHolder().getName(), this.kingHeartHolder(),

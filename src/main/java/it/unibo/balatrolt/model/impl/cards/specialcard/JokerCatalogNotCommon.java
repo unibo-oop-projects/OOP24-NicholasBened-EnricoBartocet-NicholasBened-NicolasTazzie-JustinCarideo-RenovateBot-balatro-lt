@@ -11,18 +11,17 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 
 /**
- * Catalog of not common {@link Joker}
+ * Catalog of not common {@link Joker}.
  */
 public final class JokerCatalogNotCommon extends AbstractJokerCatalog {
     private static final String THE_FOURTH_MULTIPLIER = "the fourth multiplier";
     private static final String THE_TENTH_POINT = "the tenth point";
     private static final String THE_EIGHT_MULTIPLIER = "the eighth multiplier";
     private static final JokerTier TIER = JokerTier.NOT_COMMON;
-    private JokerCatalog base = new JokerCatalogBase();
+    private final JokerCatalog base = new JokerCatalogBase();
 
     @Override
     protected Map<String, Joker> getJokersMap() {
-        this.base = new JokerCatalogBase();
         return Map.of(
             this.hearther().getName(), this.hearther(),
             this.spader().getName(), this.spader(),

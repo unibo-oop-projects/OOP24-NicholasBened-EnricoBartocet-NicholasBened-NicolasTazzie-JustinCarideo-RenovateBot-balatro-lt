@@ -18,12 +18,8 @@ public final class JokerCatalogBase extends AbstractJokerCatalog {
     private static final int MUL_FOUR = 4;
     private static final int MUL_EIGHT = 8;
     private static final int MUL_MULTIPLICATOR = 2;
-    private final static JokerTier EPIC = JokerTier.EPIC;
+    private static final JokerTier EPIC = JokerTier.EPIC;
     private static final Integer DONOUR_ADDER = 50;
-
-    public JokerCatalogBase() {
-        super();
-    }
 
     private Joker fiveBasePoints() {
         return super.getFactory().withModifierAndRandomPrice(

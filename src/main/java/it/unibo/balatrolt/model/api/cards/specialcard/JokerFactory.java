@@ -132,7 +132,7 @@ public interface JokerFactory {
      * @param newDescription new description to assigned to the merged jokers
      * @param j1             first Joker
      * @param j2             second Joker
- * @param tier 
+     * @param tier
      * @return a joker with a modifier which is the combination of the two.
      */
     Joker merge(String newName, String newDescription, Joker j1, Joker j2, JokerTier tier);

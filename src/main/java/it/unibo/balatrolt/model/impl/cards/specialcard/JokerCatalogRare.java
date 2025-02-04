@@ -11,13 +11,16 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
+/**
+ * A {@link JokerCatalog} containing rare jokers.
+ */
 public final class JokerCatalogRare extends AbstractJokerCatalog {
     private static final int MAX_RAND = 10;
     private static final String THE_TENTH_POINT = "the tenth point";
     private static final String THE_EIGHT_MULTIPLIER = "the eighth multiplier";
     private static final JokerTier TIER = JokerTier.RARE;
-    private JokerCatalog base = new JokerCatalogBase();
-    private JokerCatalog notCommon = new JokerCatalogNotCommon();
+    private final JokerCatalog base = new JokerCatalogBase();
+    private final JokerCatalog notCommon = new JokerCatalogNotCommon();
 
     private Joker generousHearther() {
         return super.getFactory()
@@ -50,8 +53,6 @@ public final class JokerCatalogRare extends AbstractJokerCatalog {
 
     @Override
     protected Map<String, Joker> getJokersMap() {
-        this.base = new JokerCatalogBase();
-        this.notCommon = new JokerCatalogNotCommon();
         return Map.of(
             this.generousHearther().getName(), this.generousHearther(),
             this.generousSpader().getName(), this.generousSpader(),

@@ -21,6 +21,8 @@ public interface PlayerController {
 
     int getMaxSpecialCards();
 
+    int getCurrency();
+
     DeckInfo getDeck();
 
 }

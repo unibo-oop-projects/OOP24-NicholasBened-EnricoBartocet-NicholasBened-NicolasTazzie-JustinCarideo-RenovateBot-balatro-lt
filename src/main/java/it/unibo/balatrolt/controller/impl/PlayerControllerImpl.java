@@ -32,6 +32,11 @@ public class PlayerControllerImpl implements PlayerController {
     }
 
     @Override
+    public int getCurrency() {
+        return this.player.getCurrency();
+    }
+
+    @Override
     public PlayerStatus getPlayerStatus() {
         return new PlayerStatusImpl(this.player.getDeck(), this.player.getSpecialCardSlot(), this.player.getCurrency());
     }

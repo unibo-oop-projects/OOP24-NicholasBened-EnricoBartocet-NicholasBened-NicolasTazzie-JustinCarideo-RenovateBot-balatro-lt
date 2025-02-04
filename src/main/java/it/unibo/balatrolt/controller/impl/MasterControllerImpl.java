@@ -92,11 +92,11 @@ public class MasterControllerImpl implements MasterController {
                             views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(),
                                     this.levels.getCurrentBlindStats()));
                         }
-                        System.out.println("currency: " + this.player.getPlayerStatus().currency());
+                        System.out.println("currency: " + this.player.getCurrency());
                     }
                     case BLIND_WON -> {
                         views.forEach(v -> v.showGameOver());
-                        System.out.println("currency: " + this.player.getPlayerStatus().currency());
+                        System.out.println("currency: " + this.player.getCurrency());
                     }
                 }
                 System.out.println(this.levels.getCurrentBlindStats());
@@ -121,7 +121,7 @@ public class MasterControllerImpl implements MasterController {
                 this.levels.updateAnte();
                 views.forEach(v -> v.showSettings(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats(), this.player.getSpecialCards(), this.player.getDeck()));
                 views.forEach(v -> v.showAnte(this.levels.getCurrentAnte()));
-                System.out.println("currency: " + this.player.getPlayerStatus().currency());
+                System.out.println("currency: " + this.player.getCurrency());
             }
             default -> throw new IllegalStateException("Invalid Event received");
         }
@@ -139,7 +139,7 @@ public class MasterControllerImpl implements MasterController {
         Preconditions.checkArgument(data.get() instanceof SpecialCardInfo,
                 "The data received alongside the event isn't a SpecialCardInfo");
         final var card = (SpecialCardInfo) data.get();
-        if (this.shop.buyCard(card, this.player.getPlayerStatus().currency())
+        if (this.shop.buyCard(card, this.player.getCurrency())
                 && this.shop.translateCard(card).isPresent()
                 && this.player.getSpecialCards().size() < this.player.getMaxSpecialCards()) {
             this.player.addSpecialCard(this.shop.translateCard(card).get());
@@ -176,4 +176,5 @@ public class MasterControllerImpl implements MasterController {
         this.views.forEach(v -> v.updateCombinationStatus(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier())));
         System.out.println(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier()));
     }
+
 }

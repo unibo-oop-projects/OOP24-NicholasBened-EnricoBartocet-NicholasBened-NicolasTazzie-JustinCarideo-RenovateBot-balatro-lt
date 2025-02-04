@@ -162,7 +162,6 @@ public final class SwingView implements View {
 
     @Override
     public void updateScore(final BlindStats stats) {
-        // TODO Auto-generated method stub
         this.infoPanel.updateStats(stats);
     }
 

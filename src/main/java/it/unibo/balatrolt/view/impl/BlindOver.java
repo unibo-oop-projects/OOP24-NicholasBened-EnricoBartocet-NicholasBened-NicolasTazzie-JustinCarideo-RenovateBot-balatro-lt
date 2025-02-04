@@ -13,13 +13,13 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
 
 public class BlindOver extends JPanel {
 
-    public BlindOver(MasterController controller, String title, BlindInfo blindInfo, BlindStats blindStats) {
+    public BlindOver(MasterController controller, BlindInfo blindInfo, BlindStats blindStats) {
         super(new BorderLayout());
         var button = new JButton("OPEN SHOP");
         button.addActionListener(a -> controller.handleEvent(BalatroEvent.OPEN_SHOP, null));
         JTextArea text = new JTextArea();
         text.setEditable(false);
-        text.append(title);
+        text.append("BLIND DEFEATED");
         text.append("\nSTATISTICS");
         text.append("\nCurrent Blind: " + blindInfo.id());
         text.append("\nReward: " + blindInfo.reward());

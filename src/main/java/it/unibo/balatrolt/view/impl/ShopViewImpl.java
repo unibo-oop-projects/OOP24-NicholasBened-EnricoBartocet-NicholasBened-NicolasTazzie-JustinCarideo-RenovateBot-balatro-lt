@@ -60,8 +60,9 @@ public final class ShopViewImpl extends JPanel implements ShopView {
      */
     public ShopViewImpl(final MasterController controller) {
         super(new BorderLayout());
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(Color.GREEN.darker().darker().darker().darker());
         final var shopTitle = new JLabel("Shop");
+        shopTitle.setForeground(Color.WHITE);
         shopTitle.setFont(getFont(FONT, TITLE_SIZE));
         final var titlePanel = new JPanel(new FlowLayout());
         titlePanel.setBackground(this.getBackground());
@@ -111,8 +112,10 @@ public final class ShopViewImpl extends JPanel implements ShopView {
             JOptionPane.showMessageDialog(this, desc, "Card description", JOptionPane.INFORMATION_MESSAGE);
         });
         panel.add(getPriceLable(price), getGBConstraints(0, 0));
+        final JLabel nameLabel = new JLabel(name, JLabel.CENTER);
+        nameLabel.setForeground(Color.WHITE);
         panel.add(card, getGBConstraints(0, CARD_Y));
-        panel.add(new JLabel(name, JLabel.CENTER), getGBConstraints(0, NAME_Y));
+        panel.add(nameLabel, getGBConstraints(0, NAME_Y));
         panel.add(info, getGBConstraints(0, INFO_Y));
         panel.setBackground(this.getBackground());
         return panel;
@@ -134,6 +137,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
     private JLabel getPriceLable(final int price) {
         final var lbl = new JLabel(Integer.toString(price) + "$");
         lbl.setFont(getFont(FONT, PRICE_SIZE));
+        lbl.setForeground(Color.WHITE);
         return lbl;
     }
 

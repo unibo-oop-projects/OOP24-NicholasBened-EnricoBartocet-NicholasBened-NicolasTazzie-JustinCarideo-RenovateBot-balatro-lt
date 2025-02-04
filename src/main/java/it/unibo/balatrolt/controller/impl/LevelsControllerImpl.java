@@ -22,14 +22,14 @@ import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
 
 public class LevelsControllerImpl implements LevelsController {
-    private static final int NUM_ANTE = 8;
+    private static final int NUM_ANTE = 7;
     private static final int NUM_BLINDS = 3;
     private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> (a + 1) * (a + 1) * 150 + b * 10;
     private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b + 4;
 
     private final List<Ante> anteList;
     private final Map<PlayableCardInfo, PlayableCard> cardsTranslator = new HashMap<>();
-    private int currAnte;
+    private int currentAnteId;
 
     /**
      * Constructor of the levels controller.
@@ -38,7 +38,7 @@ public class LevelsControllerImpl implements LevelsController {
         Preconditions.checkNotNull(deck);
         this.anteList = new AnteFactoryImpl(NUM_BLINDS, BASE_CHIP_CALCULATOR, REWARD_CALCULATOR, deck.getModifier())
             .generateList(NUM_ANTE);
-        this.currAnte = 0;
+        this.currentAnteId = 0;
         deck.getCards().forEach(c -> cardsTranslator.put(new PlayableCardInfo(c.getRank().name(), c.getSuit().name()), c));
     }
 
@@ -91,7 +91,7 @@ public class LevelsControllerImpl implements LevelsController {
     @Override
     public void updateAnte() {
         if (this.currentAnte().isOver()) {
-            this.currAnte++;
+            this.currentAnteId++;
         } else if (this.currentBlind().getStatus().equals(Blind.Status.DEFEATED)) {
             this.currentAnte().nextBlind();
         }
@@ -104,11 +104,11 @@ public class LevelsControllerImpl implements LevelsController {
 
     @Override
     public boolean isOver() {
-        return this.currAnte >= this.anteList.size();
+        return this.currentAnte().isOver() && (this.currentAnteId + 1 >= NUM_ANTE);
     }
 
     private Ante currentAnte() {
-        return this.anteList.get(this.currAnte);
+        return this.anteList.get(this.currentAnteId);
     }
 
     private Blind currentBlind() {

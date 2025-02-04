@@ -22,7 +22,7 @@ import it.unibo.balatrolt.controller.api.MasterController;
 /**
  * Shows the game over GUI
  */
-public class GameOver extends JPanel {
+public class GameEnd extends JPanel {
     static final long serialVersionUID = 1L;
     private static final String FONT = "JOKERMAN";
     private static final float BUTTON_SIZE = 65f;
@@ -33,10 +33,10 @@ public class GameOver extends JPanel {
      * builds the GUI.
      * @param controller master controller.
      */
-    GameOver(final MasterController controller) {
+    GameEnd(final MasterController controller, String title) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         final JPanel gameOverPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        final JLabel gameOver = new JLabel("Game Over");
+        final JLabel gameOver = new JLabel(title);
         gameOver.setFont(getFont("SNAP_ITC", TEXT_SIZE));
         gameOver.setForeground(Color.WHITE.brighter());
         gameOverPanel.setOpaque(false);

@@ -87,8 +87,7 @@ public class MasterControllerImpl implements MasterController {
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
                         if (this.levels.isOver()) {
-                            views.forEach(v -> v.showYouWon(this.levels.getCurrentBlindInfo(),
-                                    this.levels.getCurrentBlindStats()));
+                            views.forEach(v -> v.showYouWon());
                         } else {
                             views.forEach(v -> v.showBlindDefeated(this.levels.getCurrentBlindInfo(),
                                     this.levels.getCurrentBlindStats()));

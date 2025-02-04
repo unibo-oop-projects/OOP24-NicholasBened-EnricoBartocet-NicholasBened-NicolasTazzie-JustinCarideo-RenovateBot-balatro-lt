@@ -54,16 +54,6 @@ public interface View {
     void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck);
 
     /**
-     * Shows the blind defeated screen.
-     */
-    void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
-
-    /**
-     * Shows the game over screen.
-     */
-    void showGameOver();
-
-    /**
      * Updates the score in UI.
      * @param stats blind actual statistics.
      */
@@ -92,6 +82,11 @@ public interface View {
     void updateCombinationStatus(CombinationInfo combination);
 
     /**
+     * Shows the blind defeated screen.
+     */
+    void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
+
+    /**
      * Shows the shop.
      */
     void showShop();
@@ -103,11 +98,13 @@ public interface View {
      */
     void updateShopCards(Set<SpecialCardInfo> toSell);
 
+    /**
+     * Shows the game over screen.
+     */
+    void showGameOver();
 
     /**
      * Shows the WINNING screen.
-     * @param blindStats
-     * @param blindInfo
      */
-    void showYouWon(BlindInfo blindInfo, BlindStats blindStats);
+    void showYouWon();
 }

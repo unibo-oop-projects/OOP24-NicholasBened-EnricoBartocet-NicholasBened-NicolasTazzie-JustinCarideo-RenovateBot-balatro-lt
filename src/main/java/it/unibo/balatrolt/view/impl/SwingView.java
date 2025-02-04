@@ -181,7 +181,7 @@ public final class SwingView implements View {
     @Override
     public void showBlindDefeated(final BlindInfo blindInfo, final BlindStats blindStats) {
         rightPanel.remove(this.centerPanel);
-        centerPanel = new BlindOver(this.controller, "BLIND DEFEATED", blindInfo, blindStats);
+        centerPanel = new BlindOver(this.controller, blindInfo, blindStats);
         rightPanel.add(this.centerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
@@ -189,17 +189,17 @@ public final class SwingView implements View {
     @Override
     public void showGameOver() {
         panel.remove(rightPanel);
-        rightPanel = new GameOver(controller);
+        rightPanel = new GameEnd(controller, "Game Over");
         panel.add(rightPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
     @Override
-    public void showYouWon(final BlindInfo blindInfo, final BlindStats blindStats) {
-        this.panel.remove(this.centerPanel);
-        this.centerPanel = new BlindOver(this.controller, "YOU WON THE ENTIRE GAME", blindInfo, blindStats);
-        this.panel.add(this.centerPanel, BorderLayout.CENTER);
-        this.centerPanel.setVisible(true);
+    public void showYouWon() {
+        panel.remove(rightPanel);
+        rightPanel = new GameEnd(controller, "You Won!");
+        panel.add(rightPanel, BorderLayout.CENTER);
+        frame.setVisible(true);
     }
 
     @Override

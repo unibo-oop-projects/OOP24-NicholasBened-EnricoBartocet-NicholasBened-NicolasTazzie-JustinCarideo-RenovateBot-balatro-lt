@@ -2,10 +2,8 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -17,7 +15,6 @@ import javax.swing.SwingConstants;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
-import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 
 /**
  * Creates the left part of the main GUI.
@@ -28,7 +25,7 @@ public class InfoPanel extends JPanel {
     private ScorePanel scorePanel;
     private CombinationPanel combinationPanel;
 
-    public InfoPanel(BlindInfo info, BlindStats stats, List<PlayableCardInfo> playableCards) {
+    public InfoPanel(BlindInfo info, BlindStats stats) {
         this.setLayout(new GridLayout(4, 1));
         this.titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);

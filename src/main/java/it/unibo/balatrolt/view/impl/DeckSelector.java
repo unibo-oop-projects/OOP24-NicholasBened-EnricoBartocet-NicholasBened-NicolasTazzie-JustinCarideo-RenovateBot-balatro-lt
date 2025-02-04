@@ -22,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 
 import com.google.common.base.Optional;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
@@ -68,11 +67,10 @@ public class DeckSelector extends JPanel {
          */
         final JPanel centralMenu = new JPanel(new GridBagLayout());
         centralMenu.setBackground(Color.DARK_GRAY);
-        SwingUtilities.invokeLater(() -> {
-            centralMenu.setPreferredSize(new Dimension(570, 270));
-            revalidate();
-            repaint();
-        });
+        centralMenu.setPreferredSize(new Dimension(
+            (int) (this.getPreferredSize().width * 1.2),
+            (int) (this.getPreferredSize().height * 1.5)
+        ));
         this.add(centralMenu, getConstraints(0, 0, 0.2, 1.0, 0,
             GridBagConstraints.PAGE_END, GridBagConstraints.NONE, 0, 0, 50, 0));
         /**

@@ -2,6 +2,7 @@ package it.unibo.balatrolt.controller.api;
 
 import java.util.List;
 
+import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.model.api.PlayerStatus;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
@@ -19,5 +20,7 @@ public interface PlayerController {
     void addSpecialCard(SpecialCard card);
 
     int getMaxSpecialCards();
+
+    DeckInfo getDeck();
 
 }

@@ -2,6 +2,7 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -23,7 +24,7 @@ import it.unibo.balatrolt.controller.api.MasterController;
 public class GameOver extends JPanel {
     private static final String FONT = "JOKERMAN";
     private static final float BUTTON_SIZE = 65f;
-    private static final float TEXT_SIZE = 40f;
+    private static final float TEXT_SIZE = 70f;
     private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 
     /**
@@ -31,44 +32,42 @@ public class GameOver extends JPanel {
      * @param controller master controller.
      */
     GameOver(MasterController controller) {
-        setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        final JPanel gameOverPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        final JLabel gameOver = new JLabel("Game Over");
+        gameOver.setFont(getFont("SNAP_ITC", TEXT_SIZE));
+        gameOver.setForeground(Color.WHITE.brighter());
+        gameOverPanel.setOpaque(false);
+        gameOverPanel.add(gameOver);
         /**
          * Setting accept button.
          */
-        final JButton accept = new JButton("YES");
+        final JPanel buttons = new JPanel();
+        buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 0));
+        this.add(Box.createGlue());
+        this.add(gameOverPanel);
+        this.add(Box.createGlue());
+        this.add(buttons);
+        this.add(Box.createGlue());
+        final JButton accept = new JButton("New Game");
         accept.setFont(getFont(FONT, BUTTON_SIZE));
         accept.setForeground(Color.WHITE.brighter());
         accept.setContentAreaFilled(false);
         accept.setBorder(null);
         accept.addActionListener(a -> controller.handleEvent(BalatroEvent.MAIN_MENU, null));
         accept.setAlignmentY(Component.CENTER_ALIGNMENT);
-        this.add(Box.createHorizontalGlue());
-        this.add(accept);
-        this.add(Box.createHorizontalGlue());
-        /**
-         * Setting the text area.
-         */
-        final JLabel label = new JLabel("<-  VUOI GIOCARE ANCORA  ->");
-        label.setFont(getFont(FONT, TEXT_SIZE));
-        label.setForeground(Color.white.brighter());
-        label.setBackground(getBackground());
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(Box.createHorizontalGlue());
-        this.add(label);
-        this.add(Box.createHorizontalGlue());
-        /**
-         * Setting decline button.
-         */
-        final JButton decline = new JButton("NO");
+        buttons.add(accept);
+        buttons.setOpaque(false);;
+
+        final JButton decline = new JButton("Quit");
         decline.setFont(getFont(FONT, BUTTON_SIZE));
         decline.setForeground(Color.WHITE.brighter());
         decline.setContentAreaFilled(false);
         decline.setBorder(null);
         decline.addActionListener(a -> System.exit(0));
         decline.setAlignmentY(Component.CENTER_ALIGNMENT);
-        this.add(Box.createHorizontalGlue());
-        this.add(decline);
-        this.add(Box.createHorizontalGlue());
+        buttons.add(decline);
+        decline.setPreferredSize(accept.getPreferredSize());
         /**
          * Setting the background.
          */

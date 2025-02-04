@@ -10,7 +10,6 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
-import it.unibo.balatrolt.model.api.combination.Combination;
 
 /**
  * Interface representing the view in the application.
@@ -45,7 +44,9 @@ public interface View {
      * @param specialCards the special cards the player has.
      * @param playableCards the cards in the player's hand.
      */
-    void showRound(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, List<PlayableCardInfo> playableCards);
+    void showRound(List<PlayableCardInfo> playableCards);
+
+    void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck);
 
     /**
      * Shows the blind defeated screen.
@@ -55,7 +56,12 @@ public interface View {
     /**
      * Shows the game over screen.
      */
-    void showGameOver(BlindInfo blindInfo, BlindStats blindStats);
+    void showGameOver();
+
+    /**
+     * Updates the special cards.
+     */
+    void updateSpecialCards(List<SpecialCardInfo> specialCards);
 
     /**
      * Updates the player's hand.
@@ -75,11 +81,6 @@ public interface View {
     void updateCombinationStatus(CombinationInfo combination);
 
     /**
-     * Updates the score.
-     */
-    void updateScore(BlindStats stats);
-
-    /**
      * Shows the shop.
      */
     void showShop();
@@ -91,10 +92,6 @@ public interface View {
      */
     void updateShopCards(Set<SpecialCardInfo> toSell);
 
-    /**
-     * Updates the special cards.
-     */
-    void updateSpecialCards();
 
     /**
      * Shows the WINNING screen.

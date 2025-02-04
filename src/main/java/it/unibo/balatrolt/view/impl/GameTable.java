@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.google.common.base.Optional;
@@ -22,7 +22,6 @@ import com.google.common.base.Preconditions;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
-import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 
 /**
  * Represent the game table, formed by some generic SlotPanel<X>
@@ -31,7 +30,6 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 public class GameTable extends JPanel {
     private static final Color BG_COLOR = Color.green.darker().darker().darker();
     private static final int MAX_PLAYED_CARDS = 5;
-    private static final int MAX_SPECIAL_CARDS = 5;
     private static final float BASE_WEIGHT = 0.2f;
     private static final int RIDIM = 28;
     private static final int JB_FONT_SIZE = 18;
@@ -39,7 +37,6 @@ public class GameTable extends JPanel {
     private final MasterController controller;
     private final SlotPanel<PlayableCardInfo> handSlot;
     private SlotPanel<PlayableCardInfo> playedSlot;
-    private final SlotPanel<SpecialCardInfo> specialSlot;
     private final List<PlayableCardInfo> selectedCards = new ArrayList<>();
     private final JButton discardButton;
     private final JPanel centerPanel;
@@ -53,12 +50,13 @@ public class GameTable extends JPanel {
      * @param specialCards owned by the player.
      * @throws IOException
      */
-    public GameTable(MasterController controller, List<PlayableCardInfo> cards, List<SpecialCardInfo> specialCards) {
+    public GameTable(MasterController controller, List<PlayableCardInfo> cards) {
         super(new BorderLayout());
         this.setBackground(BG_COLOR);
         this.controller = Preconditions.checkNotNull(controller);
 
-        final JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        final JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.LINE_AXIS));
         northPanel.setBackground(BG_COLOR);
         this.add(northPanel, BorderLayout.NORTH);
         this.centerPanel = new JPanel(new GridBagLayout());
@@ -72,7 +70,7 @@ public class GameTable extends JPanel {
          * Creating slot for the cards in hand.
          */
         this.handSlot = new SlotPanel<>(
-            cards.size(),
+            cards.size(), 75, 95,
             () -> this.selectedCards.size() < MAX_PLAYED_CARDS,
             () -> true,
             card -> {
@@ -90,7 +88,7 @@ public class GameTable extends JPanel {
          * Creating slot for the played cards.
          */
         this.playedSlot = new SlotPanel<>(
-            MAX_PLAYED_CARDS,
+            MAX_PLAYED_CARDS, 75, 95,
             () -> true,
             () -> true,
             card -> {
@@ -103,17 +101,6 @@ public class GameTable extends JPanel {
         );
         this.buildSlot(this.playedSlot, 0);
 
-        /**
-         * Creating slot for the special cards.
-         */
-        this.specialSlot = new SlotPanel<>(
-            MAX_SPECIAL_CARDS,
-            () -> true,
-            () -> false,
-            card -> JOptionPane.showMessageDialog(this, card.name() + ":\n" + card.description(), "Special Card Info", JOptionPane.INFORMATION_MESSAGE)
-        );
-        specialCards.forEach(c -> this.specialSlot.addObject(this.slotTranslator(c)));
-        northPanel.add(specialSlot);
 
         /**
          * Creating the play button.
@@ -175,9 +162,5 @@ public class GameTable extends JPanel {
 
     private SlotPanel.SlotObject<PlayableCardInfo> slotTranslator(PlayableCardInfo card) {
         return new SlotPanel.SlotObject<>(card, card.rank() + " " + card.suit(), "cards/" + card.rank().toUpperCase() + card.suit().toUpperCase());
-    }
-
-    private SlotPanel.SlotObject<SpecialCardInfo> slotTranslator(SpecialCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.name(), "JOKER");
     }
 }

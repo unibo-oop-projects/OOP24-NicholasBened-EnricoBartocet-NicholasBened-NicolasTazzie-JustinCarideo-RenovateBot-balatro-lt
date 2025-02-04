@@ -116,6 +116,13 @@ public class MasterControllerImpl implements MasterController {
                     });
                 }
             }
+            case SELL_CARD -> {
+                this.player.sellSpecialCard(checkSpecialCard(data));
+                views.forEach(v -> {
+                    v.updateSpecialCards(this.player.getSpecialCards());
+                    v.updateCurrency(this.player.getCurrency());
+                });
+            }
             case CLOSE_SHOP -> {
                 this.levels.updateAnte();
                 views.forEach(v -> {
@@ -178,4 +185,9 @@ public class MasterControllerImpl implements MasterController {
         this.views.forEach(v -> v.updateCombinationStatus(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier())));
     }
 
+    private SpecialCardInfo checkSpecialCard(final Optional<?> data) {
+        Preconditions.checkArgument(data.isPresent(), "No card was received alongside the event");
+        Preconditions.checkArgument(data.get() instanceof SpecialCardInfo, "The data received alongside the event isn't a SpecialCardInfo");
+        return (SpecialCardInfo) data.get();
+    }
 }

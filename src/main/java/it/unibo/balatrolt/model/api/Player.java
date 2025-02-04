@@ -48,4 +48,6 @@ public interface Player {
     PlayerStatus getStatus();
 
     int getMaxSpecialCards();
+
+    void sellSpecialCard(SpecialCard specialCard);
 }

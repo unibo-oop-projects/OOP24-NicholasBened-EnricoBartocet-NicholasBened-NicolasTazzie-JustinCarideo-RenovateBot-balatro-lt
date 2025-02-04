@@ -15,8 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
+import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
@@ -159,11 +161,18 @@ public final class SwingView implements View {
             MAX_SPECIAL_CARDS, 75, 100,
             () -> true,
             () -> false,
-            card -> JOptionPane.showMessageDialog(
-                frame,
-                card.name() + ":\n" + card.description(),
-                "Special Card Info",
-                JOptionPane.INFORMATION_MESSAGE)
+            card -> {
+                switch(JOptionPane.showConfirmDialog(
+                    frame,
+                    "\""+ card.name() + "\":\n" + card.description() + "\n\nSell Value: " + card.price() + "$\nDo you want to sell it?",
+                    "Special Card Details",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE)
+                ) {
+                    case JOptionPane.YES_OPTION -> this.controller.handleEvent(BalatroEvent.SELL_CARD, Optional.of(card));
+                    default -> {}
+                }
+            }
         );
         specialCards.forEach(c -> specialSlot.addObject(new SlotPanel.SlotObject<>(c, c.name(), "JOKER")));
         specialSlotContainer.add(specialSlot);

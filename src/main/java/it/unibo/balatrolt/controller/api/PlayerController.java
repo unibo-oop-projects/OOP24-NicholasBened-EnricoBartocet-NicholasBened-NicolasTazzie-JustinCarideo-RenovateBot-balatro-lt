@@ -19,6 +19,8 @@ public interface PlayerController {
 
     void addSpecialCard(SpecialCard card);
 
+    void sellSpecialCard(SpecialCardInfo card);
+
     int getMaxSpecialCards();
 
     int getCurrency();

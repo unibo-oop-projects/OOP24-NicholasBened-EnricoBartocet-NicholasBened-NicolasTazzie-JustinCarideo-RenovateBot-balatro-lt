@@ -39,6 +39,7 @@ public enum BalatroEvent {
      * The player bought a card from the shop.
      */
     BUY_CARD,
+    SELL_CARD,
     /**
      * Th eplayer closed the shop.
      */
@@ -51,12 +52,13 @@ public enum BalatroEvent {
         return switch (this) {
             case MAIN_MENU -> Set.of(INIT_GAME);
             case INIT_GAME -> Set.of(CHOOSE_DECK);
-            case CHOOSE_DECK -> Set.of(CHOOSE_BLIND);
-            case CHOOSE_BLIND, DISCARD_CARDS -> Set.of(STAGE_CARDS);
-            case STAGE_CARDS -> Set.of(PLAY_CARDS, DISCARD_CARDS ,STAGE_CARDS);
-            case PLAY_CARDS -> Set.of(STAGE_CARDS, OPEN_SHOP, MAIN_MENU);
-            case BUY_CARD, OPEN_SHOP -> Set.of(BUY_CARD, CLOSE_SHOP);
-            case CLOSE_SHOP -> Set.of(CHOOSE_BLIND);
+            case CHOOSE_DECK -> Set.of(CHOOSE_BLIND, SELL_CARD);
+            case CHOOSE_BLIND, DISCARD_CARDS -> Set.of(STAGE_CARDS, SELL_CARD);
+            case STAGE_CARDS -> Set.of(PLAY_CARDS, DISCARD_CARDS ,STAGE_CARDS, SELL_CARD);
+            case PLAY_CARDS -> Set.of(STAGE_CARDS, OPEN_SHOP, MAIN_MENU, SELL_CARD);
+            case BUY_CARD, OPEN_SHOP -> Set.of(BUY_CARD, CLOSE_SHOP, SELL_CARD);
+            case CLOSE_SHOP -> Set.of(CHOOSE_BLIND, SELL_CARD);
+            case SELL_CARD -> Set.of(BalatroEvent.values());
         };
     }
 }

@@ -1,6 +1,8 @@
 package it.unibo.balatrolt.controller.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Preconditions;
 
@@ -17,6 +19,7 @@ import it.unibo.balatrolt.model.impl.PlayerStatusImpl;
 public class PlayerControllerImpl implements PlayerController {
 
     private final Player player;
+    private final Map<SpecialCardInfo, SpecialCard> specialCardTranslator = new HashMap<>();
 
     public PlayerControllerImpl(final BuffedDeck deck) {
         Preconditions.checkNotNull(deck);
@@ -29,6 +32,11 @@ public class PlayerControllerImpl implements PlayerController {
             .stream()
             .map(this::getSpecialCardInfo)
             .toList();
+    }
+
+    @Override
+    public void sellSpecialCard(SpecialCardInfo card) {
+        this.player.sellSpecialCard(specialCardTranslator.get(card));
     }
 
     @Override
@@ -54,6 +62,7 @@ public class PlayerControllerImpl implements PlayerController {
     @Override
     public void addSpecialCard(SpecialCard card) {
         this.player.addSpecialCard(card);
+        this.specialCardTranslator.put(getSpecialCardInfo(card), card);
     }
 
     @Override

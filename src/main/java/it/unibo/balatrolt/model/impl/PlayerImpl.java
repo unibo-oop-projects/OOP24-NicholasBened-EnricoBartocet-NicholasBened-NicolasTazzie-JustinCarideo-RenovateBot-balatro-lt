@@ -73,4 +73,11 @@ public final class PlayerImpl implements Player {
     public int getMaxSpecialCards() {
         return SLOT_SIZE;
     }
+
+    @Override
+    public void sellSpecialCard(SpecialCard specialCard) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sellSpecialCard'");
+    }
+
 }

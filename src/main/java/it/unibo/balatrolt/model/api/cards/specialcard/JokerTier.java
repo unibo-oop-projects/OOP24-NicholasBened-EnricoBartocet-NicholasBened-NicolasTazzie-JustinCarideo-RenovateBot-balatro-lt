@@ -11,7 +11,7 @@ public enum JokerTier {
     /**
      * Uncommon jokers.
      */
-    UNCOMMON,
+    NOT_COMMON,
     /**
      * Rare jokers.
      */

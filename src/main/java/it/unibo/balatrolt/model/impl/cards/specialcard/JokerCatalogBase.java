@@ -50,6 +50,14 @@ public final class JokerCatalogBase extends AbstractJokerCatalog {
          TIER);
     }
 
+    private Joker eighthMultiplier() {
+        return super.getFactory().withModifierAndRandomPrice(
+            "the eighth multiplier",
+         "it adds 8 multiplier",
+         getMultiplierModifier(m -> m + 8),
+         TIER);
+    }
+
     private CombinationModifier getMultiplierModifier(final UnaryOperator<Double> op) {
         return new ModifierBuilderImpl()
          .addMultiplierModifier(op)
@@ -68,7 +76,8 @@ public final class JokerCatalogBase extends AbstractJokerCatalog {
             fiveBasePoints().getName(), fiveBasePoints(),
             tenBasePoints().getName(), tenBasePoints(),
             twoMultiplier().getName(), twoMultiplier(),
-            fourMultiplier().getName(), fourMultiplier()
+            fourMultiplier().getName(), fourMultiplier(),
+            eighthMultiplier().getName(), eighthMultiplier()
         );
     }
 }

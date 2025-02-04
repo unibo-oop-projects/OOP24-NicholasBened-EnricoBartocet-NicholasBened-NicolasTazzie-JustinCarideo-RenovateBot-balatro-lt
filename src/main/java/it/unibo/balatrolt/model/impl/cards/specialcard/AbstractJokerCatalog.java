@@ -13,7 +13,7 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
  * An abstract class that provides {@link Joker}.
  */
 public abstract class AbstractJokerCatalog implements JokerCatalog {
-    private Map<String, Joker> jokers;
+    private Map<String, Joker> jokers = Map.of();
     private final JokerFactory factory = new JokerFactoryImpl();
 
     protected AbstractJokerCatalog() {
@@ -30,13 +30,21 @@ public abstract class AbstractJokerCatalog implements JokerCatalog {
         return Optional.fromNullable(this.jokers.get(name.toLowerCase()));
     }
 
-    private final void addJokers() {
+    private void addJokers() {
         this.jokers = this.getJokersMap();
     }
 
+    /**
+     * It returns a JokerFactory.
+     * @return a JokerFactory.
+     */
     protected final JokerFactory getFactory() {
         return this.factory;
     }
 
+    /**
+     * It returns the Map of jokers created by the extended classes.
+     * @return a map that given the jokers's name returns the effective joker.
+     */
     protected abstract Map<String, Joker> getJokersMap();
 }

@@ -22,7 +22,7 @@ public final class JokerCatalogCommon extends AbstractJokerCatalog {
     private static final String THE_TENTH_POINT = "the tenth point";
     private static final String THE_FIFTH_POINT = "the fifth point";
     private static final JokerTier TIER = JokerTier.COMMON;
-    private JokerCatalog base;
+    private JokerCatalog base = new JokerCatalogBase();
 
     private Joker banker() {
         return super.getFactory().addMoneyBoundToJoker(

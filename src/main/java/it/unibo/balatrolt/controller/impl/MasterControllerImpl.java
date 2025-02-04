@@ -97,7 +97,6 @@ public class MasterControllerImpl implements MasterController {
                     }
                 }
                 views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
-                System.out.println(this.levels.getCurrentBlindStats());
             }
             case OPEN_SHOP -> {
                 this.shop.openShop();
@@ -113,6 +112,7 @@ public class MasterControllerImpl implements MasterController {
                     views.forEach(v -> {
                         v.updateShopCards(this.shop.getCards());
                         v.updateCurrency(this.player.getCurrency());
+                        v.updateSpecialCards(this.player.getSpecialCards());
                     });
                 }
             }
@@ -124,7 +124,6 @@ public class MasterControllerImpl implements MasterController {
                     v.updateAnteInfo(this.levels.getCurrentAnte());
                     v.updateCurrency(this.player.getCurrency());
                 });
-                System.out.println("currency: " + this.player.getCurrency());
             }
             default -> throw new IllegalStateException("Invalid Event received");
         }
@@ -177,7 +176,6 @@ public class MasterControllerImpl implements MasterController {
         final List<PlayableCard> list = this.levels.translatePlayableCard(cards.stream().map(c -> (PlayableCardInfo) c).toList());
         final Combination combination = new PlayedHandImpl(list).evaluateCombination();
         this.views.forEach(v -> v.updateCombinationStatus(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier())));
-        System.out.println(new CombinationInfo(combination.getCombinationType().toString(), combination.getBasePoints().basePoints(), combination.getMultiplier().multiplier()));
     }
 
 }

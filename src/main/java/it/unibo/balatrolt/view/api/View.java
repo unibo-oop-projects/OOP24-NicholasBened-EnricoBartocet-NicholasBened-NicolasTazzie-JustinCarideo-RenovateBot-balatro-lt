@@ -10,7 +10,6 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
-import it.unibo.balatrolt.model.api.combination.Combination;
 
 /**
  * Interface representing the view in the application.

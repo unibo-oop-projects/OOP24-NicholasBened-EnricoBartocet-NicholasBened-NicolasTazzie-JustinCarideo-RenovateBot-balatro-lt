@@ -76,6 +76,7 @@ public class MasterControllerImpl implements MasterController {
                 this.levels.discardCards(checkPlayableCards(data));
                 views.forEach(v -> v.updateHand(this.levels.getHand()));
                 views.forEach(v -> v.updateBlindStatistics(this.levels.getCurrentBlindStats()));
+                views.forEach(v -> v.updateScore(this.levels.getCurrentBlindStats()));
             }
             case PLAY_CARDS -> {
                 this.levels.playCards(checkPlayableCards(data), this.player.getPlayerStatus());

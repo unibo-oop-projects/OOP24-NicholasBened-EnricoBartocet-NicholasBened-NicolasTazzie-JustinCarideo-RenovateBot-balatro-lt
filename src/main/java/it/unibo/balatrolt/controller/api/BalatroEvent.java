@@ -3,15 +3,15 @@ package it.unibo.balatrolt.controller.api;
 import java.util.Set;
 
 /**
- * It represents the events that the view can generate.
+ * It represents the events that the views can generate and that the Controller will handle.
  */
 public enum BalatroEvent {
     /**
-     * TODO: add description.
+     * Notify the views to show the main menu.
      */
     MAIN_MENU,
     /**
-     * The user started a new game.
+     * Notify the views to show the decks.
      */
     INIT_GAME,
     /**
@@ -19,7 +19,7 @@ public enum BalatroEvent {
      */
     CHOOSE_DECK,
     /**
-     * The Blind to play was chosen.
+     * The player confirmed the start the Blind.
      */
     CHOOSE_BLIND,
     /**
@@ -30,6 +30,9 @@ public enum BalatroEvent {
      * The player played some cards.
      */
     PLAY_CARDS,
+    /**
+     * The player added some cards to the stage.
+     */
     STAGE_CARDS,
     /**
      * The player opened the shop.
@@ -39,14 +42,18 @@ public enum BalatroEvent {
      * The player bought a card from the shop.
      */
     BUY_CARD,
+    /**
+     * The player sold a card.
+     */
     SELL_CARD,
     /**
-     * Th eplayer closed the shop.
+     * Th player closed the shop.
      */
     CLOSE_SHOP;
 
     /**
-     * @return returns the set of the allowed events that can happen after everyone
+     * Every event has a set of possible events that can happen after it.
+     * @return returns the set of the allowed events that can happen after every event.
      */
     public Set<BalatroEvent> getNextPossibleEvents() {
         return switch (this) {

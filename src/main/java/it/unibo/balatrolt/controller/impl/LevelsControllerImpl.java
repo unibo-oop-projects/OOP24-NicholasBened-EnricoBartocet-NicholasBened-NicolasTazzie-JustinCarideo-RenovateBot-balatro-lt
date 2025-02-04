@@ -21,11 +21,20 @@ import it.unibo.balatrolt.model.api.levels.Ante;
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
 
-public class LevelsControllerImpl implements LevelsController {
+/**
+ * An implementation of the {@link LevelsController}.
+ */
+public final class LevelsControllerImpl implements LevelsController {
     private static final int NUM_ANTE = 7;
     private static final int NUM_BLINDS = 3;
-    private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> (a + 1) * (a + 1) * 150 + b * 10;
+    private static final int ANTE_MULTIPLIER = 150;
+    private static final int ANTE_EXP = 3;
+    private static final int BLIND_EXP = 2;
+    private static final int BLIND_MULTIPLIER = 10;
     private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b + 4;
+    private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> {
+        return (int) Math.pow(a + 1, ANTE_EXP) * ANTE_MULTIPLIER + (int) Math.pow(b + 1, BLIND_EXP) * BLIND_MULTIPLIER;
+    };
 
     private final List<Ante> anteList;
     private final Map<PlayableCardInfo, PlayableCard> cardsTranslator = new HashMap<>();
@@ -33,11 +42,12 @@ public class LevelsControllerImpl implements LevelsController {
 
     /**
      * Constructor of the levels controller.
+     * @param deck the Deck choosen by the player.
      */
     public LevelsControllerImpl(final BuffedDeck deck) {
         Preconditions.checkNotNull(deck);
-        this.anteList = new AnteFactoryImpl(NUM_BLINDS, BASE_CHIP_CALCULATOR, REWARD_CALCULATOR, deck.getModifier())
-            .generateList(NUM_ANTE);
+        final var anteFacroty = new AnteFactoryImpl(NUM_BLINDS, BASE_CHIP_CALCULATOR, REWARD_CALCULATOR, deck.getModifier());
+        this.anteList = anteFacroty.generateList(NUM_ANTE);
         this.currentAnteId = 0;
         deck.getCards().forEach(c -> cardsTranslator.put(new PlayableCardInfo(c.getRank().name(), c.getSuit().name()), c));
     }
@@ -58,7 +68,11 @@ public class LevelsControllerImpl implements LevelsController {
 
     @Override
     public BlindStats getCurrentBlindStats() {
-        return new BlindStats(this.currentBlind().getCurrentChips(), this.currentBlind().getRemainingHands(), this.currentBlind().getRemainingDiscards());
+        return new BlindStats(
+            this.currentBlind().getCurrentChips(),
+            this.currentBlind().getRemainingHands(),
+            this.currentBlind().getRemainingDiscards()
+        );
     }
 
     @Override
@@ -75,13 +89,13 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     @Override
-    public void discardCards(List<PlayableCardInfo> cards) {
+    public void discardCards(final List<PlayableCardInfo> cards) {
         this.currentBlind().discardPlayableCards(this.translatePlayableCard(cards));
     }
 
     @Override
     public RoundStatus getRoundStatus() {
-        return switch(this.currentBlind().getStatus()) {
+        return switch (this.currentBlind().getStatus()) {
             case DEFEATED -> RoundStatus.BLIND_DEFEATED;
             case GAME_OVER -> RoundStatus.BLIND_WON;
             case IN_GAME -> RoundStatus.IN_GAME;
@@ -103,8 +117,10 @@ public class LevelsControllerImpl implements LevelsController {
     }
 
     @Override
-    public List<PlayableCard> translatePlayableCard(List<PlayableCardInfo> cards) {
-        return cards.stream().map(cardsTranslator::get).toList();
+    public List<PlayableCard> translatePlayableCard(final List<PlayableCardInfo> cards) {
+        return cards.stream()
+            .map(cardsTranslator::get)
+            .toList();
     }
 
     @Override

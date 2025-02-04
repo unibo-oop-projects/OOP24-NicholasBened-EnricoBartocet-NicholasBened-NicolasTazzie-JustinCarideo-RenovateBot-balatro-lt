@@ -13,15 +13,15 @@ import javax.swing.SwingConstants;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
 
 public class HandPanel extends JPanel {
-
+    static final long serialVersionUID = 1L;
     private final JLabel handLabel = new JLabel();
     private final JLabel discardLabel = new JLabel();
 
-    public HandPanel(BlindStats stats) {
-        this.setLayout(new GridLayout(1, 2));
+    public HandPanel(final BlindStats stats) {
+        setLayout(new GridLayout(1, 2));
         updateHands(stats);
-        this.add(getButtonsPanel(), BorderLayout.WEST);
-        this.add(getStatsPanel(), BorderLayout.EAST);
+        add(getButtonsPanel(), BorderLayout.WEST);
+        add(getStatsPanel(), BorderLayout.EAST);
     }
 
     private JPanel getStatsPanel() {
@@ -59,7 +59,7 @@ public class HandPanel extends JPanel {
      * This method updates hands and discards.
      * @param stats
      */
-    public void updateHands(final BlindStats stats) {
+    public final void updateHands(final BlindStats stats) {
         this.handLabel.setText("Hand: " + stats.hands());
         this.discardLabel.setText("Discard: " + stats.discards());
     }

@@ -16,6 +16,11 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
  */
 public interface View {
 
+    /**
+     * 
+     * @param title error title.
+     * @param desc error message.
+     */
     void notifyErrror(String title, String desc);
 
     /**
@@ -49,15 +54,9 @@ public interface View {
     void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck);
 
     /**
-     * Shows the blind defeated screen.
+     * Updates the score in UI.
+     * @param stats blind actual statistics.
      */
-    void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
-
-    /**
-     * Shows the game over screen.
-     */
-    void showGameOver();
-
     void updateScore(BlindStats stats);
 
     /**
@@ -69,18 +68,17 @@ public interface View {
      * Updates the player's hand.
      * @param playableCards
      */
-    void updateHand(List<PlayableCardInfo> playableCards);
-
-    /**
-     * Updates the blind statistics.
-     * @param stats remaining hands, discards and chips.
-     */
-    void updateBlindStatistics(BlindStats stats);
+    void updateGameTable(List<PlayableCardInfo> playableCards, BlindStats stats);
 
     /**
      * Updates the combination status.
      */
     void updateCombinationStatus(CombinationInfo combination);
+
+    /**
+     * Shows the blind defeated screen.
+     */
+    void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
 
     /**
      * Shows the shop.
@@ -94,11 +92,13 @@ public interface View {
      */
     void updateShopCards(Set<SpecialCardInfo> toSell);
 
+    /**
+     * Shows the game over screen.
+     */
+    void showGameOver();
 
     /**
      * Shows the WINNING screen.
-     * @param blindStats
-     * @param blindInfo
      */
-    void showYouWon(BlindInfo blindInfo, BlindStats blindStats);
+    void showYouWon();
 }

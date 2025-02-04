@@ -5,15 +5,18 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.google.common.base.Optional;
@@ -28,11 +31,13 @@ import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
  * of the given param X.
  */
 public class GameTable extends JPanel {
+    static final long serialVersionUID = 1L;
     private static final Color BG_COLOR = Color.green.darker().darker().darker();
-    private static final int MAX_PLAYED_CARDS = 5;
+    private static final String FONT = "COPPER_BLACK";
     private static final float BASE_WEIGHT = 0.2f;
+    private static final float JB_FONT_SIZE = 18f;
+    private static final int MAX_PLAYED_CARDS = 5;
     private static final int RIDIM = 28;
-    private static final int JB_FONT_SIZE = 18;
 
     private final MasterController controller;
     private final SlotPanel<PlayableCardInfo> handSlot;
@@ -50,7 +55,7 @@ public class GameTable extends JPanel {
      * @param specialCards owned by the player.
      * @throws IOException
      */
-    public GameTable(MasterController controller, List<PlayableCardInfo> cards) {
+    public GameTable(final MasterController controller, final List<PlayableCardInfo> cards) {
         super(new BorderLayout());
         this.setBackground(BG_COLOR);
         this.controller = Preconditions.checkNotNull(controller);
@@ -58,13 +63,13 @@ public class GameTable extends JPanel {
         final JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.LINE_AXIS));
         northPanel.setBackground(BG_COLOR);
-        this.add(northPanel, BorderLayout.NORTH);
+        add(northPanel, BorderLayout.NORTH);
         this.centerPanel = new JPanel(new GridBagLayout());
         this.centerPanel.setBackground(BG_COLOR);
-        this.add(centerPanel, BorderLayout.CENTER);
+        add(centerPanel, BorderLayout.CENTER);
         final JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 20));
         southPanel.setBackground(BG_COLOR);
-        this.add(southPanel, BorderLayout.SOUTH);
+        add(southPanel, BorderLayout.SOUTH);
 
         /**
          * Creating slot for the cards in hand.
@@ -108,7 +113,7 @@ public class GameTable extends JPanel {
         final JButton playButton = new JButton("Play Hand");
         playButton.setBackground(Color.BLUE);
         playButton.setForeground(Color.WHITE);
-        playButton.setFont(new Font("Arial", Font.PLAIN, JB_FONT_SIZE));
+        playButton.setFont(getFont(FONT, JB_FONT_SIZE));
         playButton.addActionListener(e-> {
             if (!this.selectedCards.isEmpty()) {
                 this.playedSlot.removeAll();
@@ -124,7 +129,7 @@ public class GameTable extends JPanel {
         this.discardButton = new JButton("Discard");
         discardButton.setBackground(Color.RED);
         discardButton.setForeground(Color.WHITE);
-        discardButton.setFont(new Font("Arial", Font.PLAIN, JB_FONT_SIZE));
+        discardButton.setFont(getFont(FONT, JB_FONT_SIZE));
         discardButton.setPreferredSize(playButton.getPreferredSize());
         discardButton.addActionListener(e -> {
             if (!this.selectedCards.isEmpty()) {
@@ -136,7 +141,7 @@ public class GameTable extends JPanel {
         southPanel.add(discardButton, BorderLayout.SOUTH);
     }
 
-    public void updateHand(List<PlayableCardInfo> newCards) {
+    public void updateHand(final List<PlayableCardInfo> newCards) {
         this.handSlot.removeAll();
         newCards.forEach(c -> this.handSlot.addObject(this.slotTranslator(c)));
     }
@@ -144,11 +149,11 @@ public class GameTable extends JPanel {
     /**
      * @param isEnable true if the discard button is enable.
      */
-    public void setDiscardEnabled(boolean isEnable) {
+    public void setDiscardEnabled(final boolean isEnable) {
         this.discardButton.setEnabled(isEnable);
     }
 
-    private void buildSlot(Component component, int y) {
+    private void buildSlot(final Component component, final int y) {
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = y;
@@ -160,7 +165,27 @@ public class GameTable extends JPanel {
         this.centerPanel.add(component, gbc);
     }
 
-    private SlotPanel.SlotObject<PlayableCardInfo> slotTranslator(PlayableCardInfo card) {
-        return new SlotPanel.SlotObject<>(card, card.rank() + " " + card.suit(), "cards/" + card.rank().toUpperCase() + card.suit().toUpperCase());
+    private SlotPanel.SlotObject<PlayableCardInfo> slotTranslator(final PlayableCardInfo card) {
+        return new SlotPanel.SlotObject<>(
+            card,
+            card.rank() + " " + card.suit(),
+            "cards/" + card.rank().toUpperCase(Locale.getDefault()) + card.suit().toUpperCase(Locale.getDefault()));
+    }
+
+    /*
+     * Gives back the requested font with the given size.
+     */
+    private Font getFont(final String nameFont, final float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
+        try {
+            font = Font.createFont(
+                Font.TRUETYPE_FONT,
+                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
+            );
+            font = font.deriveFont(fontSize);
+        } catch (FontFormatException | IOException e) {
+            JOptionPane.showMessageDialog(this, "Cannot load font");
+        }
+        return font;
     }
 }

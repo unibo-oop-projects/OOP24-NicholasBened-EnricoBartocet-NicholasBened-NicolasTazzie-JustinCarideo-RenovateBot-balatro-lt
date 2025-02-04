@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -16,6 +18,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
 
 public class ScorePanel extends JPanel {
+    static final long serialVersionUID = 1L;
     private static final String SCORE_FONT = "COPPER_BLACK";
     private static final float SCORE_SIZE = 36f;
     private final JLabel minimumScoreLabel;
@@ -27,7 +30,7 @@ public class ScorePanel extends JPanel {
      * @param info
      * @param stats
      */
-    public ScorePanel(BlindInfo info, BlindStats stats) {
+    public ScorePanel(final BlindInfo info, final BlindStats stats) {
         this.setLayout(new BorderLayout());
         final JPanel mainScoreContainer = new JPanel(new BorderLayout());
         mainScoreContainer.add(getMainTitleLabel(), BorderLayout.CENTER);
@@ -48,7 +51,7 @@ public class ScorePanel extends JPanel {
      * @param stats
      * @return the label in question
      */
-    private JLabel getCurrentScorePanel(BlindStats stats) {
+    private JLabel getCurrentScorePanel(final BlindStats stats) {
         final JLabel currentScore = new JLabel();
         currentScore.setText(String.valueOf(stats.chips()));
         currentScore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -79,7 +82,7 @@ public class ScorePanel extends JPanel {
      * @param info
      * @return the label in question
      */
-    private JLabel getMinimumScoreLabel(BlindInfo info) {
+    private JLabel getMinimumScoreLabel(final BlindInfo info) {
         final JLabel minimumScoreLabel = new JLabel();
         minimumScoreLabel.setText(String.valueOf(info.minimumChips()));
         minimumScoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -98,18 +101,18 @@ public class ScorePanel extends JPanel {
         this.currentScoreLabel.setText(String.valueOf(stats.chips()));
     }
 
-    /**
+    /*
      * Gives back the requested font with the given size.
      */
-    private Font getFont(String nameFont, float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, 15);
+    private final Font getFont(final String nameFont, final float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
         try {
             font = Font.createFont(
                 Font.TRUETYPE_FONT,
                 getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
             );
             font = font.deriveFont(fontSize);
-        } catch (Exception e) {
+        } catch (FontFormatException | IOException e) {
             JOptionPane.showMessageDialog(this, "Cannot load font");
         }
         return font;

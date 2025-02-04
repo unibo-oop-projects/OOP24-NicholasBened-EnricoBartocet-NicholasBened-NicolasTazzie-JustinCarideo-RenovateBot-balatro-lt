@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -13,26 +15,33 @@ import javax.swing.SwingConstants;
 
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 
-public class TitlePanel extends JPanel{
+/**
+ * Builds the title in the left GUI.
+ */
+public final class TitlePanel extends JPanel {
+    static final long serialVersionUID = 1L;
     private static final String FONT = "COPPER_BLACK";
     private static final Color SMALL_BLIND_COLOR = Color.CYAN.darker().darker().darker();
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker().darker();
     private static final int SIZE_TITLE_BLIND = 30;
-
     private final BlindInfo info;
 
-    public TitlePanel(BlindInfo info) {
+    /**
+     * builds the title.
+     * @param info Blind static information.
+     */
+    public TitlePanel(final BlindInfo info) {
         this.info = info;
         final Color backgroundColor = getBlindColor();
-        this.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         final JPanel titleContainer = new JPanel(new BorderLayout());
         titleContainer.add(getTitle(backgroundColor), BorderLayout.CENTER);
         titleContainer.setPreferredSize(new Dimension(0, 100));
 
-        this.add(titleContainer, BorderLayout.NORTH);
-        this.add(getRewardLabel(backgroundColor));
+        add(titleContainer, BorderLayout.NORTH);
+        add(getRewardLabel(backgroundColor));
     }
 
     private JLabel getTitle(final Color color) {
@@ -60,7 +69,7 @@ public class TitlePanel extends JPanel{
     private String getBlindTitle() {
         return switch (this.info.id()) {
             case 1 -> "SMALL BLIND";
-            case 2-> "BIG BLIND";
+            case 2 -> "BIG BLIND";
             case 3 -> "BOSS BLIND";
             default -> "Error";
         };
@@ -69,24 +78,24 @@ public class TitlePanel extends JPanel{
     private Color getBlindColor() {
         return switch (this.info.id()) {
             case 1 -> SMALL_BLIND_COLOR;
-            case 2-> BIG_BLIND_COLOR;
+            case 2 -> BIG_BLIND_COLOR;
             case 3 -> BOSS_BLIND_COLOR;
             default -> Color.DARK_GRAY;
         };
     }
 
-    /**
+    /*
      * Gives back the requested font with the given size.
      */
-    private Font getFont(String nameFont, float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, 15);
+    private Font getFont(final String nameFont, final float fontSize) {
+        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
         try {
             font = Font.createFont(
                 Font.TRUETYPE_FONT,
                 getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
             );
             font = font.deriveFont(fontSize);
-        } catch (Exception e) {
+        } catch (FontFormatException | IOException e) {
             JOptionPane.showMessageDialog(this, "Cannot load font");
         }
         return font;

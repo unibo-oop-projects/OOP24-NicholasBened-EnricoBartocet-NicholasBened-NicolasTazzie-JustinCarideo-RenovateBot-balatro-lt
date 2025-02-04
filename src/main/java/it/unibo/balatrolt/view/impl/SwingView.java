@@ -30,11 +30,13 @@ import it.unibo.balatrolt.view.api.View;
 /**
  * Implementation of the View interface.
  */
-public class SwingView implements View {
+public final class SwingView implements View {
+    private static final int MIN_WIDTH = 1000;
+    private static final int MIN_HEIGHT = 600;
     private static final int MAX_SPECIAL_CARDS = 5;
     private static final float RIDIM = 1.5f;
     private final MasterController controller;
-    private JFrame frame = new JFrame();
+    private final JFrame frame = new JFrame();
     private JPanel panel;
     private InfoPanel infoPanel;
     private JPanel rightPanel;
@@ -51,12 +53,14 @@ public class SwingView implements View {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize((int) (screenSize.getWidth() / RIDIM), (int) (screenSize.getHeight() / RIDIM));
         frame.setLocationByPlatform(true);
-        frame.setMinimumSize(new Dimension(1000, 600));
+        frame.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
     }
 
     @Override
     public void showMainMenu() {
-        if (panel != null) frame.remove(panel);
+        if (panel != null) {
+            frame.remove(panel);
+        }
         panel = new MainMenu(controller, "Play");
         frame.add(panel);
         frame.setVisible(true);
@@ -71,7 +75,7 @@ public class SwingView implements View {
     }
 
     @Override
-    public void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck) {
+    public void showSettings(final BlindInfo info, final BlindStats stats, final List<SpecialCardInfo> specialCards, final DeckInfo deck) {
         frame.remove(panel);
         panel = new JPanel(new BorderLayout());
         frame.add(panel);
@@ -79,7 +83,7 @@ public class SwingView implements View {
         rightPanel = new JPanel(new BorderLayout());
         panel.add(rightPanel, BorderLayout.CENTER);
         panel.add(infoPanel, BorderLayout.WEST);
-        var northPanel = new JPanel();
+        final JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.LINE_AXIS));
         northPanel.setBackground(Color.GREEN.darker().darker().darker());
         rightPanel.add(northPanel, BorderLayout.NORTH);
@@ -87,11 +91,15 @@ public class SwingView implements View {
         /**
          * Creating slot for the special cards.
          */
-        var specialSlot = new SlotPanel<SpecialCardInfo>(
+        final var specialSlot = new SlotPanel<SpecialCardInfo>(
             MAX_SPECIAL_CARDS, 75, 100,
             () -> true,
             () -> false,
-            card -> JOptionPane.showMessageDialog(frame, card.name() + ":\n" + card.description(), "Special Card Info", JOptionPane.INFORMATION_MESSAGE)
+            card -> JOptionPane.showMessageDialog(
+                frame,
+                card.name() + ":\n" + card.description(),
+                "Special Card Info",
+                JOptionPane.INFORMATION_MESSAGE)
         );
         specialCards.forEach(c -> specialSlot.addObject(new SlotPanel.SlotObject<>(c, c.name(), "JOKER")));
         final var specialSlotContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -101,11 +109,15 @@ public class SwingView implements View {
         /**
          * Creating slot for the special cards.
          */
-        var deckSlot = new SlotPanel<>(
+        final var deckSlot = new SlotPanel<>(
             1, 100, 120,
             () -> true,
             () -> false,
-            card -> JOptionPane.showMessageDialog(frame, deck.name() + " deck:\n" + deck.desc(), "Deck Info", JOptionPane.INFORMATION_MESSAGE)
+            card -> JOptionPane.showMessageDialog(
+                frame,
+                deck.name() + " deck:\n" + deck.desc(),
+                "Deck Info",
+                JOptionPane.INFORMATION_MESSAGE)
         );
         deckSlot.addObject(new SlotPanel.SlotObject<>(deck, "Deck", "decks/" + deck.name() + "_DECK"));
         final JPanel deckSlotContainer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -120,7 +132,9 @@ public class SwingView implements View {
 
     @Override
     public void showAnte(final AnteInfo anteInfo) {
-        if (centerPanel != null) rightPanel.remove(centerPanel);
+        if (centerPanel != null) {
+            rightPanel.remove(centerPanel);
+        }
         centerPanel = new AnteView(this.controller, anteInfo);
         rightPanel.add(centerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
@@ -128,51 +142,40 @@ public class SwingView implements View {
 
 
     @Override
-    public void showRound(List<PlayableCardInfo> playableCards) {
+    public void showRound(final List<PlayableCardInfo> playableCards) {
         rightPanel.remove(centerPanel);
-        try {
-            centerPanel = new GameTable(this.controller, playableCards);
-            rightPanel.add(centerPanel, BorderLayout.CENTER);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ExceptionInInitializerError(e);
-        }
+        centerPanel = new GameTable(this.controller, playableCards);
+        rightPanel.add(centerPanel, BorderLayout.CENTER);
         rightPanel.add(centerPanel, BorderLayout.CENTER);
         this.frame.setVisible(true);
     }
 
     @Override
-    public void updateHand(List<PlayableCardInfo> hand) {
+    public void updateGameTable(final List<PlayableCardInfo> hand, BlindStats stats) {
         ((GameTable) this.centerPanel).updateHand(hand);
+        ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override
-    public void updateCombinationStatus(CombinationInfo combination) {
+    public void updateCombinationStatus(final CombinationInfo combination) {
         this.infoPanel.updateCombination(combination);
     }
 
     @Override
-    public void updateScore(BlindStats stats) {
-        // TODO Auto-generated method stub
-        this.infoPanel.updateStats(stats);
-    }
-
-    @Override
-    public void updateSpecialCards(List<SpecialCardInfo> specialCards) {
+    public void updateSpecialCards(final List<SpecialCardInfo> specialCards) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
     }
 
     @Override
-    public void updateBlindStatistics(BlindStats stats) {
+    public void updateScore(final BlindStats stats) {
         this.infoPanel.updateStats(stats);
-        ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override
-    public void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats) {
+    public void showBlindDefeated(final BlindInfo blindInfo, final BlindStats blindStats) {
         rightPanel.remove(this.centerPanel);
-        centerPanel = new BlindOver(this.controller, "BLIND DEFEATED", blindInfo, blindStats);
+        centerPanel = new BlindOver(this.controller, blindInfo, blindStats);
         rightPanel.add(this.centerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
@@ -180,33 +183,33 @@ public class SwingView implements View {
     @Override
     public void showGameOver() {
         panel.remove(rightPanel);
-        rightPanel = new GameOver(controller);
+        rightPanel = new GameEnd(controller, "Game Over");
         panel.add(rightPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
     @Override
-    public void showYouWon(BlindInfo blindInfo, BlindStats blindStats) {
-        this.panel.remove(this.centerPanel);
-        this.centerPanel = new BlindOver(this.controller, "YOU WON THE ENTIRE GAME", blindInfo, blindStats);
-        this.panel.add(this.centerPanel, BorderLayout.CENTER);
-        this.centerPanel.setVisible(true);
+    public void showYouWon() {
+        panel.remove(rightPanel);
+        rightPanel = new GameEnd(controller, "You Won!");
+        panel.add(rightPanel, BorderLayout.CENTER);
+        frame.setVisible(true);
     }
 
     @Override
     public void showShop() {
         this.rightPanel.remove(centerPanel);
-        this.centerPanel = new ShopViewImpl(controller, null);
+        this.centerPanel = new ShopViewImpl(controller);
         this.rightPanel.add(centerPanel, BorderLayout.CENTER);
     }
 
     @Override
-    public void notifyErrror(String title, String desc) {
+    public void notifyErrror(final String title, final String desc) {
         JOptionPane.showMessageDialog(this.panel, desc, title, JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
-    public void updateShopCards(Set<SpecialCardInfo> toSell) {
+    public void updateShopCards(final Set<SpecialCardInfo> toSell) {
         ((ShopView) this.centerPanel).updateCards(toSell);
     }
 

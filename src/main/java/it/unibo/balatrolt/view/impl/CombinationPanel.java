@@ -11,12 +11,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import org.checkerframework.checker.units.qual.m;
-
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
+
 /**
  * Shows the base point, multiplier and combination you would get with
- * the cards that are selected at that moment (in real-time).
+ * the cards that are selected (in real-time).
  */
 public final class CombinationPanel extends JPanel {
     private static final String FONT = "COPPER_BLACK";
@@ -25,6 +24,12 @@ public final class CombinationPanel extends JPanel {
     private final JLabel basePointsLabel;
     private final JLabel multiplierLabel;
 
+    /**
+     * Constructor for building the main panel, with some
+     * labels that shows points, multiplier and what type of
+     * combination is done.
+     * @param info start info
+     */
     public CombinationPanel(final CombinationInfo info) {
         this.setLayout(new BorderLayout());
         combinationLabel = getCombinationLabel(info);
@@ -37,43 +42,61 @@ public final class CombinationPanel extends JPanel {
         mainPanel.add(basePointsLabel);
         mainPanel.add(multiplierLabel);
         updateCombination(info);
-        this.add(this.combinationLabel, BorderLayout.NORTH);
-        this.add(mainPanel, BorderLayout.CENTER);
+        this.add(this.combinationLabel, BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * This method builds the combination label.
+     * @param info
+     * @return the label in question
+     */
     private JLabel getCombinationLabel(final CombinationInfo info) {
         final JLabel combinationLabel = new JLabel();
         combinationLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         combinationLabel.setFont(getFont(FONT, SCORE_DIM));
         combinationLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        combinationLabel.setBackground(Color.GRAY);
+        combinationLabel.setBackground(Color.DARK_GRAY.darker());
+        combinationLabel.setForeground(Color.white);
         combinationLabel.setOpaque(true);
         return combinationLabel;
     }
 
+    /**
+     * This method builds the base points label.
+     * @param info
+     * @return the label in question
+     */
     private JLabel getBasePointsLabel(final CombinationInfo info) {
         final JLabel pointsLabel = new JLabel();
         pointsLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
         pointsLabel.setFont(getFont(FONT, SCORE_DIM));
-        pointsLabel.setBackground(Color.BLUE);
+        pointsLabel.setBackground(Color.decode("#2274A5"));
+        pointsLabel.setForeground(Color.white);
         pointsLabel.setOpaque(true);
         return pointsLabel;
     }
 
+    /**
+     * This method builds the multiplier label.
+     * @param info
+     * @return the label in question
+     */
     private JLabel getMultiplierLabel(final CombinationInfo info) {
         final JLabel multiplierLabel = new JLabel();
         multiplierLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         multiplierLabel.setFont(getFont(FONT, SCORE_DIM));
         multiplierLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        multiplierLabel.setBackground(Color.RED.darker());
+        multiplierLabel.setBackground(Color.decode("#c1121f"));
+        multiplierLabel.setForeground(Color.white);
         multiplierLabel.setOpaque(true);
         return multiplierLabel;
     }
 
     /**
      * Updates the informations (base point, multiplier and the combination).
-     * @param info Combination info relaativeto the selected cards.
+     * @param info about the new combination done.
      */
     public void updateCombination(final CombinationInfo info) {
         this.combinationLabel.setText(info.name());

@@ -12,6 +12,7 @@ public interface Combination {
      * Enum representing the different types of poker combinations.
      */
     enum CombinationType {
+        /** Error card combination. */
         ERROR_CARD(" "),
         /** High card combination. */
         HIGH_CARD("High Card"),
@@ -36,7 +37,7 @@ public interface Combination {
 
         private final String name;
 
-        private CombinationType(final String name) {
+        CombinationType(final String name) {
             this.name = name;
         }
 

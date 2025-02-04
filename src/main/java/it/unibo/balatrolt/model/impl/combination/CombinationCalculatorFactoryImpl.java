@@ -1,7 +1,6 @@
 package it.unibo.balatrolt.model.impl.combination;
 
 import java.util.List;
-import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 

@@ -152,6 +152,12 @@ public class SwingView implements View {
     }
 
     @Override
+    public void updateScore(BlindStats stats) {
+        // TODO Auto-generated method stub
+        this.infoPanel.updateStats(stats);
+    }
+
+    @Override
     public void updateSpecialCards(List<SpecialCardInfo> specialCards) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpecialCards'");
@@ -159,7 +165,7 @@ public class SwingView implements View {
 
     @Override
     public void updateBlindStatistics(BlindStats stats) {
-        this.infoPanel.updateScore(stats);
+        this.infoPanel.updateStats(stats);
         ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
     }
 

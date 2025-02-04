@@ -58,6 +58,8 @@ public interface View {
      */
     void showGameOver();
 
+    void updateScore(BlindStats stats);
+
     /**
      * Updates the special cards.
      */

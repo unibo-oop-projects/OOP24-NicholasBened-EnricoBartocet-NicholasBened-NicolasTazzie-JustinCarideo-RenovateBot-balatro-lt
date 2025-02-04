@@ -2,25 +2,24 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 
 /**
- * Builds the title in the left GUI.
+ * This class builds the title in the left part of the GUI.
  */
 public final class TitlePanel extends JPanel {
-    static final long serialVersionUID = 1L;
-    private static final String FONT_COLOR = "COPPER_BLACK";
+
+    private static final String MAIN_FONT = "COPPER_BLACK";
     private static final Color SMALL_BLIND_COLOR = Color.CYAN.darker().darker();
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker();
@@ -28,7 +27,8 @@ public final class TitlePanel extends JPanel {
     private final BlindInfo info;
 
     /**
-     * 
+     * Builds the title panel about the blind that
+     * is going to be challenged.
      * @param info
      */
     public TitlePanel(final BlindInfo info) {
@@ -39,32 +39,43 @@ public final class TitlePanel extends JPanel {
         final JPanel titleContainer = new JPanel(new BorderLayout());
         titleContainer.add(getTitle(backgroundColor), BorderLayout.CENTER);
 
-        add(titleContainer, BorderLayout.NORTH);
-        add(getRewardLabel(backgroundColor));
+        this.add(titleContainer, BorderLayout.CENTER);
+        this.add(getRewardLabel(backgroundColor), BorderLayout.SOUTH);
     }
 
+    /**
+     * Builds the title
+     * @param color
+     * @return
+     */
     private JLabel getTitle(final Color color) {
         final JLabel titleBlind = new JLabel();
-        titleBlind.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         titleBlind.setText(getBlindTitle());
-        titleBlind.setFont(new Font(Font.SANS_SERIF, Font.BOLD, SIZE_TITLE_BLIND));
+        titleBlind.setFont(getFont(MAIN_FONT, SIZE_TITLE_BLIND));
         titleBlind.setBackground(color);
+        titleBlind.setForeground(Color.white);
         titleBlind.setOpaque(true);
         titleBlind.setHorizontalAlignment(SwingConstants.CENTER);
+        titleBlind.setBorder(new EmptyBorder(10, 20, 10, 20));
         return titleBlind;
     }
 
     private JLabel getRewardLabel(final Color color) {
         final JLabel rewardLabel = new JLabel();
-        rewardLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        rewardLabel.setBackground(color.brighter());
+        rewardLabel.setBackground(color.darker());
         rewardLabel.setText("Reward: $" + info.reward());
         rewardLabel.setOpaque(true);
-        rewardLabel.setFont(getFont(FONT_COLOR, SIZE_TITLE_BLIND));
+        rewardLabel.setFont(getFont(MAIN_FONT, SIZE_TITLE_BLIND));
+        rewardLabel.setForeground(Color.white);
         rewardLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        rewardLabel.setBorder(new EmptyBorder(10, 20, 10, 20));
         return rewardLabel;
     }
 
+    /**
+     * Gives the title based on the blind id.
+     * @return a string based on the id
+     */
     private String getBlindTitle() {
         return switch (this.info.id()) {
             case 1 -> "SMALL BLIND";
@@ -74,6 +85,10 @@ public final class TitlePanel extends JPanel {
         };
     }
 
+    /**
+     * Gives the color based on the blind id.
+     * @return a color based on the id
+     */
     private Color getBlindColor() {
         return switch (this.info.id()) {
             case 1 -> SMALL_BLIND_COLOR;

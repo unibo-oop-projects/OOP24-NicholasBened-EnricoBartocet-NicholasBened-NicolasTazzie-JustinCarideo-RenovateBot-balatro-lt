@@ -38,11 +38,14 @@ public class ScorePanel extends JPanel {
         this.add(mainScoreContainer, BorderLayout.NORTH);
         this.currentScoreLabel = getCurrentScorePanel(stats);
         this.minimumScoreLabel = getMinimumScoreLabel(info);
-        final JPanel scoreContainer = new JPanel(new GridLayout(1, 2));
-        scoreContainer.add(currentScoreLabel);
+        final JPanel scoreContainer = new JPanel(new GridLayout(3, 1));
         scoreContainer.add(minimumScoreLabel);
+        final JLabel current = getMainTitleLabel();
+        current.setText("Current score: ");
+        scoreContainer.add(current);
+        scoreContainer.add(currentScoreLabel);
+        scoreContainer.setBorder(BorderFactory.createLineBorder(currentScoreLabel.getBackground()));
         this.add(scoreContainer, BorderLayout.CENTER);
-
     }
 
     /**
@@ -54,11 +57,12 @@ public class ScorePanel extends JPanel {
     private JLabel getCurrentScorePanel(final BlindStats stats) {
         final JLabel currentScore = new JLabel();
         currentScore.setText(String.valueOf(stats.chips()));
-        currentScore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         currentScore.setFont(getFont(SCORE_FONT, SCORE_SIZE));
-        currentScore.setBackground(Color.BLUE);
+        currentScore.setBackground(Color.DARK_GRAY);
+        currentScore.setForeground(Color.white);
         currentScore.setOpaque(true);
         currentScore.setHorizontalAlignment(SwingConstants.CENTER);
+        currentScore.setBorder(BorderFactory.createLineBorder(currentScore.getBackground()));
         return currentScore;
     }
 
@@ -68,11 +72,12 @@ public class ScorePanel extends JPanel {
      */
     private JLabel getMainTitleLabel() {
         final JLabel scoreLabel = new JLabel();
-        scoreLabel.setText("SCORE");
-        scoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        scoreLabel.setFont(getFont(SCORE_FONT, SCORE_SIZE));
-        scoreLabel.setBackground(Color.orange);
+        scoreLabel.setText("Score at least: ");
+        scoreLabel.setFont(getFont(SCORE_FONT, SCORE_SIZE / 2));
+        scoreLabel.setBackground(Color.DARK_GRAY);
+        scoreLabel.setForeground(Color.white);
         scoreLabel.setOpaque(true);
+        scoreLabel.setBorder(BorderFactory.createLineBorder(scoreLabel.getBackground()));
         scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         return scoreLabel;
     }
@@ -85,9 +90,10 @@ public class ScorePanel extends JPanel {
     private JLabel getMinimumScoreLabel(final BlindInfo info) {
         final JLabel minimumScoreLabel = new JLabel();
         minimumScoreLabel.setText(String.valueOf(info.minimumChips()));
-        minimumScoreLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         minimumScoreLabel.setFont(getFont(SCORE_FONT, SCORE_SIZE));
-        minimumScoreLabel.setBackground(Color.RED.darker());
+        minimumScoreLabel.setBackground(Color.DARK_GRAY);
+        minimumScoreLabel.setForeground(Color.RED.darker());
+        minimumScoreLabel.setBorder(BorderFactory.createLineBorder(minimumScoreLabel.getBackground()));
         minimumScoreLabel.setOpaque(true);
         minimumScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         return minimumScoreLabel;

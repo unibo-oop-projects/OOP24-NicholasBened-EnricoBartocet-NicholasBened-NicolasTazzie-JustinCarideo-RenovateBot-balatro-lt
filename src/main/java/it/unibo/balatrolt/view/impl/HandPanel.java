@@ -23,8 +23,9 @@ public class HandPanel extends JPanel {
     private final JLabel anteLabel = new JLabel("Ante: ");
 
     /**
-     * Builds the GUI.
-     * @param stats statistics of the current blind.
+     * Builds the panel with informations about
+     * player stats.
+     * @param stats about the current blind
      */
     public HandPanel(final BlindStats stats) {
         setLayout(new GridLayout(2, 1));
@@ -34,21 +35,25 @@ public class HandPanel extends JPanel {
         discardLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         handLabel.setOpaque(true);
         discardLabel.setOpaque(true);
-        handLabel.setBackground(Color.YELLOW);
-        discardLabel.setBackground(Color.GREEN.darker());
+        handLabel.setBackground(Color.DARK_GRAY);
+        discardLabel.setBackground(Color.DARK_GRAY);
         handLabel.setHorizontalAlignment(SwingConstants.CENTER);
         discardLabel.setHorizontalAlignment(SwingConstants.CENTER);
         northPanel.add(handLabel);
         northPanel.add(discardLabel);
         this.currencyLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         currencyLabel.setOpaque(true);
-        currencyLabel.setBackground(Color.YELLOW);
+        currencyLabel.setBackground(Color.DARK_GRAY);
         final JPanel southPanel = new JPanel(new GridLayout(1, 2));
         anteLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         anteLabel.setHorizontalAlignment(SwingConstants.CENTER);
         anteLabel.setOpaque(true);
-        anteLabel.setBackground(Color.green.darker());
+        anteLabel.setBackground(Color.DARK_GRAY);
         currencyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        handLabel.setForeground(Color.white);
+        anteLabel.setForeground(Color.white);
+        discardLabel.setForeground(Color.white);
+        currencyLabel.setForeground(Color.white);
         southPanel.add(anteLabel);
         southPanel.add(currencyLabel);
         this.add(northPanel);
@@ -65,6 +70,7 @@ public class HandPanel extends JPanel {
     }
 
     /**
+     * This method updates the currency held by the player.
      * @param currency
      */
     public void updateCurrency(final int currency) {
@@ -72,9 +78,10 @@ public class HandPanel extends JPanel {
     }
 
     /**
+     * This method updates with some informations about the current ante.
      * @param info
      */
-    public void updateAnte(AnteInfo info) {
-        this.anteLabel.setText("Ante :" + String.valueOf(info.id()));;
+    public void updateAnte(final AnteInfo info) {
+        this.anteLabel.setText("Ante: " + String.valueOf(info.id()));;
     }
 }

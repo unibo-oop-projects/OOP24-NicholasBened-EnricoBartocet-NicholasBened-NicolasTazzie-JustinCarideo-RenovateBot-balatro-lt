@@ -17,11 +17,12 @@ public final class InfoPanel extends JPanel {
     private final ScorePanel scorePanel;
     private final CombinationPanel combinationPanel;
     private final HandPanel handPanel;
+
     /**
-     * Builds the info panel.
-     * @param info static info about the blind.
-     * @param stats statistics about the actual game.
-     * @param numAnte number of antes.
+     * Constructor that builds the main info panel.
+     * @param info about the blind.
+     * @param stats about the actual game.
+     * @param numAnte
      */
     public InfoPanel(final BlindInfo info, final BlindStats stats, final int numAnte) {
         this.setLayout(new GridLayout(4, 1));
@@ -37,7 +38,7 @@ public final class InfoPanel extends JPanel {
 
     /**
      * Updates the combination info.
-     * @param info combination info about the selected cards.
+     * @param info
      */
     public void updateCombination(final CombinationInfo info) {
         this.combinationPanel.updateCombination(info);
@@ -45,18 +46,26 @@ public final class InfoPanel extends JPanel {
 
     /**
      * Updates the statistics in the GUI.
-     * @param stats statistics about the actual game.
+     * @param stats
      */
     public void updateStats(final BlindStats stats) {
         this.scorePanel.updateScore(stats);
         this.handPanel.updateHands(stats);
     }
 
-    public void updateCurrency(int currency) {
+    /**
+     * Updates the currency held by the player.
+     * @param currency
+     */
+    public void updateCurrency(final int currency) {
         this.handPanel.updateCurrency(currency);
     }
 
-    public void updateAnte(AnteInfo info) {
+    /**
+     * Updates the information about the current ante.
+     * @param info
+     */
+    public void updateAnte(final AnteInfo info) {
         this.handPanel.updateAnte(info);
     }
 

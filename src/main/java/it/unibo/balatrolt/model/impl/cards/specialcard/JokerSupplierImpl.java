@@ -12,6 +12,7 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerSupplier;
+import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
 /**
@@ -78,7 +79,8 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
                         final int toMultiply = 2;
                         return m * toMultiply;
                     })
-                    .build()
+                    .build(),
+            JokerTier.LEGENDARY
             );
     }
 
@@ -88,7 +90,8 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             "It doubles the current value of multipler if one of "
             + "the played cards has suit diamond",
             doubler(),
-            cards -> checkContainsSuit(cards, Suit.DIAMONDS)
+            cards -> checkContainsSuit(cards, Suit.DIAMONDS),
+            JokerTier.EPIC
         );
     }
 
@@ -98,7 +101,8 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             "It doubles the current value of multipler if one of "
             + "the played cards has suit heart",
             this.doubler(),
-            cards -> checkContainsSuit(cards, Suit.HEARTS)
+            cards -> checkContainsSuit(cards, Suit.HEARTS),
+            JokerTier.EPIC
         );
     }
 
@@ -110,7 +114,8 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             .addBasePointsModifier(p -> {
                 return p + DONOUR_ADDER;
             })
-            .build()
+            .build(),
+            JokerTier.LEGENDARY
         );
     }
 
@@ -119,7 +124,8 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             "The king donour",
             "It adds 50 base points if the played cards contains a king",
             this.donour(),
-            cards -> checkContainsRank(cards, Rank.KING)
+            cards -> checkContainsRank(cards, Rank.KING),
+            JokerTier.EPIC
         );
     }
 
@@ -128,7 +134,8 @@ public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
             "The seventh donour",
             "It adds 50 base points if the played cards contains a seven",
             this.donour(),
-            cards -> checkContainsRank(cards, Rank.SEVEN)
+            cards -> checkContainsRank(cards, Rank.SEVEN),
+            JokerTier.EPIC
         );
     }
 }

@@ -14,7 +14,7 @@ public interface JokerFactory {
      * Creates a {@link Joker} with a name, a description, a random price, but no effect.
      * @param name Joker's name
      * @param description Joker's description
-     * @return joker without effect.
+     * @return joker without effect and common tier.
      */
     Joker standardJoker(String name, String description);
 
@@ -24,18 +24,29 @@ public interface JokerFactory {
      * @param description Joker's description
      * @param modifier Joker's effect
      * @param basePrice Joker's price in the shop
+     * @param tier Joker's tier
      * @return joker with a modifier
      */
-    Joker withModifier(String name, String description, int basePrice, CombinationModifier modifier);
+    Joker withModifier(
+        String name,
+        String description,
+        int basePrice,
+        CombinationModifier modifier,
+        JokerTier tier);
 
     /**
      * Creates a {@link Joker} with a effect and a random price.
      * @param name Joker's name
      * @param description Joker's description
      * @param modifier Joker's effect
+     * @param tier Joker's tier
      * @return joker with a modifier
      */
-    Joker withModifierAndRandomPrice(String name, String description, CombinationModifier modifier);
+    Joker withModifierAndRandomPrice(
+        String name,
+        String description,
+        CombinationModifier modifier,
+        JokerTier tier);
 
     /**
      * Creates a new {@link Joker} from an existing one, adding a playable card bound.
@@ -43,13 +54,15 @@ public interface JokerFactory {
      * @param newDescription new Joker's description
      * @param j joker which add bound
      * @param bound bound to add
+     * @param newTier new tier to assign to Joker
      * @return new Joker with the old's effect and with the specified bound
      */
     Joker addPlayableCardBoundToJoker(
             String newName,
             String newDescription,
             Joker j,
-            Predicate<Set<PlayableCard>> bound);
+            Predicate<Set<PlayableCard>> bound,
+            JokerTier newTier);
 
     /**
      * Creates a {@link Joker} by merging two exixting jokers.

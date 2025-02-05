@@ -13,7 +13,8 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
  * Creates the left part of the main GUI.
  */
 public final class InfoPanel extends JPanel {
-    static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     private final ScorePanel scorePanel;
     private final CombinationPanel combinationPanel;
     private final HandPanel handPanel;
@@ -22,9 +23,8 @@ public final class InfoPanel extends JPanel {
      * Constructor that builds the main info panel.
      * @param info about the blind.
      * @param stats about the actual game.
-     * @param numAnte
      */
-    public InfoPanel(final BlindInfo info, final BlindStats stats, final int numAnte) {
+    public InfoPanel(final BlindInfo info, final BlindStats stats) {
         this.setLayout(new GridLayout(4, 1));
         final var titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);

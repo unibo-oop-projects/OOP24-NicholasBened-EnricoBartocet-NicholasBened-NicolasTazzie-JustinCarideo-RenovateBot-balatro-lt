@@ -20,6 +20,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
  */
 public class ScorePanel extends JPanel {
 
+    private static final long serialVersionUID = 1L;
     private static final String SCORE_FONT = "COPPER_BLACK";
     private static final float SCORE_SIZE = 36f;
     private final JLabel minimumScoreLabel;
@@ -32,12 +33,16 @@ public class ScorePanel extends JPanel {
      * @param stats
      */
     public ScorePanel(final BlindInfo info, final BlindStats stats) {
+        this.currentScoreLabel = getCurrentScorePanel(stats);
+        this.minimumScoreLabel = getMinimumScoreLabel(info);
+        initializePanel(info, stats);
+    }
+
+    private void initializePanel(final BlindInfo info, final BlindStats stats) {
         this.setLayout(new BorderLayout());
         final JPanel mainScoreContainer = new JPanel(new BorderLayout());
         mainScoreContainer.add(getMainTitleLabel(), BorderLayout.CENTER);
         this.add(mainScoreContainer, BorderLayout.NORTH);
-        this.currentScoreLabel = getCurrentScorePanel(stats);
-        this.minimumScoreLabel = getMinimumScoreLabel(info);
         final JPanel scoreContainer = new JPanel(new GridLayout(3, 1));
         scoreContainer.add(minimumScoreLabel);
         final JLabel current = getMainTitleLabel();

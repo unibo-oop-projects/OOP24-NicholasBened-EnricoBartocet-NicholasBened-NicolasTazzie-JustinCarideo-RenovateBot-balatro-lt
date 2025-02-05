@@ -20,7 +20,8 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
  * the cards that are selected (in real-time).
  */
 public final class CombinationPanel extends JPanel {
-    static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     private static final String FONT = "COPPER_BLACK";
     private static final int SCORE_DIM = 30;
     private final JLabel combinationLabel;

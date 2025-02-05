@@ -16,53 +16,75 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
  * (remaining discards, hand, current currency and ante).
  */
 public class HandPanel extends JPanel {
-    static final long serialVersionUID = 1L;
-    private final JLabel handLabel = new JLabel();
-    private final JLabel discardLabel = new JLabel();
-    private final JLabel currencyLabel = new JLabel("$0");
-    private final JLabel anteLabel = new JLabel("Ante: ");
+
+    private static final long serialVersionUID = 1L;
+    private final JLabel handLabel;
+    private final JLabel discardLabel;
+    private final JLabel currencyLabel;
+    private final JLabel anteLabel;
 
     /**
-     * Builds the panel with informations about
-     * player stats.
+     * Builds the panel with information about player stats.
      * @param stats about the current blind
      */
     public HandPanel(final BlindStats stats) {
-        setLayout(new GridLayout(2, 1));
-        updateHands(stats);
-        final JPanel northPanel = new JPanel(new GridLayout(1, 2));
-        handLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        discardLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        handLabel.setOpaque(true);
-        discardLabel.setOpaque(true);
-        handLabel.setBackground(Color.DARK_GRAY);
-        discardLabel.setBackground(Color.DARK_GRAY);
-        handLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        discardLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        northPanel.add(handLabel);
-        northPanel.add(discardLabel);
-        this.currencyLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        currencyLabel.setOpaque(true);
-        currencyLabel.setBackground(Color.DARK_GRAY);
-        final JPanel southPanel = new JPanel(new GridLayout(1, 2));
-        anteLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        anteLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        anteLabel.setOpaque(true);
-        anteLabel.setBackground(Color.DARK_GRAY);
-        currencyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        handLabel.setForeground(Color.white);
-        anteLabel.setForeground(Color.white);
-        discardLabel.setForeground(Color.white);
-        currencyLabel.setForeground(Color.white);
-        southPanel.add(anteLabel);
-        southPanel.add(currencyLabel);
-        this.add(northPanel);
-        this.add(southPanel);
+        super(new GridLayout(2, 1));
+        this.handLabel = createGeneralLabel("");
+        this.discardLabel = createGeneralLabel("");
+        this.currencyLabel = createGeneralLabel("$0");
+        this.anteLabel = createGeneralLabel("Ante: ");
+        initialize(stats);
     }
 
     /**
-     * This method updates hands and discards.
-     * @param stats
+     * Initializes the UI components and updates the stats.
+     * @param stats initial stats
+     */
+    private void initialize(final BlindStats stats) {
+        add(createNorthPanel());
+        add(createSouthPanel());
+        updateHands(stats);
+    }
+
+    /**
+     * Creates a JLabel with default style.
+     * @param text
+     * @return a general label with default style
+     */
+    private JLabel createGeneralLabel(final String text) {
+        final JLabel label = new JLabel(text, SwingConstants.CENTER);
+        label.setOpaque(true);
+        label.setBackground(Color.DARK_GRAY);
+        label.setForeground(Color.WHITE);
+        label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        return label;
+    }
+
+    /**
+     * Configures the north panel with hand and discard labels.
+     * @return panel placed in the south part
+     */
+    private JPanel createNorthPanel() {
+        final JPanel northPanel = new JPanel(new GridLayout(1, 2));
+        northPanel.add(handLabel);
+        northPanel.add(discardLabel);
+        return northPanel;
+    }
+
+    /**
+     * Configures the south panel with ante and currency labels.
+     * @return panel placed in the south part
+     */
+    private JPanel createSouthPanel() {
+        final JPanel southPanel = new JPanel(new GridLayout(1, 2));
+        southPanel.add(anteLabel);
+        southPanel.add(currencyLabel);
+        return southPanel;
+    }
+
+    /**
+     * Updates the hand and discard labels.
+     * @param stats The current blind stats
      */
     public void updateHands(final BlindStats stats) {
         this.handLabel.setText("Hand: " + stats.hands());
@@ -70,15 +92,15 @@ public class HandPanel extends JPanel {
     }
 
     /**
-     * This method updates the currency held by the player.
-     * @param currency
+     * Updates the currency label.
+     * @param currency new amount
      */
     public void updateCurrency(final int currency) {
         this.currencyLabel.setText("$" + currency);
     }
 
     /**
-     * This method updates with some informations about the current ante.
+     * Updates the ante label.
      * @param info
      */
     public void updateAnte(final AnteInfo info) {

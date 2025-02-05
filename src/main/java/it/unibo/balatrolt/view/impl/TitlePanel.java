@@ -25,7 +25,7 @@ public final class TitlePanel extends JPanel {
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker();
     private static final int SIZE_TITLE_BLIND = 30;
-    private final BlindInfo info;
+    private transient final BlindInfo info;
 
     /**
      * Builds the title panel about the blind that is going to be challenged.
@@ -34,10 +34,9 @@ public final class TitlePanel extends JPanel {
     public TitlePanel(final BlindInfo info) {
         this.info = info;
         final Color backgroundColor = getBlindColor();
-
-        setLayout(new BorderLayout());
-        add(getTitlePanel(backgroundColor), BorderLayout.CENTER);
-        add(getRewardLabel(backgroundColor), BorderLayout.SOUTH);
+        super.setLayout(new BorderLayout());
+        super.add(getTitlePanel(backgroundColor), BorderLayout.CENTER);
+        super.add(getRewardLabel(backgroundColor), BorderLayout.SOUTH);
     }
 
     /**

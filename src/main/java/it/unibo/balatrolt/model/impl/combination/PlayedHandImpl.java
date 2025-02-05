@@ -31,7 +31,6 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
  */
 public final class PlayedHandImpl implements PlayedHand {
 
-    private static final int EMPTY_HAND = 0;
     private static final int FULL_HAND = 5;
     private final List<PlayableCard> hand;
     private final CombinationRecognizerHelpers helper = new CombinationRecognizerHelpersImpl();
@@ -43,7 +42,7 @@ public final class PlayedHandImpl implements PlayedHand {
      * @param hand
      */
     public PlayedHandImpl(final List<PlayableCard> hand) {
-        Preconditions.checkArgument(hand.size() >= EMPTY_HAND && hand.size() <= FULL_HAND,
+        Preconditions.checkArgument(hand.size() <= FULL_HAND,
         "Hand played must be within 0 or 5 cards");
         this.hand = Collections.unmodifiableList(hand);
     }

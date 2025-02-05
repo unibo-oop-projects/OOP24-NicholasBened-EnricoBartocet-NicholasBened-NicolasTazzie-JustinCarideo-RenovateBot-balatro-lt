@@ -120,7 +120,7 @@ public class ScorePanel extends JPanel {
         try {
             font = Font.createFont(
                 Font.TRUETYPE_FONT,
-                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
+                ScorePanel.class.getResourceAsStream("/font/" + nameFont + ".TTF")
             );
             font = font.deriveFont(fontSize);
         } catch (FontFormatException | IOException e) {

@@ -5,8 +5,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
@@ -47,11 +45,13 @@ public final class ShopViewImpl extends JPanel implements ShopView {
     private static final int CARD_Y = 1;
     private static final int N_SLOT_ROWS = 1;
     private static final float GBC_WEIGHT = 0.2f;
-    private final MasterController controller;
-    private final JButton buyButton;
-    private final ShopInnerLogic logic;
-    private final List<JButton> cardButtons = new LinkedList<>();
+
     private final JPanel innerPanel = new JPanel(new FlowLayout());
+    private final List<JButton> cardButtons = new LinkedList<>();
+    private final FontFactory fontFactory = new FontFactory();
+    private final MasterController controller;
+    private final ShopInnerLogic logic;
+    private final JButton buyButton;
 
     /**
      * Constructor.
@@ -62,7 +62,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         this.setBackground(Color.GREEN.darker().darker().darker().darker());
         final var shopTitle = new JLabel("Shop");
         shopTitle.setForeground(Color.WHITE);
-        shopTitle.setFont(getFont(FONT, TITLE_SIZE));
+        shopTitle.setFont(this.fontFactory.getFont(FONT, TITLE_SIZE, this));
         final var titlePanel = new JPanel(new FlowLayout());
         titlePanel.setBackground(this.getBackground());
         titlePanel.add(shopTitle);
@@ -135,7 +135,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
 
     private JLabel getPriceLable(final int price) {
         final var lbl = new JLabel(Integer.toString(price) + "$");
-        lbl.setFont(getFont(FONT, PRICE_SIZE));
+        lbl.setFont(this.fontFactory.getFont(FONT, PRICE_SIZE, this));
         lbl.setForeground(Color.WHITE);
         return lbl;
     }
@@ -143,7 +143,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
     private JPanel getBuyOrContinuePanel() {
         final var panel = new JPanel(new FlowLayout());
         final JButton continueGame = new JButton("Continue");
-        continueGame.setFont(getFont(FONT, BUTTON_SIZE));
+        continueGame.setFont(this.fontFactory.getFont(FONT, BUTTON_SIZE, this));
         this.buyButton.setFont(continueGame.getFont());
         this.buyButton.setBackground(Color.decode("#C1121F"));
         this.buyButton.setForeground(Color.WHITE);
@@ -174,22 +174,5 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         this.cardButtons.forEach(e -> e.setBorder(
             BorderFactory.createLineBorder(e.getParent().getBackground())));
         this.repaint();
-    }
-
-    /*
-     * Gives back the requested font with the given size.
-     */
-    private Font getFont(final String nameFont, final float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
-        try {
-            font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
-            );
-            font = font.deriveFont(fontSize);
-        } catch (FontFormatException | IOException e) {
-            JOptionPane.showMessageDialog(this, "Cannot load font");
-        }
-        return font;
     }
 }

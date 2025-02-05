@@ -2,12 +2,7 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.IOException;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -25,7 +20,8 @@ public final class TitlePanel extends JPanel {
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker();
     private static final int SIZE_TITLE_BLIND = 30;
-    private transient final BlindInfo info;
+    private final transient  BlindInfo info;
+    private final FontFactory fontFactory = new FontFactory();
 
     /**
      * Builds the title panel about the blind that is going to be challenged.
@@ -68,7 +64,7 @@ public final class TitlePanel extends JPanel {
      */
     private JLabel getFormattedLabel(final String text, final Color color, final int fontSize) {
         final JLabel label = new JLabel(text, SwingConstants.CENTER);
-        label.setFont(getFont(MAIN_FONT, fontSize));
+        label.setFont(this.fontFactory.getFont(MAIN_FONT, fontSize, this));
         label.setOpaque(true);
         label.setBackground(color);
         label.setForeground(Color.WHITE);
@@ -102,24 +98,5 @@ public final class TitlePanel extends JPanel {
             case 3 -> BOSS_BLIND_COLOR;
             default -> Color.DARK_GRAY;
         };
-    }
-
-    /**
-     * Loads the requested font with the given size.
-     * @param nameFont The font name
-     * @param fontSize The font size
-     * @return The loaded font or a default one if loading fails
-     */
-    private Font getFont(final String nameFont, final float fontSize) {
-        try {
-            final Font font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
-            );
-            return font.deriveFont(fontSize);
-        } catch (FontFormatException | IOException e) {
-            JOptionPane.showMessageDialog(this, "Cannot load font");
-            return new Font("Arial", Font.PLAIN, (int) fontSize);
-        }
     }
 }

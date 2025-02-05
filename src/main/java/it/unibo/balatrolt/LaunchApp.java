@@ -22,7 +22,7 @@ final class LaunchApp {
      * @param args
      * @throws IOException
      */
-    public static void main(final String[] args) throws java.io.IOException {
+    public static void main(final String[] args) throws IOException {
         final MasterController controller = new MasterControllerImpl();
         final View view = new SwingView(controller);
         controller.attachView(view);

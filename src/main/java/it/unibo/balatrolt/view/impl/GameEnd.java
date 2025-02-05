@@ -2,8 +2,6 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -24,9 +22,12 @@ import it.unibo.balatrolt.controller.api.MasterController;
 public class GameEnd extends JPanel {
     static final long serialVersionUID = 1L;
     private static final String FONT = "JOKERMAN";
+    private static final String TITLE_FONT = "SNAP_ITC";
     private static final float BUTTON_SIZE = 65f;
     private static final float TEXT_SIZE = 70f;
     private static final int HEIGHT_GAP = 200;
+
+    private final FontFactory fontFactory = new FontFactory();
     private Image image;
 
     /**
@@ -37,7 +38,7 @@ public class GameEnd extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         final JPanel gameOverPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         final JLabel gameOver = new JLabel(title);
-        gameOver.setFont(getFont("SNAP_ITC", TEXT_SIZE));
+        gameOver.setFont(this.fontFactory.getFont(TITLE_FONT, TEXT_SIZE, this));
         gameOver.setForeground(Color.WHITE.brighter());
         gameOverPanel.setOpaque(false);
         gameOverPanel.add(gameOver);
@@ -52,7 +53,7 @@ public class GameEnd extends JPanel {
         add(buttons);
         add(Box.createGlue());
         final JButton accept = new JButton("New Game");
-        accept.setFont(getFont(FONT, BUTTON_SIZE));
+        accept.setFont(this.fontFactory.getFont(FONT, BUTTON_SIZE, this));
         accept.setForeground(Color.WHITE.brighter());
         accept.setContentAreaFilled(false);
         accept.setBorder(null);
@@ -64,7 +65,7 @@ public class GameEnd extends JPanel {
          * Setting quit button
          */
         final JButton decline = new JButton("Quit");
-        decline.setFont(getFont(FONT, BUTTON_SIZE));
+        decline.setFont(this.fontFactory.getFont(FONT, BUTTON_SIZE, this));
         decline.setForeground(Color.WHITE.brighter());
         decline.setContentAreaFilled(false);
         decline.setBorder(null);
@@ -81,23 +82,6 @@ public class GameEnd extends JPanel {
             JOptionPane.showMessageDialog(this, "Cannot load background");
         }
         setVisible(true);
-    }
-
-    /*
-     * Gives back the requested font with the given size.
-     */
-    private Font getFont(final String nameFont, final float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
-        try {
-            font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
-            );
-            font = font.deriveFont(fontSize);
-        } catch (FontFormatException | IOException e) {
-            JOptionPane.showMessageDialog(this, "Cannot load font");
-        }
-        return font;
     }
 
     @Override

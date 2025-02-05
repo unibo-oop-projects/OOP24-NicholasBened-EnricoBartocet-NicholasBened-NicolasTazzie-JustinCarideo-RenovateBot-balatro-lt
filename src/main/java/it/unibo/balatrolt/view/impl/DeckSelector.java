@@ -2,8 +2,6 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,6 +39,7 @@ public final class DeckSelector extends JPanel {
     private static final Double BASE_WEIGHT = 0.2;
     private static final int BASE_PAD = 10;
     private final Map<String, DeckInfo> decksTranslator = new HashMap<>();
+    private final FontFactory fontFactory = new FontFactory();
     private final JLabel labelName;
     private final JTextArea deckDescription;
     private final JButton deck;
@@ -62,7 +61,7 @@ public final class DeckSelector extends JPanel {
          * Setting the title.
          */
         final JLabel title = new JLabel("BALATRO");
-        title.setFont(getFont(TITLE_FONT, TITLE_SIZE));
+        title.setFont(this.fontFactory.getFont(TITLE_FONT, TITLE_SIZE, this));
         title.setForeground(Color.WHITE.brighter());
         add(title, getConstraints(GridBagConstraints.RELATIVE, GridBagConstraints.RELATIVE, 0, 0,
             0, GridBagConstraints.PAGE_START, GridBagConstraints.NONE, 50, 0, 20, 0));
@@ -82,7 +81,7 @@ public final class DeckSelector extends JPanel {
          * Setting left button.
          */
         final JButton lefButton = new JButton("<");
-        lefButton.setFont(getFont(DESC_DECK_FONT, DECK_SIZE));
+        lefButton.setFont(this.fontFactory.getFont(DESC_DECK_FONT, DECK_SIZE, this));
         lefButton.setBackground(Color.RED);
         lefButton.addActionListener(e -> {
             try {
@@ -98,7 +97,7 @@ public final class DeckSelector extends JPanel {
          * Setting right button.
          */
         final JButton rightButton = new JButton(">");
-        rightButton.setFont(getFont(DESC_DECK_FONT, DECK_SIZE));
+        rightButton.setFont(this.fontFactory.getFont(DESC_DECK_FONT, DECK_SIZE, this));
         rightButton.setBackground(Color.RED);
         rightButton.addActionListener(e -> {
             try {
@@ -128,7 +127,7 @@ public final class DeckSelector extends JPanel {
          * setting deck name.
          */
         this.labelName = new JLabel();
-        this.labelName.setFont(getFont(DESC_DECK_FONT, DECK_SIZE));
+        this.labelName.setFont(this.fontFactory.getFont(DESC_DECK_FONT, DECK_SIZE, this));
         this.labelName.setForeground(Color.WHITE);
         descriptionPanel.add(this.labelName, getConstraints(0, 0, BASE_WEIGHT, 0, 0,
             GridBagConstraints.PAGE_START, GridBagConstraints.NONE, BASE_PAD, 0, 0, 0));
@@ -140,7 +139,7 @@ public final class DeckSelector extends JPanel {
         this.deckDescription.setLineWrap(true);
         this.deckDescription.setWrapStyleWord(true);
         this.deckDescription.setAlignmentY(CENTER_ALIGNMENT);
-        this.deckDescription.setFont(getFont(DESC_DECK_FONT, DESCR_SIZE));
+        this.deckDescription.setFont(this.fontFactory.getFont(DESC_DECK_FONT, DESCR_SIZE, this));
         this.deckDescription.setBackground(Color.WHITE);
         this.deckDescription.setOpaque(true);
         this.deckDescription.setForeground(Color.BLACK);
@@ -202,23 +201,6 @@ public final class DeckSelector extends JPanel {
         this.deckDescription.setText(decksTranslator.get(deckName).desc());
         revalidate();
         repaint();
-    }
-
-    /*
-     * Gives back the requested font with the given size.
-     */
-    private Font getFont(final String nameFont, final float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
-        try {
-            font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
-            );
-            font = font.deriveFont(fontSize);
-        } catch (FontFormatException | IOException e) {
-            JOptionPane.showMessageDialog(this, "Cannot load font");
-        }
-        return font;
     }
 
     @Override

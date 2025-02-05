@@ -23,6 +23,7 @@ import com.google.common.base.Preconditions;
  */
 public final class SlotPanel<X> extends JPanel {
     static final long serialVersionUID = 1L;
+
     private final int slotSize;
     private final int buttonWidth;
     private final int buttonHeight;
@@ -30,7 +31,6 @@ public final class SlotPanel<X> extends JPanel {
     private final Consumer<X> consumer;
     private final Supplier<Boolean> canClick;
     private final Supplier<Boolean> canRemove;
-
     /*
      * It holds the full obj to eventually give it back to the controller
      * and holds the name of the card to set the image.

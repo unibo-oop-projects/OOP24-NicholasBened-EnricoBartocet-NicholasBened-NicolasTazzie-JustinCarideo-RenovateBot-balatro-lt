@@ -2,6 +2,7 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -36,15 +37,20 @@ import it.unibo.balatrolt.view.api.View;
 public final class SwingView implements View {
     private static final int MIN_WIDTH = 1000;
     private static final int MIN_HEIGHT = 600;
+    private static final int SPECIAL_CARD_WIDTH = 75;
+    private static final int SPECIAL_CARD_HEIGHT = 100;
+    private static final int DECK_WIDTH = 100;
+    private static final int DECK_HEIGHT = 120;
     private static final int MAX_SPECIAL_CARDS = 5;
     private static final float RIDIM = 1.5f;
+
     private final MasterController controller;
     private final JFrame frame = new JFrame();
-    private JPanel panel;
+    private JPanel masterPanel;
     private InfoPanel infoPanel;
     private JPanel rightPanel;
-    private JPanel centerPanel;
-    private JPanel specialSlotContainer;
+    private JPanel activePanel;
+    private JPanel specialSlotPanel;
 
     /**
      * Sets the frame and it's size.
@@ -62,88 +68,80 @@ public final class SwingView implements View {
 
     @Override
     public void showMainMenu() {
-        if (panel != null) {
-            frame.remove(panel);
-        }
-        panel = new MainMenu(controller, "Play");
-        frame.add(panel);
-        frame.setVisible(true);
+        masterPanel = changePanel(frame, masterPanel, new MainMenu(controller, "Play"), Optional.absent());
     }
 
     @Override
-    public void showDecks(final List<DeckInfo> setMap) {
-        frame.remove(panel);
-        panel = new DeckSelector(this.controller, setMap);
-        frame.add(panel);
-        frame.setVisible(true);
+    public void showDecks(final List<DeckInfo> decks) {
+        masterPanel = changePanel(frame, masterPanel, new DeckSelector(controller, decks), Optional.absent());
     }
 
     @Override
-    public void showSettings(final BlindInfo info, final BlindStats stats, final List<SpecialCardInfo> specialCards, final DeckInfo deck, final int numAnte) {
-        frame.remove(panel);
-        panel = new JPanel(new BorderLayout());
-        frame.add(panel);
-        infoPanel = new InfoPanel(info, stats, numAnte);
-        rightPanel = new JPanel(new BorderLayout());
-        panel.add(rightPanel, BorderLayout.CENTER);
-        panel.add(infoPanel, BorderLayout.WEST);
-        final JPanel northPanel = new JPanel();
+    public void showSettings(
+        final BlindInfo info,
+        final BlindStats stats,
+        final List<SpecialCardInfo> specialCards,
+        final DeckInfo deck,
+        final int numAnte
+    ) {
+        masterPanel = changePanel(frame, masterPanel, new JPanel(new BorderLayout()), Optional.absent());
+        infoPanel = (InfoPanel) changePanel(
+            masterPanel,
+            null,
+            new InfoPanel(info, stats, numAnte),
+            Optional.of(BorderLayout.WEST)
+        );
+        rightPanel = changePanel(masterPanel, null, new JPanel(new BorderLayout()), Optional.of(BorderLayout.CENTER));
+        final JPanel northPanel = changePanel(rightPanel, null, new JPanel(), Optional.of(BorderLayout.NORTH));
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.LINE_AXIS));
         northPanel.setBackground(Color.GREEN.darker().darker().darker());
-        rightPanel.add(northPanel, BorderLayout.NORTH);
 
-        /**
-         * Creating slot for the deck.
-         */
         final var deckSlot = new SlotPanel<>(
-            1, 100, 120,
+            1,
+            DECK_WIDTH,
+            DECK_HEIGHT,
             () -> true,
             () -> false,
-            card -> JOptionPane.showMessageDialog(
-                frame,
-                deck.name() + " deck:\n" + deck.desc(),
-                "Deck Info",
-                JOptionPane.INFORMATION_MESSAGE)
+            e -> JOptionPane.showMessageDialog(
+                    frame,
+                    deck.name() + " deck:\n" + deck.desc(),
+                    "Deck Info",
+                    JOptionPane.INFORMATION_MESSAGE
+                )
         );
-        deckSlot.addObject(new SlotPanel.SlotObject<>(deck, "Deck", "decks/" + deck.name().toUpperCase(Locale.getDefault()) + "_DECK"));
-        final JPanel deckSlotContainer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        deckSlot.addObject(new SlotPanel.SlotObject<>(
+            deck,
+            "Deck",
+            "decks/" + deck.name().toUpperCase(Locale.getDefault()) + "_DECK"
+        ));
+        final JPanel deckSlotContainer;
+        // The order of add is important!
+        specialSlotPanel = changePanel(northPanel, null, new JPanel(new FlowLayout(FlowLayout.LEFT)), Optional.absent());
+        northPanel.add(Box.createHorizontalGlue());
+        deckSlotContainer = changePanel(northPanel, null, new JPanel(new FlowLayout(FlowLayout.RIGHT)), Optional.absent());
+
         deckSlotContainer.setOpaque(false);
         deckSlotContainer.add(deckSlot);
-
-        specialSlotContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        specialSlotContainer.setOpaque(false);
+        specialSlotPanel.setOpaque(false);
         updateSpecialCards(specialCards);
-
-        northPanel.add(specialSlotContainer);
-        northPanel.add(Box.createHorizontalGlue());
-        northPanel.add(deckSlotContainer);
-        frame.setVisible(true);
     }
 
     @Override
     public void showAnte(final AnteInfo anteInfo) {
-        if (centerPanel != null) {
-            rightPanel.remove(centerPanel);
-        }
-        centerPanel = new AnteView(this.controller, anteInfo);
-        rightPanel.add(centerPanel, BorderLayout.CENTER);
-        frame.setVisible(true);
+        activePanel = changePanel(rightPanel, activePanel, new AnteView(controller, anteInfo), Optional.absent());
     }
 
 
     @Override
     public void showRound(final List<PlayableCardInfo> playableCards) {
-        rightPanel.remove(centerPanel);
-        centerPanel = new GameTable(this.controller, playableCards);
-        rightPanel.add(centerPanel, BorderLayout.CENTER);
-        rightPanel.add(centerPanel, BorderLayout.CENTER);
-        this.frame.setVisible(true);
+        activePanel = changePanel(rightPanel, activePanel, new GameTable(controller, playableCards), Optional.absent());
     }
 
     @Override
-    public void updateGameTable(final List<PlayableCardInfo> hand, BlindStats stats) {
-        ((GameTable) this.centerPanel).updateHand(hand);
-        ((GameTable) this.centerPanel).setDiscardEnabled(stats.discards() > 0);
+    public void updateGameTable(final List<PlayableCardInfo> hand, final BlindStats stats) {
+        Preconditions.checkState(this.activePanel instanceof GameTable, "The current active panel isn't a Game Table");
+        ((GameTable) this.activePanel).updateHand(hand);
+        ((GameTable) this.activePanel).setDiscardEnabled(stats.discards() > 0);
     }
 
     @Override
@@ -153,38 +151,38 @@ public final class SwingView implements View {
 
     @Override
     public void updateSpecialCards(final List<SpecialCardInfo> specialCards) {
-        specialSlotContainer.removeAll();
-        /**
-         * Creating slot for the special cards.
-         */
-        var specialSlot = new SlotPanel<SpecialCardInfo>(
-            MAX_SPECIAL_CARDS, 75, 100,
+        specialSlotPanel.removeAll();
+
+        final var specialSlot = new SlotPanel<SpecialCardInfo>(
+            MAX_SPECIAL_CARDS,
+            SPECIAL_CARD_WIDTH,
+            SPECIAL_CARD_HEIGHT,
             () -> true,
             () -> false,
-            card -> {
-                switch(JOptionPane.showConfirmDialog(
+            c -> {
+                switch (JOptionPane.showConfirmDialog(
                     frame,
-                    "\""+ card.name() + "\":\n" + card.description() + "\n\nSell Value: " + card.price() + "$\nDo you want to sell it?",
+                    "\"" + c.name() + "\":\n" + c.description() + "\n\nSell Value: " + c.price() + "$\nDo you want to sell it?",
                     "Special Card Details",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE)
                 ) {
-                    case JOptionPane.YES_OPTION -> this.controller.handleEvent(BalatroEvent.SELL_CARD, Optional.of(card));
-                    default -> {}
+                    case JOptionPane.YES_OPTION -> this.controller.handleEvent(BalatroEvent.SELL_CARD, Optional.of(c));
+                    default -> { }
                 }
             }
         );
         specialCards.forEach(c -> specialSlot.addObject(new SlotPanel.SlotObject<>(c, c.name(), "JOKER")));
-        specialSlotContainer.add(specialSlot);
+        specialSlotPanel.add(specialSlot);
     }
 
     @Override
-    public void updateCurrency(int currency) {
+    public void updateCurrency(final int currency) {
         this.infoPanel.updateCurrency(currency);
     }
 
     @Override
-    public void updateAnteInfo(AnteInfo ante) {
+    public void updateAnteInfo(final AnteInfo ante) {
         this.infoPanel.updateAnte(ante);
     }
     @Override
@@ -194,43 +192,59 @@ public final class SwingView implements View {
 
     @Override
     public void showBlindDefeated(final BlindInfo blindInfo, final BlindStats blindStats) {
-        rightPanel.remove(this.centerPanel);
-        centerPanel = new BlindOver(this.controller, blindInfo, blindStats);
-        rightPanel.add(this.centerPanel, BorderLayout.CENTER);
-        frame.setVisible(true);
+        activePanel = changePanel(
+            rightPanel,
+            activePanel,
+            new BlindOver(controller, blindInfo, blindStats),
+            Optional.of(BorderLayout.CENTER)
+        );
     }
 
     @Override
     public void showGameOver() {
-        panel.remove(rightPanel);
-        rightPanel = new GameEnd(controller, "Game Over");
-        panel.add(rightPanel, BorderLayout.CENTER);
-        frame.setVisible(true);
+        rightPanel = changePanel(masterPanel, rightPanel, new GameEnd(controller, "Game Over"), Optional.of(BorderLayout.CENTER));
     }
 
     @Override
     public void showYouWon() {
-        panel.remove(rightPanel);
-        rightPanel = new GameEnd(controller, "You Won!");
-        panel.add(rightPanel, BorderLayout.CENTER);
-        frame.setVisible(true);
+        rightPanel = changePanel(masterPanel, rightPanel, new GameEnd(controller, "You Won!"), Optional.of(BorderLayout.CENTER));
     }
 
     @Override
     public void showShop() {
-        this.rightPanel.remove(centerPanel);
-        this.centerPanel = new ShopViewImpl(controller);
-        this.rightPanel.add(centerPanel, BorderLayout.CENTER);
-    }
-
-    @Override
-    public void notifyErrror(final String title, final String desc) {
-        JOptionPane.showMessageDialog(this.panel, desc, title, JOptionPane.ERROR_MESSAGE);
+        activePanel = changePanel(rightPanel, activePanel, new ShopViewImpl(controller), Optional.of(BorderLayout.CENTER));
     }
 
     @Override
     public void updateShopCards(final Set<SpecialCardInfo> toSell) {
-        ((ShopView) this.centerPanel).updateCards(toSell);
+        Preconditions.checkState(this.activePanel instanceof ShopView, "The current active panel isn't a Shop View");
+        ((ShopView) this.activePanel).updateCards(toSell);
+    }
+
+    @Override
+    public void notifyErrror(final String title, final String desc) {
+        JOptionPane.showMessageDialog(this.masterPanel, desc, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    private JPanel changePanel(
+        final Container parent,
+        final JPanel oldPanel,
+        final JPanel newPanel,
+        final Optional<Object> constraints
+    ) {
+        if (oldPanel != null) {
+            parent.remove(oldPanel);
+        }
+        if (constraints.isPresent()) {
+            parent.add(newPanel, constraints.get());
+        } else {
+            parent.add(newPanel);
+        }
+        newPanel.setVisible(true);
+        this.frame.revalidate();
+        this.frame.repaint();
+        this.frame.setVisible(true);
+        return newPanel;
     }
 
 }

@@ -17,8 +17,13 @@ import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 /**
  * Displays the ante and relative blind info.
  */
-public class AnteView extends JPanel {
+public final class AnteView extends JPanel {
     static final long serialVersionUID = 1L;
+    private final FontFactory fontFactory = new FontFactory();
+    private static final String FONT = "COPPER_BLACK";
+    private static final float TITLE_SIZE = 50f;
+    private static final float BLIND_SIZE = 25f;
+    private static final float LABEL_SIZE = 15f;
 
     /**
      * Builds the GUI.
@@ -29,6 +34,7 @@ public class AnteView extends JPanel {
         super(new BorderLayout());
         this.setBackground(Color.GREEN.darker().darker().darker().darker());
         final JLabel title = new JLabel("Ante n. " + anteInfo.id(), JLabel.CENTER);
+        title.setFont(this.fontFactory.getFont(FONT, TITLE_SIZE, this));
         title.setForeground(Color.WHITE);
 
         final JPanel columns = new JPanel(new GridLayout(1, anteInfo.blinds().size()));
@@ -38,45 +44,35 @@ public class AnteView extends JPanel {
         playButton.setBackground(Color.decode("#2274A5"));
         playButton.setForeground(Color.WHITE);
         playButton.addActionListener(a -> controller.handleEvent(BalatroEvent.SHOW_BLINDS, null));
+        playButton.setAlignmentX(CENTER_ALIGNMENT);
+        playButton.setFont(this.fontFactory.getFont(FONT, LABEL_SIZE, this));
 
         for (var blind: anteInfo.blinds()) {
-            var column = new JPanel();
+            final var column = new JPanel();
             column.setLayout(new BoxLayout(column, BoxLayout.PAGE_AXIS));
             column.setOpaque(false);
-            var blindTitle = new JLabel("Blind " + blind.id());
-            var chips = new JLabel("Min. chips: " + blind.minimumChips());
-            var reward = new JLabel("Reward: " + blind.reward() + "$");
-            blindTitle.setAlignmentX(CENTER_ALIGNMENT);
-            chips.setAlignmentX(CENTER_ALIGNMENT);
-            reward.setAlignmentX(CENTER_ALIGNMENT);
-            chips.setForeground(Color.WHITE);
-            reward.setForeground(Color.WHITE);
-            blindTitle.setForeground(Color.WHITE);
-            column.add(Box.createRigidArea(new Dimension(0,30)));
-            column.add(blindTitle);
-            column.add(Box.createRigidArea(new Dimension(0,100)));
-            column.add(reward);
-            column.add(chips);
-            column.add(Box.createRigidArea(new Dimension(0,100)));
+            column.add(Box.createRigidArea(new Dimension(0, 30)));
+            column.add(createLabel("Blind " + blind.id(), BLIND_SIZE));
+            column.add(Box.createRigidArea(new Dimension(0, 30)));
+            column.add(createLabel("Min. chips: " + blind.minimumChips(), LABEL_SIZE));
+            column.add(createLabel("Reward: " + blind.reward() + "$", LABEL_SIZE));
+            column.add(Box.createRigidArea(new Dimension(0, 50)));
             if (blind.id() == anteInfo.currentBlindId()) {
-                playButton.setAlignmentX(CENTER_ALIGNMENT);
                 column.add(playButton);
             }
             columns.add(column);
         }
-
-        /*
-        for (int i = 0; i < anteInfo.blinds().size(); i++) {
-            text.append("\n\nBlind " + anteInfo.blinds().get(i).id());
-            if (i == anteInfo.currentBlindId()) {
-                text.append(" (CURRENT BLIND)");
-            }
-            text.append("\n    Chips Required: " + anteInfo.blinds().get(i).minimumChips());
-            text.append("\n    Reward: " + anteInfo.blinds().get(i).reward());
-        }*/
         add(title, BorderLayout.NORTH);
         add(columns, BorderLayout.CENTER);
         setVisible(true);
+    }
+
+    private JLabel createLabel(final String text, final float fontSize) {
+        final JLabel label = new JLabel(text);
+        label.setAlignmentX(CENTER_ALIGNMENT);
+        label.setFont(this.fontFactory.getFont(FONT, fontSize, this));
+        label.setForeground(Color.WHITE);
+        return label;
     }
 
 }

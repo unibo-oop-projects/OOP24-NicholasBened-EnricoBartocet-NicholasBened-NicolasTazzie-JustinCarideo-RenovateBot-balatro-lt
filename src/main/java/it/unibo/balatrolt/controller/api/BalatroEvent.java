@@ -35,6 +35,14 @@ public enum BalatroEvent {
      */
     STAGE_CARDS,
     /**
+     * The player wants to sort hand by rank.
+     */
+    SORT_BY_RANK,
+    /**
+     * The player wantsa to sort hand by suit.
+     */
+    SORT_BY_SUIT,
+    /**
      * The player opened the shop.
      */
     OPEN_SHOP,
@@ -60,9 +68,28 @@ public enum BalatroEvent {
             case MAIN_MENU -> Set.of(INIT_GAME);
             case INIT_GAME -> Set.of(CHOOSE_DECK);
             case CHOOSE_DECK, CLOSE_SHOP -> Set.of(SHOW_BLINDS, SELL_CARD);
-            case SHOW_BLINDS, DISCARD_CARDS -> Set.of(STAGE_CARDS, SELL_CARD);
-            case STAGE_CARDS -> Set.of(PLAY_CARDS, DISCARD_CARDS, STAGE_CARDS, SELL_CARD);
-            case PLAY_CARDS -> Set.of(STAGE_CARDS, OPEN_SHOP, MAIN_MENU, SELL_CARD);
+            case SHOW_BLINDS, DISCARD_CARDS -> Set.of(
+                STAGE_CARDS,
+                SELL_CARD,
+                SORT_BY_RANK,
+                SORT_BY_SUIT
+            );
+            case STAGE_CARDS -> Set.of(
+                PLAY_CARDS,
+                DISCARD_CARDS,
+                STAGE_CARDS,
+                SELL_CARD,
+                SORT_BY_RANK,
+                SORT_BY_SUIT
+            );
+            case PLAY_CARDS, SORT_BY_RANK, SORT_BY_SUIT -> Set.of(
+                STAGE_CARDS,
+                OPEN_SHOP,
+                MAIN_MENU,
+                SELL_CARD,
+                SORT_BY_RANK,
+                SORT_BY_SUIT
+            );
             case BUY_CARD, OPEN_SHOP -> Set.of(BUY_CARD, CLOSE_SHOP, SELL_CARD);
             case SELL_CARD -> Set.of(values());
         };

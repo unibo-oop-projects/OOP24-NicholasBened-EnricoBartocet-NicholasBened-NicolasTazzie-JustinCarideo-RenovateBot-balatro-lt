@@ -14,6 +14,7 @@ import it.unibo.balatrolt.controller.api.LevelsController;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.PlayerController;
 import it.unibo.balatrolt.controller.api.ShopController;
+import it.unibo.balatrolt.controller.api.SortingHandController;
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
@@ -38,6 +39,7 @@ public final class MasterControllerImpl implements MasterController {
     private LevelsController levels;
     private PlayerController player;
     private ShopController shop;
+    private SortingHandController sortController;
 
     /**
      * Constructor of {@link MasterContorller}.
@@ -79,6 +81,20 @@ public final class MasterControllerImpl implements MasterController {
                 this.views.forEach(v -> {
                     v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats());
                     v.updateScore(this.levels.getCurrentBlindStats());
+                });
+            }
+            case SORT_BY_RANK -> {
+                this.views.forEach(v -> {
+                    v.updateGameTable(
+                        this.sortController.sortByRank(this.levels.getHand()),
+                        this.levels.getCurrentBlindStats());
+                });
+            }
+            case SORT_BY_SUIT -> {
+                this.views.forEach(v -> {
+                    v.updateGameTable(
+                        this.sortController.sortBySuit(this.levels.getHand()),
+                        this.levels.getCurrentBlindStats());
                 });
             }
             case PLAY_CARDS -> {
@@ -179,6 +195,7 @@ public final class MasterControllerImpl implements MasterController {
         final var deck = deckTranslator.get((DeckInfo) data.get());
         this.levels = new LevelsControllerImpl(deck);
         this.player = new PlayerControllerImpl(deck);
+        this.sortController = new SortingHandControllerImpl(deck);
     }
 
     private List<PlayableCardInfo> checkPlayableCards(final Optional<?> data) {

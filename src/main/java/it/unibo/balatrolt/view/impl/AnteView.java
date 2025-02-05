@@ -13,6 +13,8 @@ import it.unibo.balatrolt.controller.api.communication.AnteInfo;
  * Displays the ante and relative blind info.
  */
 public class AnteView extends JPanel {
+    static final long serialVersionUID = 1L;
+
     /**
      * Builds the GUI.
      * @param controller master controller.
@@ -20,9 +22,9 @@ public class AnteView extends JPanel {
      */
     public AnteView(final MasterController controller, final AnteInfo anteInfo) {
         super(new BorderLayout());
-        var button = new JButton("START");
-        button.addActionListener(a -> controller.handleEvent(BalatroEvent.CHOOSE_BLIND, null));
-        JTextArea text = new JTextArea();
+        final JButton button = new JButton("START");
+        button.addActionListener(a -> controller.handleEvent(BalatroEvent.SHOW_BLINDS, null));
+        final JTextArea text = new JTextArea();
         text.setEditable(false);
         text.append("Current Ante: " + anteInfo.id());
         text.append("\n\nBLINDS:");
@@ -34,9 +36,9 @@ public class AnteView extends JPanel {
             text.append("\n    Chips Required: " + anteInfo.blinds().get(i).minimumChips());
             text.append("\n    Reward: " + anteInfo.blinds().get(i).reward());
         }
-        this.add(text, BorderLayout.CENTER);
-        this.add(button, BorderLayout.SOUTH);
-        this.setVisible(true);
+        add(text, BorderLayout.CENTER);
+        add(button, BorderLayout.SOUTH);
+        setVisible(true);
     }
 
 }

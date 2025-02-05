@@ -38,6 +38,8 @@ public final class DeckSelector extends JPanel {
     private static final float TITLE_SIZE = 100f;
     private static final float DECK_SIZE = 35f;
     private static final float DESCR_SIZE = 25f;
+    private static final Double BASE_WEIGHT = 0.2;
+    private static final int BASE_PAD = 10;
     private final Map<String, DeckInfo> decksTranslator = new HashMap<>();
     private final JLabel labelName;
     private final JTextArea deckDescription;
@@ -73,7 +75,7 @@ public final class DeckSelector extends JPanel {
             (int) (getPreferredSize().width * 1.2),
             (int) (getPreferredSize().height * 1.5)
         ));
-        add(centralMenu, getConstraints(0, 0, 0.2, 1.0, 0,
+        add(centralMenu, getConstraints(0, 0, BASE_WEIGHT, 1.0, 0,
             GridBagConstraints.PAGE_END, GridBagConstraints.NONE, 0, 0, 50, 0));
         /**
          * Adding component to the central menu.
@@ -90,8 +92,8 @@ public final class DeckSelector extends JPanel {
             }
             this.updateDeck();
         });
-        centralMenu.add(lefButton, getConstraints(0, 0, 0, 0.2, 0,
-            GridBagConstraints.LINE_START, GridBagConstraints.VERTICAL, 20, 5, 20, 5));
+        centralMenu.add(lefButton, getConstraints(0, 0, 0, BASE_WEIGHT, 0,
+            GridBagConstraints.LINE_START, GridBagConstraints.VERTICAL, BASE_PAD * 2, BASE_PAD / 2, BASE_PAD * 2, BASE_PAD / 2));
         /**
          * Setting right button.
          */
@@ -106,30 +108,30 @@ public final class DeckSelector extends JPanel {
             }
             this.updateDeck();
         });
-        centralMenu.add(rightButton, getConstraints(2, 0, 0, 0.2, 0,
-            GridBagConstraints.LINE_END, GridBagConstraints.VERTICAL, 20, 5, 20, 5));
+        centralMenu.add(rightButton, getConstraints(2, 0, 0, BASE_WEIGHT, 0,
+            GridBagConstraints.LINE_END, GridBagConstraints.VERTICAL, BASE_PAD * 2, BASE_PAD / 2, BASE_PAD * 2, BASE_PAD / 2));
         /**
          * Setting panel in which the decks will be displayed.
          */
         final JPanel deckPanel = new JPanel(new GridBagLayout());
         deckPanel.setBackground(Color.BLACK);
-        centralMenu.add(deckPanel, getConstraints(1, 0, 1.0, 0.2, 0,
+        centralMenu.add(deckPanel, getConstraints(1, 0, 1.0, BASE_WEIGHT, 0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH, 30, 0, 30, 0));
         /**
          * Setting the description panel.
          */
         final JPanel descriptionPanel = new JPanel(new GridBagLayout());
         descriptionPanel.setBackground(Color.DARK_GRAY);
-        deckPanel.add(descriptionPanel, getConstraints(1, 0, 1.0, 0.2, 0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH, 10, 10, 10, 10));
+        deckPanel.add(descriptionPanel, getConstraints(1, 0, 1.0, BASE_WEIGHT, 0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH, BASE_PAD, BASE_PAD, BASE_PAD, BASE_PAD));
         /**
          * setting deck name.
          */
         this.labelName = new JLabel();
         this.labelName.setFont(getFont(DESC_DECK_FONT, DECK_SIZE));
         this.labelName.setForeground(Color.WHITE);
-        descriptionPanel.add(this.labelName, getConstraints(0, 0, 0.2, 0, 0,
-            GridBagConstraints.PAGE_START, GridBagConstraints.NONE, 15, 0, 0, 0));
+        descriptionPanel.add(this.labelName, getConstraints(0, 0, BASE_WEIGHT, 0, 0,
+            GridBagConstraints.PAGE_START, GridBagConstraints.NONE, BASE_PAD, 0, 0, 0));
         /**
          * setting deck description.
          */
@@ -143,7 +145,7 @@ public final class DeckSelector extends JPanel {
         this.deckDescription.setOpaque(true);
         this.deckDescription.setForeground(Color.BLACK);
         descriptionPanel.add(deckDescription, getConstraints(0, 1, 1.0, 1.0, 50,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH, 10, 5, 5, 5));
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH, BASE_PAD, BASE_PAD / 2, BASE_PAD / 2, BASE_PAD / 2));
         /**
          * setting deck image
          */
@@ -153,8 +155,8 @@ public final class DeckSelector extends JPanel {
         this.deck.addActionListener(e -> {
             controller.handleEvent(BalatroEvent.CHOOSE_DECK, Optional.of(this.decksTranslator.get(this.deckName)));
         });
-        deckPanel.add(deck, getConstraints(0, 0, 0, 0.2, 0,
-            GridBagConstraints.PAGE_START, GridBagConstraints.VERTICAL, 10, 10, 10, 10));
+        deckPanel.add(deck, getConstraints(0, 0, 0, BASE_WEIGHT, 0,
+            GridBagConstraints.PAGE_START, GridBagConstraints.VERTICAL, BASE_PAD, BASE_PAD, BASE_PAD, BASE_PAD));
         this.updateDeck();
         /**
          * Setting the background.
@@ -167,7 +169,7 @@ public final class DeckSelector extends JPanel {
         setVisible(true);
     }
 
-    /**
+    /*
      * Create a GribBagConstraint with the given data.
      */
     private GridBagConstraints getConstraints(final int x, final int y, final double weightx, final double weighty,
@@ -190,7 +192,8 @@ public final class DeckSelector extends JPanel {
      */
     private void updateDeck() {
         try {
-            final Image img = ImageIO.read(getClass().getResource("/img/decks/" + this.deckName.toUpperCase(Locale.getDefault()) + "_DECK.png"));
+            final Image img = ImageIO.read(getClass()
+                .getResource("/img/decks/" + this.deckName.toUpperCase(Locale.getDefault()) + "_DECK.png"));
             this.deck.setIcon(new ImageIcon(img));
         } catch (IOException | IndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(this, "This is the last deck!");

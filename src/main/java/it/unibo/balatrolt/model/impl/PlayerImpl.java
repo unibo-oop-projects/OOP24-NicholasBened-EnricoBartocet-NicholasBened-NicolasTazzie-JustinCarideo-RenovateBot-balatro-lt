@@ -75,7 +75,7 @@ public final class PlayerImpl implements Player {
     }
 
     @Override
-    public void sellSpecialCard(SpecialCard specialCard) {
+    public void sellSpecialCard(final SpecialCard specialCard) {
         Preconditions.checkNotNull(specialCard, "Cannot sell null card");
         specialCardSlot.remove(specialCard);
         addCurrency(specialCard.getToSellValue());

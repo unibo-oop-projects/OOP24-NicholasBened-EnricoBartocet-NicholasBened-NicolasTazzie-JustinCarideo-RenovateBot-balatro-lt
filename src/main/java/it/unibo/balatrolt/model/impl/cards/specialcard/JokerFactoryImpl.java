@@ -26,7 +26,7 @@ public final class JokerFactoryImpl implements JokerFactory {
         return new JokerImpl(
             name.toLowerCase(Locale.getDefault()),
             description.toLowerCase(Locale.getDefault()),
-            getRandomPrice(JokerTier.COMMON),
+            getRandomPrice(),
             null,
             JokerTier.COMMON);
     }
@@ -55,7 +55,7 @@ public final class JokerFactoryImpl implements JokerFactory {
         return new JokerImpl(
             name.toLowerCase(Locale.getDefault()),
             description.toLowerCase(Locale.getDefault()),
-            getRandomPrice(tier),
+            getRandomPrice(),
             modifier,
             tier);
     }
@@ -70,7 +70,7 @@ public final class JokerFactoryImpl implements JokerFactory {
         return new JokerImpl(
                 name.toLowerCase(Locale.getDefault()),
                 description.toLowerCase(Locale.getDefault()),
-                getRandomPrice(j.getTier()),
+                getRandomPrice(),
                 new ModifierBuilderImpl()
                     .merge(j.getModifier().get())
                     .addPlayedCardBound(bound)
@@ -84,7 +84,7 @@ public final class JokerFactoryImpl implements JokerFactory {
         return new JokerImpl(
             newName.toLowerCase(Locale.getDefault()),
             newDescription.toLowerCase(Locale.getDefault()),
-            getRandomPrice(tier),
+            getRandomPrice(),
             new ModifierBuilderImpl()
                 .merge(j1.getModifier().get())
                 .merge(j2.getModifier().get())
@@ -92,7 +92,7 @@ public final class JokerFactoryImpl implements JokerFactory {
                 tier);
     }
 
-    private int getRandomPrice(final JokerTier tier) {
+    private int getRandomPrice() {
         return priceSupplier.nextInt(MIN_PRICE, MAX_PRICE);
     }
 
@@ -102,7 +102,7 @@ public final class JokerFactoryImpl implements JokerFactory {
                 return new JokerImpl(
                     newName.toLowerCase(Locale.getDefault()),
                     newDescription.toLowerCase(Locale.getDefault()),
-                    getRandomPrice(j.getTier()),
+                    getRandomPrice(),
                     new ModifierBuilderImpl()
                         .merge(j.getModifier().get())
                         .addHoldingCardBound(bound)
@@ -121,7 +121,7 @@ public final class JokerFactoryImpl implements JokerFactory {
             return new JokerImpl(
                 newName.toLowerCase(Locale.getDefault()),
                 newDescription.toLowerCase(Locale.getDefault()),
-                getRandomPrice(j.getTier()),
+                getRandomPrice(),
                 new ModifierBuilderImpl()
                     .merge(j.getModifier().get())
                     .addCurrentCurrencyBound(bound)
@@ -136,7 +136,7 @@ public final class JokerFactoryImpl implements JokerFactory {
                 return new JokerImpl(
                     newName.toLowerCase(Locale.getDefault()),
                     newDescription.toLowerCase(Locale.getDefault()),
-                    getRandomPrice(j.getTier()),
+                    getRandomPrice(),
                     new ModifierBuilderImpl()
                         .merge(j.getModifier().get())
                         .addCombinationBound(bound)

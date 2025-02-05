@@ -24,6 +24,8 @@ public final class TitlePanel extends JPanel {
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker();
     private static final int SIZE_TITLE_BLIND = 30;
+    private static final int VERT_PADD = 10;
+    private static final int HORI_PADD = 20;
     private final BlindInfo info;
 
     /**
@@ -44,9 +46,9 @@ public final class TitlePanel extends JPanel {
     }
 
     /**
-     * Builds the title
+     * Builds the title.
      * @param color
-     * @return
+     * @return title's JLabel.
      */
     private JLabel getTitle(final Color color) {
         final JLabel titleBlind = new JLabel();
@@ -56,7 +58,7 @@ public final class TitlePanel extends JPanel {
         titleBlind.setForeground(Color.white);
         titleBlind.setOpaque(true);
         titleBlind.setHorizontalAlignment(SwingConstants.CENTER);
-        titleBlind.setBorder(new EmptyBorder(10, 20, 10, 20));
+        titleBlind.setBorder(new EmptyBorder(VERT_PADD, HORI_PADD, VERT_PADD, HORI_PADD));
         return titleBlind;
     }
 
@@ -68,7 +70,7 @@ public final class TitlePanel extends JPanel {
         rewardLabel.setFont(getFont(MAIN_FONT, SIZE_TITLE_BLIND));
         rewardLabel.setForeground(Color.white);
         rewardLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        rewardLabel.setBorder(new EmptyBorder(10, 20, 10, 20));
+        rewardLabel.setBorder(new EmptyBorder(VERT_PADD, HORI_PADD, VERT_PADD, HORI_PADD));
         return rewardLabel;
     }
 

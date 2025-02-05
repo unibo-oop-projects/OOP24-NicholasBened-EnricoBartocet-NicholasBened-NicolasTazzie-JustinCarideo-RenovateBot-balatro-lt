@@ -16,7 +16,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
  * (remaining discards, hand, current currency and ante).
  */
 public class HandPanel extends JPanel {
-
+    static final long serialVersionUID = 1L;
     private final JLabel handLabel = new JLabel();
     private final JLabel discardLabel = new JLabel();
     private final JLabel currencyLabel = new JLabel("$0");
@@ -74,7 +74,7 @@ public class HandPanel extends JPanel {
      * @param currency
      */
     public void updateCurrency(final int currency) {
-        this.currencyLabel.setText("$" + String.valueOf(currency));
+        this.currencyLabel.setText("$" + currency);
     }
 
     /**
@@ -82,6 +82,6 @@ public class HandPanel extends JPanel {
      * @param info
      */
     public void updateAnte(final AnteInfo info) {
-        this.anteLabel.setText("Ante: " + String.valueOf(info.id()));;
+        this.anteLabel.setText("Ante: " + info.id());
     }
 }

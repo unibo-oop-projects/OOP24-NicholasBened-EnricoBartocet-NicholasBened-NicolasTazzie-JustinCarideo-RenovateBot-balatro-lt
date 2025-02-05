@@ -71,7 +71,7 @@ public final class MasterControllerImpl implements MasterController {
                     v.updateAnteInfo(this.levels.getCurrentAnte());
                 });
             }
-            case CHOOSE_BLIND -> {
+            case SHOW_BLINDS -> {
                 this.views.forEach(v -> v.showRound(this.levels.getHand()));
             }
             case STAGE_CARDS -> this.views.forEach(v -> v.updateCombinationStatus(recognizeCombination(data)));

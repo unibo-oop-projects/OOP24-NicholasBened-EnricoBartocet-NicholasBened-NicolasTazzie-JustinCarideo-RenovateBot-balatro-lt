@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -27,13 +26,14 @@ public class GameEnd extends JPanel {
     private static final String FONT = "JOKERMAN";
     private static final float BUTTON_SIZE = 65f;
     private static final float TEXT_SIZE = 70f;
-    private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    private static final int HEIGHT_GAP = 200;
+    private Image image;
 
     /**
      * builds the GUI.
      * @param controller master controller.
      */
-    GameEnd(final MasterController controller, String title) {
+    GameEnd(final MasterController controller, final String title) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         final JPanel gameOverPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         final JLabel gameOver = new JLabel(title);
@@ -42,10 +42,10 @@ public class GameEnd extends JPanel {
         gameOverPanel.setOpaque(false);
         gameOverPanel.add(gameOver);
         /**
-         * Setting accept button.
+         * Setting new game button.
          */
         final JPanel buttons = new JPanel();
-        buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 0));
+        buttons.setLayout(new FlowLayout(FlowLayout.CENTER, HEIGHT_GAP, 0));
         add(Box.createGlue());
         add(gameOverPanel);
         add(Box.createGlue());
@@ -60,7 +60,9 @@ public class GameEnd extends JPanel {
         accept.setAlignmentY(CENTER_ALIGNMENT);
         buttons.add(accept);
         buttons.setOpaque(false);
-
+        /**
+         * Setting quit button
+         */
         final JButton decline = new JButton("Quit");
         decline.setFont(getFont(FONT, BUTTON_SIZE));
         decline.setForeground(Color.WHITE.brighter());

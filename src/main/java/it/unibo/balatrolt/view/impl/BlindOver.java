@@ -15,6 +15,8 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
  * possibility to open the shop.
  */
 public class BlindOver extends JPanel {
+    static final long serialVersionUID = 1L;
+
     /**
      * Builds the GUI.
      * @param controller master controller.
@@ -23,9 +25,9 @@ public class BlindOver extends JPanel {
      */
     public BlindOver(final MasterController controller, final BlindInfo blindInfo, final BlindStats blindStats) {
         super(new BorderLayout());
-        var button = new JButton("OPEN SHOP");
+        final JButton button = new JButton("OPEN SHOP");
         button.addActionListener(a -> controller.handleEvent(BalatroEvent.OPEN_SHOP, null));
-        JTextArea text = new JTextArea();
+        final JTextArea text = new JTextArea();
         text.setEditable(false);
         text.append("BLIND DEFEATED");
         text.append("\nSTATISTICS");

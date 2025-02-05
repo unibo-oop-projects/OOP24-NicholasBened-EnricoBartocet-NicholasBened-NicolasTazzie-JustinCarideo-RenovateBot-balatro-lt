@@ -59,7 +59,7 @@ public final class CombinationCalculatorFactoryImpl implements CombinationCalcul
 
     @Override
     public CombinationCalculator errorCardCalculator() {
-        return general(hand -> hand.size());
+        return general(List::size);
     }
 
     @Override

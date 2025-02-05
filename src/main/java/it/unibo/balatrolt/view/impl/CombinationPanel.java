@@ -3,7 +3,9 @@ package it.unibo.balatrolt.view.impl;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -18,6 +20,7 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
  * the cards that are selected (in real-time).
  */
 public final class CombinationPanel extends JPanel {
+    static final long serialVersionUID = 1L;
     private static final String FONT = "COPPER_BLACK";
     private static final int SCORE_DIM = 30;
     private final JLabel combinationLabel;
@@ -32,20 +35,20 @@ public final class CombinationPanel extends JPanel {
      */
     public CombinationPanel(final CombinationInfo info) {
         this.setLayout(new BorderLayout());
-        combinationLabel = getCombinationLabel(info);
-        basePointsLabel = getBasePointsLabel(info);
-        multiplierLabel = getMultiplierLabel(info);
+        combinationLabel = getCombinationLabel();
+        basePointsLabel = getBasePointsLabel();
+        multiplierLabel = getMultiplierLabel();
         final JPanel mainPanel = new JPanel();
         final int row = 2;
         final int col = 2;
         mainPanel.setLayout(new GridLayout(row, col));
-        final JLabel pointsTitle = getBasePointsLabel(info);
+        final JLabel pointsTitle = getBasePointsLabel();
         pointsTitle.setBackground(pointsTitle.getBackground().darker());
         pointsTitle.setText("Base Points");
         pointsTitle.setHorizontalAlignment(SwingConstants.CENTER);
         pointsTitle.setFont(getFont(FONT, SCORE_DIM / 3 * 2));
         mainPanel.add(pointsTitle);
-        final JLabel multiplierTitle = getMultiplierLabel(info);
+        final JLabel multiplierTitle = getMultiplierLabel();
         multiplierTitle.setBackground(multiplierTitle.getBackground().darker());
         multiplierTitle.setText("Multiplier");
         multiplierTitle.setFont(getFont(FONT, SCORE_DIM / 3 * 2));
@@ -60,10 +63,9 @@ public final class CombinationPanel extends JPanel {
 
     /**
      * This method builds the combination label.
-     * @param info
      * @return the label in question
      */
-    private JLabel getCombinationLabel(final CombinationInfo info) {
+    private JLabel getCombinationLabel() {
         final JLabel combinationLabel = new JLabel();
         combinationLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         combinationLabel.setFont(getFont(FONT, SCORE_DIM));
@@ -76,10 +78,9 @@ public final class CombinationPanel extends JPanel {
 
     /**
      * This method builds the base points label.
-     * @param info
      * @return the label in question
      */
-    private JLabel getBasePointsLabel(final CombinationInfo info) {
+    private JLabel getBasePointsLabel() {
         final JLabel pointsLabel = new JLabel();
         pointsLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -92,10 +93,9 @@ public final class CombinationPanel extends JPanel {
 
     /**
      * This method builds the multiplier label.
-     * @param info
      * @return the label in question
      */
-    private JLabel getMultiplierLabel(final CombinationInfo info) {
+    private JLabel getMultiplierLabel() {
         final JLabel multiplierLabel = new JLabel();
         multiplierLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         multiplierLabel.setFont(getFont(FONT, SCORE_DIM));
@@ -127,7 +127,7 @@ public final class CombinationPanel extends JPanel {
                 getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
             );
             font = font.deriveFont(fontSize);
-        } catch (Exception e) {
+        } catch (FontFormatException | IOException e) {
             JOptionPane.showMessageDialog(this, "Cannot load font");
         }
         return font;

@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
-
+/**
+ * Main menu GUI.
+ */
 public class MainMenu extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String TITLE_FONT = "SNAP_ITC";
@@ -25,8 +27,12 @@ public class MainMenu extends JPanel {
     private static final float TITLE_SIZE = 100f;
     private static final float BUTTON_SIZE = 65f;
     private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-
-    public MainMenu(final MasterController controller, final String testo) {
+    /**
+     * Builds the main menu.
+     * @param controller master controller.
+     * @param text title text.
+     */
+    public MainMenu(final MasterController controller, final String text) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         /**
          * Setting the title.
@@ -40,7 +46,7 @@ public class MainMenu extends JPanel {
         /**
          * Setting the start button.
          */
-        final JButton start = new JButton(testo);
+        final JButton start = new JButton(text);
         start.setFont(getFont(BUTTON_FONT, BUTTON_SIZE));
         start.setForeground(Color.WHITE.brighter());
         start.setContentAreaFilled(false);

@@ -14,6 +14,7 @@ import it.unibo.balatrolt.controller.api.LevelsController;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.PlayerController;
 import it.unibo.balatrolt.controller.api.ShopController;
+import it.unibo.balatrolt.controller.api.SortingHandController;
 import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
@@ -38,6 +39,7 @@ public final class MasterControllerImpl implements MasterController {
     private LevelsController levels;
     private PlayerController player;
     private ShopController shop;
+    private SortingHandController sortController;
 
     /**
      * Constructor of {@link MasterContorller}.
@@ -71,14 +73,30 @@ public final class MasterControllerImpl implements MasterController {
                 });
             }
             case SHOW_BLINDS -> {
-                this.views.forEach(v -> v.showRound(this.levels.getHand()));
+                this.views.forEach(v -> v.showRound(this.getSortedCards()));
             }
             case STAGE_CARDS -> this.views.forEach(v -> v.updateCombinationStatus(recognizeCombination(data)));
             case DISCARD_CARDS -> {
                 this.levels.discardCards(checkPlayableCards(data));
                 this.views.forEach(v -> {
-                    v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats());
-                    v.updateScore(this.levels.getCurrentBlindStats());
+                    v.updateGameTable(this.getSortedCards(), this.levels.getCurrentBlindStats());
+                    v.updateScore(this.levels.getCurrentBlindStats()
+                    );
+                });
+            }
+            case SORT_BY_RANK -> {
+                this.views.forEach(v -> {
+                    v.updateGameTable(
+                        this.sortController.sortByRank(this.levels.getHand()),
+                        this.levels.getCurrentBlindStats()
+                    );
+                });
+            }
+            case SORT_BY_SUIT -> {
+                this.views.forEach(v -> {
+                    v.updateGameTable(
+                        this.sortController.sortBySuit(this.levels.getHand()),
+                        this.levels.getCurrentBlindStats());
                 });
             }
             case PLAY_CARDS -> {
@@ -86,7 +104,7 @@ public final class MasterControllerImpl implements MasterController {
                 switch (this.levels.getRoundStatus()) {
                     case IN_GAME -> {
                         this.views.forEach(
-                                v -> v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats()));
+                                v -> v.updateGameTable(this.getSortedCards(), this.levels.getCurrentBlindStats()));
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
@@ -150,6 +168,10 @@ public final class MasterControllerImpl implements MasterController {
         this.nextEvents = e.getNextPossibleEvents();
     }
 
+    private List<PlayableCardInfo> getSortedCards() {
+        return this.sortController.sortByLastCall(this.levels.getHand());
+    }
+
     @Override
     public void attachView(final View v) {
         Preconditions.checkNotNull(v);
@@ -179,6 +201,7 @@ public final class MasterControllerImpl implements MasterController {
         final var deck = deckTranslator.get((DeckInfo) data.get());
         this.levels = new LevelsControllerImpl(deck);
         this.player = new PlayerControllerImpl(deck);
+        this.sortController = new SortingHandControllerImpl(deck);
     }
 
     private List<PlayableCardInfo> checkPlayableCards(final Optional<?> data) {

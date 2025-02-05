@@ -69,7 +69,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         this.add(titlePanel, BorderLayout.NORTH);
         this.add(innerPanel, BorderLayout.CENTER);
         this.logic = new ShopInnerLogicImpl();
-        this.controller = controller;
+        this.controller = checkNotNull(controller);
         this.buyButton = new JButton("Buy");
         this.buyButton.addActionListener(e -> {
             this.controller.handleEvent(BalatroEvent.BUY_CARD, this.logic.getSelectedCard());

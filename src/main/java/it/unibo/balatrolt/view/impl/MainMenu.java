@@ -18,7 +18,7 @@ import it.unibo.balatrolt.controller.api.MasterController;
 /**
  * Main menu GUI.
  */
-public class MainMenu extends JPanel {
+public final class MainMenu extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String TITLE_FONT = "SNAP_ITC";
     private static final String BUTTON_FONT = "JOKERMAN";

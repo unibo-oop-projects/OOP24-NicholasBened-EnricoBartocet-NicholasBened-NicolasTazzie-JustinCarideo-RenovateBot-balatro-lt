@@ -100,7 +100,7 @@ public final class PlayedHandImpl implements PlayedHand {
             case FULL_HOUSE -> this.helper.fullHouseRecognizer();
             case FOUR_OF_A_KIND -> this.helper.fourOfAKindRecognizer();
             case STRAIGHT_FLUSH -> this.helper.straightFlushRecognizer();
-            case ROYAL_FLUSH ->this.helper.royalFlushRecognizer();
+            case ROYAL_FLUSH -> this.helper.royalFlushRecognizer();
             default -> this.helper.errorCardRecognizer();
         };
     }

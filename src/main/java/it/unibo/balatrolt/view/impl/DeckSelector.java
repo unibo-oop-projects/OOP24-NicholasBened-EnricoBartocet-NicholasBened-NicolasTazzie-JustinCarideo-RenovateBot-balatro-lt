@@ -7,7 +7,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -38,13 +37,18 @@ public final class DeckSelector extends JPanel {
     private static final float DESCR_SIZE = 25f;
     private static final Double BASE_WEIGHT = 0.2;
     private static final int BASE_PAD = 10;
-    private final Map<String, DeckInfo> decksTranslator = new HashMap<>();
+    private static final int TOP_PAD = 50;
+    private static final int DECK_PAD = 30;
+    private static final double HEIGHT_MULT = 1.5;
+    private static final double WIDTH_MULT = 1.2;
+
+    private final Map<String, DeckInfo> decksTranslator;
     private final FontFactory fontFactory = new FontFactory();
     private final JLabel labelName;
     private final JTextArea deckDescription;
     private final JButton deck;
     private String deckName;
-    private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    private Image image;
 
     /**
      * Sets the GUI and waits for the user to choose a deck.
@@ -53,6 +57,7 @@ public final class DeckSelector extends JPanel {
      */
     public DeckSelector(final MasterController controller, final List<DeckInfo> decks) {
         setLayout(new GridBagLayout());
+        this.decksTranslator = new HashMap<>();
         decks.forEach(d -> {
             this.decksTranslator.put(d.name(), d);
         });
@@ -64,18 +69,18 @@ public final class DeckSelector extends JPanel {
         title.setFont(this.fontFactory.getFont(TITLE_FONT, TITLE_SIZE, this));
         title.setForeground(Color.WHITE.brighter());
         add(title, getConstraints(GridBagConstraints.RELATIVE, GridBagConstraints.RELATIVE, 0, 0,
-            0, GridBagConstraints.PAGE_START, GridBagConstraints.NONE, 50, 0, 20, 0));
+            0, GridBagConstraints.PAGE_START, GridBagConstraints.NONE, TOP_PAD, 0, TOP_PAD / 2, 0));
         /**
          * Setting the deck selector.
          */
         final JPanel centralMenu = new JPanel(new GridBagLayout());
         centralMenu.setBackground(Color.DARK_GRAY);
         centralMenu.setPreferredSize(new Dimension(
-            (int) (getPreferredSize().width * 1.2),
-            (int) (getPreferredSize().height * 1.5)
+            (int) (getPreferredSize().width * WIDTH_MULT),
+            (int) (getPreferredSize().height * HEIGHT_MULT)
         ));
         add(centralMenu, getConstraints(0, 0, BASE_WEIGHT, 1.0, 0,
-            GridBagConstraints.PAGE_END, GridBagConstraints.NONE, 0, 0, 50, 0));
+            GridBagConstraints.PAGE_END, GridBagConstraints.NONE, 0, 0, TOP_PAD, 0));
         /**
          * Adding component to the central menu.
          * Setting left button.
@@ -115,7 +120,7 @@ public final class DeckSelector extends JPanel {
         final JPanel deckPanel = new JPanel(new GridBagLayout());
         deckPanel.setBackground(Color.BLACK);
         centralMenu.add(deckPanel, getConstraints(1, 0, 1.0, BASE_WEIGHT, 0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH, 30, 0, 30, 0));
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH, DECK_PAD, 0, DECK_PAD, 0));
         /**
          * Setting the description panel.
          */

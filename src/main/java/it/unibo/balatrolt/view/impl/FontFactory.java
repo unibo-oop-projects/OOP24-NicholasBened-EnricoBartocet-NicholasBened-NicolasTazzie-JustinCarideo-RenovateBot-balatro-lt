@@ -1,6 +1,7 @@
 package it.unibo.balatrolt.view.impl;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +14,8 @@ import java.awt.Font;
  * Used to avoid code duplications.
  * @author Nicholas Benedetti
  */
-public final class FontFactory {
+public final class FontFactory implements Serializable {
+    static final long serialVersionUID = 1L;
     private static final String BASE_FONT = "Arial";
 
     /**

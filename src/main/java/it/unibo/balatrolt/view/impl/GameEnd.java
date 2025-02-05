@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 /**
- * Shows the game over GUI
+ * Shows the game over GUI.
  */
-public class GameEnd extends JPanel {
+public final class GameEnd extends JPanel {
     static final long serialVersionUID = 1L;
     private static final String FONT = "JOKERMAN";
     private static final String TITLE_FONT = "SNAP_ITC";
@@ -33,6 +33,7 @@ public class GameEnd extends JPanel {
     /**
      * builds the GUI.
      * @param controller master controller.
+     * @param title the title.
      */
     GameEnd(final MasterController controller, final String title) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

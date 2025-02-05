@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 
-import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.Player;
 import it.unibo.balatrolt.model.api.PlayerStatus;
-import it.unibo.balatrolt.model.api.Slot;
+import it.unibo.balatrolt.model.api.cards.BuffedDeck;
+import it.unibo.balatrolt.model.api.cards.Slot;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 import it.unibo.balatrolt.model.impl.cards.SlotImpl;
 

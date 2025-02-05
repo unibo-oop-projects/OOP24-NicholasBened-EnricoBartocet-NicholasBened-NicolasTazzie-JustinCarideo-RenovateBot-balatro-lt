@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import it.unibo.balatrolt.model.api.Deck;
+import it.unibo.balatrolt.model.api.cards.Deck;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;

@@ -2,6 +2,7 @@ package it.unibo.balatrolt.model.api;
 
 import java.util.List;
 
+import it.unibo.balatrolt.model.api.cards.BuffedDeck;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 /**

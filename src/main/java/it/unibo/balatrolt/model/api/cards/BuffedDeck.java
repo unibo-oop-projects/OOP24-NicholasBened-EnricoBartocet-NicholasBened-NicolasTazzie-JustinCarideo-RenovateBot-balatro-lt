@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards;
 
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindModifier;

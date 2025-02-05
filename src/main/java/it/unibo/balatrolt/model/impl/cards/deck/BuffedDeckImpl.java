@@ -2,7 +2,7 @@ package it.unibo.balatrolt.model.impl.cards.deck;
 
 import com.google.common.base.Preconditions;
 
-import it.unibo.balatrolt.model.api.BuffedDeck;
+import it.unibo.balatrolt.model.api.cards.BuffedDeck;
 import it.unibo.balatrolt.model.api.levels.BlindModifier;
 
 /**

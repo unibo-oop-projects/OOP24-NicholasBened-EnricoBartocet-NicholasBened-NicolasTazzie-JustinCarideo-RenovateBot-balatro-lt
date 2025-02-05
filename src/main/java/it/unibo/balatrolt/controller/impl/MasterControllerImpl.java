@@ -18,7 +18,7 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 import it.unibo.balatrolt.controller.api.communication.DeckInfo;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
-import it.unibo.balatrolt.model.api.BuffedDeck;
+import it.unibo.balatrolt.model.api.cards.BuffedDeck;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory;

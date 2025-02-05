@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.UnaryOperator;
 
-import it.unibo.balatrolt.model.api.BuffedDeck;
+import it.unibo.balatrolt.model.api.cards.BuffedDeck;
 import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
 
 /**

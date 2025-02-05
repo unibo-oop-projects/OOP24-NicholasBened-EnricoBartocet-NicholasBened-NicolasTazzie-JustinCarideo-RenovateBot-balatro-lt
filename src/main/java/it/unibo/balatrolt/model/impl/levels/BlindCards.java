@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 
-import it.unibo.balatrolt.model.api.Slot;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
+import it.unibo.balatrolt.model.api.cards.Slot;
 import it.unibo.balatrolt.model.impl.cards.SlotImpl;
 import it.unibo.balatrolt.model.impl.cards.deck.DeckImpl;
 

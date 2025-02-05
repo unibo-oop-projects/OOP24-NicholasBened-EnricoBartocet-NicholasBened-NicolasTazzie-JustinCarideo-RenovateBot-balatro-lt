@@ -1,8 +1,6 @@
-package it.unibo.balatrolt.model.api;
+package it.unibo.balatrolt.model.api.cards;
 
 import java.util.List;
-
-import it.unibo.balatrolt.model.api.cards.Card;
 
 /**
  * It models the concept of a Slot, where we

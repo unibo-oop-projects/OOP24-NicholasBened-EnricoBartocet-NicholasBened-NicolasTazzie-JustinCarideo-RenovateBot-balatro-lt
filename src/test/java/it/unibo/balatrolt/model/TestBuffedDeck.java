@@ -14,7 +14,7 @@ import java.util.function.UnaryOperator;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.balatrolt.model.api.BuffedDeck;
+import it.unibo.balatrolt.model.api.cards.BuffedDeck;
 import it.unibo.balatrolt.model.impl.PlayerStatusImpl;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindConfigurationImpl;

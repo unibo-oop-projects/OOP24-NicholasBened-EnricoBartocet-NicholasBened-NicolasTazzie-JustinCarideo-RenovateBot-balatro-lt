@@ -17,7 +17,7 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 public interface View {
 
     /**
-     *
+     * Shows an error in the view.
      * @param title error title.
      * @param desc error message.
      */
@@ -30,62 +30,75 @@ public interface View {
 
     /**
      * Shows the decks to choose from.
-     * @param decks to choose from.
+     * @param decks to choose from
      */
     void showDecks(List<DeckInfo> decks);
 
     /**
      * Shows the ante information: the current blind,
      * current ante, the number of the ante's blinds ecc..
-     * @param anteInfo the ante information.
+     * @param anteInfo the ante information
      */
     void showAnte(AnteInfo anteInfo);
 
     /**
      * Starts the actual game.
-     * @param playableCards the cards in the player's hand.
+     * @param playableCards the cards in the player's hand
      */
     void showRound(List<PlayableCardInfo> playableCards);
 
     /**
      * Shows the information about the actual game and the cards owned by the player.
-     * @param info static information of the actual game.
-     * @param stats statistics of the actual game.
-     * @param specialCards owned special cards.
-     * @param deck selected deck.
-     * @param numAnte number of antes.
+     * @param info static information of the actual game
+     * @param stats statistics of the actual game
+     * @param specialCards owned special cards
+     * @param deck selected deck
+     * @param numAnte number of antes
      */
     void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck, int numAnte);
 
     /**
      * Updates the score in UI.
-     * @param stats blind actual statistics.
+     * @param stats blind actual statistics
      */
     void updateScore(BlindStats stats);
 
     /**
      * Updates the special cards.
+     * @param specialCards the current list of special cards
      */
     void updateSpecialCards(List<SpecialCardInfo> specialCards);
 
     /**
-     * Updates the player's hand.
-     * @param playableCards
+     * Updates the player's hand (including the discard enable).
+     * @param playableCards the list of cards in the player's hand
+     * @param stats the current statistics of the Blind
      */
     void updateGameTable(List<PlayableCardInfo> playableCards, BlindStats stats);
 
     /**
      * Updates the combination status.
+     * @param combination the current combination of the staged cards
      */
     void updateCombinationStatus(CombinationInfo combination);
 
     /**
      * Shows the blind defeated screen.
+     * @param blindInfo the information of the current blind
+     * @param blindStats the current statistics of the blind
      */
     void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
 
+    /**
+     * Update the money that the player has.
+     * @param currency the current amount of money
+     */
     void updateCurrency(int currency);
 
+    /**
+     * Update the information of the Ante.
+     * @param ante the current Ante Information
+     */
     void updateAnteInfo(AnteInfo ante);
 
     /**

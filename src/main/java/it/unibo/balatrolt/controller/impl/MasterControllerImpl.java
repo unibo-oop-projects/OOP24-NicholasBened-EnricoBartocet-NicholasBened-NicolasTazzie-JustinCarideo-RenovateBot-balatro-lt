@@ -80,14 +80,16 @@ public final class MasterControllerImpl implements MasterController {
                 this.levels.discardCards(checkPlayableCards(data));
                 this.views.forEach(v -> {
                     v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats());
-                    v.updateScore(this.levels.getCurrentBlindStats());
+                    v.updateScore(this.levels.getCurrentBlindStats()
+                    );
                 });
             }
             case SORT_BY_RANK -> {
                 this.views.forEach(v -> {
                     v.updateGameTable(
                         this.sortController.sortByRank(this.levels.getHand()),
-                        this.levels.getCurrentBlindStats());
+                        this.levels.getCurrentBlindStats()
+                    );
                 });
             }
             case SORT_BY_SUIT -> {

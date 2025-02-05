@@ -14,7 +14,12 @@ import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
  * Implementation of {@link SortingHandController}.
  */
 public class SortingHandControllerImpl implements SortingHandController {
+    private enum SortType {
+        BY_RANK,
+        BY_SUIT
+    }
     private final Map<PlayableCardInfo, PlayableCard> cardsTranslator = new HashMap<>();
+    private SortType sort = SortType.BY_RANK;
 
     /**
      * Constructor.
@@ -26,6 +31,7 @@ public class SortingHandControllerImpl implements SortingHandController {
 
     @Override
     public List<PlayableCardInfo> sortByRank(final List<PlayableCardInfo> cards) {
+        this.sort = SortType.BY_RANK;
         return SortingPlayableHelpers.sortingByRank(this.translateCards(cards))
             .stream()
             .map(c -> new PlayableCardInfo(c.getRank().name(), c.getSuit().name()))
@@ -34,10 +40,19 @@ public class SortingHandControllerImpl implements SortingHandController {
 
     @Override
     public List<PlayableCardInfo> sortBySuit(final List<PlayableCardInfo> cards) {
+        this.sort = SortType.BY_SUIT;
         return SortingPlayableHelpers.sortingBySuit(this.translateCards(cards))
             .stream()
             .map(c -> new PlayableCardInfo(c.getRank().name(), c.getSuit().name()))
             .toList();
+    }
+
+    @Override
+    public List<PlayableCardInfo> sortByLastCall(List<PlayableCardInfo> cards) {
+        return switch(sort) {
+            case BY_RANK -> this.sortByRank(cards);
+            case BY_SUIT -> this.sortBySuit(cards);
+        };
     }
 
     private List<PlayableCard> translateCards(final List<PlayableCardInfo> cards) {

@@ -59,7 +59,7 @@ public final class LevelsControllerImpl implements LevelsController {
         return new AnteInfo(
             this.currentAnte().getAnteNumber() + 1,
             this.currentAnte().getBlinds().stream().map(this::getBlindInfo).toList(),
-            this.currentBlind().getBlindNumber()
+            this.currentBlind().getBlindNumber() + 1
         );
     }
 

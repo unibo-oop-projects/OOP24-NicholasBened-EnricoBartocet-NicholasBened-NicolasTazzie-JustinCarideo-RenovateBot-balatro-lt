@@ -16,7 +16,10 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
  */
 public class BlindOver extends JPanel {
     static final long serialVersionUID = 1L;
+    private static final String FONT = "COPPER_BLACK";
+    private static final float FONT_SIZE = 30f;
 
+    private final FontFactory fontFactory = new FontFactory();
     /**
      * Builds the GUI.
      * @param controller master controller.
@@ -28,6 +31,7 @@ public class BlindOver extends JPanel {
         final JButton button = new JButton("OPEN SHOP");
         button.addActionListener(a -> controller.handleEvent(BalatroEvent.OPEN_SHOP, null));
         final JTextArea text = new JTextArea();
+        text.setFont(this.fontFactory.getFont(FONT, FONT_SIZE, this));
         text.setEditable(false);
         text.append("BLIND DEFEATED");
         text.append("\nSTATISTICS");

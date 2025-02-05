@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -16,7 +14,6 @@ import java.util.Locale;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.google.common.base.Optional;
@@ -42,12 +39,13 @@ public final class GameTable extends JPanel {
     private static final int RIDIM = 28;
     private static final int BASE_PADDING = 7;
 
-    private final MasterController controller;
-    private final SlotPanel<PlayableCardInfo> handSlot;
-    private SlotPanel<PlayableCardInfo> playedSlot;
     private final List<PlayableCardInfo> selectedCards = new ArrayList<>();
+    private final FontFactory fontFactory = new FontFactory();
+    private final SlotPanel<PlayableCardInfo> handSlot;
+    private final MasterController controller;
     private final JButton discardButton;
     private final JPanel centerPanel;
+    private SlotPanel<PlayableCardInfo> playedSlot;
 
     /**
      * Represent the game table, with the cards in the player's hand,
@@ -115,7 +113,7 @@ public final class GameTable extends JPanel {
         final JButton playButton = new JButton("Play Hand");
         playButton.setBackground(Color.decode("#2274A5"));
         playButton.setForeground(Color.WHITE);
-        playButton.setFont(getFont(FONT, JB_FONT_SIZE));
+        playButton.setFont(this.fontFactory.getFont(FONT, JB_FONT_SIZE, this));
         playButton.addActionListener(e -> {
             if (!this.selectedCards.isEmpty()) {
                 this.playedSlot.removeAll();
@@ -131,7 +129,7 @@ public final class GameTable extends JPanel {
         this.discardButton = new JButton("Discard");
         discardButton.setBackground(Color.decode("#C1121F"));
         discardButton.setForeground(Color.WHITE);
-        discardButton.setFont(getFont(FONT, JB_FONT_SIZE));
+        discardButton.setFont(this.fontFactory.getFont(FONT, JB_FONT_SIZE, this));
         discardButton.setPreferredSize(playButton.getPreferredSize());
         discardButton.addActionListener(e -> {
             if (!this.selectedCards.isEmpty()) {
@@ -176,22 +174,5 @@ public final class GameTable extends JPanel {
             card,
             card.rank() + " " + card.suit(),
             "cards/" + card.rank().toUpperCase(Locale.getDefault()) + card.suit().toUpperCase(Locale.getDefault()));
-    }
-
-    /*
-     * Gives back the requested font with the given size.
-     */
-    private Font getFont(final String nameFont, final float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
-        try {
-            font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
-            );
-            font = font.deriveFont(fontSize);
-        } catch (FontFormatException | IOException e) {
-            JOptionPane.showMessageDialog(this, "Cannot load font");
-        }
-        return font;
     }
 }

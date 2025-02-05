@@ -1,8 +1,6 @@
 package it.unibo.balatrolt.view.impl;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -26,6 +24,8 @@ public class MainMenu extends JPanel {
     private static final String BUTTON_FONT = "JOKERMAN";
     private static final float TITLE_SIZE = 100f;
     private static final float BUTTON_SIZE = 65f;
+
+    private final FontFactory fontFactory = new FontFactory();
     private Image image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     /**
      * Builds the main menu.
@@ -38,7 +38,7 @@ public class MainMenu extends JPanel {
          * Setting the title.
          */
         final JLabel title = new JLabel("BALATRO");
-        title.setFont(getFont(TITLE_FONT, TITLE_SIZE));
+        title.setFont(this.fontFactory.getFont(TITLE_FONT, TITLE_SIZE, this));
         title.setForeground(Color.WHITE.brighter());
         title.setAlignmentX(CENTER_ALIGNMENT);
         add(Box.createVerticalGlue());
@@ -47,7 +47,7 @@ public class MainMenu extends JPanel {
          * Setting the start button.
          */
         final JButton start = new JButton(text);
-        start.setFont(getFont(BUTTON_FONT, BUTTON_SIZE));
+        start.setFont(this.fontFactory.getFont(BUTTON_FONT, BUTTON_SIZE, this));
         start.setForeground(Color.WHITE.brighter());
         start.setContentAreaFilled(false);
         start.setBorder(null);
@@ -65,23 +65,6 @@ public class MainMenu extends JPanel {
             JOptionPane.showMessageDialog(this, "Cannot load Background");
         }
         setVisible(true);
-    }
-
-    /*
-     * Gives back the requested font with the given size.
-     */
-    private Font getFont(final String nameFont, final float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
-        try {
-            font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                getClass().getResourceAsStream("/font/" + nameFont + ".TTF")
-            );
-            font = font.deriveFont(fontSize);
-        } catch (FontFormatException | IOException e) {
-            JOptionPane.showMessageDialog(this, "Cannot load font");
-        }
-        return font;
     }
 
     @Override

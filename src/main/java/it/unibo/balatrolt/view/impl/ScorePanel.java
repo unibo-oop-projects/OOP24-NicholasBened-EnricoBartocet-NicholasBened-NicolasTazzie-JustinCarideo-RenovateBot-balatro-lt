@@ -2,14 +2,9 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.GridLayout;
-import java.io.IOException;
-
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -23,6 +18,8 @@ public class ScorePanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String SCORE_FONT = "COPPER_BLACK";
     private static final float SCORE_SIZE = 36f;
+
+    private final FontFactory fontFactory = new FontFactory();
     private final JLabel minimumScoreLabel;
     private final JLabel currentScoreLabel;
 
@@ -62,7 +59,7 @@ public class ScorePanel extends JPanel {
     private JLabel getCurrentScorePanel(final BlindStats stats) {
         final JLabel currentScore = new JLabel();
         currentScore.setText(String.valueOf(stats.chips()));
-        currentScore.setFont(getFont(SCORE_FONT, SCORE_SIZE));
+        currentScore.setFont(this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE, this));
         currentScore.setBackground(Color.DARK_GRAY);
         currentScore.setForeground(Color.white);
         currentScore.setOpaque(true);
@@ -78,7 +75,7 @@ public class ScorePanel extends JPanel {
     private JLabel getMainTitleLabel() {
         final JLabel scoreLabel = new JLabel();
         scoreLabel.setText("Score at least: ");
-        scoreLabel.setFont(getFont(SCORE_FONT, SCORE_SIZE / 2));
+        scoreLabel.setFont(this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE / 2, this));
         scoreLabel.setBackground(Color.DARK_GRAY);
         scoreLabel.setForeground(Color.white);
         scoreLabel.setOpaque(true);
@@ -95,7 +92,7 @@ public class ScorePanel extends JPanel {
     private JLabel getMinimumScoreLabel(final BlindInfo info) {
         final JLabel minimumScoreLabel = new JLabel();
         minimumScoreLabel.setText(String.valueOf(info.minimumChips()));
-        minimumScoreLabel.setFont(getFont(SCORE_FONT, SCORE_SIZE));
+        minimumScoreLabel.setFont(this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE, this));
         minimumScoreLabel.setBackground(Color.DARK_GRAY);
         minimumScoreLabel.setForeground(Color.RED.darker());
         minimumScoreLabel.setBorder(BorderFactory.createLineBorder(minimumScoreLabel.getBackground()));
@@ -110,22 +107,5 @@ public class ScorePanel extends JPanel {
      */
     public void updateScore(final BlindStats stats) {
         this.currentScoreLabel.setText(String.valueOf(stats.chips()));
-    }
-
-    /*
-     * Gives back the requested font with the given size.
-     */
-    private Font getFont(final String nameFont, final float fontSize) {
-        Font font = new Font("Arial", Font.PLAIN, (int) fontSize);
-        try {
-            font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                ScorePanel.class.getResourceAsStream("/font/" + nameFont + ".TTF")
-            );
-            font = font.deriveFont(fontSize);
-        } catch (FontFormatException | IOException e) {
-            JOptionPane.showMessageDialog(this, "Cannot load font");
-        }
-        return font;
     }
 }

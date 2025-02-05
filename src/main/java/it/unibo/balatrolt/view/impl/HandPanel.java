@@ -25,25 +25,15 @@ public class HandPanel extends JPanel {
 
     /**
      * Builds the panel with information about player stats.
-     * @param stats about the current blind
      */
-    public HandPanel(final BlindStats stats) {
+    public HandPanel() {
         super(new GridLayout(2, 1));
         this.handLabel = createGeneralLabel("");
         this.discardLabel = createGeneralLabel("");
         this.currencyLabel = createGeneralLabel("$0");
         this.anteLabel = createGeneralLabel("Ante: ");
-        initialize(stats);
-    }
-
-    /**
-     * Initializes the UI components and updates the stats.
-     * @param stats initial stats
-     */
-    private void initialize(final BlindStats stats) {
-        add(createNorthPanel());
-        add(createSouthPanel());
-        updateHands(stats);
+        super.add(createNorthPanel());
+        super.add(createSouthPanel());
     }
 
     /**

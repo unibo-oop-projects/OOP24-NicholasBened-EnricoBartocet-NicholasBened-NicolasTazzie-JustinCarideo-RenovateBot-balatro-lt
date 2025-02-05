@@ -29,7 +29,8 @@ public final class InfoPanel extends JPanel {
         final var titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);
         this.combinationPanel = new CombinationPanel(new CombinationInfo(" ", 0, 0));
-        this.handPanel = new HandPanel(stats);
+        this.handPanel = new HandPanel();
+        this.handPanel.updateHands(stats);
         add(titlePanel);
         add(this.scorePanel);
         add(this.combinationPanel);

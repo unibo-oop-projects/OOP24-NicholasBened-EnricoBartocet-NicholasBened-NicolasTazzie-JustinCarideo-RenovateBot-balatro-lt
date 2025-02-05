@@ -35,14 +35,14 @@ public class ScorePanel extends JPanel {
     public ScorePanel(final BlindInfo info, final BlindStats stats) {
         this.currentScoreLabel = getCurrentScorePanel(stats);
         this.minimumScoreLabel = getMinimumScoreLabel(info);
-        initializePanel(info, stats);
+        initializePanel();
     }
 
-    private void initializePanel(final BlindInfo info, final BlindStats stats) {
-        this.setLayout(new BorderLayout());
+    private void initializePanel() {
+        super.setLayout(new BorderLayout());
         final JPanel mainScoreContainer = new JPanel(new BorderLayout());
         mainScoreContainer.add(getMainTitleLabel(), BorderLayout.CENTER);
-        this.add(mainScoreContainer, BorderLayout.NORTH);
+        super.add(mainScoreContainer, BorderLayout.NORTH);
         final JPanel scoreContainer = new JPanel(new GridLayout(3, 1));
         scoreContainer.add(minimumScoreLabel);
         final JLabel current = getMainTitleLabel();
@@ -50,7 +50,7 @@ public class ScorePanel extends JPanel {
         scoreContainer.add(current);
         scoreContainer.add(currentScoreLabel);
         scoreContainer.setBorder(BorderFactory.createLineBorder(currentScoreLabel.getBackground()));
-        this.add(scoreContainer, BorderLayout.CENTER);
+        super.add(scoreContainer, BorderLayout.CENTER);
     }
 
     /**

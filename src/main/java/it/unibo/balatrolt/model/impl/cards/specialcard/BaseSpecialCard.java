@@ -6,8 +6,9 @@ import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 /**
- * It's a Basic SpecialCard, it has a name and a description, but doesn't have
+ * It's a basic {@link SpecialCard}, it has a name and a description, but doesn't have
  * any modifier.
+ * @author Nicolas Tazzieri
  */
 public abstract class BaseSpecialCard implements SpecialCard {
     private final String name;

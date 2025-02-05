@@ -11,6 +11,7 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * Implementation of {@link ModifierStatsSupplier}.
+ * @author Nicolas Tazzieri
  */
 public final class ModifierStatsSupplierBuilderImpl implements ModifierStatsBuilder {
     private Optional<Set<PlayableCard>> playedCards = Optional.absent();

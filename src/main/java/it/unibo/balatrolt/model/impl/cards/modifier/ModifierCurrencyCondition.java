@@ -8,6 +8,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
  * Implementation of ConditionalModifier checking if the currency held by the player satisfies the specified condition.
+ * @author Nicolas Tazzieri
  */
 public final class ModifierCurrencyCondition extends ConditionalModifier<Integer> {
 

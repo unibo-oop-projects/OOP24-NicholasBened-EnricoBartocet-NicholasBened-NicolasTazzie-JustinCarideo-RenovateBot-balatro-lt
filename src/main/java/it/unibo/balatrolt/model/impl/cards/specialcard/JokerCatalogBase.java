@@ -10,6 +10,7 @@ import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
 /**
  * Catalog of base {@link Joker} with {@link JokerTier} epic or legendary.
+ * @author Nicolas Tazzieri
  */
 public final class JokerCatalogBase extends AbstractJokerCatalog {
     private static final int BP_FIVE = 5;

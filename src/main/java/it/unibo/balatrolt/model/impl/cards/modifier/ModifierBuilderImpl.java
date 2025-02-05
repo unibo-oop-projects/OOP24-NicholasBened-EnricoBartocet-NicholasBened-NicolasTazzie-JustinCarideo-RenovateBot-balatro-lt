@@ -14,6 +14,7 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * Builder implementation for Modifier.
+ * @author Nicolas Tazzieri
  */
 public final class ModifierBuilderImpl implements ModifierBuilder {
     private Optional<UnaryOperator<Double>> mFun = Optional.absent();

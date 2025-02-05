@@ -9,6 +9,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
  * Special modifier that wraps and existing modifier.
+ * @author Nicolas Tazzieri
  */
 public final class ModifierFromExisting extends ModifierDecorator {
     private final Optional<UnaryOperator<Double>> multiplierMod;

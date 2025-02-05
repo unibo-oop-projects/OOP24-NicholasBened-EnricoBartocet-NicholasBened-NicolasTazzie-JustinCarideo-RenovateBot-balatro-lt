@@ -15,6 +15,7 @@ import it.unibo.balatrolt.model.impl.cards.specialcard.JokerSupplierImpl;
 
 /**
  * A shop that is only supplied with Jokers.
+ * @author Nicolas Tazzieri
  */
 public final class JokerShop implements Shop {
     private Map<SpecialCard, Integer> cards = Map.of();

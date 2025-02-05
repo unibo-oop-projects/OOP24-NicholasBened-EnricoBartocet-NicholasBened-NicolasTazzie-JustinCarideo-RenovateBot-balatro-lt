@@ -12,6 +12,7 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 
 /**
  * A catalog containing Miscelleous {@link Joker}.
+ * @author Nicolas Tazzieri
  */
 public final class JokerCatalogMisc extends AbstractJokerCatalog {
     private static final String DOUBLER = "the doubler";

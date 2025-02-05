@@ -19,7 +19,7 @@ import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
 /**
  * Joker supplier implementation.
- * @author Nicolas Tazzieri - nicolas.tazzieri@studio.unibo.it
+ * @author Nicolas Tazzieri
  */
 public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
     private static final int MISC_REP = 1;

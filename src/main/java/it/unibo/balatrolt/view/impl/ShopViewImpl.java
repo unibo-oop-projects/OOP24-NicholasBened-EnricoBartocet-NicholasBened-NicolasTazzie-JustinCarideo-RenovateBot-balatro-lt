@@ -35,6 +35,7 @@ import it.unibo.balatrolt.view.api.ShopView;
 /**
  * Implementation of {@link ShopView}.
  * It also extends a {@link JPanel}, so it can be used to replace an existing one.
+ * @author Nicolas Tazzieri
  */
 public final class ShopViewImpl extends JPanel implements ShopView {
     static final long serialVersionUID = 1L;

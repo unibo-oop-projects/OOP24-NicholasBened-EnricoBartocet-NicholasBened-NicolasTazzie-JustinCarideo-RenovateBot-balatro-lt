@@ -13,6 +13,7 @@ import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
 /**
  * A {@link JokerCatalog} containing rare jokers.
+ * @author Nicolas Tazzieri
  */
 public final class JokerCatalogRare extends AbstractJokerCatalog {
     private static final int MAX_RAND = 10;

@@ -3,6 +3,7 @@ package it.unibo.balatrolt.view.api;
 import java.util.Set;
 
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
+import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 
 /**
  * It represents the shop view.

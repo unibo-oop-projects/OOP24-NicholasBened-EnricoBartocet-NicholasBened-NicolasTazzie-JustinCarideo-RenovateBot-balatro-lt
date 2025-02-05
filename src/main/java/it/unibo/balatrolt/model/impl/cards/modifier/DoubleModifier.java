@@ -8,6 +8,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
  * A {@link CombinationModifier} that has two inner Modifiers.
+ * @author Nicolas Tazzieri
  */
 public final class DoubleModifier extends ModifierDecorator {
     private final CombinationModifier secondBase;

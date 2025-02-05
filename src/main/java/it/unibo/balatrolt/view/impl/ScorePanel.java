@@ -2,6 +2,7 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -19,7 +20,7 @@ public class ScorePanel extends JPanel {
     private static final String SCORE_FONT = "COPPER_BLACK";
     private static final float SCORE_SIZE = 36f;
 
-    private final FontFactory fontFactory = new FontFactory();
+    private final transient FontFactory fontFactory = new FontFactory();
     private final JLabel minimumScoreLabel;
     private final JLabel currentScoreLabel;
 
@@ -30,19 +31,26 @@ public class ScorePanel extends JPanel {
      * @param stats
      */
     public ScorePanel(final BlindInfo info, final BlindStats stats) {
-        this.currentScoreLabel = getCurrentScorePanel(stats);
-        this.minimumScoreLabel = getMinimumScoreLabel(info);
-        initializePanel();
+        final Font currentScoreFont = this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE, this);
+        final Font mainFont = this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE / 2, this);
+        final Font minimumScoreFont = this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE, this);
+        this.currentScoreLabel = getCurrentScorePanel(stats, currentScoreFont);
+        this.minimumScoreLabel = getMinimumScoreLabel(info, minimumScoreFont);
+        initializePanel(mainFont);
     }
 
-    private void initializePanel() {
+    /**
+     * initialize this panel.
+     * @param font
+     */
+    private void initializePanel(final Font font) {
         super.setLayout(new BorderLayout());
         final JPanel mainScoreContainer = new JPanel(new BorderLayout());
-        mainScoreContainer.add(getMainTitleLabel(), BorderLayout.CENTER);
+        mainScoreContainer.add(getMainTitleLabel(font), BorderLayout.CENTER);
         super.add(mainScoreContainer, BorderLayout.NORTH);
         final JPanel scoreContainer = new JPanel(new GridLayout(3, 1));
         scoreContainer.add(minimumScoreLabel);
-        final JLabel current = getMainTitleLabel();
+        final JLabel current = getMainTitleLabel(font);
         current.setText("Current score: ");
         scoreContainer.add(current);
         scoreContainer.add(currentScoreLabel);
@@ -54,12 +62,13 @@ public class ScorePanel extends JPanel {
      * This method create the label for the current score
      * made by the player.
      * @param stats
+     * @param font
      * @return the label in question
      */
-    private JLabel getCurrentScorePanel(final BlindStats stats) {
+    private JLabel getCurrentScorePanel(final BlindStats stats, final Font font) {
         final JLabel currentScore = new JLabel();
         currentScore.setText(String.valueOf(stats.chips()));
-        currentScore.setFont(this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE, this));
+        currentScore.setFont(font);
         currentScore.setBackground(Color.DARK_GRAY);
         currentScore.setForeground(Color.white);
         currentScore.setOpaque(true);
@@ -70,12 +79,13 @@ public class ScorePanel extends JPanel {
 
     /**
      * Set the label with SCORE.
+     * @param font
      * @return the label in question
      */
-    private JLabel getMainTitleLabel() {
+    private JLabel getMainTitleLabel(final Font font) {
         final JLabel scoreLabel = new JLabel();
         scoreLabel.setText("Score at least: ");
-        scoreLabel.setFont(this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE / 2, this));
+        scoreLabel.setFont(font);
         scoreLabel.setBackground(Color.DARK_GRAY);
         scoreLabel.setForeground(Color.white);
         scoreLabel.setOpaque(true);
@@ -87,12 +97,13 @@ public class ScorePanel extends JPanel {
     /**
      * This method return the label with the minimum score to be reached.
      * @param info
+     * @param font
      * @return the label in question
      */
-    private JLabel getMinimumScoreLabel(final BlindInfo info) {
+    private JLabel getMinimumScoreLabel(final BlindInfo info, final Font font) {
         final JLabel minimumScoreLabel = new JLabel();
         minimumScoreLabel.setText(String.valueOf(info.minimumChips()));
-        minimumScoreLabel.setFont(this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE, this));
+        minimumScoreLabel.setFont(font);
         minimumScoreLabel.setBackground(Color.DARK_GRAY);
         minimumScoreLabel.setForeground(Color.RED.darker());
         minimumScoreLabel.setBorder(BorderFactory.createLineBorder(minimumScoreLabel.getBackground()));

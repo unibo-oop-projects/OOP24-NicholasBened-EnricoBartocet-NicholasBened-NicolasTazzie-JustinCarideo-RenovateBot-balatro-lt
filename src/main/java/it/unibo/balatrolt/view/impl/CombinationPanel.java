@@ -19,7 +19,7 @@ public final class CombinationPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String FONT = "COPPER_BLACK";
     private static final int SCORE_DIM = 30;
-    private final FontFactory fontFactory = new FontFactory();
+    private final transient FontFactory fontFactory = new FontFactory();
     private final JLabel combinationLabel;
     private final JLabel basePointsLabel;
     private final JLabel multiplierLabel;

@@ -20,8 +20,8 @@ public final class TitlePanel extends JPanel {
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker();
     private static final int SIZE_TITLE_BLIND = 30;
-    private final transient  BlindInfo info;
-    private final FontFactory fontFactory = new FontFactory();
+    private final transient BlindInfo info;
+    private final transient FontFactory fontFactory = new FontFactory();
 
     /**
      * Builds the title panel about the blind that is going to be challenged.

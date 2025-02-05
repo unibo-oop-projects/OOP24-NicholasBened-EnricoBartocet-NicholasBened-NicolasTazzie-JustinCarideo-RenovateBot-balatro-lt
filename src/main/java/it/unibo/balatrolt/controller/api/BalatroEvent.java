@@ -78,9 +78,7 @@ public enum BalatroEvent {
                 PLAY_CARDS,
                 DISCARD_CARDS,
                 STAGE_CARDS,
-                SELL_CARD,
-                SORT_BY_RANK,
-                SORT_BY_SUIT
+                SELL_CARD
             );
             case PLAY_CARDS, SORT_BY_RANK, SORT_BY_SUIT -> Set.of(
                 STAGE_CARDS,

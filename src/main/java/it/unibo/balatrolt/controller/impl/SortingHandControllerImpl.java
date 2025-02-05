@@ -35,7 +35,8 @@ public class SortingHandControllerImpl implements SortingHandController {
         return SortingPlayableHelpers.sortingByRank(this.translateCards(cards))
             .stream()
             .map(c -> new PlayableCardInfo(c.getRank().name(), c.getSuit().name()))
-            .toList();
+            .toList()
+            .reversed();
     }
 
     @Override

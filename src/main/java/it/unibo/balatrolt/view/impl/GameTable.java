@@ -49,6 +49,7 @@ public final class GameTable extends JPanel {
     private final SlotPanel<PlayableCardInfo> handSlot;
     private final MasterController controller;
     private final JButton discardButton;
+    private final List<JButton> sortButtons = new ArrayList<>();
     private final JPanel centerPanel;
     private SlotPanel<PlayableCardInfo> playedSlot;
 
@@ -85,6 +86,7 @@ public final class GameTable extends JPanel {
             () -> true,
             card -> {
                 this.selectedCards.add(card);
+                this.sortButtons.forEach(b -> b.setEnabled(false));
                 this.playedSlot.addObject(slotTranslator(card));
                 this.controller.handleEvent(BalatroEvent.STAGE_CARDS, Optional.of(this.selectedCards));
                 this.revalidate();
@@ -154,13 +156,18 @@ public final class GameTable extends JPanel {
         sortLabel.setFont(this.fontFactory.getFont(FONT, SORT_FONT_SIZE, this));
         outerSortPanel.add(sortLabel, BorderLayout.NORTH);
         outerSortPanel.setBorder(BorderFactory.createLineBorder(
-            Color.DARK_GRAY.darker(),
-             SORT_BORDER_THICKNESS));
+            Color.DARK_GRAY,
+            SORT_BORDER_THICKNESS));
         outerSortPanel.setBackground(this.getBackground());
         final var innerSortPanel = new JPanel(new FlowLayout());
         innerSortPanel.setBackground(this.getBackground());
-        innerSortPanel.add(getOrangeButton("Rank", e -> {}));
-        innerSortPanel.add(getOrangeButton("Suit", e -> {}));
+        sortButtons.add(getOrangeButton("Rank", e -> {
+            this.controller.handleEvent(BalatroEvent.SORT_BY_RANK, Optional.absent());
+        }));
+        sortButtons.add(getOrangeButton("Suit", e -> {
+            this.controller.handleEvent(BalatroEvent.SORT_BY_SUIT, Optional.absent());
+        }));
+        sortButtons.forEach(b -> innerSortPanel.add(b));
         outerSortPanel.add(innerSortPanel,BorderLayout.CENTER);
         return outerSortPanel;
     }
@@ -171,6 +178,7 @@ public final class GameTable extends JPanel {
      */
     public void updateHand(final List<PlayableCardInfo> newCards) {
         this.handSlot.removeAll();
+        this.sortButtons.forEach(b -> b.setEnabled(true));
         newCards.forEach(c -> this.handSlot.addObject(this.slotTranslator(c)));
     }
 

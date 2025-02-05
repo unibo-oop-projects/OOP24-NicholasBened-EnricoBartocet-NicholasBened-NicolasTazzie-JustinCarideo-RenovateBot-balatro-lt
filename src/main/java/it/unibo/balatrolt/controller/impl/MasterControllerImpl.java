@@ -73,13 +73,13 @@ public final class MasterControllerImpl implements MasterController {
                 });
             }
             case SHOW_BLINDS -> {
-                this.views.forEach(v -> v.showRound(this.levels.getHand()));
+                this.views.forEach(v -> v.showRound(this.getSortedCards()));
             }
             case STAGE_CARDS -> this.views.forEach(v -> v.updateCombinationStatus(recognizeCombination(data)));
             case DISCARD_CARDS -> {
                 this.levels.discardCards(checkPlayableCards(data));
                 this.views.forEach(v -> {
-                    v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats());
+                    v.updateGameTable(this.getSortedCards(), this.levels.getCurrentBlindStats());
                     v.updateScore(this.levels.getCurrentBlindStats()
                     );
                 });
@@ -104,7 +104,7 @@ public final class MasterControllerImpl implements MasterController {
                 switch (this.levels.getRoundStatus()) {
                     case IN_GAME -> {
                         this.views.forEach(
-                                v -> v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats()));
+                                v -> v.updateGameTable(this.getSortedCards(), this.levels.getCurrentBlindStats()));
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
@@ -166,6 +166,10 @@ public final class MasterControllerImpl implements MasterController {
             default -> throw new IllegalStateException("Invalid Event received");
         }
         this.nextEvents = e.getNextPossibleEvents();
+    }
+
+    private List<PlayableCardInfo> getSortedCards() {
+        return this.sortController.sortByLastCall(this.levels.getHand());
     }
 
     @Override

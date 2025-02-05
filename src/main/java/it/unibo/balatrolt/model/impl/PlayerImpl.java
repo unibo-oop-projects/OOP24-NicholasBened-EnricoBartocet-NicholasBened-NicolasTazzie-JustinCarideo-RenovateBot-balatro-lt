@@ -9,6 +9,7 @@ import it.unibo.balatrolt.model.api.Player;
 import it.unibo.balatrolt.model.api.PlayerStatus;
 import it.unibo.balatrolt.model.api.Slot;
 import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
+import it.unibo.balatrolt.model.impl.cards.SlotImpl;
 
 /**
  * The implementation of the Player interface.

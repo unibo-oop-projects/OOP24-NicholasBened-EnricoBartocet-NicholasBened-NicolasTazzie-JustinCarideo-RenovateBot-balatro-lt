@@ -1,5 +1,11 @@
 package it.unibo.balatrolt.model;
 
+import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createBlue;
+import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createGold;
+import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createPurple;
+import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createRed;
+import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createWhite;
+import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.getList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -7,13 +13,6 @@ import java.util.List;
 import java.util.function.UnaryOperator;
 
 import org.junit.jupiter.api.Test;
-
-import static it.unibo.balatrolt.model.impl.BuffedDeckFactory.createWhite;
-import static it.unibo.balatrolt.model.impl.BuffedDeckFactory.createRed;
-import static it.unibo.balatrolt.model.impl.BuffedDeckFactory.createBlue;
-import static it.unibo.balatrolt.model.impl.BuffedDeckFactory.createGold;
-import static it.unibo.balatrolt.model.impl.BuffedDeckFactory.createPurple;
-import static it.unibo.balatrolt.model.impl.BuffedDeckFactory.getList;
 
 import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.impl.PlayerStatusImpl;

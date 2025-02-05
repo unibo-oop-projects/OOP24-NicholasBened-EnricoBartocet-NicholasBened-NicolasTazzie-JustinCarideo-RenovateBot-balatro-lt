@@ -15,8 +15,8 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.impl.Pair;
-import it.unibo.balatrolt.model.impl.SlotImpl;
 import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
+import it.unibo.balatrolt.model.impl.cards.SlotImpl;
 
 /**
  * Tester for Slot and it's methods.

@@ -7,7 +7,7 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.combination.CombinationRecognizer;
 import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
-import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;
+import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
  * Factory that creats recognizers.

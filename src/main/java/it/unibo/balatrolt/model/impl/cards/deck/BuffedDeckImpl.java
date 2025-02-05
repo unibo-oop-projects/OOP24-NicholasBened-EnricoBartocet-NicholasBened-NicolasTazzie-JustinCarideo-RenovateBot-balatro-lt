@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.cards.deck;
 
 import com.google.common.base.Preconditions;
 

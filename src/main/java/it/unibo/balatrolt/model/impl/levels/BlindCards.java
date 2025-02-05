@@ -7,8 +7,8 @@ import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.api.Slot;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
-import it.unibo.balatrolt.model.impl.DeckImpl;
-import it.unibo.balatrolt.model.impl.SlotImpl;
+import it.unibo.balatrolt.model.impl.cards.SlotImpl;
+import it.unibo.balatrolt.model.impl.cards.deck.DeckImpl;
 
 /**
  * Implementation of the blind which holds the

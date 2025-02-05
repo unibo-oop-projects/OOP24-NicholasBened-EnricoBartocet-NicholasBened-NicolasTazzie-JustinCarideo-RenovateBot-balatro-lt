@@ -21,7 +21,7 @@ import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
 import it.unibo.balatrolt.model.api.BuffedDeck;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination;
-import it.unibo.balatrolt.model.impl.BuffedDeckFactory;
+import it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 import it.unibo.balatrolt.view.api.View;
 

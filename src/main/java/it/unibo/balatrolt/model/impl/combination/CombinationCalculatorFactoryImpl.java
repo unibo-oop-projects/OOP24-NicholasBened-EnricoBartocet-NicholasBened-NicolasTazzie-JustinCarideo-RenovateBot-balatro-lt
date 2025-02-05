@@ -8,7 +8,7 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.CombinationCalculator;
 import it.unibo.balatrolt.model.api.combination.CombinationCalculatorFactory;
 import it.unibo.balatrolt.model.impl.Pair;
-import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;
+import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
  * @author Justin Carideo

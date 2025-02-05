@@ -1,4 +1,4 @@
-package it.unibo.balatrolt.model.impl;
+package it.unibo.balatrolt.model.impl.cards.deck;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +8,7 @@ import it.unibo.balatrolt.model.api.Deck;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
+import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
 
 /**

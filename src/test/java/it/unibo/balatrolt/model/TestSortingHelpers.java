@@ -13,8 +13,8 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.impl.Pair;
-import it.unibo.balatrolt.model.impl.SortingPlayableHelpers;
 import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
+import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
  * Class for testing SortingHelpers.

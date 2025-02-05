@@ -14,6 +14,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
  * A modifier which checks whether a condition is satisfied before suppling the
  * modifying functions.
  * If the game status is not set it will always return the modifier.
+ * @author Nicolas Tazzieri
  *
  * @param <X> type of condition that should be satisfied.
  */

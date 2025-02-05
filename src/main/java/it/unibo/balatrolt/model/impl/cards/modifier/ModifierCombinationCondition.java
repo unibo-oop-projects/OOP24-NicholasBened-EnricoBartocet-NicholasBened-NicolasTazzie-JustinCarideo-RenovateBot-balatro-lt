@@ -9,6 +9,7 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * Implementation of ConditionalModifier checking if the the current combination satisfies the specified condition.
+ * @author Nicolas Tazzieri
  */
 public final class ModifierCombinationCondition extends ConditionalModifier<CombinationType> {
     /**

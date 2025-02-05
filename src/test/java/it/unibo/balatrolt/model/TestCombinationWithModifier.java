@@ -11,18 +11,22 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
+import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
 import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.combination.PlayedHand;
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
 import it.unibo.balatrolt.model.impl.cards.modifier.ModifierStatsSupplierBuilderImpl;
-import it.unibo.balatrolt.model.impl.cards.specialcard.JokerSupplierImpl;
+import it.unibo.balatrolt.model.impl.cards.specialcard.JokerCatalogMisc;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 
 class TestCombinationWithModifier {
-
+    private static final String HEART_DOUBLER = "the heart doubler";
+    private static final String KING_DONOUR = "the king donour";
+    private static final String DIAMOND_DOUBLER = "the diamond doubler";
     private static final int EXPECTED_MULTIPLIER_STD = 3;
     private static final int EXPECTED_POINTS_STD = 45;
+    private final JokerCatalog misc = new JokerCatalogMisc();
 
     private List<PlayableCard> getTestPlayedCard() {
         return List.of(
@@ -55,8 +59,7 @@ class TestCombinationWithModifier {
         final Combination combination = hand.evaluateCombination();
         assertEquals(EXPECTED_POINTS_STD, combination.getBasePoints().basePoints());
         assertEquals(3, combination.getMultiplier().multiplier());
-        final int indexSelected = 3;
-        final var joker = new JokerSupplierImpl().getJokerList().get(indexSelected);
+        final var joker = this.misc.getJoker(KING_DONOUR).get();
         setJokerStatus(hand, combination, joker);
         combination.applyModifier(joker.getModifier().get());
         final int p = 50;
@@ -68,8 +71,7 @@ class TestCombinationWithModifier {
     void testSingleJokerNotApplied() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard2());
         final Combination combination = hand.evaluateCombination();
-        final int indexSelected = 3;
-        final var joker = new JokerSupplierImpl().getJokerList().get(indexSelected);
+        final var joker = this.misc.getJoker(KING_DONOUR).get();
         setJokerStatus(hand, combination, joker);
         combination.applyModifier(joker.getModifier().get());
         assertEquals(EXPECTED_POINTS_STD, combination.getBasePoints().basePoints());
@@ -80,11 +82,9 @@ class TestCombinationWithModifier {
     void testMultipleJokerAllApplied() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard());
         final Combination combination = hand.evaluateCombination();
-        final int indexSelected = 3;
-        final var joker1 = new JokerSupplierImpl().getJokerList().get(indexSelected);
+        final var joker1 = this.misc.getJoker(KING_DONOUR).get();
         setJokerStatus(hand, combination, joker1);
-        final int indexSelected2 = 1;
-        final var joker2 = new JokerSupplierImpl().getJokerList().get(indexSelected2);
+        final var joker2 = this.misc.getJoker(DIAMOND_DOUBLER).get();
         setJokerStatus(hand, combination, joker2);
         combination.applyModifier(joker1.getModifier().get());
         combination.applyModifier(joker2.getModifier().get());
@@ -98,11 +98,9 @@ class TestCombinationWithModifier {
     void testMultipleJokerNoneApplied() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard2());
         final Combination combination = hand.evaluateCombination();
-        final int indexSelected = 3;
-        final var joker1 = new JokerSupplierImpl().getJokerList().get(indexSelected);
+        final var joker1 = this.misc.getJoker(KING_DONOUR).get();
         setJokerStatus(hand, combination, joker1);
-        final int indexSelected2 = 1;
-        final var joker2 = new JokerSupplierImpl().getJokerList().get(indexSelected2);
+        final var joker2 = this.misc.getJoker(DIAMOND_DOUBLER).get();
         setJokerStatus(hand, combination, joker2);
         combination.applyModifier(joker1.getModifier().get());
         combination.applyModifier(joker2.getModifier().get());
@@ -114,11 +112,9 @@ class TestCombinationWithModifier {
     void testMultipleJokerOneApplied() {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard2());
         final Combination combination = hand.evaluateCombination();
-        final int indexSelected = 3;
-        final var joker1 = new JokerSupplierImpl().getJokerList().get(indexSelected);
+        final var joker1 = this.misc.getJoker(KING_DONOUR).get();
         setJokerStatus(hand, combination, joker1);
-        final int indexSelected2 = 4;
-        final var joker2 = new JokerSupplierImpl().getJokerList().get(indexSelected2);
+        final var joker2 = this.misc.getJoker(HEART_DOUBLER).get();
         setJokerStatus(hand, combination, joker2);
         combination.applyModifier(joker1.getModifier().get());
         combination.applyModifier(joker2.getModifier().get());

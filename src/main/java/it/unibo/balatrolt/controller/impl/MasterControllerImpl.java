@@ -61,12 +61,11 @@ public final class MasterControllerImpl implements MasterController {
                 this.levels.updateAnte();
                 this.views.forEach(v -> {
                     v.showSettings(
-                        this.levels.getCurrentBlindInfo(),
-                        this.levels.getCurrentBlindStats(),
-                        this.player.getSpecialCards(),
-                        this.player.getDeck(),
-                        this.levels.getNumAnte()
-                    );
+                            this.levels.getCurrentBlindInfo(),
+                            this.levels.getCurrentBlindStats(),
+                            this.player.getSpecialCards(),
+                            this.player.getDeck(),
+                            this.levels.getNumAnte());
                     v.showAnte(this.levels.getCurrentAnte());
                     v.updateAnteInfo(this.levels.getCurrentAnte());
                 });
@@ -86,7 +85,8 @@ public final class MasterControllerImpl implements MasterController {
                 this.levels.playCards(checkPlayableCards(data), this.player.getPlayerStatus());
                 switch (this.levels.getRoundStatus()) {
                     case IN_GAME -> {
-                        this.views.forEach(v -> v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats()));
+                        this.views.forEach(
+                                v -> v.updateGameTable(this.levels.getHand(), this.levels.getCurrentBlindStats()));
                     }
                     case BLIND_DEFEATED -> {
                         this.player.addCurrency(this.levels.getCurrentBlindInfo().reward());
@@ -95,7 +95,8 @@ public final class MasterControllerImpl implements MasterController {
                             this.views.forEach(View::showYouWon);
                         } else {
                             this.views.forEach(v -> {
-                                v.showBlindDefeated(this.levels.getCurrentBlindInfo(), this.levels.getCurrentBlindStats());
+                                v.showBlindDefeated(this.levels.getCurrentBlindInfo(),
+                                        this.levels.getCurrentBlindStats());
                             });
                         }
                     }
@@ -121,8 +122,6 @@ public final class MasterControllerImpl implements MasterController {
                         v.updateCurrency(this.player.getCurrency());
                         v.updateSpecialCards(this.player.getSpecialCards());
                     });
-                } else {
-                    this.views.forEach(v -> v.notifyErrror("Shop", "You don't have enough money"));
                 }
             }
             case SELL_CARD -> {
@@ -136,12 +135,11 @@ public final class MasterControllerImpl implements MasterController {
                 this.levels.updateAnte();
                 this.views.forEach(v -> {
                     v.showSettings(
-                        this.levels.getCurrentBlindInfo(),
-                        this.levels.getCurrentBlindStats(),
-                        this.player.getSpecialCards(),
-                        this.player.getDeck(),
-                        this.levels.getNumAnte()
-                    );
+                            this.levels.getCurrentBlindInfo(),
+                            this.levels.getCurrentBlindStats(),
+                            this.player.getSpecialCards(),
+                            this.player.getDeck(),
+                            this.levels.getNumAnte());
                     v.showAnte(this.levels.getCurrentAnte());
                     v.updateAnteInfo(this.levels.getCurrentAnte());
                     v.updateCurrency(this.player.getCurrency());
@@ -160,21 +158,24 @@ public final class MasterControllerImpl implements MasterController {
 
     private boolean buySpecialCard(final Optional<?> data) {
         final var card = this.checkSpecialCard(data);
+        if (this.player.getSpecialCards().size() >= this.player.getMaxSpecialCards()) {
+            this.views.forEach(v -> v.notifyErrror("Shop", "The special card slot is full"));
+            return false;
+        }
         if (this.shop.buyCard(card, this.player.getCurrency())
-            && this.shop.translateCard(card).isPresent()
-            && this.player.getSpecialCards().size() < this.player.getMaxSpecialCards()
-        ) {
+                && this.shop.translateCard(card).isPresent()) {
             this.player.addSpecialCard(this.shop.translateCard(card).get());
             this.player.spendCurrency(card.price());
             return true;
-        } else {
-            return false;
         }
+        this.views.forEach(v -> v.notifyErrror("Shop", "You don't have enough money"));
+        return false;
     }
 
     private void setControllers(final Optional<?> data) {
         Preconditions.checkArgument(data.isPresent(), "No deck was received alongside the event");
-        Preconditions.checkArgument(data.get() instanceof DeckInfo, "The data received alongside the event isn't a DeckInfo");
+        Preconditions.checkArgument(data.get() instanceof DeckInfo,
+                "The data received alongside the event isn't a DeckInfo");
         final var deck = deckTranslator.get((DeckInfo) data.get());
         this.levels = new LevelsControllerImpl(deck);
         this.player = new PlayerControllerImpl(deck);
@@ -191,21 +192,20 @@ public final class MasterControllerImpl implements MasterController {
         Preconditions.checkArgument(data.isPresent(), "No list was received alongside the event");
         Preconditions.checkArgument(data.get() instanceof List, "The data received alongside the event isn't a list");
         final var cards = (List<?>) data.get();
-        final List<PlayableCard> list = this.levels.translatePlayableCard(cards.stream().map(c -> (PlayableCardInfo) c).toList());
+        final List<PlayableCard> list = this.levels
+                .translatePlayableCard(cards.stream().map(c -> (PlayableCardInfo) c).toList());
         final Combination combination = new PlayedHandImpl(list).evaluateCombination();
         return new CombinationInfo(
-            combination.getCombinationType().toString(),
-            combination.getBasePoints().basePoints(),
-            combination.getMultiplier().multiplier()
-        );
+                combination.getCombinationType().toString(),
+                combination.getBasePoints().basePoints(),
+                combination.getMultiplier().multiplier());
     }
 
     private SpecialCardInfo checkSpecialCard(final Optional<?> data) {
         Preconditions.checkArgument(data.isPresent(), "No card was received alongside the event");
         Preconditions.checkArgument(
-            data.get() instanceof SpecialCardInfo,
-            "The data received alongside the event isn't a SpecialCardInfo"
-        );
+                data.get() instanceof SpecialCardInfo,
+                "The data received alongside the event isn't a SpecialCardInfo");
         return (SpecialCardInfo) data.get();
     }
 }

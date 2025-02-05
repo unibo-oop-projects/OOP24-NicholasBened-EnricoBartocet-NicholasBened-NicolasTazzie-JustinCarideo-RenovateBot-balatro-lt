@@ -7,6 +7,7 @@ import it.unibo.balatrolt.view.api.ShopInnerLogic;
 
 /**
  * Implementation of {@link ShopInnerLogic}.
+ * @author Nicolas Tazzieri
  */
 public final class ShopInnerLogicImpl implements ShopInnerLogic {
     private Optional<SpecialCardInfo> selected = Optional.absent();

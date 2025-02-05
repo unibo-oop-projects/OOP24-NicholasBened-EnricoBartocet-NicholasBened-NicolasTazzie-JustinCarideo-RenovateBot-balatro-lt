@@ -108,7 +108,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         });
         this.cardButtons.add(card);
         final JButton info = getIconButton("/img/INFO.png", e -> {
-            JOptionPane.showMessageDialog(this, desc, "Card description", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, desc, name, JOptionPane.INFORMATION_MESSAGE);
         });
         panel.add(getPriceLable(price), getGBConstraints(0, 0));
         final JLabel nameLabel = new JLabel(name, JLabel.CENTER);

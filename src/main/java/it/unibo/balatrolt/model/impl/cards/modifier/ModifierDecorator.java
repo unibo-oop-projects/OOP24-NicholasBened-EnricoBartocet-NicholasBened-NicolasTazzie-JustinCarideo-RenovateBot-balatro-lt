@@ -13,6 +13,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
 /**
  * A decorator for modifier.
  * If canApply is false, then it returns an empty optional.
+ * @author Nicolas Tazzieri
  */
 public abstract class ModifierDecorator implements CombinationModifier {
     private Optional<ModifierStatsSupplier> stats = Optional.absent();

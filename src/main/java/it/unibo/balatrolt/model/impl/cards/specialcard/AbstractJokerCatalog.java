@@ -12,6 +12,7 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
 
 /**
  * An abstract class that provides {@link Joker}.
+ * @author Nicolas Tazzieri
  */
 public abstract class AbstractJokerCatalog implements JokerCatalog {
     private Map<String, Joker> jokers = Map.of();

@@ -8,6 +8,7 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerTier;
 
 /**
  * Implementation of {@link Joker}.
+ * @author Nicolas Tazzieri
  */
 public final class JokerImpl extends BaseSpecialCard implements Joker {
     private final Optional<CombinationModifier> modifier;

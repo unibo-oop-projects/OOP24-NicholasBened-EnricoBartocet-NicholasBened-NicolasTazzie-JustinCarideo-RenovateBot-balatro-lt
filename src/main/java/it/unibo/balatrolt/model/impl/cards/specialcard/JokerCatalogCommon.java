@@ -15,6 +15,7 @@ import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
 
 /**
  * Catalog of base {@link Joker} with {@link JokerTier} common.
+ * @author Nicolas Tazzieri
  */
 public final class JokerCatalogCommon extends AbstractJokerCatalog {
     private static final String THE_FOURTH_MULTIPLIER = "the fourth multiplier";

@@ -17,6 +17,7 @@ import it.unibo.balatrolt.model.impl.shop.JokerShop;
 
 /**
  * Implementation of {@link ShopController}.
+ * @author Nicolas Tazzieri
  */
 public final class ShopControllerImpl implements ShopController {
     private final Shop shop;

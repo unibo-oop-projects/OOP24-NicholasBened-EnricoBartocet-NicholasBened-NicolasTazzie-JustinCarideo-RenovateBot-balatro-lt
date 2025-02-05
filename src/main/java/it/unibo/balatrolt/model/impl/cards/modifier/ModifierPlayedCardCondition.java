@@ -9,7 +9,8 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
- * Implementation of ConditionalModifier checking if the played cards satisfies the specified condition.
+ * Implementation of {@link ConditionalModifier} checking if the played cards satisfies the specified condition.
+ * @author Nicolas Tazzieri
  */
 public final class ModifierPlayedCardCondition extends ConditionalModifier<Set<PlayableCard>> {
     /**

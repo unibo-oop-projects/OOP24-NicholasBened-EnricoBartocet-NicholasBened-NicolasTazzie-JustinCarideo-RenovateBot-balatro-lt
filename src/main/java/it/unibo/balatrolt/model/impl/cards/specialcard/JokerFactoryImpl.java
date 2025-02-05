@@ -15,6 +15,7 @@ import it.unibo.balatrolt.model.impl.cards.modifier.ModifierBuilderImpl;
 
 /**
  * Implementation of {@link JokerFactory}.
+ * @author Nicolas Tazzieri
  */
 public final class JokerFactoryImpl implements JokerFactory {
     private static final int MAX_PRICE = 10;

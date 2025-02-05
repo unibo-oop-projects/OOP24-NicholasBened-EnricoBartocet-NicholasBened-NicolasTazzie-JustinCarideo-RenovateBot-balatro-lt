@@ -12,6 +12,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
  * It returns the multiplier and the basepoints if are present.
  * It can contain one of them or both depending on how is constructed.
  * modification without checking any condition and doesn't need any status
+ * @author Nicolas Tazzieri
  */
 public final class BaseModifier implements CombinationModifier {
     private final Optional<UnaryOperator<Double>> multiplierMod;

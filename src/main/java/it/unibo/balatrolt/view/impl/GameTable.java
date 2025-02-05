@@ -7,13 +7,16 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.google.common.base.Optional;
@@ -28,6 +31,8 @@ import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
  * of the given param X.
  */
 public final class GameTable extends JPanel {
+    private static final int SORT_FONT_SIZE = 14;
+    private static final int SORT_BORDER_THICKNESS = 5;
     static final long serialVersionUID = 1L;
     private static final Color BG_COLOR = Color.green.darker().darker().darker();
     private static final String FONT = "COPPER_BLACK";
@@ -122,6 +127,7 @@ public final class GameTable extends JPanel {
             }
         });
         southPanel.add(playButton, BorderLayout.SOUTH);
+        southPanel.add(this.getSortPanel());
 
         /**
          * Creating the discard button
@@ -141,6 +147,24 @@ public final class GameTable extends JPanel {
         southPanel.add(discardButton, BorderLayout.SOUTH);
     }
 
+    private JPanel getSortPanel() {
+        final var outerSortPanel = new JPanel(new BorderLayout());
+        final var sortLabel = new JLabel("Sort by", JLabel.CENTER);
+        sortLabel.setForeground(Color.WHITE);
+        sortLabel.setFont(this.fontFactory.getFont(FONT, SORT_FONT_SIZE, this));
+        outerSortPanel.add(sortLabel, BorderLayout.NORTH);
+        outerSortPanel.setBorder(BorderFactory.createLineBorder(
+            Color.DARK_GRAY.darker(),
+             SORT_BORDER_THICKNESS));
+        outerSortPanel.setBackground(this.getBackground());
+        final var innerSortPanel = new JPanel(new FlowLayout());
+        innerSortPanel.setBackground(this.getBackground());
+        innerSortPanel.add(getOrangeButton("Rank", e -> {}));
+        innerSortPanel.add(getOrangeButton("Suit", e -> {}));
+        outerSortPanel.add(innerSortPanel,BorderLayout.CENTER);
+        return outerSortPanel;
+    }
+
     /**
      * updates the GUI with the new cards given.
      * @param newCards to display.
@@ -155,6 +179,15 @@ public final class GameTable extends JPanel {
      */
     public void setDiscardEnabled(final boolean isEnable) {
         this.discardButton.setEnabled(isEnable);
+    }
+
+    private JButton getOrangeButton(final String text, final ActionListener e) {
+        final var button = new JButton(text);
+        button.addActionListener(e);
+        button.setBackground(Color.ORANGE);
+        button.setForeground(Color.WHITE);
+        button.setFont(this.fontFactory.getFont(FONT, JB_FONT_SIZE, this));
+        return button;
     }
 
     private void buildSlot(final Component component, final int y) {

@@ -64,7 +64,7 @@ public enum BalatroEvent {
             case STAGE_CARDS -> Set.of(PLAY_CARDS, DISCARD_CARDS, STAGE_CARDS, SELL_CARD);
             case PLAY_CARDS -> Set.of(STAGE_CARDS, OPEN_SHOP, MAIN_MENU, SELL_CARD);
             case BUY_CARD, OPEN_SHOP -> Set.of(BUY_CARD, CLOSE_SHOP, SELL_CARD);
-            case SELL_CARD -> Set.of(BalatroEvent.values());
+            case SELL_CARD -> Set.of(values());
         };
     }
 }

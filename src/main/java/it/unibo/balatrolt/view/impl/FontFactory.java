@@ -16,10 +16,14 @@ import java.awt.Font;
 public final class FontFactory {
     private static final String BASE_FONT = "Arial";
 
-    /*
+    /**
      * Gives back the requested font with the given size.
+     * @param nameFont name of the font.
+     * @param fontSize size of the font.
+     * @param component component in which throwing messageDialogs.
+     * @return the Font requested with the given size.
      */
-    public final Font getFont(final String nameFont, final float fontSize, final Component component) {
+    public Font getFont(final String nameFont, final float fontSize, final Component component) {
         Font font = new Font(BASE_FONT, Font.PLAIN, (int) fontSize);
         try {
             font = Font.createFont(

@@ -20,7 +20,7 @@ public final class TitlePanel extends JPanel {
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker();
     private static final int SIZE_TITLE_BLIND = 30;
-    private transient final BlindInfo info;
+    private final transient  BlindInfo info;
     private final FontFactory fontFactory = new FontFactory();
 
     /**

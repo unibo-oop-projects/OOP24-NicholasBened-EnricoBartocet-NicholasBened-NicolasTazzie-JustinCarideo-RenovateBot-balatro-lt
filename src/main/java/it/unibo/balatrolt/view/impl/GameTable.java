@@ -45,13 +45,13 @@ public final class GameTable extends JPanel {
     private static final int BASE_PADDING = 7;
 
     private final List<PlayableCardInfo> selectedCards = new ArrayList<>();
-    private final FontFactory fontFactory = new FontFactory();
+    private final List<PlayableCardInfo> handCards = new ArrayList<>();
+    private final SlotPanel<PlayableCardInfo> playedSlot;
     private final SlotPanel<PlayableCardInfo> handSlot;
+    private final FontFactory fontFactory = new FontFactory();
     private final MasterController controller;
     private final JButton discardButton;
-    private final List<JButton> sortButtons = new ArrayList<>();
     private final JPanel centerPanel;
-    private SlotPanel<PlayableCardInfo> playedSlot;
 
     /**
      * Represent the game table, with the cards in the player's hand,
@@ -84,32 +84,22 @@ public final class GameTable extends JPanel {
             cards.size(), JB_WIDTH, JB_HEIGHT,
             () -> this.selectedCards.size() < MAX_PLAYED_CARDS,
             () -> true,
-            card -> {
-                this.selectedCards.add(card);
-                this.sortButtons.forEach(b -> b.setEnabled(false));
-                this.playedSlot.addObject(slotTranslator(card));
-                this.controller.handleEvent(BalatroEvent.STAGE_CARDS, Optional.of(this.selectedCards));
-                this.revalidate();
-                this.repaint();
-            }
+            this::stageCard
         );
-        cards.forEach(c -> this.handSlot.addObject(this.slotTranslator(c)));
+        cards.forEach(c -> {
+            this.handSlot.addObject(this.slotTranslator(c));
+            this.handCards.add(c);
+        });
         this.buildSlot(this.handSlot, 1);
 
         /**
-         * Creating slot for the played cards.
+         * Creating slot for the staged cards.
          */
         this.playedSlot = new SlotPanel<>(
             MAX_PLAYED_CARDS, JB_WIDTH, JB_HEIGHT,
             () -> true,
             () -> true,
-            card -> {
-                this.selectedCards.remove(card);
-                this.handSlot.addObject(slotTranslator(card));
-                this.controller.handleEvent(BalatroEvent.STAGE_CARDS, Optional.of(this.selectedCards));
-                this.revalidate();
-                this.repaint();
-            }
+            this::unstageCard
         );
         this.buildSlot(this.playedSlot, 0);
 
@@ -129,7 +119,7 @@ public final class GameTable extends JPanel {
             }
         });
         southPanel.add(playButton, BorderLayout.SOUTH);
-        southPanel.add(this.getSortPanel());
+        southPanel.add(this.buildSortPanel());
 
         /**
          * Creating the discard button
@@ -149,7 +139,28 @@ public final class GameTable extends JPanel {
         southPanel.add(discardButton, BorderLayout.SOUTH);
     }
 
-    private JPanel getSortPanel() {
+    /**
+     * updates the GUI with the new cards given.
+     * @param newCards to display.
+     */
+    public void updateHand(final List<PlayableCardInfo> newCards) {
+        this.handSlot.removeAll();
+        this.handCards.clear();
+        newCards.forEach(c -> {
+            this.handSlot.addObject(this.slotTranslator(c));
+            this.handCards.add(c);
+        });
+    }
+
+    /**
+     * @param isEnable true if the discard button is enable.
+     */
+    public void setDiscardEnabled(final boolean isEnable) {
+        this.discardButton.setEnabled(isEnable);
+    }
+
+    private JPanel buildSortPanel() {
+        final List<JButton> sortButtons = new ArrayList<>();
         final var outerSortPanel = new JPanel(new BorderLayout());
         final var sortLabel = new JLabel("Sort by", JLabel.CENTER);
         sortLabel.setForeground(Color.WHITE);
@@ -161,35 +172,18 @@ public final class GameTable extends JPanel {
         outerSortPanel.setBackground(this.getBackground());
         final var innerSortPanel = new JPanel(new FlowLayout());
         innerSortPanel.setBackground(this.getBackground());
-        sortButtons.add(getOrangeButton("Rank", e -> {
-            this.controller.handleEvent(BalatroEvent.SORT_BY_RANK, Optional.absent());
+        sortButtons.add(buildOrangeButton("Rank", e -> {
+            this.controller.handleEvent(BalatroEvent.SORT_BY_RANK, Optional.of(handCards));
         }));
-        sortButtons.add(getOrangeButton("Suit", e -> {
-            this.controller.handleEvent(BalatroEvent.SORT_BY_SUIT, Optional.absent());
+        sortButtons.add(buildOrangeButton("Suit", e -> {
+            this.controller.handleEvent(BalatroEvent.SORT_BY_SUIT, Optional.of(handCards));
         }));
         sortButtons.forEach(innerSortPanel::add);
-        outerSortPanel.add(innerSortPanel,BorderLayout.CENTER);
+        outerSortPanel.add(innerSortPanel, BorderLayout.CENTER);
         return outerSortPanel;
     }
 
-    /**
-     * updates the GUI with the new cards given.
-     * @param newCards to display.
-     */
-    public void updateHand(final List<PlayableCardInfo> newCards) {
-        this.handSlot.removeAll();
-        this.sortButtons.forEach(b -> b.setEnabled(true));
-        newCards.forEach(c -> this.handSlot.addObject(this.slotTranslator(c)));
-    }
-
-    /**
-     * @param isEnable true if the discard button is enable.
-     */
-    public void setDiscardEnabled(final boolean isEnable) {
-        this.discardButton.setEnabled(isEnable);
-    }
-
-    private JButton getOrangeButton(final String text, final ActionListener e) {
+    private JButton buildOrangeButton(final String text, final ActionListener e) {
         final var button = new JButton(text);
         button.addActionListener(e);
         button.setBackground(Color.ORANGE);
@@ -215,5 +209,23 @@ public final class GameTable extends JPanel {
             card,
             card.rank() + " " + card.suit(),
             "cards/" + card.rank().toUpperCase(Locale.getDefault()) + card.suit().toUpperCase(Locale.getDefault()));
+    }
+
+    private void stageCard(final PlayableCardInfo card) {
+        this.selectedCards.add(card);
+        this.handCards.remove(card);
+        this.playedSlot.addObject(slotTranslator(card));
+        this.controller.handleEvent(BalatroEvent.STAGE_CARDS, Optional.of(this.selectedCards));
+        this.revalidate();
+        this.repaint();
+    }
+
+    private void unstageCard(final PlayableCardInfo card) {
+        this.selectedCards.remove(card);
+        this.handCards.add(card);
+        this.handSlot.addObject(slotTranslator(card));
+        this.controller.handleEvent(BalatroEvent.STAGE_CARDS, Optional.of(this.selectedCards));
+        this.revalidate();
+        this.repaint();
     }
 }

@@ -21,9 +21,12 @@ public final class AnteView extends JPanel {
     static final long serialVersionUID = 1L;
     private final FontFactory fontFactory = new FontFactory();
     private static final String FONT = "COPPER_BLACK";
+    private static final int TOP_DISTANCE = 30;
+    private static final int BUTTON_DISTANCE = 50;
+
     private static final float TITLE_SIZE = 50f;
-    private static final float BLIND_SIZE = 25f;
-    private static final float LABEL_SIZE = 15f;
+    private static final float BLIND_SIZE = 26f;
+    private static final float LABEL_SIZE = 21f;
 
     /**
      * Builds the GUI.
@@ -51,13 +54,13 @@ public final class AnteView extends JPanel {
             final var column = new JPanel();
             column.setLayout(new BoxLayout(column, BoxLayout.PAGE_AXIS));
             column.setOpaque(false);
-            column.add(Box.createRigidArea(new Dimension(0, 30)));
+            column.add(Box.createRigidArea(new Dimension(0, TOP_DISTANCE)));
             column.add(createLabel("Blind " + blind.id(), BLIND_SIZE));
-            column.add(Box.createRigidArea(new Dimension(0, 30)));
+            column.add(Box.createRigidArea(new Dimension(0, TOP_DISTANCE)));
             column.add(createLabel("Min. chips: " + blind.minimumChips(), LABEL_SIZE));
             column.add(createLabel("Reward: " + blind.reward() + "$", LABEL_SIZE));
-            column.add(Box.createRigidArea(new Dimension(0, 50)));
             if (blind.id() == anteInfo.currentBlindId()) {
+                column.add(Box.createRigidArea(new Dimension(0, BUTTON_DISTANCE)));
                 column.add(playButton);
             }
             columns.add(column);

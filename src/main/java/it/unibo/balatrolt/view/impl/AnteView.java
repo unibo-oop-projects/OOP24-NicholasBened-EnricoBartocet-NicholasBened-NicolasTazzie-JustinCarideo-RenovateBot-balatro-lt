@@ -47,7 +47,7 @@ public final class AnteView extends JPanel {
         playButton.setAlignmentX(CENTER_ALIGNMENT);
         playButton.setFont(this.fontFactory.getFont(FONT, LABEL_SIZE, this));
 
-        for (var blind: anteInfo.blinds()) {
+        for (final var blind: anteInfo.blinds()) {
             final var column = new JPanel();
             column.setLayout(new BoxLayout(column, BoxLayout.PAGE_AXIS));
             column.setOpaque(false);

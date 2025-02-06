@@ -167,7 +167,7 @@ public final class GameTable extends JPanel {
         sortButtons.add(getOrangeButton("Suit", e -> {
             this.controller.handleEvent(BalatroEvent.SORT_BY_SUIT, Optional.absent());
         }));
-        sortButtons.forEach(b -> innerSortPanel.add(b));
+        sortButtons.forEach(innerSortPanel::add);
         outerSortPanel.add(innerSortPanel,BorderLayout.CENTER);
         return outerSortPanel;
     }

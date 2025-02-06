@@ -13,7 +13,7 @@ import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 /**
  * Implementation of {@link SortingHandController}.
  */
-public class SortingHandControllerImpl implements SortingHandController {
+public final class SortingHandControllerImpl implements SortingHandController {
     private enum SortType {
         BY_RANK,
         BY_SUIT
@@ -49,8 +49,8 @@ public class SortingHandControllerImpl implements SortingHandController {
     }
 
     @Override
-    public List<PlayableCardInfo> sortByLastCall(List<PlayableCardInfo> cards) {
-        return switch(sort) {
+    public List<PlayableCardInfo> sortByLastCall(final List<PlayableCardInfo> cards) {
+        return switch (sort) {
             case BY_RANK -> this.sortByRank(cards);
             case BY_SUIT -> this.sortBySuit(cards);
         };

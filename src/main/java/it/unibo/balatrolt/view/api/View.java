@@ -87,7 +87,7 @@ public interface View {
      * @param blindInfo the information of the current blind
      * @param blindStats the current statistics of the blind
      */
-    void showBlindDefeated(BlindInfo blindInfo, BlindStats blindStats);
+    void showBlindDefeated(BlindInfo blindInfo);
 
     /**
      * Update the money that the player has.

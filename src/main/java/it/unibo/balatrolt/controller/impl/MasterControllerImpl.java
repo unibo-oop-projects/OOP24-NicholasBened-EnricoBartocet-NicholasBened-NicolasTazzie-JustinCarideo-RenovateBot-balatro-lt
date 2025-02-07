@@ -113,8 +113,7 @@ public final class MasterControllerImpl implements MasterController {
                             this.views.forEach(View::showYouWon);
                         } else {
                             this.views.forEach(v -> {
-                                v.showBlindDefeated(this.levels.getCurrentBlindInfo(),
-                                        this.levels.getCurrentBlindStats());
+                                v.showBlindDefeated(this.levels.getCurrentBlindInfo());
                             });
                         }
                     }

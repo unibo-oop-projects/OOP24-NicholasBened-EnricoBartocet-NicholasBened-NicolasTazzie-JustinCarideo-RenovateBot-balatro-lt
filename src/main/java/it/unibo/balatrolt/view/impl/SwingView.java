@@ -191,11 +191,11 @@ public final class SwingView implements View {
     }
 
     @Override
-    public void showBlindDefeated(final BlindInfo blindInfo, final BlindStats blindStats) {
+    public void showBlindDefeated(final BlindInfo blindInfo) {
         activePanel = changePanel(
             rightPanel,
             activePanel,
-            new BlindOver(controller, blindInfo, blindStats),
+            new BlindOver(controller, blindInfo),
             Optional.of(BorderLayout.CENTER)
         );
     }

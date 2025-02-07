@@ -3,6 +3,7 @@ package it.unibo.balatrolt.view.impl;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,12 +20,12 @@ import com.google.common.base.Optional;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
-import it.unibo.balatrolt.controller.api.communication.BlindStats;
 /**
  * Show the Blind over GUI with statistics and
  * possibility to open the shop.
  */
 public class BlindOver extends JPanel {
+    private static final Color BG_COLOR = Color.GREEN.darker().darker().darker();
     private static final int PADDING_MULT = 2;
     private static final int WIDTH_PADDING = 20;
     private static final int HEIGHT_PADDING = 10;
@@ -38,21 +39,22 @@ public class BlindOver extends JPanel {
      * Builds the GUI.
      * @param controller master controller.
      * @param blindInfo static info about the blind.
-     * @param blindStats statistic of the game till now.
      */
-    public BlindOver(final MasterController controller, final BlindInfo blindInfo, final BlindStats blindStats) {
-        super(new BorderLayout());
-        this.setFont(this.fontFactory.getFont(FONT, FONT_SIZE, this));
-        this.setBackground(Color.GREEN.darker().darker().darker());
+    public BlindOver(final MasterController controller, final BlindInfo blindInfo) {
+        super.setLayout(new BorderLayout());
         final var outerPanel = new JPanel();
         outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
         final var panel = getBlindOverPanel(controller, blindInfo);
         outerPanel.add(Box.createVerticalGlue());
         outerPanel.add(panel);
         outerPanel.add(Box.createVerticalGlue());
-        outerPanel.setBackground(this.getBackground());
-        this.add(outerPanel, BorderLayout.CENTER);
-        this.setVisible(true);
+        outerPanel.setBackground(BG_COLOR);
+        super.add(outerPanel, BorderLayout.CENTER);
+        super.setVisible(true);
+    }
+
+    private Font getLabelFont() {
+        return this.fontFactory.getFont(FONT, FONT_SIZE, this);
     }
 
     private JPanel getBlindOverPanel(final MasterController controller, final BlindInfo blindInfo) {
@@ -65,14 +67,14 @@ public class BlindOver extends JPanel {
         innerPanel.add(blindDefeatedLbl, BorderLayout.NORTH);
         final var chipsEarnedLbl = new JLabel(this.getRewardString(blindInfo), JLabel.CENTER);
         chipsEarnedLbl.setForeground(Color.ORANGE);
-        chipsEarnedLbl.setFont(this.getFont());
+        chipsEarnedLbl.setFont(this.getLabelFont());
         chipsEarnedLbl.setBorder(this.getPaddingBorderCenterLabel());
         innerPanel.add(chipsEarnedLbl, BorderLayout.CENTER);
         innerPanel.add(button, BorderLayout.SOUTH);
         innerPanel.setBackground(Color.DARK_GRAY);
         innerPanel.setBorder(this.getPaddingBorder());
         panel.add(innerPanel);
-        panel.setBackground(this.getBackground());
+        panel.setBackground(BG_COLOR);
         return panel;
     }
 
@@ -81,7 +83,7 @@ public class BlindOver extends JPanel {
         button.addActionListener(a -> controller.handleEvent(BalatroEvent.OPEN_SHOP, Optional.absent()));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.ORANGE);
-        button.setFont(this.getFont());
+        button.setFont(this.getLabelFont());
         button.setBorder(this.getPaddingBorder());
         return button;
     }

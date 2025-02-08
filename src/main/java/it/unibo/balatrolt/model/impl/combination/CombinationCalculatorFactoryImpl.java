@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.CombinationCalculator;
 import it.unibo.balatrolt.model.api.combination.CombinationCalculatorFactory;
+import it.unibo.balatrolt.model.api.combination.CombinationTable;
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
@@ -15,7 +16,7 @@ import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
  */
 public final class CombinationCalculatorFactoryImpl implements CombinationCalculatorFactory {
 
-    private final CombinationTables table = new CombinationTables();
+    private final CombinationTable table = new CombinationTableImpl();
 
     /**
      * This method gives a function that compute the value

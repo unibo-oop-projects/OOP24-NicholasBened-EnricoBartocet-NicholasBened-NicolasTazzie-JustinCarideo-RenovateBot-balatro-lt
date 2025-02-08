@@ -44,31 +44,17 @@ public final class CombinationTableImpl implements CombinationTable {
         Map.entry(CombinationType.ROYAL_FLUSH, new Pair<>(150, 8.0))
     );
 
-    /**
-     * @return the combination table
-     */
     @Override
     public Map<CombinationType, Pair<Integer, Double>> getCombinationTable() {
         return Collections.unmodifiableMap(this.combinationTable);
     }
 
-    /**
-     * Given the type of combination, it returns
-     * the pair points-multiplier assigned in the table.
-     * @param type combination
-     * @return the couple points-multiplier
-     */
+
     @Override
     public Pair<Integer, Double> convertCombination(final CombinationType type) {
         return this.combinationTable.get(type);
     }
 
-    /**
-     * Given the rank, it returns
-     * amount of points assigned in the table.
-     * @param rank
-     * @return the couple points-multiplier
-     */
     @Override
     public Integer convertRank(final Rank rank) {
         return this.rankTable.get(rank);

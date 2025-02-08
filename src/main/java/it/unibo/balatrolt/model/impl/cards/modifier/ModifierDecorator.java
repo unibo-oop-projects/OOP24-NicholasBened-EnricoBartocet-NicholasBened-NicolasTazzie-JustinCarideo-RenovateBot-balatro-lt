@@ -3,7 +3,6 @@ package it.unibo.balatrolt.model.impl.cards.modifier;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
@@ -90,30 +89,6 @@ public abstract class ModifierDecorator implements CombinationModifier {
             return m2;
         }
         return Optional.absent();
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((stats == null) ? 0 : stats.hashCode());
-        result = prime * result + ((base == null) ? 0 : base.hashCode());
-        result = prime * result + (multiplierMapperReady ? 1231 : 1237);
-        result = prime * result + (basePointsMapperReady ? 1231 : 1237);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ModifierDecorator other = (ModifierDecorator) obj;
-        return Objects.equals(other.stats, this.stats)
-            && Objects.equals(other.base, this.base);
     }
 
     /**

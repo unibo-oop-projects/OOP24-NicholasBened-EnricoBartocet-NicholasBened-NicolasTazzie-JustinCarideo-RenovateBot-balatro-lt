@@ -57,12 +57,15 @@ public final class ModifierFromExisting extends ModifierDecorator {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (!super.equals(obj))
+        }
+        if (!super.equals(obj)) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         final ModifierFromExisting other = (ModifierFromExisting) obj;
         return Objects.equals(other.multiplierMod, this.multiplierMod)
         && Objects.equals(other.basePointMod, this.basePointMod)

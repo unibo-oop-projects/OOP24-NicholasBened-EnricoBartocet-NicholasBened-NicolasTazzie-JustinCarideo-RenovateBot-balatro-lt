@@ -84,11 +84,4 @@ public abstract class BaseSpecialCard implements SpecialCard {
         return Objects.equals(other.name, this.name)
             && Objects.equals(other.description, this.description);
     }
-
-    @Override
-    public String toString() {
-        return "BaseSpecialCard [name="
-        + name + ", description=" + description + ", ShopPrice=" + price
-        + ", SellValue=" + this.getToSellValue() + "]";
-    }
 }

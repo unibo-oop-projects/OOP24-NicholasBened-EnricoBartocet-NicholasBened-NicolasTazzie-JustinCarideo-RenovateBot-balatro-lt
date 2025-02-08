@@ -52,12 +52,15 @@ public final class DoubleModifier extends ModifierDecorator {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (!super.equals(obj))
+        }
+        if (!super.equals(obj)) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         final DoubleModifier other = (DoubleModifier) obj;
         return Objects.equals(other.secondBase, this.secondBase)
         && super.equals(other);

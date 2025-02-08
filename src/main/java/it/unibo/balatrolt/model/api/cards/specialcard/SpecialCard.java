@@ -3,8 +3,8 @@ package it.unibo.balatrolt.model.api.cards.specialcard;
 import it.unibo.balatrolt.model.api.cards.Card;
 
 /**
- * An interface modelling the concept of a SpecialCard.
- * It has a name and a descripion, it's mostly used to carry modifiers.
+ * It models the concept of a SpecialCard.
+ * It has a name and a descripion. Extension of this interface should specify its behaviour.
  */
 public interface SpecialCard extends Card {
     /**

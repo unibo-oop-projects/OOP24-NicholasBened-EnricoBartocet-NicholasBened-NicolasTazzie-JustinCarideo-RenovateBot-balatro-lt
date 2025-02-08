@@ -16,8 +16,7 @@ public abstract class BaseSpecialCard implements SpecialCard {
     private final int price;
 
     /**
-     * Constructor.
-     *
+     * Constructor for BaseSpecialCard.
      * @param name        card name
      * @param description description of what the card does
      * @param price       card selling price

@@ -3,7 +3,6 @@ package it.unibo.balatrolt.model.api.cards.modifier;
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
-import com.google.errorprone.annotations.DoNotCall;
 
 import it.unibo.balatrolt.model.api.combination.BasePoints;
 import it.unibo.balatrolt.model.api.combination.Multiplier;
@@ -14,7 +13,7 @@ import it.unibo.balatrolt.model.api.combination.Multiplier;
  */
 public interface CombinationModifier {
     /**
-     * Getter for multiplier mapper.
+     * Getter for {@link Multiplier} mapper.
      * Before calling this method setGameStatus() should be called.
      * @return Optional.empty() if conditions are not verified, otherwise an UnaryOperator.
      * mapping the new value a {@link Multiplier} should have
@@ -24,9 +23,8 @@ public interface CombinationModifier {
     Optional<UnaryOperator<Double>> getMultiplierMapper();
 
     /**
-     * Getter for BasePoints mapper.
+     * Getter for {@link BasePoints} mapper.
      * Before calling this method setGameStatus() should be called.
-     *
      * @return Optional.empty() if conditions are not verified, otherwise an UnaryOperator.
      * mapping the new value a {@link BasePoints} should have
      * @throws IllegalStateException if the Modifier value is inconsistent (e.g. when the game status is not set before
@@ -46,6 +44,5 @@ public interface CombinationModifier {
      * It's used to concatenate results of different mofi
      * @return true if can be applied
      */
-    @DoNotCall
     boolean canApply();
 }

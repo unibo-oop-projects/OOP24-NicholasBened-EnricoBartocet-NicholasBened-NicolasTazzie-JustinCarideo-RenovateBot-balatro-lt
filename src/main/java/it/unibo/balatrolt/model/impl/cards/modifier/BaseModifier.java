@@ -11,7 +11,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
  * A basic modifier.
  * It returns the multiplier and the basepoints if are present.
  * It can contain one of them or both depending on how is constructed.
- * modification without checking any condition and doesn't need any status
+ * It doesn't need any status and doesn't check any condition.
  * @author Nicolas Tazzieri
  */
 public final class BaseModifier implements CombinationModifier {

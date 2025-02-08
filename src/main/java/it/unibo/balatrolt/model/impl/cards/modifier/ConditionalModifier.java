@@ -11,7 +11,7 @@ import com.google.common.base.Optional;
 import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
 
 /**
- * A modifier which checks whether a condition is satisfied before suppling the
+ * A modifier which checks whether a condition is satisfied before giving the
  * modifying functions.
  * If the game status is not set it will always return the modifier.
  * @author Nicolas Tazzieri
@@ -63,10 +63,7 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
 
     @Override
     protected final boolean canApplySingle() {
-        /*if (!super.getStats().isPresent()) {
-            return true;
-        }*/
-        return !super.getStats().isPresent() || checkCondition();
+        return this.checkCondition();
     }
 
     @Override

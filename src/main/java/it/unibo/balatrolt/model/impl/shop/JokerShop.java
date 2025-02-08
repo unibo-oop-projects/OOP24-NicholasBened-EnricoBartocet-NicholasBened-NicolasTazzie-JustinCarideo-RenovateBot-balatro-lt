@@ -14,7 +14,7 @@ import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 import it.unibo.balatrolt.model.impl.cards.specialcard.JokerSupplierImpl;
 
 /**
- * A shop that is only supplied with Jokers.
+ * A {@link Shop} that is only supplied with {@link Joker}.
  * @author Nicolas Tazzieri
  */
 public final class JokerShop implements Shop {
@@ -28,7 +28,7 @@ public final class JokerShop implements Shop {
      * @throws NullPointerException if size is null
      */
     public JokerShop(final int size) {
-        supply();
+        this.supply();
         this.size = checkNotNull(size, "Size can't be null");
     }
 

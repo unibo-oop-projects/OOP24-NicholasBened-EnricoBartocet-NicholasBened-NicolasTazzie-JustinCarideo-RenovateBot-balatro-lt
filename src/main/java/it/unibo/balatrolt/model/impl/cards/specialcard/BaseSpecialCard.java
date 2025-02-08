@@ -1,5 +1,7 @@
 package it.unibo.balatrolt.model.impl.cards.specialcard;
 
+import java.util.Objects;
+
 import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
@@ -79,21 +81,14 @@ public abstract class BaseSpecialCard implements SpecialCard {
             return false;
         }
         final BaseSpecialCard other = (BaseSpecialCard) obj;
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        if (description == null) {
-            if (other.description != null) {
-                return false;
-            }
-        } else if (!description.equals(other.description)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(other.name, this.name)
+            && Objects.equals(other.description, this.description);
     }
 
+    @Override
+    public String toString() {
+        return "BaseSpecialCard [name="
+        + name + ", description=" + description + ", ShopPrice=" + price
+        + ", SellValue=" + this.getToSellValue() + "]";
+    }
 }

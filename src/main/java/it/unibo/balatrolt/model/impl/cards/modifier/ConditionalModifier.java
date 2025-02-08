@@ -58,7 +58,8 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
             return false;
         }
         final ConditionalModifier<X> other = (ConditionalModifier<X>) obj;
-        return Objects.equals(other.condition, this.condition);
+        return Objects.equals(other.condition, this.condition)
+        && super.equals(other);
     }
 
     @Override
@@ -74,6 +75,11 @@ public abstract class ConditionalModifier<X> extends ModifierDecorator {
     @Override
     protected final Optional<UnaryOperator<Double>> getInnerMultiplierFun() {
         return Optional.absent();
+    }
+
+    @Override
+    public final String toString() {
+        return "ConditionalModifier [condition=" + condition + "]";
     }
 
     /**

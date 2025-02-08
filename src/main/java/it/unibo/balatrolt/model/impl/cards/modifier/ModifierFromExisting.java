@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.model.impl.cards.modifier;
 
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -43,5 +44,33 @@ public final class ModifierFromExisting extends ModifierDecorator {
     @Override
     protected Optional<UnaryOperator<Integer>> getInnerBasePointsFun() {
         return this.basePointMod;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((multiplierMod == null) ? 0 : multiplierMod.hashCode());
+        result = prime * result + ((basePointMod == null) ? 0 : basePointMod.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final ModifierFromExisting other = (ModifierFromExisting) obj;
+        return Objects.equals(other.multiplierMod, this.multiplierMod)
+        && Objects.equals(other.basePointMod, this.basePointMod)
+        && super.equals(other);
+    }
+
+    @Override
+    public String toString() {
+        return "ModifierFromExisting [multiplierMod=" + multiplierMod + ", basePointMod=" + basePointMod + "]";
     }
 }

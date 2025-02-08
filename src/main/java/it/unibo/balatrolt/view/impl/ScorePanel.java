@@ -19,8 +19,7 @@ public class ScorePanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String SCORE_FONT = "COPPER_BLACK";
     private static final float SCORE_SIZE = 36f;
-
-    private final transient FontFactory fontFactory = new FontFactory();
+    private static final FontFactory FONT_FACTORY = new FontFactory();
     private final JLabel minimumScoreLabel;
     private final JLabel currentScoreLabel;
 
@@ -31,9 +30,9 @@ public class ScorePanel extends JPanel {
      * @param stats
      */
     public ScorePanel(final BlindInfo info, final BlindStats stats) {
-        final Font currentScoreFont = this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE, this);
-        final Font mainFont = this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE / 2, this);
-        final Font minimumScoreFont = this.fontFactory.getFont(SCORE_FONT, SCORE_SIZE, this);
+        final Font currentScoreFont = FONT_FACTORY.getFont(SCORE_FONT, SCORE_SIZE, this);
+        final Font mainFont = FONT_FACTORY.getFont(SCORE_FONT, SCORE_SIZE / 2, this);
+        final Font minimumScoreFont = FONT_FACTORY.getFont(SCORE_FONT, SCORE_SIZE, this);
         this.currentScoreLabel = getCurrentScorePanel(stats, currentScoreFont);
         this.minimumScoreLabel = getMinimumScoreLabel(info, minimumScoreFont);
         initializePanel(mainFont);

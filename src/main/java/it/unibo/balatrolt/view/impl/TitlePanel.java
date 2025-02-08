@@ -16,12 +16,12 @@ public final class TitlePanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private static final String MAIN_FONT = "COPPER_BLACK";
+    private static final FontFactory FONT_FACTORY = new FontFactory();
     private static final Color SMALL_BLIND_COLOR = Color.CYAN.darker().darker();
     private static final Color BIG_BLIND_COLOR = Color.ORANGE.darker().darker();
     private static final Color BOSS_BLIND_COLOR = Color.MAGENTA.darker().darker();
     private static final int SIZE_TITLE_BLIND = 30;
     private final transient BlindInfo info;
-    private final transient FontFactory fontFactory = new FontFactory();
 
     /**
      * Builds the title panel about the blind that is going to be challenged.
@@ -64,7 +64,7 @@ public final class TitlePanel extends JPanel {
      */
     private JLabel getFormattedLabel(final String text, final Color color, final int fontSize) {
         final JLabel label = new JLabel(text, SwingConstants.CENTER);
-        label.setFont(this.fontFactory.getFont(MAIN_FONT, fontSize, this));
+        label.setFont(FONT_FACTORY.getFont(MAIN_FONT, fontSize, this));
         label.setOpaque(true);
         label.setBackground(color);
         label.setForeground(Color.WHITE);

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
+import it.unibo.balatrolt.model.api.combination.CombinationTable;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.impl.Pair;
 
@@ -12,7 +13,7 @@ import it.unibo.balatrolt.model.impl.Pair;
  * conversition tables for evaluating combinations.
  * @author Justin Carideo
  */
-public final class CombinationTables {
+public final class CombinationTableImpl implements CombinationTable {
 
     private final Map<Rank, Integer> rankTable = Map.ofEntries(
         Map.entry(Rank.ACE, 11),
@@ -46,6 +47,7 @@ public final class CombinationTables {
     /**
      * @return the combination table
      */
+    @Override
     public Map<CombinationType, Pair<Integer, Double>> getCombinationTable() {
         return Collections.unmodifiableMap(this.combinationTable);
     }
@@ -56,6 +58,7 @@ public final class CombinationTables {
      * @param type combination
      * @return the couple points-multiplier
      */
+    @Override
     public Pair<Integer, Double> convertCombination(final CombinationType type) {
         return this.combinationTable.get(type);
     }
@@ -66,6 +69,7 @@ public final class CombinationTables {
      * @param rank
      * @return the couple points-multiplier
      */
+    @Override
     public Integer convertRank(final Rank rank) {
         return this.rankTable.get(rank);
     }

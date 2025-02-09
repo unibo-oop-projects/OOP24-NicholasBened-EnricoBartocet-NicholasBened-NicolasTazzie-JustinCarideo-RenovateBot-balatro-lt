@@ -1,5 +1,7 @@
 package it.unibo.balatrolt.model.impl.cards.specialcard;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Objects;
 
 import com.google.common.base.Optional;
@@ -24,9 +26,9 @@ public abstract class BaseSpecialCard implements SpecialCard {
      * @param price       card selling price
      */
     public BaseSpecialCard(final String name, final String description, final int price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
+        this.name = checkNotNull(name);
+        this.description = checkNotNull(description);
+        this.price = checkNotNull(price);
     }
 
     @Override

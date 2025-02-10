@@ -9,7 +9,8 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * It models a supplier of statistics used to retrieve player, card and other statistics.
- * Although it's not required, it's preferable to pass immutable implementation of the provided classes.
+ * It's used by {@link CombinationModifier} to verify whether the modifiers can be issued or not.
+ * Although it's not required, it's preferable to use immutable implementation of the required classes.
  */
 public interface ModifierStatsSupplier {
     /**

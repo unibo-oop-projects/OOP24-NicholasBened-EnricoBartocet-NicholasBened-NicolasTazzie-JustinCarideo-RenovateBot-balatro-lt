@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
@@ -30,6 +31,15 @@ import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
  * Represent the game table, formed by some generic SlotPanel<X>
  * of the given param X.
  */
+@SuppressFBWarnings(
+    justification = """
+        Since we extend JPanel (which is Serializable), it's required to make the class Serializable,
+        otherwhise an exception will be thrown when serializing this class.
+        Anyway we are sure that we will never serialize this class, because if we want to save the game
+        we will only save the informations stored in the model, creating a new View when needed.
+        """,
+    value = "SE_BAD_FIELD"
+)
 public final class GameTable extends JPanel {
     private static final int SORT_FONT_SIZE = 14;
     private static final int SORT_BORDER_THICKNESS = 5;

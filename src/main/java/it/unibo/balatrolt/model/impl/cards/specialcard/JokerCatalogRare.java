@@ -33,11 +33,12 @@ public final class JokerCatalogRare extends AbstractJokerCatalog {
     }
 
     private Joker madRand() {
+        final Random r = new Random();
         return super.getFactory()
                 .withModifierAndRandomPrice("the mad joker",
                     "it adds a random multiplier from 0 to 10 if you're holding an ace",
                     new ModifierBuilderImpl()
-                            .addMultiplierModifier(m -> m + new Random().nextDouble(MAX_RAND))
+                            .addMultiplierModifier(m -> m + r.nextDouble(MAX_RAND))
                             .addHoldingCardBound(c -> checkContainsRank(c, Rank.ACE))
                             .build(),
                     TIER);

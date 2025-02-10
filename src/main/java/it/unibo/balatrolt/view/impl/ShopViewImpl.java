@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import com.google.common.base.Optional;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.api.communication.SpecialCardInfo;
@@ -34,6 +35,15 @@ import it.unibo.balatrolt.view.api.ShopView;
  * Implementation of {@link ShopView}.
  * It also extends a {@link JPanel}, so it can be used to replace an existing one.
  */
+@SuppressFBWarnings(
+    justification = """
+        Since we extend JPanel (which is Serializable), it's required to make the class Serializable,
+        otherwhise an exception will be thrown when serializing this class.
+        Anyway we are sure that we will never serialize this class, because if we want to save the game
+        we will only save the informations stored in the model, creating a new View when needed.
+        """,
+    value = "SE_BAD_FIELD"
+)
 public final class ShopViewImpl extends JPanel implements ShopView {
     static final long serialVersionUID = 1L;
     private static final String FONT = "COPPER_BLACK";

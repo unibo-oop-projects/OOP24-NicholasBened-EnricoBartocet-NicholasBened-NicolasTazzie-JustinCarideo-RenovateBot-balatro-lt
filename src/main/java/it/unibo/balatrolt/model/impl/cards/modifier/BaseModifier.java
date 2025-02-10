@@ -1,5 +1,6 @@
 package it.unibo.balatrolt.model.impl.cards.modifier;
 
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 import com.google.common.base.Optional;
@@ -11,7 +12,7 @@ import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
  * A basic modifier.
  * It returns the multiplier and the basepoints if are present.
  * It can contain one of them or both depending on how is constructed.
- * modification without checking any condition and doesn't need any status
+ * It doesn't need any status and doesn't check any condition.
  * @author Nicolas Tazzieri
  */
 public final class BaseModifier implements CombinationModifier {
@@ -60,29 +61,21 @@ public final class BaseModifier implements CombinationModifier {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (this.getClass() != obj.getClass()) {
             return false;
         }
         final BaseModifier other = (BaseModifier) obj;
-        if (multiplierMod == null) {
-            if (other.multiplierMod != null) {
-                return false;
-            }
-        } else if (!multiplierMod.equals(other.multiplierMod)) {
-            return false;
-        }
-        if (basePointMod == null) {
-            if (other.basePointMod != null) {
-                return false;
-            }
-        } else if (!basePointMod.equals(other.basePointMod)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(other.multiplierMod, this.multiplierMod)
+            && Objects.equals(other.basePointMod, this.basePointMod);
     }
 
     @Override
     public boolean canApply() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseModifier [multiplierMod=" + multiplierMod + ", basePointMod=" + basePointMod + "]";
     }
 }

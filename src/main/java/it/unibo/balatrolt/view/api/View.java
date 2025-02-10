@@ -85,7 +85,6 @@ public interface View {
     /**
      * Shows the blind defeated screen.
      * @param blindInfo the information of the current blind
-     * @param blindStats the current statistics of the blind
      */
     void showBlindDefeated(BlindInfo blindInfo);
 

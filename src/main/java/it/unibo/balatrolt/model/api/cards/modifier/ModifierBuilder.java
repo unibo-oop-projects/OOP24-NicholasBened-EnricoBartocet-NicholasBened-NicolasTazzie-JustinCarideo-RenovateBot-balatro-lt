@@ -8,7 +8,7 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
- * Builder for modifier. It allows the to create a modifier with bound
+ * Builder for {@link CombinationModifier}. It allows the to create a modifier with bound
  */
 public interface ModifierBuilder {
     /**

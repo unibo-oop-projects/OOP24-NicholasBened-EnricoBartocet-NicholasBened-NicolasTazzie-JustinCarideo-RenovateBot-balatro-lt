@@ -26,16 +26,15 @@ import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
  * An implementation of the {@link LevelsController}.
  */
 public final class LevelsControllerImpl implements LevelsController {
-    private static final Random RAND = new Random();
     private static final int NUM_ANTE = 7;
     private static final int NUM_BLINDS = 3;
-    private static final int ANTE_MULTIPLIER = 50 * (RAND.nextInt(3) + 1);
     private static final int ANTE_EXP = 2;
-    private static final int BLIND_EXP = 1;
-    private static final int BLIND_MULTIPLIER = 30 * (RAND.nextInt(3) + 1);
-    private static final UnaryOperator<Integer> REWARD_CALCULATOR = b -> b * 2 + 2 + RAND.nextInt(4);
-    private static final BinaryOperator<Integer> BASE_CHIP_CALCULATOR = (a, b) -> {
-        return (int) Math.pow(a + 1, ANTE_EXP) * ANTE_MULTIPLIER + (int) Math.pow(b + 1, BLIND_EXP) * BLIND_MULTIPLIER;
+    private static final Random RAND = new Random();
+    private final int anteMultiplier = 50 * (RAND.nextInt(3) + 1);
+    private final int blindMultiplier = 30 * (RAND.nextInt(3) + 1);
+    private final UnaryOperator<Integer> rewardCalculator = b -> b * 2 + 2 + RAND.nextInt(4);
+    private final BinaryOperator<Integer> baseChipCalculator = (a, b) -> {
+        return (int) Math.pow(a + 1, ANTE_EXP) * anteMultiplier + (b + 1) * blindMultiplier;
     };
 
     private final List<Ante> anteList;
@@ -48,7 +47,7 @@ public final class LevelsControllerImpl implements LevelsController {
      */
     public LevelsControllerImpl(final BuffedDeck deck) {
         Preconditions.checkNotNull(deck);
-        final var anteFacroty = new AnteFactoryImpl(NUM_BLINDS, BASE_CHIP_CALCULATOR, REWARD_CALCULATOR, deck.getModifier());
+        final var anteFacroty = new AnteFactoryImpl(NUM_BLINDS, baseChipCalculator, rewardCalculator, deck.getModifier());
         this.anteList = anteFacroty.generateList(NUM_ANTE);
         this.currentAnteId = 0;
         deck.getCards().forEach(c -> cardsTranslator.put(new PlayableCardInfo(c.getRank().name(), c.getSuit().name()), c));

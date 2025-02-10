@@ -1,5 +1,9 @@
 package it.unibo.balatrolt.model.impl.cards.specialcard;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Objects;
+
 import com.google.common.base.Optional;
 
 import it.unibo.balatrolt.model.api.cards.modifier.CombinationModifier;
@@ -16,16 +20,15 @@ public abstract class BaseSpecialCard implements SpecialCard {
     private final int price;
 
     /**
-     * Constructor.
-     *
+     * Constructor for BaseSpecialCard.
      * @param name        card name
      * @param description description of what the card does
      * @param price       card selling price
      */
     public BaseSpecialCard(final String name, final String description, final int price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
+        this.name = checkNotNull(name);
+        this.description = checkNotNull(description);
+        this.price = checkNotNull(price);
     }
 
     @Override
@@ -80,21 +83,7 @@ public abstract class BaseSpecialCard implements SpecialCard {
             return false;
         }
         final BaseSpecialCard other = (BaseSpecialCard) obj;
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        if (description == null) {
-            if (other.description != null) {
-                return false;
-            }
-        } else if (!description.equals(other.description)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(other.name, this.name)
+            && Objects.equals(other.description, this.description);
     }
-
 }

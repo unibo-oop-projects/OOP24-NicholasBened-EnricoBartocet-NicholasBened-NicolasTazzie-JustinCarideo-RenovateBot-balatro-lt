@@ -12,7 +12,6 @@ public interface ModifierStatsBuilder {
 
     /**
      * Sets current played cards.
-     *
      * @param playedCards current played cards
      * @return builder state
      */
@@ -20,7 +19,6 @@ public interface ModifierStatsBuilder {
 
     /**
      * Sets current holding cards.
-     *
      * @param holdingCards current holding cards
      * @return builder state
      */
@@ -28,7 +26,6 @@ public interface ModifierStatsBuilder {
 
     /**
      * Sets current currency.
-     *
      * @param currentCurrency current currency
      * @return builder state
      */
@@ -36,7 +33,6 @@ public interface ModifierStatsBuilder {
 
     /**
      * Sets current combination.
-     *
      * @param combination current combination
      * @return builder state
      */
@@ -44,7 +40,6 @@ public interface ModifierStatsBuilder {
 
     /**
      * builds ModifierStats.
-     *
      * @return builded ModidierStats with all parameters set
      */
     ModifierStatsSupplier build();

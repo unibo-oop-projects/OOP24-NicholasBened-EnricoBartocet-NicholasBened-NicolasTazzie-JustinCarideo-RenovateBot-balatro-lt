@@ -5,7 +5,8 @@ import java.util.List;
 import com.google.common.base.Optional;
 
 /**
- * It contains a catalog of {@link Joker}.
+ * It models a catalog of {@link Joker}.
+ * Each catalog contains multiple Jokers.
  */
 public interface JokerCatalog {
     /**

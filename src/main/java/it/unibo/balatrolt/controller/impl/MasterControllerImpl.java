@@ -23,6 +23,7 @@ import it.unibo.balatrolt.model.api.cards.BuffedDeck;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory;
+import it.unibo.balatrolt.model.impl.combination.CombinationTableImpl;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 import it.unibo.balatrolt.view.api.View;
 
@@ -34,6 +35,7 @@ public final class MasterControllerImpl implements MasterController {
     private static final int SHOP_SIZE = 3;
     private final Set<View> views = new HashSet<>();
     private final Map<DeckInfo, BuffedDeck> deckTranslator = new HashMap<>();
+    private final List<CombinationInfo> avaiableCombinations;
     private Set<BalatroEvent> nextEvents = Set.of(BalatroEvent.MAIN_MENU);
 
     private LevelsController levels;
@@ -47,6 +49,15 @@ public final class MasterControllerImpl implements MasterController {
     public MasterControllerImpl() {
         final var decks = BuffedDeckFactory.getList();
         decks.forEach(d -> deckTranslator.put(new DeckInfo(d.getName(), d.getDescription()), d));
+        this.avaiableCombinations = new CombinationTableImpl().getCombinationTable()
+            .entrySet()
+            .stream()
+            .map(entry -> new CombinationInfo(
+                entry.getKey().toString(),
+                entry.getValue().e1(),
+                entry.getValue().e2()))
+            .sorted((c1, c2) -> Integer.compare(c1.points(), c2.points()))
+            .toList();
     }
 
     @Override
@@ -67,7 +78,8 @@ public final class MasterControllerImpl implements MasterController {
                             this.levels.getCurrentBlindStats(),
                             this.player.getSpecialCards(),
                             this.player.getDeck(),
-                            this.levels.getNumAnte());
+                            this.levels.getNumAnte(),
+                            avaiableCombinations);
                     v.showAnte(this.levels.getCurrentAnte());
                     v.updateAnteInfo(this.levels.getCurrentAnte());
                 });
@@ -156,7 +168,8 @@ public final class MasterControllerImpl implements MasterController {
                             this.levels.getCurrentBlindStats(),
                             this.player.getSpecialCards(),
                             this.player.getDeck(),
-                            this.levels.getNumAnte());
+                            this.levels.getNumAnte(),
+                            avaiableCombinations);
                     v.showAnte(this.levels.getCurrentAnte());
                     v.updateAnteInfo(this.levels.getCurrentAnte());
                     v.updateCurrency(this.player.getCurrency());

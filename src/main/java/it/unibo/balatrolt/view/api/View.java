@@ -55,7 +55,7 @@ public interface View {
      * @param deck selected deck
      * @param numAnte number of antes
      */
-    void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck, int numAnte);
+    void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck, int numAnte, List<CombinationInfo> avaiableCombinations);
 
     /**
      * Updates the score in UI.

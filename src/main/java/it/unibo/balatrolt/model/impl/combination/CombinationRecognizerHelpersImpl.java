@@ -22,7 +22,7 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
     private final List<Rank> ranks = List.of(Rank.values());
 
     @Override
-    public CombinationRecognizer errorCardRecognizer() {
+    public CombinationRecognizer emptyCardRecognizer() {
         return List::isEmpty;
     }
 

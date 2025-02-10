@@ -82,13 +82,14 @@ public final class SwingView implements View {
         final BlindStats stats,
         final List<SpecialCardInfo> specialCards,
         final DeckInfo deck,
-        final int numAnte
+        final int numAnte,
+        final List<CombinationInfo> combinations
     ) {
         masterPanel = changePanel(frame, masterPanel, new JPanel(new BorderLayout()), Optional.absent());
         infoPanel = (InfoPanel) changePanel(
             masterPanel,
             null,
-            new InfoPanel(info, stats),
+            new InfoPanel(info, stats, combinations),
             Optional.of(BorderLayout.WEST)
         );
         rightPanel = changePanel(masterPanel, null, new JPanel(new BorderLayout()), Optional.of(BorderLayout.CENTER));

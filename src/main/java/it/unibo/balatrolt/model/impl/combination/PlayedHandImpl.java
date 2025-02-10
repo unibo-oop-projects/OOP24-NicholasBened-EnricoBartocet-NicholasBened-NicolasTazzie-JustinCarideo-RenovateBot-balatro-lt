@@ -101,7 +101,7 @@ public final class PlayedHandImpl implements PlayedHand {
             case FOUR_OF_A_KIND -> this.helper.fourOfAKindRecognizer();
             case STRAIGHT_FLUSH -> this.helper.straightFlushRecognizer();
             case ROYAL_FLUSH -> this.helper.royalFlushRecognizer();
-            default -> this.helper.errorCardRecognizer();
+            default -> this.helper.emptyCardRecognizer();
         };
     }
 
@@ -111,7 +111,7 @@ public final class PlayedHandImpl implements PlayedHand {
      */
     private CombinationCalculator getCalculator(final CombinationType type) {
         return switch (type) {
-            case ERROR_CARD -> this.factory.errorCardCalculator();
+            case EMPTY_CARD -> this.factory.emptyCardCalculator();
             case HIGH_CARD -> this.factory.highCardCalculator();
             case PAIR, TWO_PAIR -> this.factory.pairsCalculator();
             case THREE_OF_A_KIND -> this.factory.threeOfAKindCalculator();

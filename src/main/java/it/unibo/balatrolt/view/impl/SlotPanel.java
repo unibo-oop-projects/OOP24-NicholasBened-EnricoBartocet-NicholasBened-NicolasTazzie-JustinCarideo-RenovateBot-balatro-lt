@@ -41,8 +41,8 @@ public final class SlotPanel<X> extends JPanel {
     private final int buttonHeight;
     private final Map<String, X> slots;
     private final Consumer<X> consumer;
-    private final Supplier<Boolean> canClick;
-    private final Supplier<Boolean> canRemove;
+    private final Supplier<Boolean> clickable;
+    private final Supplier<Boolean> removable;
     /*
      * It holds the full obj to eventually give it back to the controller
      * and holds the name of the card to set the image.
@@ -54,16 +54,16 @@ public final class SlotPanel<X> extends JPanel {
      * @param slotSize max size of the slot.
      * @param buttonWidth width of the button.
      * @param buttonHeigth height of the button.
-     * @param canClick possibility to click.
-     * @param canRemove possibility to remove.
+     * @param clickable possibility to click.
+     * @param removable possibility to remove.
      * @param consumer action to perform with the pressed card. THE CARD GETS DELETED BY DEFAULT.
      */
     public SlotPanel(
             final int slotSize,
             final int buttonWidth,
             final int buttonHeigth,
-            final Supplier<Boolean> canClick,
-            final Supplier<Boolean> canRemove,
+            final Supplier<Boolean> clickable,
+            final Supplier<Boolean> removable,
             final Consumer<X> consumer
         ) {
         super(new GridLayout(1, slotSize));
@@ -71,8 +71,8 @@ public final class SlotPanel<X> extends JPanel {
         Preconditions.checkArgument(buttonWidth >= 0);
         Preconditions.checkArgument(buttonHeigth >= 0);
         this.consumer = Preconditions.checkNotNull(consumer);
-        this.canClick = Preconditions.checkNotNull(canClick);
-        this.canRemove = Preconditions.checkNotNull(canRemove);
+        this.clickable = Preconditions.checkNotNull(clickable);
+        this.removable = Preconditions.checkNotNull(removable);
         this.slotSize = Preconditions.checkNotNull(slotSize);
         this.slots = new HashMap<>();
         this.buttonWidth = buttonWidth;
@@ -92,9 +92,9 @@ public final class SlotPanel<X> extends JPanel {
         button.setBorderPainted(false);
         button.setActionCommand(card.cardName());
         button.addActionListener(e -> {
-            if (this.canClick.get()) {
+            if (this.clickable.get()) {
                 this.consumer.accept(this.slots.get(e.getActionCommand()));
-                if (this.canRemove.get()) {
+                if (this.removable.get()) {
                     this.slots.remove(e.getActionCommand());
                     this.remove((JButton) e.getSource());
                 }

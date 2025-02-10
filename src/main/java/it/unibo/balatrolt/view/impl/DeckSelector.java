@@ -50,6 +50,7 @@ public final class DeckSelector extends JPanel {
     private static final Double BASE_WEIGHT = 0.2;
     private static final int BASE_PAD = 10;
     private static final int TOP_PAD = 50;
+    private static final int IPADX = 50;
     private static final int DECK_PAD = 30;
     private static final double HEIGHT_MULT = 1.5;
     private static final double WIDTH_MULT = 1.2;
@@ -160,7 +161,7 @@ public final class DeckSelector extends JPanel {
         this.deckDescription.setBackground(Color.WHITE);
         this.deckDescription.setOpaque(true);
         this.deckDescription.setForeground(Color.BLACK);
-        descriptionPanel.add(deckDescription, getConstraints(0, 1, 1.0, 1.0, 50,
+        descriptionPanel.add(deckDescription, getConstraints(0, 1, 1.0, 1.0, IPADX,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH, BASE_PAD, BASE_PAD / 2, BASE_PAD / 2, BASE_PAD / 2));
         /**
          * setting deck image

@@ -23,8 +23,9 @@ public final class InfoPanel extends JPanel {
 
     /**
      * Constructor that builds the main info panel.
-     * @param info about the blind.
-     * @param stats about the actual game.
+     * @param info about the blind
+     * @param stats about the actual game
+     * @param combinations available
      */
     public InfoPanel(final BlindInfo info, final BlindStats stats, final List<CombinationInfo> combinations) {
         this.setLayout(new GridLayout(4, 1));

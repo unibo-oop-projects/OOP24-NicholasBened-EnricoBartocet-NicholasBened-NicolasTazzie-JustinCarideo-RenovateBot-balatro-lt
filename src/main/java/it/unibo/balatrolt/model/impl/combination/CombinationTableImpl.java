@@ -34,13 +34,13 @@ public final class CombinationTableImpl implements CombinationTable {
         Map.entry(CombinationType.EMPTY_CARD, new Pair<>(0, 0.0)),
         Map.entry(CombinationType.HIGH_CARD, new Pair<>(5, 1.0)),
         Map.entry(CombinationType.PAIR, new Pair<>(10, 2.0)),
-        Map.entry(CombinationType.TWO_PAIR, new Pair<>(20, 2.0)),
+        Map.entry(CombinationType.TWO_PAIR, new Pair<>(20, 2.5)),
         Map.entry(CombinationType.THREE_OF_A_KIND, new Pair<>(30, 3.0)),
-        Map.entry(CombinationType.STRAIGHT, new Pair<>(30, 4.0)),
-        Map.entry(CombinationType.FLUSH, new Pair<>(35, 4.0)),
-        Map.entry(CombinationType.FULL_HOUSE, new Pair<>(40, 4.0)),
-        Map.entry(CombinationType.FOUR_OF_A_KIND, new Pair<>(60, 7.0)),
-        Map.entry(CombinationType.STRAIGHT_FLUSH, new Pair<>(100, 8.0)),
+        Map.entry(CombinationType.STRAIGHT, new Pair<>(35, 4.0)),
+        Map.entry(CombinationType.FLUSH, new Pair<>(40, 5.0)),
+        Map.entry(CombinationType.FULL_HOUSE, new Pair<>(50, 5.5)),
+        Map.entry(CombinationType.FOUR_OF_A_KIND, new Pair<>(60, 6.5)),
+        Map.entry(CombinationType.STRAIGHT_FLUSH, new Pair<>(100, 7.0)),
         Map.entry(CombinationType.ROYAL_FLUSH, new Pair<>(150, 8.0))
     );
 

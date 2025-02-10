@@ -3,13 +3,10 @@ package it.unibo.balatrolt.view.impl;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -29,19 +26,28 @@ public class HandPanel extends JPanel {
     private final JLabel discardLabel;
     private final JLabel currencyLabel;
     private final JLabel anteLabel;
+    private boolean isCombinationVisible;
 
     /**
-     * Builds the panel with information about player stats.
+     * Builds the panel with information about player stats
+     * and a button for opening a new frame that has
+     * every information about combinations could the player do.
+     * @param availableCombinations
      */
-    public HandPanel(List<CombinationInfo> avaiableCombinations) {
+    public HandPanel(final List<CombinationInfo> availableCombinations) {
         super(new GridLayout(3, 1));
-        this.combFrame = new CombinationFrame(avaiableCombinations);
+        this.combFrame = new CombinationFrame(availableCombinations);
         this.handLabel = createGeneralLabel("");
         this.discardLabel = createGeneralLabel("");
         this.currencyLabel = createGeneralLabel("$0");
         this.anteLabel = createGeneralLabel("Ante: ");
-        final JButton combinationButton = new JButton("Avaiable Combinations");
-        combinationButton.addActionListener(e -> combFrame.setVisible(true));
+        final JButton combinationButton = new JButton("Available Combinations");
+        combinationButton.setBackground(Color.DARK_GRAY.darker());
+        combinationButton.setForeground(Color.WHITE);
+        combinationButton.addActionListener(e -> {
+            isCombinationVisible = !isCombinationVisible;
+            combFrame.setVisible(isCombinationVisible);
+        });
         super.add(createNorthPanel());
         super.add(createSouthPanel());
         super.add(combinationButton);

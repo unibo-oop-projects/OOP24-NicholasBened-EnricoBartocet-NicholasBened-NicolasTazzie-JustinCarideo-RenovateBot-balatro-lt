@@ -77,7 +77,7 @@ class TestCalculators {
             new PlayableCardImpl(new Pair<>(Rank.FOUR, Suit.DIAMONDS)),
             new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS))
         );
-        final var expected2 = new CombinationImpl(42, 2, CombinationType.TWO_PAIR);
+        final var expected2 = new CombinationImpl(42, 2.5, CombinationType.TWO_PAIR);
         final var result2 = this.factory.pairsCalculator().compute(CombinationType.TWO_PAIR, hand2);
         assertEquals(expected2.getBasePoints().basePoints(), result2.getBasePoints().basePoints());
         assertEquals(expected2.getMultiplier().multiplier(), result2.getMultiplier().multiplier());
@@ -119,7 +119,7 @@ class TestCalculators {
             new PlayableCardImpl(new Pair<>(Rank.FIVE, Suit.DIAMONDS)),
             new PlayableCardImpl(new Pair<>(Rank.SIX, Suit.CLUBS))
         );
-        final var expected = new CombinationImpl(80, 7, CombinationType.FOUR_OF_A_KIND);
+        final var expected = new CombinationImpl(80, 6.5, CombinationType.FOUR_OF_A_KIND);
         final var result = this.factory.fourOfAKindCalculator().compute(CombinationType.FOUR_OF_A_KIND, hand);
         assertEquals(expected.getBasePoints().basePoints(), result.getBasePoints().basePoints());
         assertEquals(expected.getMultiplier().multiplier(), result.getMultiplier().multiplier());
@@ -137,7 +137,7 @@ class TestCalculators {
             new PlayableCardImpl(new Pair<>(Rank.JACK, Suit.DIAMONDS)),
             new PlayableCardImpl(new Pair<>(Rank.TEN, Suit.CLUBS))
         );
-        final var expected = new CombinationImpl(81, 4, CombinationType.STRAIGHT);
+        final var expected = new CombinationImpl(86, 4, CombinationType.STRAIGHT);
         final var result = this.factory.fiveCardsCalculator().compute(CombinationType.STRAIGHT, hand);
         assertEquals(expected.getBasePoints().basePoints(), result.getBasePoints().basePoints());
         assertEquals(expected.getMultiplier().multiplier(), result.getMultiplier().multiplier());

@@ -31,7 +31,7 @@ public final class CombinationTableImpl implements CombinationTable {
         Map.entry(Rank.KING, 10)
     );
     private final Map<CombinationType, Pair<Integer, Double>> combinationTable = Map.ofEntries(
-        Map.entry(CombinationType.ERROR_CARD, new Pair<>(0, 0.0)),
+        Map.entry(CombinationType.EMPTY_CARD, new Pair<>(0, 0.0)),
         Map.entry(CombinationType.HIGH_CARD, new Pair<>(5, 1.0)),
         Map.entry(CombinationType.PAIR, new Pair<>(10, 2.0)),
         Map.entry(CombinationType.TWO_PAIR, new Pair<>(20, 2.0)),

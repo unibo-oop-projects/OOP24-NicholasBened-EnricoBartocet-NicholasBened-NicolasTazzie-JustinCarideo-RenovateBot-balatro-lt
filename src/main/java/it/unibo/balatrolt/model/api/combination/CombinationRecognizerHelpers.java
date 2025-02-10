@@ -10,7 +10,7 @@ public interface CombinationRecognizerHelpers {
     /**
      * @return an error card recognizer
      */
-    CombinationRecognizer errorCardRecognizer();
+    CombinationRecognizer emptyCardRecognizer();
 
     /**
      * @return an high card recognizer

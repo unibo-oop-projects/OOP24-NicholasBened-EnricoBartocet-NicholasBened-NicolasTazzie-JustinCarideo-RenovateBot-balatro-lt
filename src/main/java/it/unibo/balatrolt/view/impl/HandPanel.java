@@ -2,14 +2,20 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
+import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 
 /**
  * Displays the statistics of the current blind.
@@ -18,6 +24,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
 public class HandPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
+    private final CombinationFrame combFrame;
     private final JLabel handLabel;
     private final JLabel discardLabel;
     private final JLabel currencyLabel;
@@ -26,14 +33,18 @@ public class HandPanel extends JPanel {
     /**
      * Builds the panel with information about player stats.
      */
-    public HandPanel() {
-        super(new GridLayout(2, 1));
+    public HandPanel(List<CombinationInfo> avaiableCombinations) {
+        super(new GridLayout(3, 1));
+        this.combFrame = new CombinationFrame(avaiableCombinations);
         this.handLabel = createGeneralLabel("");
         this.discardLabel = createGeneralLabel("");
         this.currencyLabel = createGeneralLabel("$0");
         this.anteLabel = createGeneralLabel("Ante: ");
+        final JButton combinationButton = new JButton("Avaiable Combinations");
+        combinationButton.addActionListener(e -> combFrame.setVisible(true));
         super.add(createNorthPanel());
         super.add(createSouthPanel());
+        super.add(combinationButton);
     }
 
     /**

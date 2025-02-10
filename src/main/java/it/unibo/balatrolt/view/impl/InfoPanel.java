@@ -1,5 +1,7 @@
 package it.unibo.balatrolt.view.impl;
 
+import java.util.List;
+
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -24,12 +26,12 @@ public final class InfoPanel extends JPanel {
      * @param info about the blind.
      * @param stats about the actual game.
      */
-    public InfoPanel(final BlindInfo info, final BlindStats stats) {
+    public InfoPanel(final BlindInfo info, final BlindStats stats, final List<CombinationInfo> combinations) {
         this.setLayout(new GridLayout(4, 1));
         final var titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);
         this.combinationPanel = new CombinationPanel(new CombinationInfo(" ", 0, 0));
-        this.handPanel = new HandPanel();
+        this.handPanel = new HandPanel(combinations);
         this.handPanel.updateHands(stats);
         add(titlePanel);
         add(this.scorePanel);

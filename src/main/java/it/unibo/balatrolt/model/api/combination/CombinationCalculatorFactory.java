@@ -10,7 +10,7 @@ public interface CombinationCalculatorFactory {
     /**
      * @return a CombinationCalculator for error card
      */
-    CombinationCalculator errorCardCalculator();
+    CombinationCalculator emptyCardCalculator();
 
     /**
      * @return a CombinationCalculator for high card

@@ -13,7 +13,7 @@ public interface Combination {
      */
     enum CombinationType {
         /** Error card combination. */
-        ERROR_CARD(" "),
+        EMPTY_CARD("Empty Card"),
         /** High card combination. */
         HIGH_CARD("High Card"),
         /** A pair combination. */

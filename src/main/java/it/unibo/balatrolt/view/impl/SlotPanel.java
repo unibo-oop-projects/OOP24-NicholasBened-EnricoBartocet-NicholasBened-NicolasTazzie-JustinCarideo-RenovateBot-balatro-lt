@@ -22,6 +22,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * Represent a Generic panel in which we can store any card.
  * we can also set the action to perform when the buttons are pressed.
  * @param <X> object the panel has to hold.
+ * @author Benedetti Nicholas
  */
 @SuppressFBWarnings(
     justification = """
@@ -57,7 +58,14 @@ public final class SlotPanel<X> extends JPanel {
      * @param canRemove possibility to remove.
      * @param consumer action to perform with the pressed card. THE CARD GETS DELETED BY DEFAULT.
      */
-    public SlotPanel(final int slotSize, final int buttonWidth, final int buttonHeigth, final Supplier<Boolean> canClick, final Supplier<Boolean> canRemove, final Consumer<X> consumer) {
+    public SlotPanel(
+            final int slotSize,
+            final int buttonWidth,
+            final int buttonHeigth,
+            final Supplier<Boolean> canClick,
+            final Supplier<Boolean> canRemove,
+            final Consumer<X> consumer
+        ) {
         super(new GridLayout(1, slotSize));
         super.setBackground(Color.DARK_GRAY);
         Preconditions.checkArgument(buttonWidth >= 0);

@@ -59,7 +59,7 @@ public interface Player {
     PlayerStatus getStatus();
 
     /**
-     * @return the maximum number of special cards that the Player can have
+     * @return the maximum number of special cards that the Player can hold
      */
     int getMaxSpecialCards();
 }

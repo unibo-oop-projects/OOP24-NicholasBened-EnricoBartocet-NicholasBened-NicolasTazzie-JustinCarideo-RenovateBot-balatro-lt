@@ -19,6 +19,7 @@ import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 /**
  * Main menu GUI.
+ * @author Benedetti Nicholas
  */
 @SuppressFBWarnings(
     justification = """

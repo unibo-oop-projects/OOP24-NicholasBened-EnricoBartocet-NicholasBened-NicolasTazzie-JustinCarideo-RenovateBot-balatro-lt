@@ -13,6 +13,7 @@ import it.unibo.balatrolt.model.impl.cards.SlotImpl;
 
 /**
  * The implementation of the Player interface.
+ * @author Benedetti Nicholas
  */
 public final class PlayerImpl implements Player {
     private static final int SLOT_SIZE = 5;

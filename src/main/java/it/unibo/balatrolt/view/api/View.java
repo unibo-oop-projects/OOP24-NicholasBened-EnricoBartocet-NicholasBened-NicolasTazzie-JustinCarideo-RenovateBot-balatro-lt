@@ -54,8 +54,16 @@ public interface View {
      * @param specialCards owned special cards
      * @param deck selected deck
      * @param numAnte number of antes
+     * @param availableCombinations list of combinations and their scores
      */
-    void showSettings(BlindInfo info, BlindStats stats, List<SpecialCardInfo> specialCards, DeckInfo deck, int numAnte, List<CombinationInfo> avaiableCombinations);
+    void showSettings(
+        BlindInfo info,
+        BlindStats stats,
+        List<SpecialCardInfo> specialCards,
+        DeckInfo deck,
+        int numAnte,
+        List<CombinationInfo> availableCombinations
+    );
 
     /**
      * Updates the score in UI.

@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -80,7 +81,11 @@ public final class GameEnd extends JPanel {
         decline.setForeground(Color.WHITE.brighter());
         decline.setContentAreaFilled(false);
         decline.setBorder(null);
-        decline.addActionListener(a -> System.exit(0));
+        decline.addActionListener(a -> {
+            for (final var f: JFrame.getFrames()) {
+                f.dispose();
+            }
+        });
         decline.setAlignmentY(CENTER_ALIGNMENT);
         buttons.add(decline);
         decline.setPreferredSize(accept.getPreferredSize());

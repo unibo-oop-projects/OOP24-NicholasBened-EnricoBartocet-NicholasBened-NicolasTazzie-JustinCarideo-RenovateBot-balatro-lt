@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import com.google.common.base.Supplier;
-
 import it.unibo.balatrolt.model.api.cards.specialcard.Joker;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerCatalog;
 import it.unibo.balatrolt.model.api.cards.specialcard.JokerSupplier;
@@ -14,7 +12,7 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerSupplier;
  * Joker supplier implementation.
  * @author Nicolas Tazzieri
  */
-public final class JokerSupplierImpl implements JokerSupplier, Supplier<Joker> {
+public final class JokerSupplierImpl implements JokerSupplier {
     private static final int MISC_REP = 1;
     private static final int RARE_REP = 1;
     private static final int NOTCOMMON_REP = 2;

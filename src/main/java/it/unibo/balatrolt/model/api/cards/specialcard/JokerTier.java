@@ -1,7 +1,7 @@
 package it.unibo.balatrolt.model.api.cards.specialcard;
 
 /**
- * It's the tier of the {@link Joker}.
+ * It's the tier of the {@link Joker}. It specifies the rarity of a Joker.
  */
 public enum JokerTier {
     /**

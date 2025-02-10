@@ -15,23 +15,16 @@ import it.unibo.balatrolt.model.api.cards.specialcard.JokerFactory;
  * @author Nicolas Tazzieri
  */
 public abstract class AbstractJokerCatalog implements JokerCatalog {
-    private Map<String, Joker> jokers = Map.of();
     private final JokerFactory factory = new JokerFactoryImpl();
 
     @Override
     public final List<Joker> getJokerList() {
-        this.addJokers();
-        return this.jokers.values().stream().toList();
+        return this.getJokersMap().values().stream().toList();
     }
 
     @Override
     public final Optional<Joker> getJoker(final String name) {
-        this.addJokers();
-        return Optional.fromNullable(this.jokers.get(name.toLowerCase(Locale.getDefault())));
-    }
-
-    private void addJokers() {
-        this.jokers = this.getJokersMap();
+        return Optional.fromNullable(this.getJokersMap().get(name.toLowerCase(Locale.getDefault())));
     }
 
     /**

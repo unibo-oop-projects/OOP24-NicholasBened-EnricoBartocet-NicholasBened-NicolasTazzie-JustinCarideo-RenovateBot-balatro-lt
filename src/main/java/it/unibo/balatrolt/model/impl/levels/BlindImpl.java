@@ -55,10 +55,10 @@ public final class BlindImpl implements Blind {
 
     @Override
     public Status getStatus() {
-        if (this.getRemainingHands() > 0) {
+        if (this.getRemainingHands() > 0 && this.getCurrentChips() < this.getMinimumChips()) {
             return Status.IN_GAME;
         }
-        if (this.getCurrentChips() >= this.getMinimumChips()) {
+        if (this.getRemainingHands() >= 0 && this.getCurrentChips() >= this.getMinimumChips()) {
             return Status.DEFEATED;
         }
         return Status.GAME_OVER;

@@ -5,16 +5,21 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -64,6 +69,8 @@ public final class SwingView implements View {
         frame.setSize((int) (screenSize.getWidth() / RIDIM), (int) (screenSize.getHeight() / RIDIM));
         frame.setLocationByPlatform(true);
         frame.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+        this.setLookAndFeel();
+        this.setFrameIconImg();
     }
 
     @Override
@@ -248,4 +255,27 @@ public final class SwingView implements View {
         return newPanel;
     }
 
+    private void setFrameIconImg() {
+        try {
+            final Image img;
+            img = ImageIO.read(getClass().getResource("/img/cards/ACEHEARTS.png"));
+            frame.setIconImage(img);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(frame, "Can't load the application icon", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void setLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(
+                UIManager.getCrossPlatformLookAndFeelClassName()
+            );
+        } catch (ClassNotFoundException
+                | InstantiationException
+                | IllegalAccessException
+                | UnsupportedLookAndFeelException e
+            ) {
+            JOptionPane.showMessageDialog(frame, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

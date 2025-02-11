@@ -18,6 +18,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -67,6 +69,7 @@ public final class SwingView implements View {
         frame.setSize((int) (screenSize.getWidth() / RIDIM), (int) (screenSize.getHeight() / RIDIM));
         frame.setLocationByPlatform(true);
         frame.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+        this.setLookAndFeel();
         this.setFrameIconImg();
     }
 
@@ -258,6 +261,20 @@ public final class SwingView implements View {
             frame.setIconImage(img);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(frame, "Can't load the application icon", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void setLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(
+                UIManager.getCrossPlatformLookAndFeelClassName()
+            );
+        } catch (ClassNotFoundException
+                | InstantiationException
+                | IllegalAccessException
+                | UnsupportedLookAndFeelException e
+            ) {
+            JOptionPane.showMessageDialog(frame, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

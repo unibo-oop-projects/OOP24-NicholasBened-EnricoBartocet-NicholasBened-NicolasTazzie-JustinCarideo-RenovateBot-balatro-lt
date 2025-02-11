@@ -122,6 +122,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         final JButton info = getIconButton("/img/INFO.png", e -> {
             JOptionPane.showMessageDialog(this, desc, name, JOptionPane.INFORMATION_MESSAGE);
         });
+        info.setBorder(BorderFactory.createEmptyBorder());
         panel.add(getPriceLable(price), getGBConstraints(0, 0));
         final JLabel nameLabel = new JLabel(name, JLabel.CENTER);
         nameLabel.setForeground(Color.WHITE);
@@ -140,7 +141,6 @@ public final class ShopViewImpl extends JPanel implements ShopView {
 
     private JButton getIconButton(final String path, final ActionListener action) {
         final var btn = new JButton();
-        btn.setSize(this.getSize());
         btn.addActionListener(action);
         try {
             final Image img = ImageIO.read(getClass().getResource(path));

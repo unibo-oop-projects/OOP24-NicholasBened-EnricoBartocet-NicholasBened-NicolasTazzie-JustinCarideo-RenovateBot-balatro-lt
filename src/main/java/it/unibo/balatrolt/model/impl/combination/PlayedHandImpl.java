@@ -12,7 +12,7 @@ import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.combination.CombinationCalculator;
 import it.unibo.balatrolt.model.api.combination.CombinationCalculatorFactory;
 import it.unibo.balatrolt.model.api.combination.CombinationRecognizer;
-import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
+import it.unibo.balatrolt.model.api.combination.CombinationRecognizerFactory;
 import it.unibo.balatrolt.model.api.combination.PlayedHand;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
@@ -33,7 +33,7 @@ public final class PlayedHandImpl implements PlayedHand {
 
     private static final int FULL_HAND = 5;
     private final List<PlayableCard> hand;
-    private final CombinationRecognizerHelpers helper = new CombinationRecognizerHelpersImpl();
+    private final CombinationRecognizerFactory helper = new CombinationRecognizerFactoryImpl();
     private final CombinationCalculatorFactory factory = new CombinationCalculatorFactoryImpl();
     private final List<Pair<CombinationType, CombinationRecognizer>> combinationTable = new ArrayList<>();
 
@@ -85,7 +85,7 @@ public final class PlayedHandImpl implements PlayedHand {
     /**
      * This is a support method for recognizing the right combination.
      * Given the type of the combination, it returns the right recognizer,
-     * produced by the factory {@link CombinationRecognizerHelpers} implementation.
+     * produced by the factory {@link CombinationRecognizerFactory} implementation.
      * @param type of the combination
      * @return the right recognizer
      */

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.combination.CombinationRecognizer;
-import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
+import it.unibo.balatrolt.model.api.combination.CombinationRecognizerFactory;
 import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
@@ -15,7 +15,7 @@ import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
  * Strategy pattern for the interface {@link CombinationRecognizer}.
  * @author Justin Carideo
  */
-public final class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
+public final class CombinationRecognizerFactoryImpl implements CombinationRecognizerFactory {
 
     private static final int FULL_HAND = 5;
     private static final int THREE_SIZE = 3;

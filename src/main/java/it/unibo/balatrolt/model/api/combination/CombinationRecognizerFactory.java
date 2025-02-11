@@ -5,7 +5,7 @@ package it.unibo.balatrolt.model.api.combination;
  * Simply it's a factory that provides some classes for recognizing combination
  * given by input.
  */
-public interface CombinationRecognizerHelpers {
+public interface CombinationRecognizerFactory {
 
     /**
      * @return an empty card recognizer

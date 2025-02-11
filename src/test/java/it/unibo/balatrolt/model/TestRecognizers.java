@@ -13,14 +13,14 @@ import it.unibo.balatrolt.model.api.cards.PlayableCard.Rank;
 import it.unibo.balatrolt.model.api.cards.PlayableCard.Suit;
 import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.cards.PlayableCardImpl;
-import it.unibo.balatrolt.model.impl.combination.CombinationRecognizerHelpersImpl;
+import it.unibo.balatrolt.model.impl.combination.CombinationRecognizerFactoryImpl;
 
 /**
  * Test class for Combination Recognizers.
  */
 class TestRecognizers {
 
-    private final CombinationRecognizerHelpersImpl helper = new CombinationRecognizerHelpersImpl();
+    private final CombinationRecognizerFactoryImpl helper = new CombinationRecognizerFactoryImpl();
     private List<PlayableCard> hand;
 
     /**

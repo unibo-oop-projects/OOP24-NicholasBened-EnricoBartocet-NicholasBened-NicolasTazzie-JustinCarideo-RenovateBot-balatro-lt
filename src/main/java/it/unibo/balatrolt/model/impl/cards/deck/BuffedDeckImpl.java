@@ -7,7 +7,7 @@ import it.unibo.balatrolt.model.api.levels.BlindModifier;
 
 /**
  * A simple implementation of a {@link BuffedDeck}.
- * @author Bartocetti Enrico
+ * @author Enrico Bartocetti
  */
 public final class BuffedDeckImpl extends DeckImpl implements BuffedDeck {
 

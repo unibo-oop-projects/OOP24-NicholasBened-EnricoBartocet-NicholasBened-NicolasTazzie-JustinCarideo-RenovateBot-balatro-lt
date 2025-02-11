@@ -8,7 +8,7 @@ import it.unibo.balatrolt.model.api.levels.BlindModifier;
 
 /**
  * An implementation of the interface {@link BlindModifier} that follows the Strategy pattern.
- * @author Bartocetti Enrico
+ * @author Enrico Bartocetti
  */
 public final class BlindModifierImpl implements BlindModifier {
 

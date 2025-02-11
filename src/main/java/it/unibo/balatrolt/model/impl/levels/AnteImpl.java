@@ -11,7 +11,7 @@ import it.unibo.balatrolt.model.api.levels.BlindModifier;
 
 /**
  * An implementation of the {@link Ante} interface.
- * @author Bartocetti Enrico
+ * @author Enrico Bartocetti
  */
 public final class AnteImpl implements Ante {
     private final AnteConfiguration configuration;

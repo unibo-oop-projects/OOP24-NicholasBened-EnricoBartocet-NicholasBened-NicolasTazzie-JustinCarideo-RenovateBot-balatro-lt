@@ -13,7 +13,7 @@ import it.unibo.balatrolt.model.api.levels.BlindModifier;
 
 /**
  * A factory for {@link Blind} objects.
- * @author Bartocetti Enrico
+ * @author Enrico Bartocetti
  */
 public final class BlindFactoryImpl implements BlindFactory {
 

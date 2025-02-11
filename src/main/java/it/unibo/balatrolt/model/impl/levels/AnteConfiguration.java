@@ -10,7 +10,7 @@ import it.unibo.balatrolt.model.api.levels.Blind;
 
 /**
  * Represents the characteristics of an {@link Ante}.
- * @author Bartocetti Enrico
+ * @author Enrico Bartocetti
  * @param id the id of the Ante
  * @param numBlinds the number of {@link Blind} present in the Ante
  * @param baseChipCalc the function that computes the minimum chips required to defeat the Blind, given the Ante ID and Blind ID

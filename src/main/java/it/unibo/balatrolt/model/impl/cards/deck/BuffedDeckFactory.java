@@ -11,7 +11,7 @@ import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
 
 /**
  * A Static Factory to generate some types of {@link BuffedDeck}.
- * @author Bartocetti Enrico
+ * @author Enrico Bartocetti
  */
 public final class BuffedDeckFactory {
 

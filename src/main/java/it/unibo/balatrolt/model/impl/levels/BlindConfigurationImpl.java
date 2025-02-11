@@ -6,7 +6,7 @@ import it.unibo.balatrolt.model.api.levels.BlindConfiguration;
 
 /**
  * A simple and immutable implementation of {@link BlindConfiguration}.
- * @author Bartocetti Enrico
+ * @author Enrico Bartocetti
  * @param id the id of the Blind
  * @param baseChip the minium of chips required to defeat the Blind
  * @param reward the reward which will be awarded to the player if he defeats the blind

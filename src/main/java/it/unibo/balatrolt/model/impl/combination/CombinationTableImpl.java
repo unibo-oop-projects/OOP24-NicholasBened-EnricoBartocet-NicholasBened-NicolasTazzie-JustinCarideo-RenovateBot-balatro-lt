@@ -9,7 +9,7 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.impl.Pair;
 
 /**
- * This is an immutable class that contains
+ * This is an immutable class that implements
  * {@link CombinationTable} for evaluating {@link Combination}.
  * @author Justin Carideo
  */

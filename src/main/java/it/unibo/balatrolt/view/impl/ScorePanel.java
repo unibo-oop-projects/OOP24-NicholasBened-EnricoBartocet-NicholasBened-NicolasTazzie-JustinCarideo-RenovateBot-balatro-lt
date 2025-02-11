@@ -14,7 +14,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
 /**
  * Display the scores (actual score and the one to beat).
  */
-public class ScorePanel extends JPanel {
+public final class ScorePanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private static final String SCORE_FONT = "COPPER_BLACK";

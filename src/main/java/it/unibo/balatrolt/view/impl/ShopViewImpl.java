@@ -45,6 +45,8 @@ import it.unibo.balatrolt.view.api.ShopView;
     value = "SE_BAD_FIELD"
 )
 public final class ShopViewImpl extends JPanel implements ShopView {
+    private static final int HORIZONTAL_PADDING = 20;
+    private static final int VERTICAL_PADDING = 10;
     static final long serialVersionUID = 1L;
     private static final String FONT = "COPPER_BLACK";
     private static final float TITLE_SIZE = 100f;
@@ -92,7 +94,7 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         checkNotNull(toSell);
         this.cardButtons.clear();
         this.logic.reset();
-        buildInnerPanel(toSell);
+        this.buildInnerPanel(toSell);
         this.redraw();
     }
 
@@ -127,11 +129,18 @@ public final class ShopViewImpl extends JPanel implements ShopView {
         panel.add(nameLabel, getGBConstraints(0, NAME_Y));
         panel.add(info, getGBConstraints(0, INFO_Y));
         panel.setBackground(this.getBackground());
+        panel.setBorder(BorderFactory.createEmptyBorder(
+            VERTICAL_PADDING,
+            HORIZONTAL_PADDING,
+            VERTICAL_PADDING,
+            HORIZONTAL_PADDING
+        ));
         return panel;
     }
 
     private JButton getIconButton(final String path, final ActionListener action) {
         final var btn = new JButton();
+        btn.setSize(this.getSize());
         btn.addActionListener(action);
         try {
             final Image img = ImageIO.read(getClass().getResource(path));

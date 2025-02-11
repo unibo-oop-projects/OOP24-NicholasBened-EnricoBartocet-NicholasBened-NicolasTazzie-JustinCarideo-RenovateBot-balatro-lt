@@ -5,11 +5,14 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -64,6 +67,7 @@ public final class SwingView implements View {
         frame.setSize((int) (screenSize.getWidth() / RIDIM), (int) (screenSize.getHeight() / RIDIM));
         frame.setLocationByPlatform(true);
         frame.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+        this.setFrameIconImg();
     }
 
     @Override
@@ -247,4 +251,13 @@ public final class SwingView implements View {
         return newPanel;
     }
 
+    private void setFrameIconImg() {
+        try {
+            final Image img;
+            img = ImageIO.read(getClass().getResource("/img/cards/ACEHEARTS.png"));
+            frame.setIconImage(img);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(frame, "Can't load the application icon", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

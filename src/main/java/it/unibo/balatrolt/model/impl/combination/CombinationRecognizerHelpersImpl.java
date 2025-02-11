@@ -11,6 +11,8 @@ import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
  * Factory that creats {@link CombinationRecognizer}.
+ * Every method represents a class that belongs to the
+ * Strategy pattern for the interface {@link CombinationRecognizer}.
  * @author Justin Carideo
  */
 public final class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {

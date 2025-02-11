@@ -3,7 +3,7 @@ package it.unibo.balatrolt.model.impl.combination;
 import it.unibo.balatrolt.model.api.combination.BasePoints;
 
 /**
- * Immutable classes for representing {@link BasePoints}.
+ * Immutable class for representing {@link BasePoints}.
  * Simply is a wrapper of intergers that represents
  * the amount of points scored.
  * @author Justin Carideo

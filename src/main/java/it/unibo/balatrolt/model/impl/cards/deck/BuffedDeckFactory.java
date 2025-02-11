@@ -86,7 +86,7 @@ public final class BuffedDeckFactory {
      * Returns a list of all the decks that can be created by this class using reflection.
      * @return a list containing the decks provided by this factory
      */
-    public static Set<BuffedDeck> getList() {
+    public static Set<BuffedDeck> getAllDecks() {
         final Set<BuffedDeck> toReturn = new HashSet<>();
         final Method[] methods = BuffedDeckFactory.class.getMethods();
         try {

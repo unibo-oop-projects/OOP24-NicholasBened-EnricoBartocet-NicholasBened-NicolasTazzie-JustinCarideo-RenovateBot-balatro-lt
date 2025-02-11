@@ -5,7 +5,7 @@ import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createG
 import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createPurple;
 import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createRed;
 import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.createWhite;
-import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.getList;
+import static it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckFactory.getAllDecks;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -52,7 +52,7 @@ class TestBuffedDeck {
 
     @Test
     void testList() {
-        final var deckList = getList();
+        final var deckList = getAllDecks();
         assertNotNull(deckList);
         assertEquals(NUM_DECKS, deckList.size());
         /*

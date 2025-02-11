@@ -47,7 +47,7 @@ public final class MasterControllerImpl implements MasterController {
      * Constructor of {@link MasterContorller}.
      */
     public MasterControllerImpl() {
-        final var decks = BuffedDeckFactory.getList();
+        final var decks = BuffedDeckFactory.getAllDecks();
         decks.forEach(d -> deckTranslator.put(new DeckInfo(d.getName(), d.getDescription()), d));
         this.avaiableCombinations = new CombinationTableImpl().getCombinationTable()
             .entrySet()

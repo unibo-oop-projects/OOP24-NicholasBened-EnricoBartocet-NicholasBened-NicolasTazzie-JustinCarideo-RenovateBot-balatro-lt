@@ -9,8 +9,8 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 import it.unibo.balatrolt.model.impl.Pair;
 
 /**
- * This is an utility class that contains
- * conversition tables for evaluating combinations.
+ * This is an immutable class that implements
+ * {@link CombinationTable} for evaluating {@link Combination}.
  * @author Justin Carideo
  */
 public final class CombinationTableImpl implements CombinationTable {

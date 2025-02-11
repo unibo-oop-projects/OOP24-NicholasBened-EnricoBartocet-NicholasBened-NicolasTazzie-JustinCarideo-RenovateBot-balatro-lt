@@ -18,7 +18,7 @@ public interface CombinationTable {
      */
     Map<CombinationType, Pair<Integer, Double>> getCombinationTable();
 
-        /**
+    /**
      * Given the type of combination, it returns
      * the pair points-multiplier assigned in the table.
      * @param type combination

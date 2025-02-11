@@ -12,6 +12,9 @@ import it.unibo.balatrolt.model.impl.Pair;
 import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
+ * This is the implementation of {@link CombinationCalculatorFactory}.
+ * It essentially uses a general (strategic) method that computes
+ * the right calculator.
  * @author Justin Carideo
  */
 public final class CombinationCalculatorFactoryImpl implements CombinationCalculatorFactory {

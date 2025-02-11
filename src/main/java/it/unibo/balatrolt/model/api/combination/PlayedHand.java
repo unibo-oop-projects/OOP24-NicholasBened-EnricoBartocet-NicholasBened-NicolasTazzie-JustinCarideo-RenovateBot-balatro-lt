@@ -19,7 +19,7 @@ public interface PlayedHand {
     List<PlayableCard> getCards();
 
     /**
-     * @return the Combination that has been recognized
+     * @return the {@link Combination} that has been recognized
      */
     Combination evaluateCombination();
 }

@@ -11,8 +11,9 @@ import javax.swing.SwingConstants;
 
 import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 import it.unibo.balatrolt.controller.api.communication.BlindStats;
+
 /**
- * Display the scores (actual score and the one to beat).
+ * Display the scores (actual score and the one to achieve).
  */
 public final class ScorePanel extends JPanel {
 
@@ -25,7 +26,7 @@ public final class ScorePanel extends JPanel {
 
     /**
      * The constructor set the whole thing, calling
-     * up methods that set every thing that has to be in a score panel.
+     * up methods that set every component that has to be in the score panel.
      * @param info
      * @param stats
      */

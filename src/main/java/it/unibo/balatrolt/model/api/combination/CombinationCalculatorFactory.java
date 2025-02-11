@@ -3,12 +3,13 @@ package it.unibo.balatrolt.model.api.combination;
 /**
  * Interface that models the concept of
  * evaluating multiple type of combination
- * with the creation of calculators.
+ * with the creation of calculators. It's
+ * based on the class {@link CombinationCalculator}
  */
 public interface CombinationCalculatorFactory {
 
     /**
-     * @return a CombinationCalculator for error card
+     * @return a CombinationCalculator for empty card
      */
     CombinationCalculator emptyCardCalculator();
 

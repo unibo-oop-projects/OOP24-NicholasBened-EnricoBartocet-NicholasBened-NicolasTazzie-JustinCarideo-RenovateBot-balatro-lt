@@ -17,7 +17,7 @@ import it.unibo.balatrolt.model.api.combination.PlayedHand;
 import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
- * Implementation the played hand.
+ * Implementation of the played hand.
  * Simply it wraps a list of PlayableCard and it recognize
  * what type of combination has the player done.
  * For evaluating the combination it goes in these steps:
@@ -85,7 +85,7 @@ public final class PlayedHandImpl implements PlayedHand {
     /**
      * This is a support method for recognizing the right combination.
      * Given the type of the combination, it returns the right recognizer,
-     * produced by the factory CombinationFactoryHelpers implementation.
+     * produced by the factory {@link CombinationRecognizerHelpers} implementation.
      * @param type of the combination
      * @return the right recognizer
      */
@@ -106,6 +106,9 @@ public final class PlayedHandImpl implements PlayedHand {
     }
 
     /**
+     * This is a support method for getting the right combination calculator.
+     * Given the type of the combination, it returns the right calculator,
+     * produced by the factory {@link CombinationCalculatorFactory} implementation.
      * @param type of combination
      * @return the right calculator for the given combination
      */

@@ -10,7 +10,9 @@ import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
 import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
- * Factory that creats recognizers.
+ * Factory that creats {@link CombinationRecognizer}.
+ * Every method represents a class that belongs to the
+ * Strategy pattern for the interface {@link CombinationRecognizer}.
  * @author Justin Carideo
  */
 public final class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
@@ -31,14 +33,25 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
         return hand -> !hand.isEmpty();
     }
 
-    @Override
-    public CombinationRecognizer pairRecognizer() {
+    /**
+     * This method is for recognizers that has to
+     * recognize whether there are n equal cards
+     * depending on the rank.
+     * @param n
+     * @return a general recognizer for n equal cards
+     */
+    private CombinationRecognizer sameNRecognizer(final int n) {
         return hand -> hand.size() >= PAIR_SIZE
             && hand.stream()
                 .collect(Collectors.groupingBy(PlayableCard::getRank, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .anyMatch(e -> e.getValue() == PAIR_SIZE);
+                .anyMatch(e -> e.getValue() == n);
+    }
+
+    @Override
+    public CombinationRecognizer pairRecognizer() {
+        return sameNRecognizer(PAIR_SIZE);
     }
 
     @Override
@@ -54,12 +67,7 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
 
     @Override
     public CombinationRecognizer threeOfAKindRecognizer() {
-        return hand -> hand.size() >= THREE_SIZE
-            && hand.stream()
-                .collect(Collectors.groupingBy(PlayableCard::getRank, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .anyMatch(e -> e.getValue() == THREE_SIZE);
+        return sameNRecognizer(THREE_SIZE);
     }
 
     @Override
@@ -68,8 +76,7 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
             if (hand.size() != FULL_HAND) {
                 return false;
             }
-            final List<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
-                .stream()
+            final List<Rank> sorted = hand.stream()
                 .map(PlayableCard::getRank)
                 .sorted()
                 .toList();
@@ -105,12 +112,7 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
 
     @Override
     public CombinationRecognizer fourOfAKindRecognizer() {
-        return hand -> hand.size() >= FOUR_SIZE
-            && hand.stream()
-                .collect(Collectors.groupingBy(PlayableCard::getRank, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .anyMatch(e -> e.getValue() == FOUR_SIZE);
+        return sameNRecognizer(FOUR_SIZE);
     }
 
     @Override

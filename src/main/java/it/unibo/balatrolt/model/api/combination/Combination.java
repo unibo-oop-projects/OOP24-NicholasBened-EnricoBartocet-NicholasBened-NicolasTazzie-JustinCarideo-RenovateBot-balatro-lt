@@ -12,7 +12,7 @@ public interface Combination {
      * Enum representing the different types of poker combinations.
      */
     enum CombinationType {
-        /** Error card combination. */
+        /** Empty card combination. */
         EMPTY_CARD("Empty Card"),
         /** High card combination. */
         HIGH_CARD("High Card"),
@@ -48,19 +48,19 @@ public interface Combination {
     }
 
     /**
-     * Gets the current multiplier applied.
+     * Gets the current {@link Multiplier} applied.
      * @return the multiplier
      */
     Multiplier getMultiplier();
 
     /**
-     * Gets the current base points reached.
+     * Gets the current {@link BasePoints} reached.
      * @return the base points
      */
     BasePoints getBasePoints();
 
     /**
-     * Applies the specified modifier to the combination.
+     * Applies the specified {@link Modifier} to the combination.
      * @param mod the modifier to be applied
      */
     void applyModifier(CombinationModifier mod);

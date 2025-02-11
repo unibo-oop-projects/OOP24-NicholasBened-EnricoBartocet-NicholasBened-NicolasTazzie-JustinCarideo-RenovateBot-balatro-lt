@@ -8,12 +8,12 @@ import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.combination.Multiplier;
 
 /**
- * Classes that represents the concept of combination.
+ * Classes that represents the concept of {@link Combination}.
  * A combination is represented as an object that has an amount
  * of points (points scored with combination + points that depends on
- * the hand played, check PlayedHandImpl for more details) and a
+ * the hand played, check {@link PlayedHand} for more details) and a
  * multiplier (multiplier scored with the combination).
- * This class can be modify only with applyModifier method.
+ * This class can be modify only with {@link applyModifier} method.
  * @author Justin Carideo
  */
 public final class CombinationImpl implements Combination {

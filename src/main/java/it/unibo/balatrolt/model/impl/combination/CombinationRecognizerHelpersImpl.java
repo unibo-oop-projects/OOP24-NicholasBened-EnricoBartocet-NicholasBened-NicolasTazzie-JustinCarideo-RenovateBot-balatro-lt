@@ -10,7 +10,7 @@ import it.unibo.balatrolt.model.api.combination.CombinationRecognizerHelpers;
 import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
- * Factory that creats recognizers.
+ * Factory that creats {@link CombinationRecognizer}.
  * @author Justin Carideo
  */
 public final class CombinationRecognizerHelpersImpl implements CombinationRecognizerHelpers {
@@ -74,8 +74,7 @@ public final class CombinationRecognizerHelpersImpl implements CombinationRecogn
             if (hand.size() != FULL_HAND) {
                 return false;
             }
-            final List<Rank> sorted = SortingPlayableHelpers.sortingByRank(hand)
-                .stream()
+            final List<Rank> sorted = hand.stream()
                 .map(PlayableCard::getRank)
                 .sorted()
                 .toList();

@@ -1,14 +1,14 @@
 package it.unibo.balatrolt.model.api.combination;
 
 /**
- * Interface modelling the concept of creating CombinationRecognizer classes.
+ * Interface modelling the concept of creating {@link CombinationRecognizer} classes.
  * Simply it's a factory that provides some classes for recognizing combination
  * given by input.
  */
 public interface CombinationRecognizerHelpers {
 
     /**
-     * @return an error card recognizer
+     * @return an empty card recognizer
      */
     CombinationRecognizer emptyCardRecognizer();
 

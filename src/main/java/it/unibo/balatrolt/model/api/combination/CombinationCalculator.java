@@ -7,7 +7,7 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
 
 /**
  * Interface modelling the concept of creating
- * Combination objects given the type of combination
+ * {@link Combination} objects given the type of combination
  * and the hand played.
  */
 @FunctionalInterface

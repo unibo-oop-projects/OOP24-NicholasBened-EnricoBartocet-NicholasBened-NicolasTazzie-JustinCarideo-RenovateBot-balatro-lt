@@ -24,8 +24,8 @@ class TestCombinationWithModifier {
     private static final String HEART_DOUBLER = "the heart doubler";
     private static final String KING_DONOUR = "the king donour";
     private static final String DIAMOND_DOUBLER = "the diamond doubler";
-    private static final int EXPECTED_MULTIPLIER_STD = 3;
-    private static final int EXPECTED_POINTS_STD = 45;
+    private static final int EXPECTED_MULTIPLIER_STD = 4;
+    private static final int EXPECTED_POINTS_STD = 35;
     private final JokerCatalog misc = new JokerCatalogMisc();
 
     private List<PlayableCard> getTestPlayedCard() {
@@ -58,7 +58,7 @@ class TestCombinationWithModifier {
         final PlayedHand hand = new PlayedHandImpl(getTestPlayedCard());
         final Combination combination = hand.evaluateCombination();
         assertEquals(EXPECTED_POINTS_STD, combination.getBasePoints().basePoints());
-        assertEquals(3, combination.getMultiplier().multiplier());
+        assertEquals(4, combination.getMultiplier().multiplier());
         final var joker = this.misc.getJoker(KING_DONOUR).get();
         setJokerStatus(hand, combination, joker);
         combination.applyModifier(joker.getModifier().get());

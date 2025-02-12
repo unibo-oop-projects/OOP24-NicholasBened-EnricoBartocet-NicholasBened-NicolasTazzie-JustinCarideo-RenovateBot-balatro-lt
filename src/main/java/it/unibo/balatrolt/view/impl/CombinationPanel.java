@@ -104,7 +104,8 @@ public final class CombinationPanel extends JPanel {
     }
 
     /**
-     * Updates the informations (base point, multiplier and the combination).
+     * Updates information about the combination played
+     * (base point, multiplier and the combination).
      * @param info about the new combination done.
      */
     public void updateCombination(final CombinationInfo info) {

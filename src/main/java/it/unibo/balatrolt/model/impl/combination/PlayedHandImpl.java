@@ -22,7 +22,7 @@ import it.unibo.balatrolt.model.api.combination.Combination.CombinationType;
  * what type of combination has the player done.
  * For evaluating the combination it goes in these steps:
  * - it creates a list for all combination types
- * - then maps only avaiable combinations
+ * - then maps only available combinations
  * - once obtained the mapped list, it takes the last one, in other words the best
  * - In the end it creates the right combination with a calculator
  * For more details check Combination class that simply acts as a

@@ -10,7 +10,7 @@ import it.unibo.balatrolt.model.api.combination.CombinationRecognizerFactory;
 import it.unibo.balatrolt.model.impl.cards.SortingPlayableHelpers;
 
 /**
- * Factory that creats {@link CombinationRecognizer}.
+ * Factory that creates {@link CombinationRecognizer}.
  * Every method represents a class that belongs to the
  * Strategy pattern for the interface {@link CombinationRecognizer}.
  * @author Justin Carideo

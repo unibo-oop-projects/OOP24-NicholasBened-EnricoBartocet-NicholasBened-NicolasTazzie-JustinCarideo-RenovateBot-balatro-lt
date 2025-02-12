@@ -49,7 +49,7 @@ public final class MainMenu extends JPanel {
         /**
          * Setting the title.
          */
-        final JLabel title = new JLabel("BALATRO LITE");
+        final JLabel title = new JLabel("BALATRO");
         title.setFont(this.fontFactory.getFont(TITLE_FONT, TITLE_SIZE, this));
         title.setForeground(Color.WHITE.brighter());
         title.setAlignmentX(CENTER_ALIGNMENT);

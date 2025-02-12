@@ -46,6 +46,7 @@ public final class DeckSelector extends JPanel {
     private static final String DESC_DECK_FONT = "COPPER_BLACK";
     private static final float TITLE_SIZE = 100f;
     private static final float DECK_SIZE = 35f;
+    private static final float SUBTITLE_SIZE = 20f;
     private static final float DESCR_SIZE = 25f;
     private static final Double BASE_WEIGHT = 0.2;
     private static final int BASE_PAD = 10;
@@ -83,6 +84,11 @@ public final class DeckSelector extends JPanel {
         title.setForeground(Color.WHITE.brighter());
         add(title, getConstraints(GridBagConstraints.RELATIVE, GridBagConstraints.RELATIVE, 0, 0,
             0, GridBagConstraints.PAGE_START, GridBagConstraints.NONE, TOP_PAD, 0, TOP_PAD / 2, 0));
+        final JLabel desc = new JLabel("Click on the Deck you'll use");
+        desc.setFont(this.fontFactory.getFont(DESC_DECK_FONT, SUBTITLE_SIZE, this));
+        desc.setForeground(Color.WHITE);
+        add(desc, getConstraints(0, 0, 0, 0,
+            0, GridBagConstraints.SOUTH, GridBagConstraints.NONE, 0, 0, 0, 0));
         /**
          * Setting the deck selector.
          */

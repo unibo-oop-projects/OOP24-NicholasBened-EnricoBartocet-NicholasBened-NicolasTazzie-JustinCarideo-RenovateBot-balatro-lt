@@ -18,7 +18,7 @@ import it.unibo.balatrolt.model.api.cards.BuffedDeck;
 import it.unibo.balatrolt.model.impl.PlayerStatusImpl;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindConfigurationImpl;
-import it.unibo.balatrolt.model.impl.levels.BlindImpl;
+import it.unibo.balatrolt.model.impl.levels.AbstractBlind;
 import it.unibo.balatrolt.model.impl.levels.BlindStats;
 
 class TestBuffedDeck {
@@ -69,7 +69,7 @@ class TestBuffedDeck {
         final UnaryOperator<Integer> discards,
         final UnaryOperator<Integer> chips
     ) {
-        final var blind = new BlindImpl(new BlindConfigurationImpl(0, 0, 0), deck.getModifier());
+        final var blind = new AbstractBlind(new BlindConfigurationImpl(0, 0, 0), deck.getModifier());
         assertEquals(hands.apply(BlindStats.BASE_HANDS), blind.getRemainingHands());
         assertEquals(discards.apply(BlindStats.BASE_DISCARDS), blind.getRemainingDiscards());
         final var toPlay = blind.getHandCards().subList(0, 3);

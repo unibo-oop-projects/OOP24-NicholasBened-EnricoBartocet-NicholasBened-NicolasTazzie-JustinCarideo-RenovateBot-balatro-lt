@@ -17,7 +17,7 @@ import it.unibo.balatrolt.model.impl.PlayerStatusImpl;
 import it.unibo.balatrolt.model.impl.cards.deck.BuffedDeckImpl;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindConfigurationImpl;
-import it.unibo.balatrolt.model.impl.levels.BlindImpl;
+import it.unibo.balatrolt.model.impl.levels.AbstractBlind;
 import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindStats;
 
@@ -31,7 +31,7 @@ class TestBlind {
     @BeforeEach
     void init() {
         this.blindModifier = new BlindModifierImpl(n -> n - 1, n -> n + 1, n -> n / 2);
-        this.blind = new BlindImpl(
+        this.blind = new AbstractBlind(
             new BlindConfigurationImpl(BLIND_ID, BASE_CHIPS, REWARD),
             blindModifier
         );

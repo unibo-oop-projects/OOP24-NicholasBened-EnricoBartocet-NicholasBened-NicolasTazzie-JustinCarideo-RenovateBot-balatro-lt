@@ -39,7 +39,7 @@ public final class BlindFactoryImpl implements BlindFactory {
 
     @Override
     public Blind fromIds(final int anteId, final int blindId) {
-        return new BlindImpl(
+        return new AbstractBlind(
             new BlindConfigurationImpl(
                 blindId,
                 baseChipsCalculator.apply(anteId, blindId),

@@ -53,6 +53,12 @@ public interface Blind {
     int getCurrentChips();
 
     /**
+     * Returns the characteristics of the blind.
+     * @return the characteristic of the blind.
+     */
+    String getDescription();
+
+    /**
      * Returns the amount of currency that the player will get if he will defeat the Blind.
      * @return the amount of the reward in case the Blind will be defeated
      */

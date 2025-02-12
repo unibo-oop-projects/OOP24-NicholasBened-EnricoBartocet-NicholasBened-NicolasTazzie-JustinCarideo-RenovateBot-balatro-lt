@@ -4,25 +4,22 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
 import it.unibo.balatrolt.model.api.PlayerStatus;
 import it.unibo.balatrolt.model.api.cards.PlayableCard;
 import it.unibo.balatrolt.model.api.cards.modifier.ModifierStatsSupplier;
-import it.unibo.balatrolt.model.api.cards.specialcard.SpecialCard;
 import it.unibo.balatrolt.model.api.combination.Combination;
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindConfiguration;
 import it.unibo.balatrolt.model.api.levels.BlindModifier;
 import it.unibo.balatrolt.model.impl.cards.modifier.ModifierStatsSupplierBuilderImpl;
-import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 
 /**
- * An implementation for the {@link Blind} interface.
+ * An abstract implementation for the {@link Blind} interface.
  * @author Enrico Bartocetti
  */
-public final class BlindImpl implements Blind {
+public abstract class AbstractBlind implements Blind {
     private final BlindConfiguration config;
     private final BlindStats statistics;
     private final BlindCards cardsManager;
@@ -32,7 +29,7 @@ public final class BlindImpl implements Blind {
      * @param config the configuration for the Blind
      * @param modifier the modifier that tells how to change the statistics of the Blind
      */
-    public BlindImpl(final BlindConfiguration config, final BlindModifier modifier) {
+    public AbstractBlind(final BlindConfiguration config, final BlindModifier modifier) {
         this.config = Preconditions.checkNotNull(config);
         this.cardsManager = new BlindCards();
         this.statistics = new BlindStats(Preconditions.checkNotNull(modifier));
@@ -87,17 +84,20 @@ public final class BlindImpl implements Blind {
         Preconditions.checkState(this.statistics.getRemainingHands() > 0, "There aren't hands left");
         this.cardsManager.discardCards(toPlay);
         this.statistics.decrementHands();
-        final Combination combination = new PlayedHandImpl(toPlay).evaluateCombination();
-        playerStatus.specialCards().stream()
-            .map(SpecialCard::getModifier)
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .forEach(m -> {
-                m.setGameStatus(getGameStatus(combination, toPlay, playerStatus));
-                combination.applyModifier(m);
-            });
-        this.statistics.incrementChips(combination.getChips());
+        this.statistics.incrementChips(evaluateChips(toPlay, playerStatus));
     }
+
+    /**
+     * Evaluates the chips earned from the cards played by applying
+     * the needed modifiers.
+     * @param toPlay cards to play.
+     * @param playerStatus
+     * @return the chips earned from the played hand.
+     */
+    protected abstract int evaluateChips(List<PlayableCard> toPlay, PlayerStatus playerStatus);
+
+    @Override
+    public abstract String getDescription();
 
     @Override
     public void discardPlayableCards(final List<PlayableCard> toDiscard) {
@@ -121,7 +121,7 @@ public final class BlindImpl implements Blind {
         return cards.stream().allMatch(c -> this.cardsManager.getHandCards().contains(c));
     }
 
-    private ModifierStatsSupplier getGameStatus(
+    protected ModifierStatsSupplier getGameStatus(
         final Combination comb,
         final List<PlayableCard> toPlay,
         final PlayerStatus playerStatus

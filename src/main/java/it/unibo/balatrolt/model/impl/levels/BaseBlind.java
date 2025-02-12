@@ -13,16 +13,21 @@ import it.unibo.balatrolt.model.api.levels.BlindModifier;
 import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 
 /**
- * //TODO: ll
+ * Implementation of an AbstractBlind which doesn't have any debuff.
  */
-public class BaseBlind extends AbstractBlind {
+public final class BaseBlind extends AbstractBlind {
 
-    public BaseBlind(BlindConfiguration config, BlindModifier modifier) {
+    /**
+     * Create a new base blind.
+     * @param config the blind configuration
+     * @param modifier the blind modifier
+     */
+    public BaseBlind(final BlindConfiguration config, final BlindModifier modifier) {
         super(config, modifier);
     }
 
     @Override
-    protected int evaluateChips(List<PlayableCard> toPlay, PlayerStatus playerStatus) {
+    protected int evaluateChips(final List<PlayableCard> toPlay, final PlayerStatus playerStatus) {
         final Combination combination = new PlayedHandImpl(toPlay).evaluateCombination();
 
         playerStatus.specialCards().stream()

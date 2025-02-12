@@ -3,6 +3,7 @@ package it.unibo.balatrolt.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.function.BinaryOperator;
@@ -13,8 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.balatrolt.model.api.levels.Blind;
 import it.unibo.balatrolt.model.api.levels.BlindFactory;
+import it.unibo.balatrolt.model.impl.levels.BaseBlind;
 import it.unibo.balatrolt.model.impl.levels.BlindFactoryImpl;
 import it.unibo.balatrolt.model.impl.levels.BlindModifierImpl;
+import it.unibo.balatrolt.model.impl.levels.BossBlind;
 
 class TestBlindFactory {
     private static final int NUM_BLINDS = 5;
@@ -42,8 +45,18 @@ class TestBlindFactory {
     }
 
     @Test
-    void testSingleBlind() {
-        final Blind newBlind = this.factory.fromIds(ANTE_ID, BLIND_ID);
+    void testSingleBaseBlind() {
+        final Blind newBlind = this.factory.baseFromIds(ANTE_ID, BLIND_ID);
+        assertEquals(2, newBlind.getBlindNumber());
+        assertEquals(baseChipsCalculator.apply(ANTE_ID, BLIND_ID), newBlind.getMinimumChips());
+        assertEquals(rewardCalculator.apply(BLIND_ID), newBlind.getReward());
+        assertEquals(0, newBlind.getCurrentChips());
+        assertEquals(Blind.Status.IN_GAME, newBlind.getStatus());
+    }
+
+    @Test
+    void testSingleBossBlind() {
+        final Blind newBlind = this.factory.bossFromIds(ANTE_ID, BLIND_ID);
         assertEquals(2, newBlind.getBlindNumber());
         assertEquals(baseChipsCalculator.apply(ANTE_ID, BLIND_ID), newBlind.getMinimumChips());
         assertEquals(rewardCalculator.apply(BLIND_ID), newBlind.getReward());
@@ -55,6 +68,13 @@ class TestBlindFactory {
     void testList() {
         final List<Blind> blinds = this.factory.createList(NUM_BLINDS, ANTE_ID);
         assertNotNull(blinds);
+        for (int i = 0; i < blinds.size(); i++) {
+            if (i + 1 < blinds.size()) {
+                assertTrue(blinds.get(i) instanceof BaseBlind);
+            } else {
+                assertTrue(blinds.get(i) instanceof BossBlind);
+            }
+        }
         assertEquals(NUM_BLINDS, blinds.size());
     }
 

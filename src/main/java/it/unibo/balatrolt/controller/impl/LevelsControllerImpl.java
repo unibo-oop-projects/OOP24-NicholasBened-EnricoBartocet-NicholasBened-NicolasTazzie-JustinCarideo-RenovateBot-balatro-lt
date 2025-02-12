@@ -110,6 +110,7 @@ public final class LevelsControllerImpl implements LevelsController {
         } else if (this.currentBlind().getStatus().equals(Blind.Status.DEFEATED)) {
             this.currentAnte().nextBlind();
         }
+        System.out.println(this.currentBlind().getDescription());
     }
 
     @Override
@@ -138,7 +139,7 @@ public final class LevelsControllerImpl implements LevelsController {
     }
 
     private BlindInfo getBlindInfo(final Blind blind) {
-        return new BlindInfo(blind.getBlindNumber() + 1, blind.getMinimumChips(), blind.getReward());
+        return new BlindInfo(blind.getBlindNumber() + 1, blind.getDescription(), blind.getMinimumChips(), blind.getReward());
     }
 
 }

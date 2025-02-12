@@ -38,8 +38,20 @@ public final class BlindFactoryImpl implements BlindFactory {
     }
 
     @Override
-    public Blind fromIds(final int anteId, final int blindId) {
-        return new AbstractBlind(
+    public Blind baseFromIds(final int anteId, final int blindId) {
+        return new BaseBlind(
+            new BlindConfigurationImpl(
+                blindId,
+                baseChipsCalculator.apply(anteId, blindId),
+                rewardCalculator.apply(blindId)
+            ),
+            modifier
+        );
+    }
+
+    @Override
+    public Blind bossFromIds(final int anteId, final int blindId) {
+        return new BossBlind(
             new BlindConfigurationImpl(
                 blindId,
                 baseChipsCalculator.apply(anteId, blindId),
@@ -52,6 +64,9 @@ public final class BlindFactoryImpl implements BlindFactory {
     @Override
     public List<Blind> createList(final int numBlinds, final int anteId) {
         Preconditions.checkArgument(numBlinds > 0, "The list must contain at least 1 Blind");
-        return Stream.iterate(0, i -> i + 1).limit(numBlinds).map(n -> this.fromIds(anteId, n)).toList();
+        return Stream.iterate(0, i -> i + 1)
+            .limit(numBlinds)
+            .map(n -> n + 1 < numBlinds ? baseFromIds(anteId, n) : bossFromIds(anteId, n))
+            .toList();
     }
 }

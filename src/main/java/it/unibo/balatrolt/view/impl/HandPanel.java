@@ -42,8 +42,8 @@ public class HandPanel extends JPanel {
         this.combFrame = new CombinationFrame(availableCombinations);
         this.handLabel = createGeneralLabel("");
         this.discardLabel = createGeneralLabel("");
-        this.currencyLabel = createGeneralLabel("$0");
-        this.anteLabel = createGeneralLabel("Ante: /" + numAnte);
+        this.currencyLabel = createGeneralLabel("Money: $0");
+        this.anteLabel = createGeneralLabel("Ante: 1 / " + numAnte);
         final JButton combinationButton = new JButton("Available Combinations");
         combinationButton.setBackground(Color.DARK_GRAY.darker());
         combinationButton.setForeground(Color.WHITE);
@@ -106,7 +106,7 @@ public class HandPanel extends JPanel {
      * @param currency new amount
      */
     public void updateCurrency(final int currency) {
-        this.currencyLabel.setText("$" + currency);
+        this.currencyLabel.setText("Money: $" + currency);
     }
 
     /**

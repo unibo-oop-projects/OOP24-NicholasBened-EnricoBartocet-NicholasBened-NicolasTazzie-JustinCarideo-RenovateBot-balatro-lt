@@ -97,7 +97,7 @@ public final class SwingView implements View {
         infoPanel = (InfoPanel) changePanel(
             masterPanel,
             null,
-            new InfoPanel(info, stats, combinations),
+            new InfoPanel(info, stats, combinations, numAnte),
             Optional.of(BorderLayout.WEST)
         );
         rightPanel = changePanel(masterPanel, null, new JPanel(new BorderLayout()), Optional.of(BorderLayout.CENTER));

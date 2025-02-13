@@ -26,6 +26,7 @@ public class HandPanel extends JPanel {
     private final JLabel discardLabel;
     private final JLabel currencyLabel;
     private final JLabel anteLabel;
+    private final int numAnte;
     private boolean isCombinationVisible;
 
     /**
@@ -33,14 +34,16 @@ public class HandPanel extends JPanel {
      * and a button for opening a new frame that has
      * every information about combinations could the player do.
      * @param availableCombinations
+     * @param numAnte number of ante
      */
-    public HandPanel(final List<CombinationInfo> availableCombinations) {
+    public HandPanel(final List<CombinationInfo> availableCombinations, final int numAnte) {
         super(new GridLayout(3, 1));
+        this.numAnte = numAnte;
         this.combFrame = new CombinationFrame(availableCombinations);
         this.handLabel = createGeneralLabel("");
         this.discardLabel = createGeneralLabel("");
         this.currencyLabel = createGeneralLabel("$0");
-        this.anteLabel = createGeneralLabel("Ante: ");
+        this.anteLabel = createGeneralLabel("Ante: /" + numAnte);
         final JButton combinationButton = new JButton("Available Combinations");
         combinationButton.setBackground(Color.DARK_GRAY.darker());
         combinationButton.setForeground(Color.WHITE);
@@ -111,6 +114,6 @@ public class HandPanel extends JPanel {
      * @param info
      */
     public void updateAnte(final AnteInfo info) {
-        this.anteLabel.setText("Ante: " + info.id());
+        this.anteLabel.setText("Ante: " + info.id() + " / " + this.numAnte);
     }
 }

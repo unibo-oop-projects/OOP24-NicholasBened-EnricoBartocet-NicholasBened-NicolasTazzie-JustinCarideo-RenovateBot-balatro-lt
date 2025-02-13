@@ -35,7 +35,7 @@ public final class MasterControllerImpl implements MasterController {
     private static final int SHOP_SIZE = 3;
     private final Set<View> views = new HashSet<>();
     private final Map<DeckInfo, BuffedDeck> deckTranslator = new HashMap<>();
-    private final List<CombinationInfo> avaiableCombinations;
+    private final List<CombinationInfo> availableCombinations;
     private Set<BalatroEvent> nextEvents = Set.of(BalatroEvent.MAIN_MENU);
 
     private LevelsController levels;
@@ -49,7 +49,7 @@ public final class MasterControllerImpl implements MasterController {
     public MasterControllerImpl() {
         final var decks = BuffedDeckFactory.getAllDecks();
         decks.forEach(d -> deckTranslator.put(new DeckInfo(d.getName(), d.getDescription()), d));
-        this.avaiableCombinations = new CombinationTableImpl().getCombinationTable()
+        this.availableCombinations = new CombinationTableImpl().getCombinationTable()
             .entrySet()
             .stream()
             .map(entry -> new CombinationInfo(
@@ -79,7 +79,7 @@ public final class MasterControllerImpl implements MasterController {
                             this.player.getSpecialCards(),
                             this.player.getDeck(),
                             this.levels.getNumAnte(),
-                            avaiableCombinations);
+                            availableCombinations);
                     v.showAnte(this.levels.getCurrentAnte());
                     v.updateAnteInfo(this.levels.getCurrentAnte());
                 });
@@ -169,7 +169,7 @@ public final class MasterControllerImpl implements MasterController {
                             this.player.getSpecialCards(),
                             this.player.getDeck(),
                             this.levels.getNumAnte(),
-                            avaiableCombinations);
+                            availableCombinations);
                     v.showAnte(this.levels.getCurrentAnte());
                     v.updateAnteInfo(this.levels.getCurrentAnte());
                     v.updateCurrency(this.player.getCurrency());

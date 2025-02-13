@@ -26,13 +26,14 @@ public final class InfoPanel extends JPanel {
      * @param info about the blind
      * @param stats about the actual game
      * @param combinations available
+     * @param numAnte number of ante
      */
-    public InfoPanel(final BlindInfo info, final BlindStats stats, final List<CombinationInfo> combinations) {
+    public InfoPanel(final BlindInfo info, final BlindStats stats, final List<CombinationInfo> combinations, final int numAnte) {
         this.setLayout(new GridLayout(4, 1));
         final var titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);
         this.combinationPanel = new CombinationPanel(new CombinationInfo(" ", 0, 0));
-        this.handPanel = new HandPanel(combinations);
+        this.handPanel = new HandPanel(combinations, numAnte);
         this.handPanel.updateHands(stats);
         add(titlePanel);
         add(this.scorePanel);

@@ -25,7 +25,7 @@ public final class AnteView extends JPanel {
     private final FontFactory fontFactory = new FontFactory();
     private static final String FONT = "COPPER_BLACK";
     private static final int TOP_DISTANCE = 30;
-    private static final int BUTTON_DISTANCE = 50;
+    private static final int BUTTON_DISTANCE = 80;
 
     private static final float TITLE_SIZE = 50f;
     private static final float BLIND_SIZE = 26f;
@@ -66,8 +66,8 @@ public final class AnteView extends JPanel {
             column.add(createDescArea(blind.description()));
 
             if (blind.id() == anteInfo.currentBlindId()) {
-                column.add(Box.createRigidArea(new Dimension(0, BUTTON_DISTANCE)));
                 column.add(playButton);
+                column.add(Box.createRigidArea(new Dimension(0, BUTTON_DISTANCE)));
             }
             columns.add(column);
         }

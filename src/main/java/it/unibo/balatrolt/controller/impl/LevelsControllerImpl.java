@@ -26,7 +26,7 @@ import it.unibo.balatrolt.model.impl.levels.AnteFactoryImpl;
  * An implementation of the {@link LevelsController}.
  */
 public final class LevelsControllerImpl implements LevelsController {
-    private static final int NUM_ANTE = 7;
+    private static final int NUM_ANTE = 5;
     private static final int NUM_BLINDS = 3;
     private static final int ANTE_EXP = 2;
     private static final Random RAND = new Random();

@@ -39,6 +39,7 @@ public class CombinationFrame extends JFrame {
         mainPanel.add(createGeneralLabel("Points", Color.decode("#2274A5").darker()));
         mainPanel.add(createGeneralLabel("Multiplier", Color.decode("#c1121f").darker()));
         super.add(mainPanel);
+        super.setTitle("Combinations Table");
         for (final CombinationInfo combinationInfo : combinations) {
             mainPanel.add(createGeneralLabel(combinationInfo.name(), Color.DARK_GRAY));
             mainPanel.add(createGeneralLabel(String.valueOf(combinationInfo.points()), Color.decode("#2274A5")));

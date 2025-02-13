@@ -67,6 +67,7 @@ public final class SwingView implements View {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize((int) (screenSize.getWidth() / RIDIM), (int) (screenSize.getHeight() / RIDIM));
+        frame.setTitle("Balatro Lite");
         frame.setLocationByPlatform(true);
         frame.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
         this.setLookAndFeel();

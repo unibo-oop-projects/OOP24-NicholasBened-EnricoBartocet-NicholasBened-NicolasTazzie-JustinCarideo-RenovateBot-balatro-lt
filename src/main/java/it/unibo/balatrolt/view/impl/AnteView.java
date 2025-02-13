@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
@@ -59,6 +62,9 @@ public final class AnteView extends JPanel {
             column.add(Box.createRigidArea(new Dimension(0, TOP_DISTANCE)));
             column.add(createLabel("Min. chips: " + blind.minimumChips(), LABEL_SIZE));
             column.add(createLabel("Reward: " + blind.reward() + "$", LABEL_SIZE));
+            column.add(Box.createRigidArea(new Dimension(0, TOP_DISTANCE)));
+            column.add(createDescArea(blind.description()));
+
             if (blind.id() == anteInfo.currentBlindId()) {
                 column.add(Box.createRigidArea(new Dimension(0, BUTTON_DISTANCE)));
                 column.add(playButton);
@@ -78,4 +84,18 @@ public final class AnteView extends JPanel {
         return label;
     }
 
+    private JTextPane createDescArea(final String description) {
+        final JTextPane blindDesc = new JTextPane();
+        final StyledDocument descStyle = blindDesc.getStyledDocument();
+        final SimpleAttributeSet centerAttribute = new SimpleAttributeSet();
+
+        StyleConstants.setAlignment(centerAttribute, StyleConstants.ALIGN_CENTER);
+        descStyle.setParagraphAttributes(0, descStyle.getLength(), centerAttribute, false);
+        blindDesc.setText(description);
+        blindDesc.setEditable(false);
+        blindDesc.setBackground(getBackground());
+        blindDesc.setForeground(Color.WHITE);
+        blindDesc.setFont(this.fontFactory.getFont(FONT, LABEL_SIZE, this));
+        return blindDesc;
+    }
 }

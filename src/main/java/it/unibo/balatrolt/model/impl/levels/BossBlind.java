@@ -19,19 +19,24 @@ import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
  * or in the cards (their rank or suit).
  * @author Benedetti Nicholas
  */
-public class BossBlind extends AbstractBlind {
+public final class BossBlind extends AbstractBlind {
 
     private final BossModifiersCatalog bossMod;
     private final CombinationModifier combMod;
 
-    public BossBlind(BlindConfiguration config, BlindModifier modifier) {
+    /**
+     * Sets the blind and gets a random debuff from the catalog.
+     * @param config the blind's configuration
+     * @param modifier blind's modifiers
+     */
+    public BossBlind(final BlindConfiguration config, final BlindModifier modifier) {
         super(config, modifier);
         this.bossMod = new BossModifiersCatalog();
         this.combMod = this.bossMod.getRandom();
     }
 
     @Override
-    protected int evaluateChips(List<PlayableCard> toPlay, PlayerStatus playerStatus) {
+    protected int evaluateChips(final List<PlayableCard> toPlay, final PlayerStatus playerStatus) {
         final Combination combination = new PlayedHandImpl(toPlay).evaluateCombination();
 
         playerStatus.specialCards().stream()

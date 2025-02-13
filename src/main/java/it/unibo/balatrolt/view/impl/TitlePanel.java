@@ -2,7 +2,10 @@ package it.unibo.balatrolt.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -42,7 +45,7 @@ public final class TitlePanel extends JPanel {
      */
     private JPanel getTitlePanel(final Color color) {
         final JPanel titleContainer = new JPanel(new BorderLayout());
-        titleContainer.add(getFormattedLabel(getBlindTitle(), color, SIZE_TITLE_BLIND), BorderLayout.CENTER);
+        titleContainer.add(getTitleButton(color), BorderLayout.CENTER);
         return titleContainer;
     }
 
@@ -53,6 +56,20 @@ public final class TitlePanel extends JPanel {
      */
     private JLabel getRewardLabel(final Color color) {
         return getFormattedLabel("Reward: $" + info.reward(), color.darker(), SIZE_TITLE_BLIND);
+    }
+
+    private JButton getTitleButton(final Color color) {
+        final JButton title = new JButton(getBlindTitle());
+
+        title.addActionListener(e -> {
+            JOptionPane.showMessageDialog(title, this.info.description());
+        });
+        title.setBackground(color);
+        title.setForeground(Color.WHITE);
+        title.setBorderPainted(false);
+        title.setContentAreaFilled(true);
+        title.setFont(FONT_FACTORY.getFont(MAIN_FONT, SIZE_TITLE_BLIND, this));
+        return title;
     }
 
     /**

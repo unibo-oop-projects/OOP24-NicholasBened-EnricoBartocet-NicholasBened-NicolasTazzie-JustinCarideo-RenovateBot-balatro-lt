@@ -110,7 +110,6 @@ public final class LevelsControllerImpl implements LevelsController {
         } else if (this.currentBlind().getStatus().equals(Blind.Status.DEFEATED)) {
             this.currentAnte().nextBlind();
         }
-        System.out.println(this.currentBlind().getDescription());
     }
 
     @Override

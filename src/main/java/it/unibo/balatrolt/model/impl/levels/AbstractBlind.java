@@ -36,22 +36,22 @@ public abstract class AbstractBlind implements Blind {
     }
 
     @Override
-    public int getBlindNumber() {
+    public final int getBlindNumber() {
         return this.config.id();
     }
 
     @Override
-    public int getMinimumChips() {
+    public final int getMinimumChips() {
         return this.config.baseChip();
     }
 
     @Override
-    public int getCurrentChips() {
+    public final int getCurrentChips() {
         return this.statistics.getCurrentChips();
     }
 
     @Override
-    public Status getStatus() {
+    public final Status getStatus() {
         if (this.getRemainingHands() > 0 && this.getCurrentChips() < this.getMinimumChips()) {
             return Status.IN_GAME;
         }
@@ -62,22 +62,22 @@ public abstract class AbstractBlind implements Blind {
     }
 
     @Override
-    public int getReward() {
+    public final int getReward() {
         return this.config.reward();
     }
 
     @Override
-    public List<PlayableCard> getRemainingDeckCards() {
+    public final List<PlayableCard> getRemainingDeckCards() {
         return this.cardsManager.getRemainingDeckCards();
     }
 
     @Override
-    public List<PlayableCard> getHandCards() {
+    public final List<PlayableCard> getHandCards() {
         return this.cardsManager.getHandCards();
     }
 
     @Override
-    public void playHand(final List<PlayableCard> toPlay, final PlayerStatus playerStatus) {
+    public final void playHand(final List<PlayableCard> toPlay, final PlayerStatus playerStatus) {
         Preconditions.checkNotNull(toPlay);
         Preconditions.checkArgument(!toPlay.isEmpty(), "You need to play at least 1 card");
         Preconditions.checkState(this.cardsInHand(toPlay), "The Cards played need to be in your hand");
@@ -100,7 +100,7 @@ public abstract class AbstractBlind implements Blind {
     public abstract String getDescription();
 
     @Override
-    public void discardPlayableCards(final List<PlayableCard> toDiscard) {
+    public final void discardPlayableCards(final List<PlayableCard> toDiscard) {
         Preconditions.checkState(this.cardsInHand(toDiscard), "The cards must be in your hand");
         Preconditions.checkState(this.statistics.getRemainingDiscards() > 0, "There aren't discards left");
         this.cardsManager.discardCards(toDiscard);
@@ -108,12 +108,12 @@ public abstract class AbstractBlind implements Blind {
     }
 
     @Override
-    public int getRemainingHands() {
+    public final int getRemainingHands() {
         return this.statistics.getRemainingHands();
     }
 
     @Override
-    public int getRemainingDiscards() {
+    public final int getRemainingDiscards() {
         return this.statistics.getRemainingDiscards();
     }
 
@@ -121,7 +121,14 @@ public abstract class AbstractBlind implements Blind {
         return cards.stream().allMatch(c -> this.cardsManager.getHandCards().contains(c));
     }
 
-    protected ModifierStatsSupplier getGameStatus(
+    /**
+     * Builds a ModifierStatsSupplier with the given params.
+     * @param comb combination of the played hand.
+     * @param toPlay cards played
+     * @param playerStatus
+     * @return ModifierStatsSupplier with the given params.
+     */
+    protected final ModifierStatsSupplier getGameStatus(
         final Combination comb,
         final List<PlayableCard> toPlay,
         final PlayerStatus playerStatus

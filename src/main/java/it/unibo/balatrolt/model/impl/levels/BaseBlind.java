@@ -14,6 +14,7 @@ import it.unibo.balatrolt.model.impl.combination.PlayedHandImpl;
 
 /**
  * Implementation of an AbstractBlind which doesn't have any debuff.
+ * @author Bartocetti Enrico
  */
 public final class BaseBlind extends AbstractBlind {
 

@@ -93,6 +93,7 @@ public abstract class AbstractBlind implements Blind {
      * @param toPlay cards to play.
      * @param playerStatus
      * @return the chips earned from the played hand.
+     * @author Benedetti Nicholas
      */
     protected abstract int evaluateChips(List<PlayableCard> toPlay, PlayerStatus playerStatus);
 

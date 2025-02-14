@@ -20,7 +20,7 @@ import it.unibo.balatrolt.controller.api.communication.AnteInfo;
 /**
  * Displays the ante and relative blind info.
  */
-public final class AnteView extends JPanel {
+final class AnteView extends JPanel {
     static final long serialVersionUID = 1L;
     private final FontFactory fontFactory = new FontFactory();
     private static final String FONT = "COPPER_BLACK";
@@ -36,7 +36,7 @@ public final class AnteView extends JPanel {
      * @param controller master controller.
      * @param anteInfo info's of the current ante.
      */
-    public AnteView(final MasterController controller, final AnteInfo anteInfo) {
+    AnteView(final MasterController controller, final AnteInfo anteInfo) {
         super(new BorderLayout());
         this.setBackground(Color.GREEN.darker().darker().darker().darker());
         final JLabel title = new JLabel("Ante n. " + anteInfo.id(), JLabel.CENTER);

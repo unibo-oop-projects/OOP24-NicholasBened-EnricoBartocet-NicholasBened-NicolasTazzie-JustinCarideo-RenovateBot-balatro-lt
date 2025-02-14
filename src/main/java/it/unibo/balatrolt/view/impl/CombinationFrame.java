@@ -17,7 +17,7 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 /**
  * This class represents the view of the combination table.
  */
-public class CombinationFrame extends JFrame {
+class CombinationFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private static final String FONT = "COPPER_BLACK";
@@ -29,7 +29,7 @@ public class CombinationFrame extends JFrame {
      * Combination, Points and Multiplier.
      * @param combinations to be represented
      */
-    public CombinationFrame(final List<CombinationInfo> combinations) {
+    CombinationFrame(final List<CombinationInfo> combinations) {
         super.setSize(
             Toolkit.getDefaultToolkit().getScreenSize().width / 2,
             Toolkit.getDefaultToolkit().getScreenSize().height / 2

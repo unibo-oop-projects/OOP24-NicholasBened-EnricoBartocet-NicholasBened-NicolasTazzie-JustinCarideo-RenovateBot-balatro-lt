@@ -15,7 +15,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindInfo;
 /**
  * This class builds the title in the left part of the GUI.
  */
-public final class TitlePanel extends JPanel {
+final class TitlePanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private static final String MAIN_FONT = "COPPER_BLACK";
@@ -30,7 +30,7 @@ public final class TitlePanel extends JPanel {
      * Builds the title panel about the blind that is going to be challenged.
      * @param info about the current blind
      */
-    public TitlePanel(final BlindInfo info) {
+    TitlePanel(final BlindInfo info) {
         this.info = info;
         final Color backgroundColor = getBlindColor();
         super.setLayout(new BorderLayout());

@@ -14,7 +14,7 @@ import java.awt.Font;
  * Used to avoid code duplications.
  * @author Nicholas Benedetti
  */
-public final class FontFactory implements Serializable {
+final class FontFactory implements Serializable {
     static final long serialVersionUID = 1L;
     private static final String BASE_FONT = "Arial";
 
@@ -25,7 +25,7 @@ public final class FontFactory implements Serializable {
      * @param component component in which throwing messageDialogs.
      * @return the Font requested with the given size.
      */
-    public Font getFont(final String nameFont, final float fontSize, final Component component) {
+    Font getFont(final String nameFont, final float fontSize, final Component component) {
         Font font = new Font(BASE_FONT, Font.PLAIN, (int) fontSize);
         try {
             font = Font.createFont(

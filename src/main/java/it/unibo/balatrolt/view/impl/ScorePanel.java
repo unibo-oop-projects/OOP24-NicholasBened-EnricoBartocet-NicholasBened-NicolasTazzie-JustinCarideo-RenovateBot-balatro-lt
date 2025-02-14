@@ -15,7 +15,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindStats;
 /**
  * Display the scores (actual score and the one to achieve).
  */
-public final class ScorePanel extends JPanel {
+final class ScorePanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private static final String SCORE_FONT = "COPPER_BLACK";
@@ -30,7 +30,7 @@ public final class ScorePanel extends JPanel {
      * @param info
      * @param stats
      */
-    public ScorePanel(final BlindInfo info, final BlindStats stats) {
+    ScorePanel(final BlindInfo info, final BlindStats stats) {
         final Font currentScoreFont = FONT_FACTORY.getFont(SCORE_FONT, SCORE_SIZE, this);
         final Font mainFont = FONT_FACTORY.getFont(SCORE_FONT, SCORE_SIZE / 2, this);
         final Font minimumScoreFont = FONT_FACTORY.getFont(SCORE_FONT, SCORE_SIZE, this);
@@ -116,7 +116,7 @@ public final class ScorePanel extends JPanel {
      * This method updates the visualized score.
      * @param stats
      */
-    public void updateScore(final BlindStats stats) {
+    void updateScore(final BlindStats stats) {
         this.currentScoreLabel.setText(String.valueOf(stats.chips()));
     }
 }

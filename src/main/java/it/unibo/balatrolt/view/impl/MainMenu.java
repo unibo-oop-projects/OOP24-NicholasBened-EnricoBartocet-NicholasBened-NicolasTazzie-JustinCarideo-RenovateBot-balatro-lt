@@ -30,7 +30,7 @@ import it.unibo.balatrolt.controller.api.MasterController;
         """,
     value = "SE_BAD_FIELD"
 )
-public final class MainMenu extends JPanel {
+final class MainMenu extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String TITLE_FONT = "SNAP_ITC";
     private static final String BUTTON_FONT = "JOKERMAN";
@@ -44,7 +44,7 @@ public final class MainMenu extends JPanel {
      * @param controller master controller.
      * @param text title text.
      */
-    public MainMenu(final MasterController controller, final String text) {
+    MainMenu(final MasterController controller, final String text) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         /**
          * Setting the title.

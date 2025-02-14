@@ -30,7 +30,7 @@ import it.unibo.balatrolt.controller.api.MasterController;
         """,
     value = "SE_BAD_FIELD"
 )
-public final class GameEnd extends JPanel {
+final class GameEnd extends JPanel {
     static final long serialVersionUID = 1L;
     private static final String FONT = "JOKERMAN";
     private static final String TITLE_FONT = "SNAP_ITC";

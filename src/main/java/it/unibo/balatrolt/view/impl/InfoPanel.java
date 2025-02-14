@@ -14,7 +14,7 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
 /**
  * Creates the left part of the main GUI.
  */
-public final class InfoPanel extends JPanel {
+final class InfoPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private final ScorePanel scorePanel;
@@ -28,7 +28,7 @@ public final class InfoPanel extends JPanel {
      * @param combinations available
      * @param numAnte number of ante
      */
-    public InfoPanel(final BlindInfo info, final BlindStats stats, final List<CombinationInfo> combinations, final int numAnte) {
+    InfoPanel(final BlindInfo info, final BlindStats stats, final List<CombinationInfo> combinations, final int numAnte) {
         this.setLayout(new GridLayout(4, 1));
         final var titlePanel = new TitlePanel(info);
         this.scorePanel = new ScorePanel(info, stats);
@@ -45,7 +45,7 @@ public final class InfoPanel extends JPanel {
      * Updates the combination info.
      * @param info
      */
-    public void updateCombination(final CombinationInfo info) {
+    void updateCombination(final CombinationInfo info) {
         this.combinationPanel.updateCombination(info);
     }
 
@@ -53,7 +53,7 @@ public final class InfoPanel extends JPanel {
      * Updates the statistics in the GUI.
      * @param stats
      */
-    public void updateStats(final BlindStats stats) {
+    void updateStats(final BlindStats stats) {
         this.scorePanel.updateScore(stats);
         this.handPanel.updateHands(stats);
     }
@@ -62,7 +62,7 @@ public final class InfoPanel extends JPanel {
      * Updates the currency held by the player.
      * @param currency
      */
-    public void updateCurrency(final int currency) {
+    void updateCurrency(final int currency) {
         this.handPanel.updateCurrency(currency);
     }
 
@@ -70,7 +70,7 @@ public final class InfoPanel extends JPanel {
      * Updates the information about the current ante.
      * @param info
      */
-    public void updateAnte(final AnteInfo info) {
+    void updateAnte(final AnteInfo info) {
         this.handPanel.updateAnte(info);
     }
 

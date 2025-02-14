@@ -40,7 +40,7 @@ import it.unibo.balatrolt.controller.api.communication.PlayableCardInfo;
         """,
     value = "SE_BAD_FIELD"
 )
-public final class GameTable extends JPanel {
+final class GameTable extends JPanel {
     private static final int SORT_FONT_SIZE = 14;
     private static final int SORT_BORDER_THICKNESS = 5;
     static final long serialVersionUID = 1L;
@@ -71,7 +71,7 @@ public final class GameTable extends JPanel {
      * @param cards in the player hands.
      * @throws IOException
      */
-    public GameTable(final MasterController controller, final List<PlayableCardInfo> cards) {
+    GameTable(final MasterController controller, final List<PlayableCardInfo> cards) {
         super(new BorderLayout());
         this.setBackground(BG_COLOR);
         this.controller = Preconditions.checkNotNull(controller);
@@ -153,7 +153,7 @@ public final class GameTable extends JPanel {
      * updates the GUI with the new cards given.
      * @param newCards to display.
      */
-    public void updateHand(final List<PlayableCardInfo> newCards) {
+    void updateHand(final List<PlayableCardInfo> newCards) {
         this.handSlot.removeAll();
         this.handCards.clear();
         newCards.forEach(c -> {
@@ -165,7 +165,7 @@ public final class GameTable extends JPanel {
     /**
      * @param isEnable true if the discard button is enable.
      */
-    public void setDiscardEnabled(final boolean isEnable) {
+    void setDiscardEnabled(final boolean isEnable) {
         this.discardButton.setEnabled(isEnable);
     }
 

@@ -24,7 +24,7 @@ import it.unibo.balatrolt.controller.api.communication.BlindInfo;
  * Show the Blind over GUI with statistics and
  * possibility to open the shop.
  */
-public class BlindOver extends JPanel {
+class BlindOver extends JPanel {
     private static final Color BG_COLOR = Color.GREEN.darker().darker().darker();
     private static final int PADDING_MULT = 2;
     private static final int WIDTH_PADDING = 20;
@@ -40,7 +40,7 @@ public class BlindOver extends JPanel {
      * @param controller master controller.
      * @param blindInfo static info about the blind.
      */
-    public BlindOver(final MasterController controller, final BlindInfo blindInfo) {
+    BlindOver(final MasterController controller, final BlindInfo blindInfo) {
         super.setLayout(new BorderLayout());
         final var outerPanel = new JPanel();
         outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));

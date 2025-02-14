@@ -40,7 +40,7 @@ import it.unibo.balatrolt.controller.api.communication.DeckInfo;
         """,
     value = "SE_BAD_FIELD"
 )
-public final class DeckSelector extends JPanel {
+final class DeckSelector extends JPanel {
     static final long serialVersionUID = 1L;
     private static final String TITLE_FONT = "SNAP_ITC";
     private static final String DESC_DECK_FONT = "COPPER_BLACK";
@@ -69,7 +69,7 @@ public final class DeckSelector extends JPanel {
      * @param controller the master controller.
      * @param decks to choose from.
      */
-    public DeckSelector(final MasterController controller, final List<DeckInfo> decks) {
+    DeckSelector(final MasterController controller, final List<DeckInfo> decks) {
         setLayout(new GridBagLayout());
         this.decksTranslator = new HashMap<>();
         decks.forEach(d -> {

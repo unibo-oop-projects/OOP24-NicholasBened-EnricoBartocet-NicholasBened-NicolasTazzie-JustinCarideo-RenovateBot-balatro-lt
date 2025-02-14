@@ -14,7 +14,7 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
  * Shows the base point, multiplier and combination you would get with
  * the cards that are selected (in real-time).
  */
-public final class CombinationPanel extends JPanel {
+final class CombinationPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private static final String FONT = "COPPER_BLACK";
@@ -30,7 +30,7 @@ public final class CombinationPanel extends JPanel {
      * combination is done.
      * @param info start info
      */
-    public CombinationPanel(final CombinationInfo info) {
+    CombinationPanel(final CombinationInfo info) {
         this.setLayout(new BorderLayout());
         combinationLabel = getCombinationLabel();
         basePointsLabel = getBasePointsLabel();
@@ -108,7 +108,7 @@ public final class CombinationPanel extends JPanel {
      * (base point, multiplier and the combination).
      * @param info about the new combination done.
      */
-    public void updateCombination(final CombinationInfo info) {
+    void updateCombination(final CombinationInfo info) {
         this.combinationLabel.setText(info.name());
         this.basePointsLabel.setText(String.valueOf(info.points()));
         this.multiplierLabel.setText(String.valueOf(info.multiplier()));

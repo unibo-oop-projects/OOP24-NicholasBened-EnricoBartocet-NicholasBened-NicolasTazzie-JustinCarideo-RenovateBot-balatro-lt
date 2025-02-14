@@ -33,7 +33,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
         """,
     value =  "SE_BAD_FIELD"
 )
-public final class SlotPanel<X> extends JPanel {
+final class SlotPanel<X> extends JPanel {
     static final long serialVersionUID = 1L;
 
     private final int slotSize;
@@ -58,7 +58,7 @@ public final class SlotPanel<X> extends JPanel {
      * @param removable possibility to remove.
      * @param consumer action to perform with the pressed card. THE CARD GETS DELETED BY DEFAULT.
      */
-    public SlotPanel(
+    SlotPanel(
             final int slotSize,
             final int buttonWidth,
             final int buttonHeigth,
@@ -84,7 +84,7 @@ public final class SlotPanel<X> extends JPanel {
      * defined Consumer(action to perform) and Supplier (possibility to click).
      * @param card to add.
      */
-    public void addObject(final SlotObject<X> card) {
+    void addObject(final SlotObject<X> card) {
         Preconditions.checkState(this.slots.size() < slotSize);
         this.slots.put(card.cardName(), card.obj());
         final JButton button = new JButton();

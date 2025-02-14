@@ -18,7 +18,7 @@ import it.unibo.balatrolt.controller.api.communication.CombinationInfo;
  * Displays the statistics of the current blind.
  * (remaining discards, hand, current currency and ante).
  */
-public class HandPanel extends JPanel {
+class HandPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private final CombinationFrame combFrame;
@@ -36,7 +36,7 @@ public class HandPanel extends JPanel {
      * @param availableCombinations
      * @param numAnte number of ante
      */
-    public HandPanel(final List<CombinationInfo> availableCombinations, final int numAnte) {
+    HandPanel(final List<CombinationInfo> availableCombinations, final int numAnte) {
         super(new GridLayout(3, 1));
         this.numAnte = numAnte;
         this.combFrame = new CombinationFrame(availableCombinations);
@@ -96,7 +96,7 @@ public class HandPanel extends JPanel {
      * Updates the hand and discard labels.
      * @param stats The current blind stats
      */
-    public void updateHands(final BlindStats stats) {
+    void updateHands(final BlindStats stats) {
         this.handLabel.setText("Hand: " + stats.hands());
         this.discardLabel.setText("Discard: " + stats.discards());
     }
@@ -105,7 +105,7 @@ public class HandPanel extends JPanel {
      * Updates the currency label.
      * @param currency new amount
      */
-    public void updateCurrency(final int currency) {
+    void updateCurrency(final int currency) {
         this.currencyLabel.setText("Money: $" + currency);
     }
 
@@ -113,7 +113,7 @@ public class HandPanel extends JPanel {
      * Updates the ante label.
      * @param info
      */
-    public void updateAnte(final AnteInfo info) {
+    void updateAnte(final AnteInfo info) {
         this.anteLabel.setText("Ante: " + info.id() + " / " + this.numAnte);
     }
 }

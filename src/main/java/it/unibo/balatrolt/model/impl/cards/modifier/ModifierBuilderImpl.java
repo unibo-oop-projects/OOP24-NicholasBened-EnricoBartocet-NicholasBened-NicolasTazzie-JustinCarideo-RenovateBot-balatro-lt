@@ -94,6 +94,17 @@ public final class ModifierBuilderImpl implements ModifierBuilder {
         if (this.currencyBound.isPresent()) {
             modifier = new ModifierCurrencyCondition(modifier, this.currencyBound.get());
         }
+        this.reset();
         return modifier;
+    }
+
+    private void reset() {
+        this.mFun = Optional.absent();
+        this.bpFun = Optional.absent();
+        this.playedCardBound = Optional.absent();
+        this.holdingCardBound = Optional.absent();
+        this.combinationBound = Optional.absent();
+        this.currencyBound = Optional.absent();
+        this.toMerge = Optional.absent();
     }
 }

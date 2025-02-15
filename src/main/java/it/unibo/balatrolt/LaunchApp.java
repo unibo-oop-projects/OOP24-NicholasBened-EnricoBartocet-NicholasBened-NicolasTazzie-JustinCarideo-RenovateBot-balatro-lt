@@ -1,7 +1,5 @@
 package it.unibo.balatrolt;
 
-import java.io.IOException;
-
 import it.unibo.balatrolt.controller.api.BalatroEvent;
 import it.unibo.balatrolt.controller.api.MasterController;
 import it.unibo.balatrolt.controller.impl.MasterControllerImpl;
@@ -9,7 +7,7 @@ import it.unibo.balatrolt.view.api.View;
 import it.unibo.balatrolt.view.impl.SwingView;
 
 /**
- * Entry point of the app, it launches the GUI
+ * Entry point of the app, it creates a controller and launches the GUI
  * so that the game can start.
  */
 final class LaunchApp {
@@ -18,11 +16,9 @@ final class LaunchApp {
 
     /**
      * Starts the application.
-     *
-     * @param args
-     * @throws IOException
+     * @param args unused
      */
-    public static void main(final String[] args) throws IOException {
+    public static void main(final String[] args) {
         final MasterController controller = new MasterControllerImpl();
         final View view = new SwingView(controller);
         controller.attachView(view);

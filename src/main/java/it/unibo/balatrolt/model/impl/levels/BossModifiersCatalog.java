@@ -66,7 +66,7 @@ public final class BossModifiersCatalog {
             .anyMatch(su -> su.equals(suit))
         );
         this.modBuilder.addBasePointsModifier(p -> 0);
-        this.desc = this.desc.concat(suit + " card, it gets 0 base points");
+        this.desc = this.desc.concat(suit + ", base points are set to 0");
     }
 
     private void playedRankBP() {
@@ -77,7 +77,7 @@ public final class BossModifiersCatalog {
             .anyMatch(ra -> ra.equals(rank))
         );
         this.modBuilder.addBasePointsModifier(p -> 0);
-        this.desc = this.desc.concat(rank + " card, it gets 0 base points");
+        this.desc = this.desc.concat(rank + ", base points are set to 0");
     }
 
     private void playedRankMP() {
@@ -88,7 +88,7 @@ public final class BossModifiersCatalog {
             .anyMatch(ra -> ra.equals(rank))
         );
         this.modBuilder.addMultiplierModifier(p -> 1.0);
-        this.desc = this.desc.concat(rank + " card, it gets 1x multiplier");
+        this.desc = this.desc.concat(rank + ", multiplier is set to 1x");
     }
 
     private void playedSuitMP() {
@@ -99,6 +99,6 @@ public final class BossModifiersCatalog {
             .anyMatch(su -> su.equals(suit))
         );
         this.modBuilder.addMultiplierModifier(p -> 1.0);
-        this.desc = this.desc.concat(suit + " card, it gets 1x multiplier");
+        this.desc = this.desc.concat(suit + ", multiplier is set to 1x");
     }
 }
